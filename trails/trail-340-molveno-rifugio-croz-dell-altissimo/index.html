@@ -363,7 +363,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors',
   maxZoom: 18
 }).addTo(map);
-new L.GPX('https://michelesarzana.github.io/trail/gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx', {
+new L.GPX('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx', {
   async: true,
   polyline_options: { color: '#c17b8c', weight: 3.5, opacity: 0.9 },
   marker_options: {
@@ -380,7 +380,7 @@ new L.GPX('https://michelesarzana.github.io/trail/gpx/trail-340-molveno-rifugio-
 async function renderElevationChart() {
   let xml;
   try {
-    const resp = await fetch('https://michelesarzana.github.io/trail/gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx');
+    const resp = await fetch('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx');
     if (!resp.ok) return;
     const text = await resp.text();
     const parser = new DOMParser();
