@@ -13,7 +13,7 @@
       "description": "Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!\n\nRifugio Croz dell’Altissimo\n\nIl rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova nella Val delle Seghe, ai piedi della parete sud-ovest dell’omonima Cima Croz dell’Altissimo, lungo la principale via d’accesso al versante orientale del Gruppo di Brenta.\nQui passarono, nella seconda metà dell’Ottocento, i pionieri dell’alpinismo che per primi esplorarono questo Gruppo dolomitico attraverso la Bocca di Brenta. Sulla parete di 900 metri che è una tra le più alte e impressionanti delle Dolomiti di Brenta, si misero alla prova i più forti e impavidi scalatori.\nIl rifugio è stato costruito nel 1962 dai genitori di Felice Spellini.\nPochi anni dopo, precisamente il 6 e 7 luglio 1974 Marco Pilati con Valentino Chini, Dario Bonetti e Felice Spellini tracciano l’impegnativa e bella via del “Rifugio Altissimo” sfruttando una serie di fessure sul bellissimo pilastro soprastante il rifugio, scalata bellissima su roccia compatta quasi esclusivamente in libera.",
       "rating": null,
       "completed_at": null,
-      "cover_image": "https://dgtzuqphqg23d.cloudfront.net/czt3LuZy_bKY-cOW7vouD0WFzKMWv2p0nFnVayFAon8-2048x956.jpg",
+      "cover_image": null,
       "location": {
         "country": "Italia",
         "country_code": "IT",
@@ -43,7 +43,8 @@
         "route_type": "loop",
         "surface": [
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx"
       },
       "classification": {
         "difficulty": null,
@@ -65,8 +66,11 @@
         "other": null
       },
       "media": {
-        "cover": "https://dgtzuqphqg23d.cloudfront.net/czt3LuZy_bKY-cOW7vouD0WFzKMWv2p0nFnVayFAon8-2048x956.jpg",
-        "photos": []
+        "cover": null,
+        "photos": [
+          "https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo1.jpg",
+          "https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo2.jpg"
+        ]
       }
     },
     {
@@ -157,7 +161,15 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg"
           }
         ]
-      }
+      },
+      "log": [
+        {
+          "date": "2026-06-20",
+          "duration_min": 316,
+          "rating": 5,
+          "notes": "Il Rifugio Micheluzzi si raggiunge con un comodo collegamento tramite Van da Campitello (personalmente non amo il sentiero che dal paese porta all'inizio della Val Duron), 10€ a persona a tratta. \n\nDa lì io prediligo la salita alla Val di Dona dalla variante alta che ti porta fino ad avere una vista dall'alto della valle stessa che merita. La salita poi al Passo di Dona è quella tradizionale, l'ultimo strappo prima del bellissimo Lago Antermoia. \n\nDiscesa dal Passo delle Ciaregole, di nuovo fino"
+        }
+      ]
     },
     {
       "id": "pizzo-dei-tre-signori",
@@ -311,7 +323,15 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"
           }
         ]
-      }
+      },
+      "log": [
+        {
+          "date": "2025-10-04",
+          "duration_min": 328,
+          "rating": 5,
+          "notes": "L’Alta Via n. 1 della Valle d’Aosta, o Alta Via dei Giganti, è un itinerario escursionistico dallo scenario incomparabile, che si sviluppa ai piedi dei massicci più elevati d’Europa:. il Monte Rosa, il Cervino e il Monte Bianco. L’Alta Via n. 1 collega Donnas a Courmayeur. Il Rifugio Barma rappresenta un punto d’appoggio prezioso per chi intraprende quest’esperienza integralmente o per un tratto.\n\nDal rifugio si possono fare numerose escursioni di difficoltà e lunghezza differenti, percorsi ad a"
+        }
+      ]
     }
   ]
 }
