@@ -778,15 +778,18 @@ function renderPage(trail, allTrails) {
   // Gallery
   const hasPhotos = photos.length > 0;
   let galleryHtml = '';
+  // Store photo srcs in a global for lightbox access
+  window._currentGallery = [];
   if (hasPhotos) {
     const photoSrcs = photos.map(p => photoUrl(trail, p));
+    window._currentGallery = photoSrcs;
     const gridClass = photos.length <= 2 ? 'gallery-grid gallery-grid-2' : 'gallery-grid';
     galleryHtml = `
       <section class="gallery-section">
         <div class="section-title">Galleria fotografica</div>
         <div class="${gridClass}">
           ${photoSrcs.map((url, i) => `
-            <div class="gallery-item" onclick="openLightbox(${JSON.stringify(photoSrcs)}, ${i})">
+            <div class="gallery-item" onclick="openLightbox(window._currentGallery,${i})">
               <img src="${escHtml(url)}" alt="${escHtml(trail.title)} foto ${i+1}" loading="lazy" onerror="this.parentElement.style.display='none'">
             </div>`).join('')}
         </div>
