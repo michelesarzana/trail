@@ -259,6 +259,7 @@ async function renderElevationChart() {
   }
   const labels = sampled.map(p => p.dist.toFixed(2));
   const data = sampled.map(p => Math.round(p.ele));
+  await new Promise(r => setTimeout(r, 50));
   const el = document.getElementById('elevation-chart-wrap');
   if (!el) return;
   el.innerHTML = '<canvas id="elevation-canvas"></canvas>';
