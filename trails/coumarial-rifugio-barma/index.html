@@ -185,7 +185,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e
 // MAP
 const map=L.map('map-hero',{zoomControl:true,scrollWheelZoom:false}).setView([45.639885,7.878667],13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&#169; OpenStreetMap contributors',maxZoom:18}).addTo(map);
-new L.GPX('https://michelesarzana.github.io/trail/gpx/coumarial-rifugio-barma.gpx',{
+new L.GPX('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/coumarial-rifugio-barma.gpx',{
   async:true,
   polyline_options:{color:'#c17b8c',weight:3.5,opacity:0.9},
   marker_options:{startIconUrl:null,endIconUrl:null,shadowUrl:null,wptIconUrls:{'':null}}
@@ -195,7 +195,7 @@ new L.GPX('https://michelesarzana.github.io/trail/gpx/coumarial-rifugio-barma.gp
 async function renderElevationChart() {
   let xml;
   try {
-    const resp = await fetch('https://michelesarzana.github.io/trail/gpx/coumarial-rifugio-barma.gpx');
+    const resp = await fetch('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/coumarial-rifugio-barma.gpx');
     if (!resp.ok) return;
     const text = await resp.text();
     const parser = new DOMParser();
