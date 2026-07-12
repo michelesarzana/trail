@@ -22,7 +22,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .shell {
   width: 100%;
   background: #fff;
-  min-height: 100vh;
+  min-height: 0;
 }
 
 /* ===== NAV ===== */
@@ -355,6 +355,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
+  body { min-height: 0 !important; }
   /* Shell: no forced full-height on mobile */
   .shell { min-height: 0; }
 
