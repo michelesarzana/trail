@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coumarial < > Rifugio Barma &mdash; Every Single Trail</title>
+<meta name="description" content="L’Alta Via n. 1 della Valle d’Aosta, o Alta Via dei Giganti, è un itinerario escursionistico dallo scenario incomparabile, che si sviluppa ai piedi dei massicci">
+<meta property="og:title" content="Coumarial < > Rifugio Barma">
+<meta property="og:description" content="L’Alta Via n. 1 della Valle d’Aosta, o Alta Via dei Giganti, è un itinerario escursionistico dallo scenario incomparabile, che si sviluppa ai piedi dei massicci più elevati d’Europa:. il Monte Rosa, i">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://michelesarzana.github.io/trail/trails/coumarial-rifugio-barma/">
+<meta property="og:image" content="https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg">
+<link rel="canonical" href="https://michelesarzana.github.io/trail/trails/coumarial-rifugio-barma/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0;background:#faf7f4;font-family:'Manrope',sans-serif;color:#2e2b38;}
+::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-thumb{background:rgba(46,43,56,0.16);border-radius:4px;}
+a{color:#38324a;text-decoration:none;}a:hover{color:#c17b8c;}
+.shell{width:100%;background:#fff;min-height:100vh;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:#fff;border-bottom:1px solid rgba(46,43,56,0.08);position:sticky;top:0;z-index:200;gap:16px;}
+.nav-back{font-size:13px;font-weight:700;color:#38324a;white-space:nowrap;display:flex;align-items:center;gap:6px;min-width:140px;}
+.nav-back:hover{color:#c17b8c;}
+.nav-center{text-align:center;flex:1;text-decoration:none;}
+.nav-wordmark{font-size:22px;font-weight:800;color:#2e2b38;letter-spacing:-0.01em;display:inline;line-height:1.1;}
+.nav-payoff{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;display:inline;margin-left:0.4em;color:#c17b8c;opacity:0.85;}
+.nav-spacer{min-width:140px;}
+#map-hero{width:100%;height:500px;border-radius:0;}
+.map-section{padding:0 48px 0;margin-top:-24px;}
+.map-section-inner{border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(46,43,56,0.13);border:1px solid rgba(46,43,56,0.08);}
+.trail-header{padding:32px 48px 20px;border-bottom:1px solid rgba(46,43,56,0.08);}
+.trail-header-badge{display:inline-block;font-size:12px;font-weight:800;padding:5px 12px;border-radius:8px;margin-bottom:12px;letter-spacing:0.02em;}
+.badge-done{background:#38324a;color:#fff;}.badge-todo{background:#f0edf0;color:#726e7a;}
+.trail-header-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#726e7a;margin-bottom:8px;}
+.trail-header-title{font-family:'Instrument Serif',serif;font-style:italic;font-size:48px;line-height:1.08;color:#2e2b38;margin:0 0 8px;}
+.trail-header-stars{font-size:16px;color:#c17b8c;}
+.stats-bar{display:flex;gap:12px;padding:20px 48px;border-bottom:1px solid rgba(46,43,56,0.08);flex-wrap:wrap;}
+.stat-card{background:#f5f2f5;border-radius:12px;padding:14px 20px;min-width:90px;display:flex;flex-direction:column;gap:3px;}
+.stat-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#726e7a;}
+.stat-value{font-size:18px;font-weight:800;color:#2e2b38;font-variant-numeric:tabular-nums;}
+.stat-accent{color:#c17b8c;}
+.elevation-section{padding:32px 48px;border-bottom:1px solid rgba(46,43,56,0.08);}
+.section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#726e7a;margin-bottom:16px;}
+#elevation-canvas{width:100%;height:180px;}
+.gallery-section{padding:32px 48px;border-bottom:1px solid rgba(46,43,56,0.08);}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.gallery-grid-2{grid-template-columns:repeat(2,1fr);}
+.gallery-item{border-radius:14px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:#f0edf0;transition:transform 0.15s;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery-item:hover{transform:scale(1.02);}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:1000;}
+#lightbox.open{display:flex;}
+#lightbox img{max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain;}
+#lightbox-close,#lightbox-prev,#lightbox-next{position:absolute;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:24px;cursor:pointer;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;}
+#lightbox-close{top:24px;right:24px;border-radius:8px;width:auto;height:auto;padding:8px 14px;}
+#lightbox-prev{left:24px;top:50%;transform:translateY(-50%);}
+#lightbox-next{right:24px;top:50%;transform:translateY(-50%);}
+.trail-body{display:flex;gap:48px;padding:32px 48px;align-items:flex-start;}
+.trail-body-main{flex:1;min-width:0;}
+.trail-body-right{width:280px;flex-shrink:0;display:flex;flex-direction:column;gap:16px;}
+.section-heading{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#726e7a;margin-bottom:14px;}
+.section-text{font-size:15px;line-height:1.75;color:#3e3a4e;}
+.sidebar-card{background:#f5f2f5;border-radius:14px;padding:18px;}
+.sidebar-card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#726e7a;margin-bottom:12px;}
+.kv-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(46,43,56,0.07);font-size:13px;}
+.kv-row:last-child{border-bottom:none;}
+.kv-key{color:#726e7a;font-weight:600;}
+.kv-val{color:#2e2b38;font-weight:700;text-align:right;max-width:60%;}
+.coords-text{font-size:13px;font-weight:600;color:#2e2b38;font-family:monospace;}
+.link-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#f0edf0;border-radius:999px;font-size:13px;font-weight:700;color:#38324a;margin:4px 4px 4px 0;transition:background .15s;}
+.link-pill:hover{background:#c17b8c;color:#fff;}
+.footer-nav{display:flex;align-items:center;justify-content:space-between;padding:32px 48px;border-top:1px solid rgba(46,43,56,0.08);}
+.footer-nav-btn{background:#f0edf0;color:#38324a;border:none;cursor:pointer;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:10px 20px;border-radius:12px;text-decoration:none;transition:background .15s;}
+.footer-nav-btn:hover{background:#c17b8c;color:#fff;}
+.cover-hero{width:100%;height:360px;display:flex;align-items:flex-end;position:relative;overflow:hidden;}
+.cover-hero--photo{background-size:cover;background-position:center;}
+.cover-hero--photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(30,26,42,0.82) 0%,rgba(30,26,42,0.2) 60%,transparent 100%);}
+.cover-hero-inner{position:relative;z-index:1;padding:32px 48px;}
+.cover-hero-title{font-family:'Instrument Serif',serif;font-style:italic;font-size:38px;color:#fff;margin:0 0 6px;line-height:1.15;}
+.cover-hero-eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.65);}
+@media(max-width:768px){.nav{padding:16px 20px;}.trail-header{padding:24px 20px 16px;}.trail-header-title{font-size:32px;}.stats-bar{padding:16px 20px;}.elevation-section,.gallery-section{padding:24px 20px;}.gallery-grid{grid-template-columns:repeat(2,1fr);}.trail-body{flex-direction:column;padding:24px 20px;gap:28px;}.trail-body-right{width:100%;}.footer-nav{padding:20px;}}
+</style>
+</head>
+<body>
+<div class="shell">
+<nav class="nav">
+  <a href="https://michelesarzana.github.io/trail/" class="nav-back">&#8592; Every Single Trail</a>
+  <a href="https://michelesarzana.github.io/trail/" class="nav-center">
+    <span class="nav-wordmark">Every Single Trail</span>
+    <span class="nav-payoff">No map is ever finished.</span>
+  </a>
+  <div class="nav-spacer"></div>
+</nav>
+<div class="cover-hero cover-hero--photo" style="background-image:url('https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg')">
+  <div class="cover-hero-inner">
+    <h2 class="cover-hero-title">Coumarial < > Rifugio Barma</h2>
+    <span class="cover-hero-eyebrow">Fontainemore, Valle d'Aosta</span>
+  </div>
+</div>
+<div class="map-section">
+  <div class="map-section-inner">
+    <div id="map-hero"></div>
+  </div>
+</div>
+<div class="trail-header">
+  <span class="trail-header-badge badge-done">&#10003; Fatto</span>
+  <div class="trail-header-eyebrow">Fontainemore, Valle d'Aosta</div>
+  <h1 class="trail-header-title">Coumarial < > Rifugio Barma</h1>
+  <div class="trail-header-stars">★★★★★</div>
+</div>
+<div class="stats-bar">
+  <div class="stat-card"><span class="stat-label">Distanza</span><span class="stat-value">13.5 km</span></div>
+  <div class="stat-card"><span class="stat-label">Dislivello +</span><span class="stat-value stat-accent">+1009 m</span></div>
+  <div class="stat-card"><span class="stat-label">Dislivello &minus;</span><span class="stat-value">&minus;969 m</span></div>
+  <div class="stat-card"><span class="stat-label">Quota max</span><span class="stat-value">2065 m</span></div>
+  <div class="stat-card"><span class="stat-label">Durata</span><span class="stat-value">5h 28min</span></div>
+</div>
+<div class="elevation-section">
+  <div class="section-title">Altimetria</div>
+  <div id="elevation-chart-wrap" style="background:#faf7f4;border-radius:16px;padding:20px;height:220px;">
+    <div style="color:#726e7a;font-size:14px;padding:20px 0;">Caricamento altimetria&hellip;</div>
+  </div>
+</div>
+<div class="gallery-section">
+  <div class="section-title">Galleria fotografica</div>
+  <div class="gallery-grid">
+  <div class="gallery-item" onclick="openLightbox(["https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"],0)"><img src="https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg" alt="Foto 1" loading="lazy"></div>
+  <div class="gallery-item" onclick="openLightbox(["https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"],1)"><img src="https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg" alt="Foto 2" loading="lazy"></div>
+  <div class="gallery-item" onclick="openLightbox(["https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"],2)"><img src="https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg" alt="Foto 3" loading="lazy"></div>
+  <div class="gallery-item" onclick="openLightbox(["https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg", "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"],3)"><img src="https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg" alt="Foto 4" loading="lazy"></div>
+  </div>
+</div>
+<div class="trail-body">
+  <div class="trail-body-main">
+    <div class="section-heading">Descrizione</div>
+    <div class="section-text">L’Alta Via n. 1 della Valle d’Aosta, o Alta Via dei Giganti, è un itinerario escursionistico dallo scenario incomparabile, che si sviluppa ai piedi dei massicci più elevati d’Europa:. il Monte Rosa, il Cervino e il Monte Bianco. L’Alta Via n. 1 collega Donnas a Courmayeur. Il Rifugio Barma rappresenta un punto d’appoggio prezioso per chi intraprende quest’esperienza integralmente o per un tratto.<br><br>Dal rifugio si possono fare numerose escursioni di difficoltà e lunghezza differenti, percorsi ad anello, colli e cime da raggiungere, tratti attrezzati, ferrate e non ultime le falesie di arrampicata. Il rifugio sarà un appoggio sicuro e accogliente dove ricevere indicazioni e supporto.<br><br>Leggermente tecnico il percorso all'andata, difficile la salita finale non tanto per tecnicità quanto per dislivello. Molto ben segnato e su strada carrozzabile il ritorno.</div>
+  </div>
+  <div class="trail-body-right">
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Dettagli</div>
+      <div class="kv-row"><span class="kv-key">Tipo</span><span class="kv-val">Loop</span></div>
+      <div class="kv-row"><span class="kv-key">Regione</span><span class="kv-val">Valle d'Aosta</span></div>
+      <div class="kv-row"><span class="kv-key">Area</span><span class="kv-val">Monte Rosa</span></div>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Coordinate partenza</div>
+      <div class="coords-text">45.639885, 7.878667</div>
+      <a class="link-pill" style="margin-top:10px;display:inline-flex" href="https://maps.google.com/?q=45.639885,7.878667" target="_blank">&#8599; Google Maps</a>
+    </div>
+  </div>
+</div>
+<div class="footer-nav">
+  <a href="https://michelesarzana.github.io/trail/" class="footer-nav-btn">&#8592; Tutti i trail</a>
+  <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:13px;color:#c17b8c;opacity:0.7">No map is ever finished.</span>
+</div>
+</div>
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <button id="lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+let lbPhotos=[],lbIndex=0;
+function openLightbox(photos,idx){lbPhotos=photos;lbIndex=idx;document.getElementById('lightbox-img').src=photos[idx];document.getElementById('lightbox').classList.add('open');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+function lightboxNav(dir){lbIndex=(lbIndex+dir+lbPhotos.length)%lbPhotos.length;document.getElementById('lightbox-img').src=lbPhotos[lbIndex];}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='ArrowRight')lightboxNav(1);});
+
+// MAP
+const map=L.map('map-hero',{zoomControl:true,scrollWheelZoom:false}).setView([45.639885,7.878667],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&#169; OpenStreetMap contributors',maxZoom:18}).addTo(map);
+new L.GPX('https://michelesarzana.github.io/trail/gpx/coumarial-rifugio-barma.gpx',{
+  async:true,
+  polyline_options:{color:'#c17b8c',weight:3.5,opacity:0.9},
+  marker_options:{startIconUrl:null,endIconUrl:null,shadowUrl:null,wptIconUrls:{'':null}}
+}).on('loaded',function(e){map.fitBounds(e.target.getBounds(),{padding:[30,30]});}).addTo(map);
+
+// ELEVATION CHART
+async function renderElevationChart() {
+  let xml;
+  try {
+    const resp = await fetch('https://michelesarzana.github.io/trail/gpx/coumarial-rifugio-barma.gpx');
+    if (!resp.ok) return;
+    const text = await resp.text();
+    const parser = new DOMParser();
+    xml = parser.parseFromString(text,'application/xml');
+  } catch(e) { return; }
+  const trkpts = xml.querySelectorAll('trkpt');
+  if (!trkpts.length) return;
+  const points = [];
+  let cumDist = 0, prev = null;
+  for (const pt of trkpts) {
+    const lat = parseFloat(pt.getAttribute('lat'));
+    const lon = parseFloat(pt.getAttribute('lon'));
+    const eleEl = pt.querySelector('ele');
+    const ele = eleEl ? parseFloat(eleEl.textContent) : null;
+    if (ele === null || isNaN(lat) || isNaN(lon)) continue;
+    if (prev) {
+      const dlat = (lat-prev.lat)*111320;
+      const dlon = (lon-prev.lon)*111320*Math.cos(prev.lat*Math.PI/180);
+      cumDist += Math.sqrt(dlat*dlat+dlon*dlon)/1000;
+    }
+    points.push({lat,lon,ele,dist:Math.round(cumDist*100)/100});
+    prev = {lat,lon};
+  }
+  if (points.length < 2) return;
+  const maxPts = 200;
+  let sampled = points;
+  if (points.length > maxPts) {
+    const step = Math.floor(points.length/maxPts);
+    sampled = points.filter((_,i) => i%step===0);
+  }
+  const labels = sampled.map(p => p.dist.toFixed(2));
+  const data = sampled.map(p => Math.round(p.ele));
+  const el = document.getElementById('elevation-chart-wrap');
+  if (!el) return;
+  el.innerHTML = '<canvas id="elevation-canvas"></canvas>';
+  const ctx = document.getElementById('elevation-canvas').getContext('2d');
+  new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data,fill:true,backgroundColor:'rgba(193,123,140,0.18)',borderColor:'#c17b8c',borderWidth:2,pointRadius:0,tension:0.3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{title:items=>items[0].label+' km',label:item=>item.raw+' m'}}},scales:{x:{ticks:{maxTicksLimit:8,font:{size:11},color:'#726e7a'},grid:{color:'rgba(46,43,56,0.06)'}},y:{ticks:{font:{size:11},color:'#726e7a'},grid:{color:'rgba(46,43,56,0.06)'}}}}
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderElevationChart);
+} else {
+  renderElevationChart();
+}
+</script>
+</body>
+</html>
