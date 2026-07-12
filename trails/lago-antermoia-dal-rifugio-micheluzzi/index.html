@@ -20,12 +20,14 @@ body{margin:0;background:#faf7f4;font-family:'Manrope',sans-serif;color:#2e2b38;
 ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-thumb{background:rgba(46,43,56,0.16);border-radius:4px;}
 a{color:#38324a;text-decoration:none;}a:hover{color:#c17b8c;}
 .shell{width:100%;background:#fff;min-height:100vh;}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:#fff;border-bottom:1px solid rgba(46,43,56,0.08);position:sticky;top:0;z-index:200;gap:16px;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;
+  min-height: 64px;
+  align-items: center;background:#fff;border-bottom:1px solid rgba(46,43,56,0.08);position:sticky;top:0;z-index:200;gap:16px;}
 .nav-back{font-size:13px;font-weight:700;color:#38324a;white-space:nowrap;display:flex;align-items:center;gap:6px;min-width:140px;}
 .nav-back:hover{color:#c17b8c;}
 .nav-center{text-align:center;flex:1;text-decoration:none;}
 .nav-wordmark{font-size:22px;font-weight:800;color:#2e2b38;letter-spacing:-0.01em;display:inline;line-height:1.1;}
-.nav-payoff{font-family:'Instrument Serif',serif;font-style:italic;font-size: 22px; display: inline; margin-left: 0.4em;color:#c17b8c;opacity:0.85;}
+.nav-payoff{font-family:'Instrument Serif',serif;font-style:italic;font-size: 22px; display: inline; margin-left: 0.4em;color:#c17b8c;opacity:0.85;;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:18px}
 .nav-spacer{min-width:140px;}
 #map-hero{width:100%;height:500px;border-radius:0;}
 .map-section{padding:0 48px 0;margin-top:-24px;}
@@ -128,7 +130,7 @@ a{color:#38324a;text-decoration:none;}a:hover{color:#c17b8c;}
 <body>
 <div class="shell">
 <nav class="nav">
-  <a href="https://michelesarzana.github.io/trail/" class="nav-back">← Every Single Trail</a>
+  <a href="https://michelesarzana.github.io/trail/" class="nav-back">←</a>
   <a href="https://michelesarzana.github.io/trail/" class="nav-center">
     <span class="nav-wordmark">Every Single Trail</span>
     <span class="nav-payoff">No map is ever finished.</span>
