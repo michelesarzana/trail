@@ -456,6 +456,14 @@ a:hover { color: #c17b8c; }
 const DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
 const GPX_BASE = 'https://michelesarzana.github.io/trail/';
 
+/* ===== REDIRECT TO STATIC PAGE ===== */
+(function() {
+  const id = window.location.hash.replace('#', '').trim();
+  if (id) {
+    window.location.replace('trails/' + id + '/');
+  }
+})();
+
 /* ===== LIGHTBOX STATE ===== */
 let lbPhotos = [];
 let lbIndex = 0;
