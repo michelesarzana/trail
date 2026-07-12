@@ -111,8 +111,7 @@
         "surface": [
           "terra",
           "sterrato"
-        ],
-        "gpx_file": "gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
+        ]
       },
       "classification": {
         "difficulty": "T3",
@@ -149,8 +148,18 @@
       "media": {
         "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg",
         "photos": [
-          "https://michelesarzana.github.io/trail/media/lago-antermoia-dal-rifugio-micheluzzi/photo1.jpg",
-          "https://michelesarzana.github.io/trail/media/lago-antermoia-dal-rifugio-micheluzzi/photo2.jpg"
+          {
+            "filename": "_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048 (1).jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048 (1).jpg"
+          },
+          {
+            "filename": "j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg"
+          },
+          {
+            "filename": "BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg"
+          }
         ]
       }
     },
