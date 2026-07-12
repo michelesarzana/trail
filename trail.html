@@ -440,6 +440,21 @@ a:hover { color: #c17b8c; }
 .lang-btn { background:none; border:none; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#726e7a; padding:4px 6px; border-radius:6px; transition:all .15s; }
 .lang-btn.active { color:#38324a; background:#f0edf0; }
 .lang-sep { color:#b0a8b5; font-size:11px; }
+
+/* Photo credit badge */
+.photo-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.45);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  z-index: 2;
+}
 </style>
 </head>
 <body>
@@ -759,18 +774,19 @@ function renderPage(trail, allTrails) {
       </section>`;
   }
 
-  // Logbook
-  const entries = (trail.logbook || []);
+  // Logbook — usa t.log (array), con retrocompatibilità completed_at
+  const logArr = (trail.log && trail.log.length) ? trail.log :
+    (trail.completed_at ? [{ date: trail.completed_at, duration_min: track.duration_min, rating: trail.rating, notes: null }] : []);
   let logbookHtml = '';
   if (isDone) {
-    if (entries.length > 0) {
-      logbookHtml = entries.map(e => `
+    if (logArr.length > 0) {
+      logbookHtml = logArr.map(e => `
         <div class="logbook-entry">
           <div class="logbook-date">${escHtml(e.date || '')}</div>
-          <div class="logbook-notes">${escHtml(e.notes || '')}</div>
+          ${e.notes ? `<div class="logbook-notes">${escHtml(e.notes)}</div>` : ''}
           <div class="logbook-meta">
-            ${e.duration_min ? `<span>${fmtDur(e.duration_min)}</span>` : ''}
-            ${e.distance_km ? `<span>${fmtDist(e.distance_km)}</span>` : ''}
+            ${e.rating ? `<span>⭐ ${e.rating}/5</span>` : ''}
+            ${e.duration_min ? `<span>⏱ ${fmtDur(e.duration_min)}</span>` : ''}
           </div>
         </div>`).join('');
     } else {
@@ -802,7 +818,7 @@ function renderPage(trail, allTrails) {
     </nav>
 
     <!-- COVER HERO or GRADIENT HERO -->
-    ${cover ? `<div class="cover-hero" style="width:100%;height:320px;overflow:hidden;background:#f0edf0;"><img src="${escHtml(cover)}" alt="${escHtml(trail.title)}" style="width:100%;height:320px;object-fit:cover;display:block;"></div>` : `<div class="trail-hero-gradient" style="width:100%;height:320px;background:linear-gradient(135deg,#38324a 0%,#2e2b38 100%);display:flex;align-items:flex-end;padding:40px 48px;"><h1 class="trail-hero-gradient-title" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:42px;color:#fff;margin:0;">${escHtml(trail.title)}</h1></div>`}
+    ${cover ? `<div class="cover-hero" style="position:relative;width:100%;height:320px;overflow:hidden;background:#f0edf0;"><img src="${escHtml(cover)}" alt="${escHtml(trail.title)}" style="width:100%;height:320px;object-fit:cover;display:block;">${trail.photo_credit ? `<div class="photo-credit">📷 ${escHtml(trail.photo_credit)}</div>` : ''}</div>` : `<div class="trail-hero-gradient" style="width:100%;height:320px;background:linear-gradient(135deg,#38324a 0%,#2e2b38 100%);display:flex;align-items:flex-end;padding:40px 48px;"><h1 class="trail-hero-gradient-title" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:42px;color:#fff;margin:0;">${escHtml(trail.title)}</h1></div>`}
 
     <!-- MAP HERO (full width) -->
     <div id="map-hero"></div>
