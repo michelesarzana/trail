@@ -176,6 +176,49 @@ a:hover { color: #c17b8c; }
   .trail-body-right { width: 100%; }
   .footer-nav { padding: 20px; }
 }
+
+/* COVER HERO */
+.cover-hero {
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+.cover-hero--gradient {
+  background: linear-gradient(135deg, #38324a 0%, #2e2b38 100%);
+}
+.cover-hero--photo {
+  background-size: cover;
+  background-position: center;
+}
+.cover-hero--photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30,26,42,0.82) 0%, rgba(30,26,42,0.2) 60%, transparent 100%);
+}
+.cover-hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 32px 48px;
+}
+.cover-hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 38px;
+  color: #fff;
+  margin: 0 0 6px;
+  line-height: 1.15;
+}
+.cover-hero-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.65);
+}
 </style>
 </head>
 <body>
@@ -193,7 +236,13 @@ a:hover { color: #c17b8c; }
 
   
   
-  <div id="map-hero"></div>
+  <div class="cover-hero cover-hero--gradient">
+  <div class="cover-hero-inner">
+    <h2 class="cover-hero-title">Trail 340 Molveno – Rifugio Croz dell’Altissimo</h2>
+    <span class="cover-hero-eyebrow">Molveno, Trentino-Alto Adige</span>
+  </div>
+</div>
+<div id="map-hero"></div>
 
   <!-- TRAIL HEADER -->
   <div class="trail-header">
@@ -224,7 +273,11 @@ a:hover { color: #c17b8c; }
     <div class="trail-body-main">
       <div class="section-heading">Descrizione</div><div class="section-text">Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!<br><br>Rifugio Croz dell’Altissimo<br><br>Il rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova nella Val delle Seghe, ai piedi della parete sud-ovest dell’omonima Cima Croz dell’Altissimo, lungo la principale via d’accesso al versante orientale del Gruppo di Brenta.<br>Qui passarono, nella seconda metà dell’Ottocento, i pionieri dell’alpinismo che per primi esplorarono questo Gruppo dolomitico attraverso la Bocca di Brenta. Sulla parete di 900 metri che è una tra le più alte e impressionanti delle Dolomiti di Brenta, si misero alla prova i più forti e impavidi scalatori.<br>Il rifugio è stato costruito nel 1962 dai genitori di Felice Spellini.<br>Pochi anni dopo, precisamente il 6 e 7 luglio 1974 Marco Pilati con Valentino Chini, Dario Bonetti e Felice Spellini tracciano l’impegnativa e bella via del “Rifugio Altissimo” sfruttando una serie di fessure sul bellissimo pilastro soprastante il rifugio, scalata bellissima su roccia compatta quasi esclusivamente in libera.</div>
 
-      <div class="section-heading" style="margin-top:32px">Dettagli</div><div class="info-grid"><div class="info-row"><span class="info-key">Regione</span><span class="info-val">Trentino-Alto Adige</span></div><div class="info-row"><span class="info-key">Provincia</span><span class="info-val">Trento</span></div><div class="info-row"><span class="info-key">Comune</span><span class="info-val">Molveno</span></div><div class="info-row"><span class="info-key">Area</span><span class="info-val">Dolimiti di Brenta</span></div><div class="info-row"><span class="info-key">Tipo</span><span class="info-val">loop</span></div></div>
+      <div class="logbook-empty" style="margin-top:24px;padding:20px;background:#f5f2f5;border-radius:12px;text-align:center;">
+  <div style="font-size:13px;color:#726e7a;font-weight:600;">Nessuna uscita registrata</div>
+  <div style="font-size:12px;color:#b0a8b5;margin-top:4px;">Il logbook apparirà dopo la prima escursione</div>
+</div>
+    <div class="section-heading" style="margin-top:32px">Dettagli</div><div class="info-grid"><div class="info-row"><span class="info-key">Regione</span><span class="info-val">Trentino-Alto Adige</span></div><div class="info-row"><span class="info-key">Provincia</span><span class="info-val">Trento</span></div><div class="info-row"><span class="info-key">Comune</span><span class="info-val">Molveno</span></div><div class="info-row"><span class="info-key">Area</span><span class="info-val">Dolimiti di Brenta</span></div><div class="info-row"><span class="info-key">Tipo</span><span class="info-val">loop</span></div></div>
 
       
 
@@ -397,7 +450,11 @@ async function renderElevationChart() {
     }
   });
 }
-renderElevationChart();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderElevationChart);
+} else {
+  renderElevationChart();
+}
 
 </script>
 </body>
