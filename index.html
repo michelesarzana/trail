@@ -11,7 +11,7 @@
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+body { margin: 0; background: #fff; font-family: 'Manrope', sans-serif; color: #2e2b38; }
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-thumb { background: rgba(46,43,56,0.16); border-radius: 4px; }
 a { color: #38324a; text-decoration: none; }
@@ -309,6 +309,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     height: 300px !important;
   }
   .footer { padding: 20px 20px; }
+  .search-hero { padding: 16px 20px 12px; }
+  .search-box-wrap { max-width: 100%; }
+  .filter-bar { max-width: 100%; flex-wrap: nowrap; overflow-x: auto; gap: 8px; }
+  .filter-toggle-btn, .filter-clear-btn { white-space: nowrap; flex-shrink: 0; }
+  .nav-add { white-space: nowrap; }
 }
 
 /* ── CSS vars (if not already defined) ── */
