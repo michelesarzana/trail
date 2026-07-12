@@ -1,0 +1,362 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://michelesarzana.github.io/trail/schema/trail.schema.json",
+  "title": "Trail",
+  "description": "Schema per un singolo trail nella mappa personale di Michele Sarzana",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID univoco del trail (slug kebab-case, es. 'gran-sasso-corno-grande')"
+    },
+    "title": {
+      "type": "string",
+      "description": "Titolo del trail"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descrizione libera del trail"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "done",
+        "todo"
+      ],
+      "description": "Se il trail è stato completato o è ancora da fare"
+    },
+    "rating": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Voto personale da 1 a 5 (null se non ancora fatto)"
+    },
+    "date_done": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Data in cui è stato completato (YYYY-MM-DD, opzionale)"
+    },
+    "times_completed": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "Numero totale di volte che il trail è stato completato"
+    },
+    "logbook": {
+      "type": "array",
+      "description": "Storico delle uscite (una entry per ogni volta)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "weather": {
+            "type": "string"
+          },
+          "strava_activity_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "geo": {
+      "type": "object",
+      "description": "Dati geografici per filtri e localizzazione",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Stato (es. 'Italia')"
+        },
+        "country_code": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 (es. 'IT')"
+        },
+        "region": {
+          "type": "string",
+          "description": "Regione (es. 'Abruzzo')"
+        },
+        "province": {
+          "type": "string",
+          "description": "Provincia (es. 'L'Aquila')"
+        },
+        "municipality": {
+          "type": "string",
+          "description": "Comune principale"
+        },
+        "area_name": {
+          "type": "string",
+          "description": "Nome dell'area/massiccio (es. 'Gran Sasso')"
+        },
+        "start_coords": {
+          "type": "object",
+          "description": "Coordinate punto di partenza",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "lat",
+            "lng"
+          ]
+        },
+        "end_coords": {
+          "type": "object",
+          "description": "Coordinate punto di arrivo (uguale a start se anello)",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "lat",
+            "lng"
+          ]
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "description": "Dati tecnici del percorso",
+      "properties": {
+        "gpx_file": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Path relativo al file GPX nella repo (es. 'gpx/gran-sasso.gpx')"
+        },
+        "distance_km": {
+          "type": "number",
+          "description": "Distanza totale in km"
+        },
+        "elevation_gain_m": {
+          "type": "integer",
+          "description": "Dislivello positivo in metri (D+)"
+        },
+        "elevation_loss_m": {
+          "type": "integer",
+          "description": "Dislivello negativo in metri (D-)"
+        },
+        "altitude_max_m": {
+          "type": "integer",
+          "description": "Quota massima in metri slm"
+        },
+        "altitude_min_m": {
+          "type": "integer",
+          "description": "Quota minima in metri slm"
+        },
+        "duration_estimate_min": {
+          "type": "integer",
+          "description": "Tempo stimato in minuti"
+        },
+        "route_type": {
+          "type": "string",
+          "enum": [
+            "loop",
+            "point-to-point",
+            "out-and-back"
+          ],
+          "description": "Tipo di percorso: anello / A→B / andata e ritorno"
+        },
+        "surface": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "terra",
+              "sterrato",
+              "roccia",
+              "misto",
+              "asfalto",
+              "neve"
+            ]
+          },
+          "description": "Tipi di fondo del percorso"
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "description": "Classificazione e caratteristiche",
+      "properties": {
+        "difficulty": {
+          "type": "string",
+          "enum": [
+            "T1",
+            "T2",
+            "T3",
+            "T4",
+            "T5",
+            "T6"
+          ],
+          "description": "Scala EAC/CAI: T1 turistica → T6 alpinistica estrema"
+        },
+        "activity_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "trail-running",
+              "trekking",
+              "escursionismo",
+              "mtb",
+              "alpinismo",
+              "snowshoe"
+            ]
+          },
+          "description": "Tipologie di attività compatibili"
+        },
+        "best_seasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "primavera",
+              "estate",
+              "autunno",
+              "inverno"
+            ]
+          },
+          "description": "Stagioni consigliate"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tag liberi (es. panoramico, tecnico, cresta, cascata, bosco, ...)"
+        }
+      }
+    },
+    "logistics": {
+      "type": "object",
+      "description": "Informazioni logistiche pratiche",
+      "properties": {
+        "dog_friendly": {
+          "type": "boolean",
+          "description": "Adatto ai cani"
+        },
+        "public_transport": {
+          "type": "boolean",
+          "description": "Raggiungibile con mezzi pubblici"
+        },
+        "parking_notes": {
+          "type": "string",
+          "description": "Note sul parcheggio"
+        },
+        "water_on_route": {
+          "type": "boolean",
+          "description": "Presenza di acqua lungo il percorso"
+        },
+        "start_address": {
+          "type": "string",
+          "description": "Indirizzo/descrizione del punto di partenza"
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "description": "Link esterni",
+      "properties": {
+        "strava": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "komoot": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "alltrails": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "wikiloc": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "other": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      }
+    },
+    "media": {
+      "type": "object",
+      "description": "File multimediali associati",
+      "properties": {
+        "cover_image": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Path relativo all'immagine di copertina (es. 'media/gran-sasso/cover.jpg')"
+        },
+        "photos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Lista di path relativi alle foto"
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Lista di URL o path relativi ai video"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data di creazione della scheda nel database"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data ultimo aggiornamento"
+    }
+  }
+}
