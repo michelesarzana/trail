@@ -793,6 +793,9 @@ function renderPage(trail, allTrails) {
       </div>
     </nav>
 
+    <!-- COVER HERO or GRADIENT HERO -->
+    ${cover ? `<div class="cover-hero" style="width:100%;height:320px;overflow:hidden;background:#f0edf0;"><img src="${escHtml(cover)}" alt="${escHtml(trail.title)}" style="width:100%;height:320px;object-fit:cover;display:block;"></div>` : `<div class="trail-hero-gradient" style="width:100%;height:320px;background:linear-gradient(135deg,#38324a 0%,#2e2b38 100%);display:flex;align-items:flex-end;padding:40px 48px;"><h1 class="trail-hero-gradient-title" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:42px;color:#fff;margin:0;">${escHtml(trail.title)}</h1></div>`}
+
     <!-- MAP HERO (full width) -->
     <div id="map-hero"></div>
 
