@@ -111,7 +111,8 @@
         "surface": [
           "terra",
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
       },
       "classification": {
         "difficulty": "T3",
@@ -206,7 +207,8 @@
         "elevation_min": 1487,
         "duration_min": 400,
         "route_type": "loop",
-        "surface": []
+        "surface": [],
+        "gpx_file": "gpx/pizzo-dei-tre-signori.gpx"
       },
       "classification": {
         "difficulty": null,
