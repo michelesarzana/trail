@@ -78,6 +78,49 @@ a{color:#38324a;text-decoration:none;}a:hover{color:#c17b8c;}
 .footer-nav-btn{display:inline-flex;align-items:center;gap:8px;background:#f0edf0;color:#38324a;font-size:13px;font-weight:700;padding:10px 20px;border-radius:12px;text-decoration:none;transition:background .15s;}
 .footer-nav-btn:hover{background:#c17b8c;color:#fff;}
 @media(max-width:768px){.nav{padding:16px 20px;}.trail-header{padding:24px 20px 16px;}.trail-header-title{font-size:32px;}.stats-bar{padding:16px 20px;}.elevation-section,.gallery-section{padding:24px 20px;}.gallery-grid{grid-template-columns:repeat(2,1fr);}.trail-body{flex-direction:column;padding:24px 20px;gap:28px;}.trail-body-right{width:100%;}.footer-nav{padding:20px;}}
+
+/* COVER HERO */
+.cover-hero {
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+.cover-hero--gradient {
+  background: linear-gradient(135deg, #38324a 0%, #2e2b38 100%);
+}
+.cover-hero--photo {
+  background-size: cover;
+  background-position: center;
+}
+.cover-hero--photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30,26,42,0.82) 0%, rgba(30,26,42,0.2) 60%, transparent 100%);
+}
+.cover-hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 32px 48px;
+}
+.cover-hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 38px;
+  color: #fff;
+  margin: 0 0 6px;
+  line-height: 1.15;
+}
+.cover-hero-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.65);
+}
 </style>
 </head>
 <body>
@@ -90,6 +133,12 @@ a{color:#38324a;text-decoration:none;}a:hover{color:#c17b8c;}
   </a>
   <div class="nav-spacer"></div>
 </nav>
+<div class="cover-hero cover-hero--photo" style="background-image:url('https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg')">
+  <div class="cover-hero-inner">
+    <h2 class="cover-hero-title">Lago Antermoia dal Rifugio Micheluzzi</h2>
+    <span class="cover-hero-eyebrow">Campitello di Fassa, Trentino-Alto Adige</span>
+  </div>
+</div>
 <div id="map-hero"></div>
 <div class="trail-header">
   <span class="trail-header-badge badge-done">✓ Fatto</span>
@@ -205,7 +254,11 @@ async function renderElevationChart() {
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{title:items=>items[0].label+' km',label:item=>item.raw+' m'}}},scales:{x:{ticks:{maxTicksLimit:8,font:{size:11},color:'#726e7a'},grid:{color:'rgba(46,43,56,0.06)'}},y:{ticks:{font:{size:11},color:'#726e7a'},grid:{color:'rgba(46,43,56,0.06)'}}}}
   });
 }
-renderElevationChart();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderElevationChart);
+} else {
+  renderElevationChart();
+}
 </script>
 </body>
 </html>
