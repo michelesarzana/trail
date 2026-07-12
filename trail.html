@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trail — Every Single Trail</title>
+<meta name="description" content="Dettaglio percorso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(46,43,56,0.16); border-radius: 4px; }
+a { color: #38324a; text-decoration: none; }
+a:hover { color: #c17b8c; }
+
+/* ===== SHELL ===== */
+.shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+  box-shadow: 0 0 60px rgba(0,0,0,0.05);
+}
+
+/* ===== NAV ===== */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 16px;
+}
+.nav-back {
+  font-size: 13px;
+  font-weight: 700;
+  color: #38324a;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 140px;
+}
+.nav-back:hover { color: #c17b8c; }
+.nav-wordmark {
+  font-size: 22px;
+  font-weight: 800;
+  color: #2e2b38;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  text-align: center;
+  flex: 1;
+}
+.nav-wordmark:hover { color: #2e2b38; }
+.nav-prev-next {
+  display: flex;
+  gap: 8px;
+  min-width: 140px;
+  justify-content: flex-end;
+}
+.nav-btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: #38324a;
+  background: #f0edf0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: none;
+  font-family: 'Manrope', sans-serif;
+  transition: background .15s;
+  text-decoration: none;
+}
+.nav-btn:hover { background: #e4dfe4; color: #38324a; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(46,43,56,0.75) 0%, rgba(46,43,56,0.12) 55%, transparent 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 48px 40px;
+  width: 100%;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 7px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+}
+.badge-done { background: rgba(255,255,255,0.95); color: #38324a; }
+.badge-todo { background: rgba(255,255,255,0.85); color: #726e7a; }
+.hero-stars { font-size: 16px; color: #fff; margin-bottom: 8px; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 8px;
+}
+.hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 54px;
+  line-height: 1.08;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+/* todo hero: dark text on light pattern */
+.hero-todo .hero-title { color: #2e2b38; text-shadow: none; }
+.hero-todo .hero-eyebrow { color: #726e7a; }
+.hero-todo .hero-stars { color: #c17b8c; text-shadow: none; }
+
+/* ===== STATS BAR ===== */
+.stats-bar {
+  display: flex;
+  gap: 12px;
+  padding: 24px 48px;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  flex-wrap: wrap;
+}
+.stat-card {
+  background: #f5f2f5;
+  border-radius: 12px;
+  padding: 14px 20px;
+  min-width: 100px;
+  flex: 1;
+}
+.stat-card-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #726e7a;
+  margin-bottom: 4px;
+}
+.stat-card-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2e2b38;
+  line-height: 1.1;
+}
+.stat-card-unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: #726e7a;
+  margin-left: 2px;
+}
+
+/* ===== BODY LAYOUT ===== */
+.trail-body {
+  display: flex;
+  gap: 48px;
+  padding: 56px 48px;
+  align-items: flex-start;
+}
+.trail-body-left { flex: 1.5; min-width: 0; display: flex; flex-direction: column; gap: 44px; }
+.trail-body-right { width: 360px; flex-shrink: 0; display: flex; flex-direction: column; gap: 28px; }
+
+/* ===== SECTIONS ===== */
+.section-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #726e7a;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 14px;
+}
+.section-text {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #2e2b38;
+  max-width: 680px;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.info-key {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #726e7a;
+}
+.info-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2e2b38;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-pill {
+  font-size: 12px;
+  font-weight: 600;
+  background: #f0edf0;
+  color: #38324a;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.bool-yes { color: #38324a; }
+.bool-no { color: #726e7a; }
+
+/* ===== LOGBOOK ===== */
+.logbook-entry {
+  border-left: 3px solid #c17b8c;
+  padding: 0 0 0 16px;
+  margin-bottom: 20px;
+}
+.logbook-date {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #726e7a;
+  margin-bottom: 4px;
+}
+.logbook-notes {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #2e2b38;
+}
+.logbook-meta {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #726e7a;
+  display: flex;
+  gap: 14px;
+}
+.logbook-empty {
+  background: #f5f2f5;
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  color: #726e7a;
+  font-size: 15px;
+}
+
+/* ===== MINI MAP ===== */
+#mini-map {
+  height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(46,43,56,0.08);
+}
+
+/* ===== LINK PILLS ===== */
+.link-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #f0edf0;
+  color: #38324a;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: background .15s, transform .15s;
+}
+.link-pill:hover { background: #38324a; color: #fff; transform: translateY(-1px); }
+
+/* ===== PHOTO GALLERY ===== */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.photo-tile {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  transition: transform .2s;
+}
+.photo-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-tile:hover { transform: scale(1.02); }
+
+/* ===== SIDEBAR CARD ===== */
+.sidebar-card {
+  background: #faf7f4;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(46,43,56,0.06);
+}
+.sidebar-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #726e7a;
+  margin-bottom: 14px;
+}
+.coords-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e2b38;
+  font-feature-settings: 'tnum';
+}
+
+/* ===== FOOTER NAV ===== */
+.footer-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 48px;
+  border-top: 1px solid rgba(46,43,56,0.08);
+  gap: 16px;
+}
+.footer-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #38324a;
+  background: #f0edf0;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  font-family: 'Manrope', sans-serif;
+  transition: background .15s;
+  text-decoration: none;
+}
+.footer-nav-btn:hover { background: #38324a; color: #fff; }
+.footer-nav-center {
+  font-size: 13px;
+  color: #726e7a;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ===== NOT FOUND ===== */
+.not-found {
+  padding: 80px 48px;
+  text-align: center;
+  color: #726e7a;
+}
+.not-found h2 { font-size: 28px; color: #2e2b38; margin-bottom: 12px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .nav { padding: 16px 20px; }
+  .hero { height: 320px; }
+  .hero-title { font-size: 34px; }
+  .hero-content { padding: 0 20px 28px; }
+  .stats-bar { padding: 16px 20px; gap: 8px; }
+  .trail-body { flex-direction: column; padding: 28px 20px; gap: 32px; }
+  .trail-body-right { width: 100%; }
+  .footer-nav { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="shell" id="app">
+  <div style="padding:80px 48px;text-align:center;color:#726e7a;font-size:16px;">Caricamento…</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ===== CONFIG ===== */
+const DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
+
+/* ===== UTILITIES ===== */
+function fmtDist(km) { return km != null ? km + ' km' : '—'; }
+function fmtGain(m) { return m != null ? '+' + m + ' m' : '—'; }
+function fmtLoss(m) { return m != null ? '−' + m + ' m' : '—'; }
+function fmtElev(m) { return m != null ? m + ' m' : '—'; }
+function fmtDur(min) {
+  if (!min) return '—';
+  const h = Math.floor(min / 60), m = min % 60;
+  return h > 0 ? (m > 0 ? h + 'h ' + m + 'min' : h + 'h') : m + ' min';
+}
+function stars(n) {
+  return n ? '★'.repeat(n) + '☆'.repeat(5 - n) : '';
+}
+function coverSrc(t) {
+  const m = t.media || {};
+  return m.cover || t.cover_image || null;
+}
+function todoBg() {
+  return 'repeating-linear-gradient(45deg,#efe9ec,#efe9ec 14px,#e3dbe1 14px,#e3dbe1 28px)';
+}
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function boolLabel(v) {
+  if (v === true) return '<span class="bool-yes">✓ Sì</span>';
+  if (v === false) return '<span class="bool-no">No</span>';
+  return '<span class="bool-no">—</span>';
+}
+
+/* ===== LOAD TRAILS ===== */
+async function loadTrails() {
+  try {
+    const r = await fetch(DB_URL + '?t=' + Date.now());
+    const data = await r.json();
+    return data.trails || [];
+  } catch(e) {
+    console.error('Failed to load trails:', e);
+    return [];
+  }
+}
+
+/* ===== RENDER FULL PAGE ===== */
+function renderPage(trail, allTrails) {
+  const app = document.getElementById('app');
+  const idx = allTrails.findIndex(t => t.id === trail.id);
+  const prev = idx > 0 ? allTrails[idx - 1] : allTrails[allTrails.length - 1];
+  const next = idx < allTrails.length - 1 ? allTrails[idx + 1] : allTrails[0];
+  const isDone = trail.status === 'done';
+  const loc = trail.location || {};
+  const track = trail.track || {};
+  const cls = trail.classification || {};
+  const links = trail.links || {};
+  const logistics = trail.logistics || {};
+  const media = trail.media || {};
+  const cover = coverSrc(trail);
+  const coords = (loc.coordinates || {});
+  const startCoords = coords.start || {};
+  const endCoords = coords.end || {};
+
+  // Page title
+  document.title = trail.title + ' — Every Single Trail';
+
+  // HERO background
+  let heroBgStyle, heroClass;
+  if (isDone && cover) {
+    heroBgStyle = '';
+    heroClass = '';
+  } else if (isDone) {
+    heroBgStyle = 'background: linear-gradient(135deg,#d7b8d3 0%,#8a86b4 50%,#38324a 100%);';
+    heroClass = '';
+  } else {
+    heroBgStyle = 'background: ' + todoBg() + ';';
+    heroClass = 'hero-todo';
+  }
+
+  // Stats
+  const statCards = [
+    { label: 'Distanza', value: track.distance_km != null ? track.distance_km : '—', unit: track.distance_km != null ? 'km' : '' },
+    { label: 'Dislivello +', value: track.elevation_gain != null ? '+' + track.elevation_gain : '—', unit: track.elevation_gain != null ? 'm' : '' },
+    { label: 'Dislivello −', value: track.elevation_loss != null ? '−' + track.elevation_loss : '—', unit: track.elevation_loss != null ? 'm' : '' },
+    { label: 'Quota max', value: track.elevation_max != null ? track.elevation_max : '—', unit: track.elevation_max != null ? 'm' : '' },
+    { label: 'Durata', value: track.duration_min ? fmtDur(track.duration_min) : '—', unit: '' },
+    { label: 'Difficoltà', value: cls.difficulty || '—', unit: '' },
+  ].filter(s => s.value !== '—');
+
+  const statsHtml = statCards.map(s => `
+    <div class="stat-card">
+      <div class="stat-card-label">${escHtml(s.label)}</div>
+      <div class="stat-card-value">${escHtml(String(s.value))}<span class="stat-card-unit">${escHtml(s.unit)}</span></div>
+    </div>`).join('');
+
+  // Logbook
+  const logbook = trail.logbook || [];
+  let logbookHtml;
+  if (logbook.length > 0) {
+    logbookHtml = logbook.map(e => `
+      <div class="logbook-entry">
+        <div class="logbook-date">${escHtml(e.date || e.completed_at || '')}</div>
+        ${e.notes ? `<div class="logbook-notes">${escHtml(e.notes)}</div>` : ''}
+        <div class="logbook-meta">
+          ${e.duration_min ? `<span>⏱ ${fmtDur(e.duration_min)}</span>` : ''}
+          ${e.weather ? `<span>☁️ ${escHtml(e.weather)}</span>` : ''}
+        </div>
+      </div>`).join('');
+  } else if (isDone && trail.completed_at) {
+    logbookHtml = `
+      <div class="logbook-entry">
+        <div class="logbook-date">${escHtml(trail.completed_at)}</div>
+        <div class="logbook-notes">Percorso completato.</div>
+      </div>`;
+  } else {
+    logbookHtml = `<div class="logbook-empty">📖 Ancora da fare — il logbook sarà qui dopo la prima uscita.</div>`;
+  }
+
+  // Link pills
+  const linkDefs = [
+    { key: 'strava', label: '🏃 Strava' },
+    { key: 'komoot', label: '🗺️ Komoot' },
+    { key: 'alltrails', label: '🥾 AllTrails' },
+    { key: 'wikiloc', label: '📍 Wikiloc' },
+  ];
+  const linkPills = linkDefs
+    .filter(l => links[l.key])
+    .map(l => `<a href="${escHtml(links[l.key])}" class="link-pill" target="_blank" rel="noopener">${l.label}</a>`)
+    .join('');
+  const otherLink = links.other
+    ? `<a href="${escHtml(links.other)}" class="link-pill" target="_blank" rel="noopener">🔗 Link</a>`
+    : '';
+
+  // Photos
+  const photos = (media.photos || []);
+  let photosHtml = '';
+  if (photos.length > 0) {
+    photosHtml = `
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Galleria foto</div>
+        <div class="photo-grid">
+          ${photos.map(p => `
+            <div class="photo-tile">
+              <img src="${escHtml(p.url || p)}" alt="Foto trail" loading="lazy">
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  // Coordinates card
+  let coordsHtml = '';
+  if (startCoords.lat) {
+    const gps = `${startCoords.lat.toFixed(5)}, ${(startCoords.lng || startCoords.lon || 0).toFixed(5)}`;
+    coordsHtml = `
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Punto di partenza</div>
+        <div class="coords-text">📍 ${gps}</div>
+        ${loc.start_address ? `<div style="font-size:13px;color:#726e7a;margin-top:6px">${escHtml(loc.start_address)}</div>` : ''}
+      </div>`;
+  }
+
+  const hasSidebarLinks = (linkPills + otherLink).length > 0;
+
+  const eyebrow = [loc.area, loc.region].filter(Boolean).join(' · ') || loc.municipality || '';
+  const actTypes = (cls.activity_types || []);
+  const seasons = (cls.seasons || []);
+
+  app.innerHTML = `
+    <!-- NAV -->
+    <nav class="nav">
+      <a href="index.html" class="nav-back">← Tutti i trail</a>
+      <a href="index.html" class="nav-wordmark">Every Single Trail</a>
+      <div class="nav-prev-next">
+        <button class="nav-btn" onclick="navigateTo('${prev.id}')">← Prec.</button>
+        <button class="nav-btn" onclick="navigateTo('${next.id}')">Succ. →</button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero ${heroClass}" id="hero">
+      <div class="hero-bg" id="hero-bg" style="${heroBgStyle}">
+        ${isDone && cover ? `<img src="${escHtml(cover)}" alt="${escHtml(trail.title)}">` : ''}
+      </div>
+      ${isDone ? '<div class="hero-overlay"></div>' : ''}
+      <div class="hero-content">
+        <div class="hero-badge ${isDone ? 'badge-done' : 'badge-todo'}">${isDone ? '✓ Fatto' : '◷ Da fare'}</div>
+        ${isDone && trail.rating ? `<div class="hero-stars">${stars(trail.rating)}</div>` : ''}
+        ${eyebrow ? `<div class="hero-eyebrow">${escHtml(eyebrow)}</div>` : ''}
+        <h1 class="hero-title">${escHtml(trail.title)}</h1>
+      </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">${statsHtml}</div>
+
+    <!-- BODY -->
+    <div class="trail-body">
+
+      <!-- LEFT -->
+      <div class="trail-body-left">
+
+        ${trail.description ? `
+        <div>
+          <div class="section-label">Descrizione</div>
+          <div class="section-text">${escHtml(trail.description).replace(/\n/g,'<br>')}</div>
+        </div>` : ''}
+
+        <!-- DOVE -->
+        <div>
+          <div class="section-label">📍 Dove</div>
+          <div class="info-grid">
+            ${loc.region ? `<div class="info-row"><span class="info-key">Regione</span><span class="info-val">${escHtml(loc.region)}</span></div>` : ''}
+            ${loc.province ? `<div class="info-row"><span class="info-key">Provincia</span><span class="info-val">${escHtml(loc.province)}</span></div>` : ''}
+            ${loc.municipality ? `<div class="info-row"><span class="info-key">Comune</span><span class="info-val">${escHtml(loc.municipality)}</span></div>` : ''}
+            ${loc.area ? `<div class="info-row"><span class="info-key">Area</span><span class="info-val">${escHtml(loc.area)}</span></div>` : ''}
+          </div>
+        </div>
+
+        <!-- TRACCIA -->
+        <div>
+          <div class="section-label">🗺️ Traccia</div>
+          <div class="info-grid">
+            ${track.route_type ? `<div class="info-row"><span class="info-key">Tipo percorso</span><span class="info-val">${escHtml(track.route_type)}</span></div>` : ''}
+            ${(track.surface || []).length > 0 ? `<div class="info-row"><span class="info-key">Fondo</span><span class="info-val">${escHtml(track.surface.join(', '))}</span></div>` : ''}
+          </div>
+          ${actTypes.length > 0 ? `
+          <div style="margin-top:12px">
+            <div class="info-key" style="margin-bottom:8px">Attività</div>
+            <div class="tag-row">${actTypes.map(a => `<span class="tag-pill">${escHtml(a)}</span>`).join('')}</div>
+          </div>` : ''}
+          ${seasons.length > 0 ? `
+          <div style="margin-top:12px">
+            <div class="info-key" style="margin-bottom:8px">Stagioni consigliate</div>
+            <div class="tag-row">${seasons.map(s => `<span class="tag-pill">${escHtml(s)}</span>`).join('')}</div>
+          </div>` : ''}
+        </div>
+
+        <!-- LOGISTICA -->
+        <div>
+          <div class="section-label">🧭 Logistica</div>
+          <div class="info-grid">
+            <div class="info-row"><span class="info-key">Dog friendly</span><span class="info-val">${boolLabel(logistics.dog_friendly)}</span></div>
+            <div class="info-row"><span class="info-key">Acqua sul percorso</span><span class="info-val">${boolLabel(logistics.water_available)}</span></div>
+            <div class="info-row"><span class="info-key">Mezzi pubblici</span><span class="info-val">${boolLabel(logistics.public_transport)}</span></div>
+            ${logistics.parking_notes ? `<div class="info-row" style="grid-column:1/-1"><span class="info-key">Parcheggio</span><span class="info-val">${escHtml(logistics.parking_notes)}</span></div>` : ''}
+          </div>
+        </div>
+
+        <!-- LOGBOOK -->
+        <div>
+          <div class="section-label">📖 Logbook</div>
+          ${logbookHtml}
+        </div>
+
+      </div><!-- /left -->
+
+      <!-- RIGHT -->
+      <div class="trail-body-right">
+
+        <!-- MINI MAP -->
+        <div>
+          <div class="section-label">🗺️ Mappa</div>
+          <div id="mini-map"></div>
+        </div>
+
+        ${coordsHtml}
+
+        ${hasSidebarLinks ? `
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Link esterni</div>
+          <div class="link-pills">${linkPills}${otherLink}</div>
+        </div>` : ''}
+
+        ${photosHtml}
+
+      </div><!-- /right -->
+
+    </div><!-- /trail-body -->
+
+    <!-- FOOTER NAV -->
+    <div class="footer-nav">
+      <button class="footer-nav-btn" onclick="navigateTo('${prev.id}')">← ${escHtml(prev.title)}</button>
+      <div class="footer-nav-center">
+        ${idx + 1} / ${allTrails.length}
+      </div>
+      <button class="footer-nav-btn" onclick="navigateTo('${next.id}')">${escHtml(next.title)} →</button>
+    </div>
+  `;
+
+  // Init mini map after render
+  setTimeout(() => initMiniMap(trail), 100);
+}
+
+/* ===== MINI MAP ===== */
+function initMiniMap(trail) {
+  const el = document.getElementById('mini-map');
+  if (!el) return;
+  const loc = trail.location || {};
+  const coords = (loc.coordinates || {});
+  const start = coords.start || {};
+  const end = coords.end || {};
+
+  if (!start.lat) {
+    el.innerHTML = '<div style="height:260px;display:flex;align-items:center;justify-content:center;background:#f5f2f5;border-radius:16px;color:#726e7a;font-size:13px">Coordinate non disponibili</div>';
+    return;
+  }
+
+  const miniMap = L.map(el, { zoomControl: false, dragging: false, touchZoom: false, scrollWheelZoom: false }).setView([start.lat, start.lng || start.lon], 12);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(miniMap);
+
+  const isDone = trail.status === 'done';
+  const color = isDone ? '#38324a' : '#c17b8c';
+  const markerIcon = L.divIcon({
+    html: `<div style="width:14px;height:14px;border-radius:50%;background:${color};border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>`,
+    className: '',
+    iconSize: [14,14],
+    iconAnchor: [7,7]
+  });
+
+  L.marker([start.lat, start.lng || start.lon], { icon: markerIcon }).addTo(miniMap);
+
+  if (end.lat && end.lng && (end.lat !== start.lat || end.lng !== start.lng)) {
+    const endIcon = L.divIcon({
+      html: `<div style="width:14px;height:14px;border-radius:50%;background:#c17b8c;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>`,
+      className: '',
+      iconSize: [14,14],
+      iconAnchor: [7,7]
+    });
+    L.marker([end.lat, end.lng], { icon: endIcon }).addTo(miniMap);
+    miniMap.fitBounds([[start.lat, start.lng || start.lon], [end.lat, end.lng]], { padding: [30,30], maxZoom: 13 });
+  }
+}
+
+/* ===== NAVIGATION ===== */
+function navigateTo(id) {
+  window.location.hash = id;
+  window.location.reload();
+}
+
+/* ===== RENDER NOT FOUND ===== */
+function renderNotFound(id) {
+  document.getElementById('app').innerHTML = `
+    <nav class="nav">
+      <a href="index.html" class="nav-back">← Tutti i trail</a>
+      <a href="index.html" class="nav-wordmark">Every Single Trail</a>
+      <div></div>
+    </nav>
+    <div class="not-found">
+      <div style="font-size:48px;margin-bottom:16px">🏔️</div>
+      <h2>Trail non trovato</h2>
+      <p>Il percorso <code>${escHtml(id)}</code> non esiste nel database.</p>
+      <a href="index.html" style="display:inline-block;margin-top:20px;background:#38324a;color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;font-size:14px">← Torna alla homepage</a>
+    </div>`;
+}
+
+/* ===== INIT ===== */
+async function init() {
+  const id = window.location.hash.replace('#', '').trim();
+  const allTrails = await loadTrails();
+
+  if (!id || allTrails.length === 0) {
+    if (allTrails.length > 0) {
+      navigateTo(allTrails[0].id);
+    } else {
+      renderNotFound('(nessun ID)');
+    }
+    return;
+  }
+
+  const trail = allTrails.find(t => t.id === id);
+  if (!trail) {
+    renderNotFound(id);
+    return;
+  }
+
+  renderPage(trail, allTrails);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
