@@ -6,6 +6,8 @@
 <title>🏔️ Trail Admin — michelesarzana/trail</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" crossorigin=""/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" crossorigin=""></script>
 <style>
 :root {
   --bg: #0D0D0D;
@@ -200,8 +202,32 @@ input,textarea,select{font-family:inherit;font-size:14px}
 .photo-thumb{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1;background:var(--bg-input);border:1px solid var(--border)}
 .photo-thumb img{width:100%;height:100%;object-fit:cover}
 .photo-thumb .photo-remove{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.7);border:none;color:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.photo-thumb.cover-photo{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
-.photo-thumb .photo-cover-badge{position:absolute;bottom:4px;left:4px;background:var(--accent);color:#000;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px}
+.photo-thumb.cover-photo{border-color:#c17b8c;box-shadow:0 0 0 2px #c17b8c}
+.photo-thumb .photo-cover-badge{position:absolute;bottom:4px;left:4px;background:#c17b8c;color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px}
+.photo-thumb .photo-crop-btn{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,.75);border:1px solid var(--accent);color:var(--accent);border-radius:4px;font-size:9px;font-weight:700;padding:2px 5px;cursor:pointer;line-height:1.4}
+.photo-thumb .photo-crop-btn:hover{background:var(--accent);color:#000}
+
+/* ── CROP MODAL ───────────────────────────────────────── */
+#crop-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);align-items:center;justify-content:center}
+#crop-modal.open{display:flex}
+.crop-modal-inner{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;width:min(860px,96vw);max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.crop-modal-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
+.crop-modal-header h3{font-size:15px;font-weight:700}
+.crop-modal-close{background:none;border:none;color:var(--text-dim);font-size:20px;cursor:pointer;padding:0 4px}
+.crop-modal-close:hover{color:var(--text)}
+.crop-modal-body{flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
+.crop-ratio-switcher{display:flex;gap:8px}
+.crop-ratio-btn{background:var(--bg-input);border:1px solid var(--border);color:var(--text-dim);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.crop-ratio-btn.active{background:var(--accent);border-color:var(--accent);color:#000}
+.crop-container{position:relative;width:100%;max-height:50vh;background:#000;border-radius:8px;overflow:hidden}
+.crop-container img{display:block;max-width:100%;max-height:50vh}
+/* Cropper.js accent override */
+.cropper-view-box,.cropper-face{border-color:var(--accent)!important;outline-color:var(--accent)!important}
+.cropper-line,.cropper-point{background-color:var(--accent)!important}
+.crop-modal-footer{display:flex;gap:10px;justify-content:flex-end;padding:14px 20px;border-top:1px solid var(--border)}
+.crop-preview-wrap{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-dim)}
+.crop-preview-16{width:80px;height:45px;overflow:hidden;border-radius:4px;border:1px solid var(--border)}
+.crop-preview-11{width:45px;height:45px;overflow:hidden;border-radius:4px;border:1px solid var(--border)}
 
 /* Responsive */
 @media(max-width:640px){
@@ -885,6 +911,34 @@ input,textarea,select{font-family:inherit;font-size:14px}
 
 <div id="toast"></div>
 
+<!-- ── CROP MODAL ───────────────────────────────────────── -->
+<div id="crop-modal" role="dialog" aria-modal="true" aria-labelledby="crop-modal-title">
+  <div class="crop-modal-inner">
+    <div class="crop-modal-header">
+      <h3 id="crop-modal-title">✂️ Imposta Copertina</h3>
+      <button class="crop-modal-close" onclick="closeCropModal()" title="Chiudi">✕</button>
+    </div>
+    <div class="crop-modal-body">
+      <div class="crop-ratio-switcher">
+        <button class="crop-ratio-btn active" id="crop-btn-169" onclick="setCropRatio(16/9, this)">16:9 — Hero</button>
+        <button class="crop-ratio-btn" id="crop-btn-11" onclick="setCropRatio(1, this)">1:1 — Card</button>
+      </div>
+      <div class="crop-container">
+        <img id="crop-image" src="" alt="Anteprima crop">
+      </div>
+      <div class="crop-preview-wrap">
+        Anteprima: &nbsp;
+        <div class="crop-preview-16"><div class="cropper-preview" id="prev-16" style="width:80px;height:45px;overflow:hidden"></div></div>
+        <div class="crop-preview-11"><div class="cropper-preview" id="prev-11" style="width:45px;height:45px;overflow:hidden"></div></div>
+      </div>
+    </div>
+    <div class="crop-modal-footer">
+      <button class="btn btn-ghost" onclick="closeCropModal()">Annulla</button>
+      <button class="btn btn-primary" id="crop-save-btn" onclick="saveCrop()">⭐ Usa come copertina</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── CONSTANTS ────────────────────────────────────────────────
 const REPO = 'michelesarzana/trail';
@@ -1348,14 +1402,122 @@ function removePhoto(idx) {
 function renderPhotoGrid() {
   const grid = document.getElementById('photo-grid');
   if (!photos.length) { grid.innerHTML = ''; return; }
-  grid.innerHTML = photos.map((p, i) => `
-    <div class="photo-thumb ${i === 0 ? 'cover-photo' : ''}" title="${escHtml(p.name)}">
+  grid.innerHTML = photos.map((p, i) => {
+    const isCover = p.isCover === true || (i === 0 && !photos.some(ph => ph.isCover));
+    return `
+    <div class="photo-thumb ${isCover ? 'cover-photo' : ''}" title="${escHtml(p.name)}">
       <img src="${p.preview || p.url}" alt="${escHtml(p.name)}">
       <button class="photo-remove" onclick="removePhoto(${i})">✕</button>
-      ${i === 0 ? '<div class="photo-cover-badge">COVER</div>' : ''}
+      ${isCover ? '<div class="photo-cover-badge">COVER</div>' : ''}
+      <button class="photo-crop-btn" onclick="openCropModal(${i})" title="Imposta copertina con crop">✂️ Crop</button>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
+
+// ── CROP MODAL ────────────────────────────────────────────────
+let cropperInstance = null;
+let cropPhotoIndex = null;
+let cropCurrentRatio = 16/9;
+
+function openCropModal(photoIdx) {
+  cropPhotoIndex = photoIdx;
+  const p = photos[photoIdx];
+  const src = p.preview || p.url;
+  const img = document.getElementById('crop-image');
+  img.src = src;
+  // Reset previous cropper
+  if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
+  document.getElementById('crop-btn-169').classList.add('active');
+  document.getElementById('crop-btn-11').classList.remove('active');
+  cropCurrentRatio = 16/9;
+  const modal = document.getElementById('crop-modal');
+  modal.classList.add('open');
+  // Init cropper after image loads
+  img.onload = () => {
+    cropperInstance = new Cropper(img, {
+      aspectRatio: cropCurrentRatio,
+      viewMode: 1,
+      autoCropArea: 0.8,
+      movable: true,
+      zoomable: true,
+      scalable: false,
+      preview: ['#prev-16', '#prev-11'],
+    });
+  };
+  // If already loaded
+  if (img.complete && img.naturalWidth) img.onload();
+}
+
+function closeCropModal() {
+  document.getElementById('crop-modal').classList.remove('open');
+  if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
+  cropPhotoIndex = null;
+}
+
+function setCropRatio(ratio, btn) {
+  cropCurrentRatio = ratio;
+  document.querySelectorAll('.crop-ratio-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (cropperInstance) cropperInstance.setAspectRatio(ratio);
+}
+
+async function saveCrop() {
+  if (!cropperInstance || cropPhotoIndex === null) return;
+  const saveBtn = document.getElementById('crop-save-btn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = '⏳ Elaboro…';
+
+  try {
+    // Get cropped canvas
+    const canvas = cropperInstance.getCroppedCanvas({ maxWidth: 2048, maxHeight: 2048, imageSmoothingQuality: 'high' });
+    const trailId = document.getElementById('f-id').value.trim();
+    if (!trailId) { showToast('Salva prima l\'ID del trail', 'error'); saveBtn.disabled = false; saveBtn.textContent = '⭐ Usa come copertina'; return; }
+
+    // Convert canvas to base64
+    const dataURL = canvas.toDataURL('image/jpeg', 0.92);
+    const base64 = dataURL.split(',')[1];
+
+    // Push to GitHub as media/[trail-id]/cover.jpg
+    const ghPath = `media/${trailId}/cover.jpg`;
+    showToast('⏳ Upload copertina su GitHub…', 'info');
+    const existing = await ghGetFile(ghPath);
+    const sha = existing.ok ? existing.data.sha : null;
+    const r = await ghFetch('PUT', `/repos/${REPO}/contents/${ghPath}`, {
+      message: `media: set cover for ${trailId}`,
+      content: base64,
+      branch: 'main',
+      ...(sha && { sha })
+    });
+    if (!r.ok) throw new Error('Upload fallito: ' + (r.data?.message || 'errore sconosciuto'));
+
+    const coverUrl = `https://raw.githubusercontent.com/${REPO}/main/${ghPath}`;
+
+    // Mark photo as cover in local state
+    photos.forEach(p => { p.isCover = false; });
+    photos[cropPhotoIndex].isCover = true;
+    photos[cropPhotoIndex].coverUrl = coverUrl;
+
+    // Update f-cover field
+    document.getElementById('f-cover').value = coverUrl;
+
+    renderPhotoGrid();
+    closeCropModal();
+    showToast('✅ Copertina salvata!', 'success');
+  } catch(e) {
+    showToast('Errore: ' + e.message, 'error');
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.textContent = '⭐ Usa come copertina';
+  }
+}
+
+// Close modal on backdrop click
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('crop-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('crop-modal')) closeCropModal();
+  });
+});
 async function uploadPhotos(trailId) {
   const toUpload = photos.filter(p => p.isNew);
   for (const photo of toUpload) {
@@ -1487,14 +1649,21 @@ function populateForm(t) {
   document.getElementById('f-alltrails').value = lk.alltrails || '';
   document.getElementById('f-wikiloc').value = lk.wikiloc || '';
   document.getElementById('f-link-other').value = lk.other || '';
-  document.getElementById('f-cover').value = t.cover_image || t.media?.cover || '';
-  // photos
+  document.getElementById('f-cover').value = t.cover_image || (typeof t.media?.cover === 'object' ? t.media.cover.url : t.media?.cover) || '';
+  // photos — detect which one is cover
+  const existingCoverUrl = typeof t.media?.cover === 'string' ? t.media.cover : t.media?.cover?.url;
   photos = (t.media?.photos || []).map(p => ({
     name: p.filename,
     url: p.url,
     preview: p.url,
-    isSaved: true
+    isSaved: true,
+    isCover: existingCoverUrl && p.url === existingCoverUrl
   }));
+  // Also check if cover.jpg exists separately (set by crop tool)
+  if (!photos.some(p => p.isCover) && existingCoverUrl && existingCoverUrl.endsWith('/cover.jpg')) {
+    // cover was set via crop — highlight first photo as reference but store coverUrl
+    if (photos.length) { photos[0].isCover = true; photos[0].coverUrl = existingCoverUrl; }
+  }
   renderPhotoGrid();
 }
 
@@ -1514,8 +1683,11 @@ function collectForm() {
   const emin = parseInt(document.getElementById('f-ele-min').value) || null;
   const dur = parseInt(document.getElementById('f-duration').value) || null;
   const trailId = document.getElementById('f-id').value.trim();
-  const coverUrl = document.getElementById('f-cover').value.trim() ||
-    (photos[0]?.url || (photos[0]?.isNew ? `https://raw.githubusercontent.com/${REPO}/main/media/${trailId}/${photos[0].name}` : null));
+  // Determine cover URL: prefer explicit crop cover, then f-cover field, then first photo
+  const cropCoverPhoto = photos.find(p => p.isCover && p.coverUrl);
+  const coverUrl = cropCoverPhoto?.coverUrl
+    || document.getElementById('f-cover').value.trim()
+    || (photos[0]?.url || (photos[0]?.isNew ? `https://raw.githubusercontent.com/${REPO}/main/media/${trailId}/${photos[0].name}` : null));
   return {
     id, title, status,
     description: document.getElementById('f-desc').value.trim() || null,
