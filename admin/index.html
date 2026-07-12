@@ -422,6 +422,17 @@ input,textarea,select{font-family:inherit;font-size:14px}
 
 /* ── MAIN re-layout ────────────────────────────────────── */
 
+
+.logbook-admin-entry{background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.logbook-admin-entry-info{flex:1;min-width:0}
+.logbook-admin-entry-date{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px}
+.logbook-admin-entry-notes{font-size:13px;line-height:1.5;color:var(--text);white-space:pre-line}
+.logbook-admin-entry-meta{font-size:11px;color:var(--text-muted);margin-top:4px}
+.logbook-admin-entry-actions{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.logbook-admin-entry-actions button{font-size:11px;padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);cursor:pointer}
+.logbook-admin-entry-actions button:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+#lb-stars span{color:var(--text-muted)}
+#lb-stars span.active{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -891,6 +902,53 @@ input,textarea,select{font-family:inherit;font-size:14px}
               <div class="field">
                 <label>Cover Image (URL esterno o lascia vuoto per usare la prima foto)</label>
                 <input type="text" id="f-cover" placeholder="https://… oppure lascia vuoto">
+              </div>
+              <div class="field">
+                <label>Fonte / Attribuzione foto</label>
+                <input type="text" id="f-photo-credit" placeholder="es. © Mario Rossi / Unsplash">
+              </div>
+            </div>
+          </div>
+
+
+          <!-- LOGBOOK -->
+          <div class="form-section" id="section-logbook">
+            <div class="form-section-header" onclick="toggleSection(this)">
+              <div class="form-section-title">📓 Logbook</div>
+              <span class="section-arrow">▶</span>
+            </div>
+            <div class="form-section-body" style="display:none">
+              <div id="logbook-entries-list"></div>
+              <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:16px">
+                <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:12px" id="logbook-form-title">➕ Nuova uscita</div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label>Data</label>
+                    <input type="date" id="lb-date">
+                  </div>
+                  <div class="field">
+                    <label>Durata (minuti)</label>
+                    <input type="number" id="lb-duration" min="1" step="1" placeholder="es. 316">
+                  </div>
+                  <div class="field">
+                    <label>Rating</label>
+                    <div id="lb-stars" style="font-size:22px;cursor:pointer;display:flex;gap:4px">
+                      <span onclick="setLbRating(1)">☆</span>
+                      <span onclick="setLbRating(2)">☆</span>
+                      <span onclick="setLbRating(3)">☆</span>
+                      <span onclick="setLbRating(4)">☆</span>
+                      <span onclick="setLbRating(5)">☆</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="field" style="margin-top:8px">
+                  <label>Note</label>
+                  <textarea id="lb-notes" rows="4" placeholder="Racconta l'uscita…"></textarea>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:10px">
+                  <button class="btn btn-primary" onclick="addOrUpdateLogEntry()">💾 Salva uscita</button>
+                  <button class="btn btn-ghost" id="lb-cancel-btn" style="display:none" onclick="cancelLogEdit()">✕ Annulla</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1398,6 +1456,12 @@ function addPhoto(file) {
 function removePhoto(idx) {
   photos.splice(idx, 1);
   renderPhotoGrid();
+  logEntries = (t.log||[]).slice();
+  if (!logEntries.length && t.completed_at) {
+    logEntries = [{date:t.completed_at, duration_min:(t.track&&t.track.duration_min)||null, rating:t.rating||null, notes:null}];
+  }
+  cancelLogEdit();
+  renderLogbookList();
 }
 function renderPhotoGrid() {
   const grid = document.getElementById('photo-grid');
@@ -1586,6 +1650,8 @@ function resetForm() {
   tags = []; renderTags();
   photos = []; renderPhotoGrid();
   clearGpx();
+  document.getElementById('f-photo-credit').value = '';
+  logEntries=[]; cancelLogEdit(); renderLogbookList();
 }
 
 function newTrail() {
@@ -1650,6 +1716,7 @@ function populateForm(t) {
   document.getElementById('f-wikiloc').value = lk.wikiloc || '';
   document.getElementById('f-link-other').value = lk.other || '';
   document.getElementById('f-cover').value = t.cover_image || (typeof t.media?.cover === 'object' ? t.media.cover.url : t.media?.cover) || '';
+  document.getElementById('f-photo-credit').value = t.photo_credit || '';
   // photos — detect which one is cover
   const existingCoverUrl = typeof t.media?.cover === 'string' ? t.media.cover : t.media?.cover?.url;
   photos = (t.media?.photos || []).map(p => ({
@@ -1729,6 +1796,7 @@ function collectForm() {
       water_available: document.getElementById('f-water').checked,
       parking_notes: document.getElementById('f-parking').value.trim() || null
     },
+    photo_credit: document.getElementById('f-photo-credit').value.trim() || null,
     links: {
       strava: document.getElementById('f-strava').value.trim() || null,
       komoot: document.getElementById('f-komoot').value.trim() || null,
@@ -1736,6 +1804,7 @@ function collectForm() {
       wikiloc: document.getElementById('f-wikiloc').value.trim() || null,
       other: document.getElementById('f-link-other').value.trim() || null
     },
+    log: logEntries.slice(),
     media: {
       cover: coverUrl || null,
       photos: photos.map(p => ({
@@ -1983,6 +2052,84 @@ function populateRegionFilter() {
   const sel = document.getElementById('filter-region');
   if (!sel) return;
   sel.innerHTML = '<option value="">Tutte le regioni</option>' + regions.map(r => `<option value="${r}">${escHtml(r)}</option>`).join('');
+}
+
+
+// ===== LOGBOOK =====
+let logEntries = [];
+let editingLogIdx = -1;
+let lbRating = 0;
+
+function setLbRating(n) {
+  lbRating = n;
+  document.querySelectorAll('#lb-stars span').forEach((s,i) => {
+    s.textContent = i < n ? '★' : '☆';
+    s.classList.toggle('active', i < n);
+  });
+}
+function renderLogbookList() {
+  const list = document.getElementById('logbook-entries-list');
+  if (!list) return;
+  if (!logEntries.length) {
+    list.innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:8px 0">Nessuna uscita registrata</div>';
+    return;
+  }
+  list.innerHTML = logEntries.map((e,i) => `
+    <div class="logbook-admin-entry">
+      <div class="logbook-admin-entry-info">
+        <div class="logbook-admin-entry-date">${e.date||'—'}</div>
+        ${e.notes ? `<div class="logbook-admin-entry-notes">${escHtml(e.notes)}</div>` : ''}
+        <div class="logbook-admin-entry-meta">${e.rating?'⭐ '+e.rating+'/5':''}${e.duration_min?' · ⏱ '+fmtDurLb(e.duration_min):''}</div>
+      </div>
+      <div class="logbook-admin-entry-actions">
+        <button onclick="editLogEntry(${i})">✏️</button>
+        <button onclick="deleteLogEntry(${i})">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
+function fmtDurLb(min) {
+  if (!min) return '';
+  const h = Math.floor(min/60), m = min%60;
+  return h>0 ? `${h}h${m>0?' '+m+'min':''}` : `${m}min`;
+}
+function addOrUpdateLogEntry() {
+  const date = document.getElementById('lb-date').value;
+  if (!date) { alert('Inserisci la data'); return; }
+  const entry = {
+    date,
+    duration_min: parseInt(document.getElementById('lb-duration').value)||null,
+    rating: lbRating||null,
+    notes: document.getElementById('lb-notes').value.trim()||null
+  };
+  if (editingLogIdx >= 0) { logEntries[editingLogIdx] = entry; }
+  else { logEntries.push(entry); logEntries.sort((a,b)=>(b.date||'').localeCompare(a.date||'')); }
+  cancelLogEdit();
+  renderLogbookList();
+}
+function editLogEntry(i) {
+  editingLogIdx = i;
+  const e = logEntries[i];
+  document.getElementById('lb-date').value = e.date||'';
+  document.getElementById('lb-duration').value = e.duration_min||'';
+  document.getElementById('lb-notes').value = e.notes||'';
+  setLbRating(e.rating||0);
+  document.getElementById('logbook-form-title').textContent = '✏️ Modifica uscita';
+  document.getElementById('lb-cancel-btn').style.display = 'inline-flex';
+}
+function deleteLogEntry(i) {
+  if (!confirm('Eliminare questa uscita?')) return;
+  logEntries.splice(i,1);
+  renderLogbookList();
+}
+function cancelLogEdit() {
+  editingLogIdx = -1;
+  document.getElementById('lb-date').value = '';
+  document.getElementById('lb-duration').value = '';
+  document.getElementById('lb-notes').value = '';
+  setLbRating(0);
+  document.getElementById('logbook-form-title').textContent = '➕ Nuova uscita';
+  document.getElementById('lb-cancel-btn').style.display = 'none';
 }
 
 // ── INIT ────────────────────────────────────────────────────────
