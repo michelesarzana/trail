@@ -170,7 +170,7 @@
       "description": null,
       "rating": null,
       "completed_at": null,
-      "cover_image": null,
+      "cover_image": "https://dgtzuqphqg23d.cloudfront.net/sJa0xcjb_3ttcUb0P0k_IPhkQMSxktGpNeK6xlizSNw-2048x1540.jpg",
       "location": {
         "country": "Italia",
         "country_code": "IT",
@@ -198,8 +198,7 @@
         "elevation_min": 1487,
         "duration_min": 400,
         "route_type": "loop",
-        "surface": [],
-        "gpx_file": "gpx/pizzo-dei-tre-signori.gpx"
+        "surface": []
       },
       "classification": {
         "difficulty": null,
@@ -221,11 +220,8 @@
         "other": null
       },
       "media": {
-        "cover": null,
-        "photos": [
-          "https://michelesarzana.github.io/trail/media/pizzo-dei-tre-signori/photo1.jpg",
-          "https://michelesarzana.github.io/trail/media/pizzo-dei-tre-signori/photo2.jpg"
-        ]
+        "cover": "https://dgtzuqphqg23d.cloudfront.net/sJa0xcjb_3ttcUb0P0k_IPhkQMSxktGpNeK6xlizSNw-2048x1540.jpg",
+        "photos": []
       }
     },
     {
