@@ -178,6 +178,28 @@ input,textarea,select{font-family:inherit;font-size:14px}
 .gpx-info .gpx-size{color:var(--text-dim)}
 .gpx-clear{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px}
 .gpx-clear:hover{color:var(--danger)}
+/* GPX dropzone nuovo */
+#gpx-dropzone{border:2px dashed var(--border);border-radius:10px;padding:32px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:12px}
+#gpx-dropzone:hover,#gpx-dropzone.dragover{border-color:var(--accent);background:rgba(253,196,0,.04)}
+.gpx-icon{font-size:32px;margin-bottom:8px}
+.gpx-label{font-weight:600;margin-bottom:4px}
+.gpx-sub{font-size:12px;color:var(--text-dim)}
+.gpx-preview-bar{display:flex;align-items:center;gap:10px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:10px 14px;margin-bottom:12px}
+.gpx-preview-name{font-weight:600;color:var(--success);flex:1}
+.gpx-preview-size{font-size:12px;color:var(--text-dim)}
+.gpx-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:rgba(253,196,0,.05);border:1px solid rgba(253,196,0,.2);border-radius:8px;padding:14px;margin-top:12px}
+.gpx-stat{text-align:center}
+.gpx-stat-value{display:block;font-size:18px;font-weight:700;color:var(--accent)}
+.gpx-stat-label{display:block;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+/* Photo upload */
+#photo-dropzone{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:14px}
+#photo-dropzone:hover,#photo-dropzone.dragover{border-color:var(--accent);background:rgba(253,196,0,.04)}
+#photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.photo-thumb{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1;background:var(--bg-input);border:1px solid var(--border)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover}
+.photo-thumb .photo-remove{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.7);border:none;color:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.photo-thumb.cover-photo{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.photo-thumb .photo-cover-badge{position:absolute;bottom:4px;left:4px;background:var(--accent);color:#000;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px}
 
 /* Responsive */
 @media(max-width:640px){
@@ -248,6 +270,30 @@ input,textarea,select{font-family:inherit;font-size:14px}
             <span id="form-mode-label">Nuovo Trail</span>
           </div>
 
+          <!-- GPX UPLOAD -->
+          <div class="form-section" id="section-gpx">
+            <div class="form-section-header open" onclick="toggleSection(this)">
+              <div class="form-section-title">📁 GPX Upload &amp; Analisi</div>
+              <span class="section-arrow open">▶</span>
+            </div>
+            <div class="form-section-body open">
+              <div id="gpx-dropzone">
+                <div class="gpx-icon">📁</div>
+                <div class="gpx-label">Trascina il file GPX qui</div>
+                <div class="gpx-sub">oppure <label for="f-gpx" style="color:var(--accent);cursor:pointer">sfoglia</label></div>
+                <input type="file" id="f-gpx" accept=".gpx" style="display:none">
+              </div>
+              <div id="gpx-preview-bar" style="display:none" class="gpx-preview-bar">
+                <span>📍</span>
+                <span class="gpx-preview-name" id="gpx-filename"></span>
+                <span class="gpx-preview-size" id="gpx-filesize"></span>
+                <button style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px" onclick="clearGpx()" title="Rimuovi">✕</button>
+              </div>
+              <div id="gpx-parsing" style="display:none;padding:10px 0;color:var(--text-dim)">⏳ Analisi GPX in corso…</div>
+              <div id="gpx-parsed-summary" style="display:none"></div>
+            </div>
+          </div>
+
           <!-- BASE -->
           <div class="form-section">
             <div class="form-section-header open" onclick="toggleSection(this)">
@@ -296,7 +342,7 @@ input,textarea,select{font-family:inherit;font-size:14px}
           </div>
 
           <!-- POSIZIONE -->
-          <div class="form-section">
+          <div class="form-section" id="section-position">
             <div class="form-section-header" onclick="toggleSection(this)">
               <div class="form-section-title">📍 Posizione</div>
               <span class="section-arrow">▶</span>
@@ -360,45 +406,32 @@ input,textarea,select{font-family:inherit;font-size:14px}
           </div>
 
           <!-- TRACCIA -->
-          <div class="form-section">
+          <div class="form-section" id="section-track">
             <div class="form-section-header" onclick="toggleSection(this)">
-              <div class="form-section-title">🗺️ Traccia & Dati Tecnici</div>
+              <div class="form-section-title">🗺️ Traccia &amp; Dati Tecnici</div>
               <span class="section-arrow">▶</span>
             </div>
             <div class="form-section-body">
               <div class="form-grid">
-                <div class="field full">
-                  <label>File GPX</label>
-                  <div class="gpx-drop" id="gpx-drop" onclick="document.getElementById('gpx-file').click()" ondragover="gpxDragOver(event)" ondragleave="gpxDragLeave(event)" ondrop="gpxDrop(event)">
-                    📂 Clicca per selezionare o trascina un file .gpx
-                  </div>
-                  <input type="file" id="gpx-file" accept=".gpx" style="display:none" onchange="gpxSelected(this)">
-                  <div id="gpx-preview" style="display:none" class="gpx-info">
-                    <span>📍</span>
-                    <span class="gpx-name" id="gpx-name"></span>
-                    <span class="gpx-size" id="gpx-size"></span>
-                    <button class="gpx-clear" onclick="clearGpx()" title="Rimuovi">✕</button>
-                  </div>
-                </div>
                 <div class="field">
                   <label>Distanza (km)</label>
                   <input type="number" id="f-distance" min="0" step="0.1" placeholder="es. 12.5">
                 </div>
                 <div class="field">
                   <label>D+ Dislivello positivo (m)</label>
-                  <input type="number" id="f-elev-gain" min="0" step="1" placeholder="es. 850">
+                  <input type="number" id="f-dplus" min="0" step="1" placeholder="es. 850">
                 </div>
                 <div class="field">
                   <label>D- Dislivello negativo (m)</label>
-                  <input type="number" id="f-elev-loss" min="0" step="1" placeholder="es. 850">
+                  <input type="number" id="f-dminus" min="0" step="1" placeholder="es. 850">
                 </div>
                 <div class="field">
                   <label>Quota massima (m slm)</label>
-                  <input type="number" id="f-elev-max" min="0" step="1" placeholder="es. 2912">
+                  <input type="number" id="f-ele-max" min="0" step="1" placeholder="es. 2912">
                 </div>
                 <div class="field">
                   <label>Quota minima (m slm)</label>
-                  <input type="number" id="f-elev-min" min="0" step="1" placeholder="es. 1750">
+                  <input type="number" id="f-ele-min" min="0" step="1" placeholder="es. 1750">
                 </div>
                 <div class="field">
                   <label>Durata stimata (minuti)</label>
@@ -548,18 +581,22 @@ input,textarea,select{font-family:inherit;font-size:14px}
           </div>
 
           <!-- MEDIA -->
-          <div class="form-section">
+          <div class="form-section" id="section-media">
             <div class="form-section-header" onclick="toggleSection(this)">
-              <div class="form-section-title">📸 Media</div>
+              <div class="form-section-title">📸 Foto &amp; Media</div>
               <span class="section-arrow">▶</span>
             </div>
             <div class="form-section-body">
-              <div class="form-grid">
-                <div class="field full">
-                  <label>Cover image URL</label>
-                  <input type="url" id="f-cover" placeholder="https://…/foto-copertina.jpg">
-                  <div class="field-hint">Per ora solo URL esterno. Upload foto coming soon.</div>
-                </div>
+              <div id="photo-dropzone">
+                <div class="gpx-icon">🖼️</div>
+                <div class="gpx-label">Trascina le foto qui</div>
+                <div class="gpx-sub">JPG, PNG, WebP · oppure <label for="f-photos" style="color:var(--accent);cursor:pointer">sfoglia</label></div>
+                <input type="file" id="f-photos" accept="image/*" multiple style="display:none">
+              </div>
+              <div id="photo-grid"></div>
+              <div class="field">
+                <label>Cover Image (URL esterno o lascia vuoto per usare la prima foto)</label>
+                <input type="text" id="f-cover" placeholder="https://… oppure lascia vuoto">
               </div>
             </div>
           </div>
@@ -591,6 +628,8 @@ let currentRating = null;
 let gpxFile = null;
 let gpxFileData = null; // base64
 let tags = [];
+
+let photos = [];
 
 // ── AUTH ─────────────────────────────────────────────────────
 function doLogin() {
@@ -840,40 +879,221 @@ function tagKeydown(e) {
 }
 
 // GPX
-function gpxSelected(input) {
-  const file = input.files[0];
-  if (!file) return;
+function haversine(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+function parseGPX(text) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'application/xml');
+  const trkpts = doc.querySelectorAll('trkpt');
+  if (!trkpts.length) return null;
+  const points = [];
+  trkpts.forEach(pt => {
+    const lat = parseFloat(pt.getAttribute('lat'));
+    const lon = parseFloat(pt.getAttribute('lon'));
+    const ele = pt.querySelector('ele') ? parseFloat(pt.querySelector('ele').textContent) : null;
+    const time = pt.querySelector('time') ? pt.querySelector('time').textContent : null;
+    points.push({ lat, lon, ele, time });
+  });
+  let distKm = 0;
+  for (let i = 1; i < points.length; i++) distKm += haversine(points[i-1].lat, points[i-1].lon, points[i].lat, points[i].lon);
+  let dPlus = 0, dMinus = 0;
+  for (let i = 1; i < points.length; i++) {
+    if (points[i].ele !== null && points[i-1].ele !== null) {
+      const diff = points[i].ele - points[i-1].ele;
+      if (diff > 0) dPlus += diff; else dMinus += Math.abs(diff);
+    }
+  }
+  const eles = points.filter(p => p.ele !== null).map(p => p.ele);
+  const eleMax = eles.length ? Math.round(Math.max(...eles)) : null;
+  const eleMin = eles.length ? Math.round(Math.min(...eles)) : null;
+  const start = points[0]; const end = points[points.length - 1];
+  let durationMin = null;
+  if (points[0].time && points[points.length-1].time) {
+    const t0 = new Date(points[0].time).getTime();
+    const t1 = new Date(points[points.length-1].time).getTime();
+    if (t1 > t0) durationMin = Math.round((t1 - t0) / 60000);
+  }
+  if (!durationMin) durationMin = Math.round((distKm / 5 + dPlus / 300) * 60);
+  const startEndDist = haversine(start.lat, start.lon, end.lat, end.lon);
+  const loopType = startEndDist < 0.3 ? 'loop' : 'point-to-point';
+  const gpxName = doc.querySelector('name, trk > name');
+  const gpxTitle = gpxName ? gpxName.textContent.trim() : null;
+  return {
+    distKm: Math.round(distKm * 10) / 10,
+    dPlus: Math.round(dPlus), dMinus: Math.round(dMinus),
+    eleMax, eleMin, durationMin,
+    startLat: Math.round(start.lat * 1000000) / 1000000,
+    startLon: Math.round(start.lon * 1000000) / 1000000,
+    endLat: Math.round(end.lat * 1000000) / 1000000,
+    endLon: Math.round(end.lon * 1000000) / 1000000,
+    loopType, gpxTitle, pointCount: points.length
+  };
+}
+function showGPXSummary(data) {
+  const el = document.getElementById('gpx-parsed-summary');
+  el.innerHTML = `
+    <div class="gpx-summary-grid">
+      <div class="gpx-stat"><span class="gpx-stat-value">${data.distKm} km</span><span class="gpx-stat-label">Distanza</span></div>
+      <div class="gpx-stat"><span class="gpx-stat-value">+${data.dPlus} m</span><span class="gpx-stat-label">D+</span></div>
+      <div class="gpx-stat"><span class="gpx-stat-value">-${data.dMinus} m</span><span class="gpx-stat-label">D-</span></div>
+      <div class="gpx-stat"><span class="gpx-stat-value">${data.eleMax ?? '—'} m</span><span class="gpx-stat-label">Quota max</span></div>
+      <div class="gpx-stat"><span class="gpx-stat-value">${data.eleMin ?? '—'} m</span><span class="gpx-stat-label">Quota min</span></div>
+      <div class="gpx-stat"><span class="gpx-stat-value">${data.durationMin} min</span><span class="gpx-stat-label">Durata est.</span></div>
+    </div>
+    <div style="font-size:12px;color:var(--text-dim);margin-top:8px">${data.pointCount} trackpoint · ${data.loopType === 'loop' ? '🔄 Anello' : '→ A-B'}</div>`;
+  el.style.display = 'block';
+}
+function applyGPXData(data) {
+  if (!data) { showToast('GPX non valido o senza trackpoint', 'error'); return; }
+  if (data.distKm) document.getElementById('f-distance').value = data.distKm;
+  if (data.dPlus) document.getElementById('f-dplus').value = data.dPlus;
+  if (data.dMinus) document.getElementById('f-dminus').value = data.dMinus;
+  if (data.eleMax) document.getElementById('f-ele-max').value = data.eleMax;
+  if (data.eleMin) document.getElementById('f-ele-min').value = data.eleMin;
+  if (data.durationMin) document.getElementById('f-duration').value = data.durationMin;
+  if (data.loopType) document.getElementById('f-route-type').value = data.loopType;
+  if (data.startLat) document.getElementById('f-start-lat').value = data.startLat;
+  if (data.startLon) document.getElementById('f-start-lng').value = data.startLon;
+  if (data.endLat) document.getElementById('f-end-lat').value = data.endLat;
+  if (data.endLon) document.getElementById('f-end-lng').value = data.endLon;
+  if (data.gpxTitle && !document.getElementById('f-title').value) {
+    document.getElementById('f-title').value = data.gpxTitle;
+    autoId(data.gpxTitle);
+  }
+  showGPXSummary(data);
+  openSection('section-track');
+  openSection('section-position');
+  showToast('✓ Dati GPX importati', 'success');
+  if (data.startLat && data.startLon) reverseGeocode(data.startLat, data.startLon);
+}
+async function reverseGeocode(lat, lon) {
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=it`;
+    const r = await fetch(url, { headers: { 'User-Agent': 'trail-admin/1.0' } });
+    const data = await r.json();
+    const addr = data.address || {};
+    if (addr.state) document.getElementById('f-region').value = addr.state;
+    if (addr.county || addr.province) document.getElementById('f-province').value = addr.county || addr.province || '';
+    if (addr.city || addr.town || addr.village) document.getElementById('f-municipality').value = addr.city || addr.town || addr.village || '';
+    showToast('📍 Posizione rilevata da GPX', 'success');
+  } catch(e) { /* silenzioso */ }
+}
+function handleGPXFile(file) {
   gpxFile = file;
-  document.getElementById('gpx-drop').style.display = 'none';
-  document.getElementById('gpx-preview').style.display = 'flex';
-  document.getElementById('gpx-name').textContent = file.name;
-  document.getElementById('gpx-size').textContent = formatBytes(file.size);
+  document.getElementById('gpx-preview-bar').style.display = 'flex';
+  document.getElementById('gpx-filename').textContent = file.name;
+  document.getElementById('gpx-filesize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+  document.getElementById('gpx-dropzone').style.display = 'none';
+  document.getElementById('gpx-parsing').style.display = 'block';
   const reader = new FileReader();
-  reader.onload = e => { gpxFileData = btoa(e.target.result); };
-  reader.readAsBinaryString(file);
+  reader.onload = e => {
+    gpxFileData = btoa(unescape(encodeURIComponent(e.target.result)));
+    document.getElementById('gpx-parsing').style.display = 'none';
+    const data = parseGPX(e.target.result);
+    applyGPXData(data);
+  };
+  reader.readAsText(file);
 }
 function clearGpx() {
   gpxFile = null; gpxFileData = null;
-  document.getElementById('gpx-file').value = '';
-  document.getElementById('gpx-drop').style.display = '';
-  document.getElementById('gpx-preview').style.display = 'none';
+  document.getElementById('f-gpx').value = '';
+  document.getElementById('gpx-dropzone').style.display = '';
+  document.getElementById('gpx-preview-bar').style.display = 'none';
+  document.getElementById('gpx-parsed-summary').style.display = 'none';
+  document.getElementById('gpx-parsing').style.display = 'none';
 }
-function gpxDragOver(e) { e.preventDefault(); document.getElementById('gpx-drop').classList.add('dragover'); }
-function gpxDragLeave(e) { document.getElementById('gpx-drop').classList.remove('dragover'); }
-function gpxDrop(e) {
-  e.preventDefault();
-  document.getElementById('gpx-drop').classList.remove('dragover');
-  const f = e.dataTransfer.files[0];
-  if (f) { document.getElementById('gpx-file').files; gpxFile = f;
-    document.getElementById('gpx-drop').style.display = 'none';
-    document.getElementById('gpx-preview').style.display = 'flex';
-    document.getElementById('gpx-name').textContent = f.name;
-    document.getElementById('gpx-size').textContent = formatBytes(f.size);
-    const reader = new FileReader();
-    reader.onload = ev => { gpxFileData = btoa(ev.target.result); };
-    reader.readAsBinaryString(f);
+// GPX drag&drop wiring (runs after DOM ready)
+document.addEventListener('DOMContentLoaded', function() {
+  const dropzone = document.getElementById('gpx-dropzone');
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault(); dropzone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) handleGPXFile(file);
+  });
+  dropzone.addEventListener('click', () => document.getElementById('f-gpx').click());
+  document.getElementById('f-gpx').addEventListener('change', e => {
+    if (e.target.files[0]) handleGPXFile(e.target.files[0]);
+  });
+  // Photo dropzone wiring
+  const photoDropzone = document.getElementById('photo-dropzone');
+  photoDropzone.addEventListener('dragover', e => { e.preventDefault(); photoDropzone.classList.add('dragover'); });
+  photoDropzone.addEventListener('dragleave', () => photoDropzone.classList.remove('dragover'));
+  photoDropzone.addEventListener('drop', e => {
+    e.preventDefault(); photoDropzone.classList.remove('dragover');
+    [...e.dataTransfer.files].forEach(f => { if (f.type.startsWith('image/')) addPhoto(f); });
+  });
+  photoDropzone.addEventListener('click', () => document.getElementById('f-photos').click());
+  document.getElementById('f-photos').addEventListener('change', e => {
+    [...e.target.files].forEach(f => addPhoto(f));
+    e.target.value = '';
+  });
+});
+
+// Helper: open a form section by id
+function openSection(sectionId) {
+  const sec = document.getElementById(sectionId);
+  if (!sec) return;
+  const header = sec.querySelector('.form-section-header');
+  const body = sec.querySelector('.form-section-body');
+  const arrow = sec.querySelector('.section-arrow');
+  if (header && body && !body.classList.contains('open')) {
+    header.classList.add('open');
+    body.classList.add('open');
+    if (arrow) arrow.classList.add('open');
   }
 }
+
+// Photos
+function addPhoto(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const photo = { file, name: file.name, base64: e.target.result.split(',')[1], preview: e.target.result, isNew: true };
+    photos.push(photo);
+    renderPhotoGrid();
+  };
+  reader.readAsDataURL(file);
+}
+function removePhoto(idx) {
+  photos.splice(idx, 1);
+  renderPhotoGrid();
+}
+function renderPhotoGrid() {
+  const grid = document.getElementById('photo-grid');
+  if (!photos.length) { grid.innerHTML = ''; return; }
+  grid.innerHTML = photos.map((p, i) => `
+    <div class="photo-thumb ${i === 0 ? 'cover-photo' : ''}" title="${escHtml(p.name)}">
+      <img src="${p.preview || p.url}" alt="${escHtml(p.name)}">
+      <button class="photo-remove" onclick="removePhoto(${i})">✕</button>
+      ${i === 0 ? '<div class="photo-cover-badge">COVER</div>' : ''}
+    </div>
+  `).join('');
+}
+async function uploadPhotos(trailId) {
+  const toUpload = photos.filter(p => p.isNew);
+  for (const photo of toUpload) {
+    const ghPath = `media/${trailId}/${photo.name}`;
+    const existing = await ghGetFile(ghPath);
+    const sha = existing.ok ? existing.data.sha : null;
+    const r = await ghFetch('PUT', `/repos/${REPO}/contents/${ghPath}`, {
+      message: `media: add photo ${photo.name} to ${trailId}`,
+      content: photo.base64,
+      branch: 'main',
+      ...(sha && { sha })
+    });
+    if (r.ok) {
+      photo.isSaved = true; photo.isNew = false;
+      photo.url = `https://raw.githubusercontent.com/${REPO}/main/${ghPath}`;
+    }
+  }
+}
+
 function formatBytes(b) {
   if (b < 1024) return b + ' B';
   if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
@@ -899,10 +1119,10 @@ function resetForm() {
   document.getElementById('f-end-lat').value = '';
   document.getElementById('f-end-lng').value = '';
   document.getElementById('f-distance').value = '';
-  document.getElementById('f-elev-gain').value = '';
-  document.getElementById('f-elev-loss').value = '';
-  document.getElementById('f-elev-max').value = '';
-  document.getElementById('f-elev-min').value = '';
+  document.getElementById('f-dplus').value = '';
+  document.getElementById('f-dminus').value = '';
+  document.getElementById('f-ele-max').value = '';
+  document.getElementById('f-ele-min').value = '';
   document.getElementById('f-duration').value = '';
   document.getElementById('f-route-type').value = '';
   document.getElementById('f-difficulty').value = '';
@@ -921,6 +1141,7 @@ function resetForm() {
   setChecked('cb-season', []);
   setRating(0);
   tags = []; renderTags();
+  photos = []; renderPhotoGrid();
   clearGpx();
 }
 
@@ -959,10 +1180,10 @@ function populateForm(t) {
   // track
   const tr = t.track || {};
   document.getElementById('f-distance').value = tr.distance_km || '';
-  document.getElementById('f-elev-gain').value = tr.elevation_gain || '';
-  document.getElementById('f-elev-loss').value = tr.elevation_loss || '';
-  document.getElementById('f-elev-max').value = tr.elevation_max || '';
-  document.getElementById('f-elev-min').value = tr.elevation_min || '';
+  document.getElementById('f-dplus').value = tr.elevation_gain || '';
+  document.getElementById('f-dminus').value = tr.elevation_loss || '';
+  document.getElementById('f-ele-max').value = tr.elevation_max || '';
+  document.getElementById('f-ele-min').value = tr.elevation_min || '';
   document.getElementById('f-duration').value = tr.duration_min || '';
   document.getElementById('f-route-type').value = tr.route_type || '';
   setChecked('cb-surface', tr.surface || []);
@@ -985,7 +1206,15 @@ function populateForm(t) {
   document.getElementById('f-alltrails').value = lk.alltrails || '';
   document.getElementById('f-wikiloc').value = lk.wikiloc || '';
   document.getElementById('f-link-other').value = lk.other || '';
-  document.getElementById('f-cover').value = t.cover_image || '';
+  document.getElementById('f-cover').value = t.cover_image || t.media?.cover || '';
+  // photos
+  photos = (t.media?.photos || []).map(p => ({
+    name: p.filename,
+    url: p.url,
+    preview: p.url,
+    isSaved: true
+  }));
+  renderPhotoGrid();
 }
 
 // ── COLLECT FORM ───────────────────────────────────────────────
@@ -998,17 +1227,20 @@ function collectForm() {
   const endLat = parseFloat(document.getElementById('f-end-lat').value) || null;
   const endLng = parseFloat(document.getElementById('f-end-lng').value) || null;
   const dist = parseFloat(document.getElementById('f-distance').value) || null;
-  const gain = parseInt(document.getElementById('f-elev-gain').value) || null;
-  const loss = parseInt(document.getElementById('f-elev-loss').value) || null;
-  const emax = parseInt(document.getElementById('f-elev-max').value) || null;
-  const emin = parseInt(document.getElementById('f-elev-min').value) || null;
+  const gain = parseInt(document.getElementById('f-dplus').value) || null;
+  const loss = parseInt(document.getElementById('f-dminus').value) || null;
+  const emax = parseInt(document.getElementById('f-ele-max').value) || null;
+  const emin = parseInt(document.getElementById('f-ele-min').value) || null;
   const dur = parseInt(document.getElementById('f-duration').value) || null;
+  const trailId = document.getElementById('f-id').value.trim();
+  const coverUrl = document.getElementById('f-cover').value.trim() ||
+    (photos[0]?.url || (photos[0]?.isNew ? `https://raw.githubusercontent.com/${REPO}/main/media/${trailId}/${photos[0].name}` : null));
   return {
     id, title, status,
     description: document.getElementById('f-desc').value.trim() || null,
     rating: currentRating,
     completed_at: document.getElementById('f-date').value || null,
-    cover_image: document.getElementById('f-cover').value.trim() || null,
+    cover_image: coverUrl || null,
     location: {
       country: document.getElementById('f-country').value.trim() || 'Italia',
       country_code: document.getElementById('f-country-code').value.trim().toUpperCase() || 'IT',
@@ -1050,6 +1282,13 @@ function collectForm() {
       alltrails: document.getElementById('f-alltrails').value.trim() || null,
       wikiloc: document.getElementById('f-wikiloc').value.trim() || null,
       other: document.getElementById('f-link-other').value.trim() || null
+    },
+    media: {
+      cover: coverUrl || null,
+      photos: photos.map(p => ({
+        filename: p.name,
+        url: p.url || `https://raw.githubusercontent.com/${REPO}/main/media/${trailId}/${p.name}`
+      }))
     }
   };
 }
@@ -1094,6 +1333,12 @@ async function saveTrail() {
       if (!gpxRes.ok) throw new Error('Errore upload GPX: ' + gpxRes.data.message);
       trail.track = trail.track || {};
       trail.track.gpx_file = gpxPath;
+    }
+
+    // Upload photos if present
+    if (photos.some(p => p.isNew)) {
+      showToast('⏳ Upload foto…', 'info');
+      await uploadPhotos(trail.id);
     }
 
     // Update db
