@@ -664,9 +664,10 @@ function buildFilterChips(trails) {
     container.appendChild(btn);
   };
 
-  addChip('Tutti', () => { activeStatus = 'all'; rebuildChips(); applyFilters(); }, activeStatus === 'all');
-  addChip('✓ Fatti', () => { activeStatus = 'done'; rebuildChips(); applyFilters(); }, activeStatus === 'done');
-  addChip('◷ Da fare', () => { activeStatus = 'todo'; rebuildChips(); applyFilters(); }, activeStatus === 'todo');
+  const T = TRANSLATIONS[localStorage.getItem('est-lang') || 'it'] || TRANSLATIONS['it'];
+  addChip(T['chip-all'], () => { activeStatus = 'all'; rebuildChips(); applyFilters(); }, activeStatus === 'all');
+  addChip(T['chip-done'], () => { activeStatus = 'done'; rebuildChips(); applyFilters(); }, activeStatus === 'done');
+  addChip(T['chip-todo'], () => { activeStatus = 'todo'; rebuildChips(); applyFilters(); }, activeStatus === 'todo');
 
   if (diffs.length > 0) {
     const sep = document.createElement('div');
@@ -749,6 +750,9 @@ const TRANSLATIONS = {
     'filter-reset': '↩ Clear filters',
     'counter-suffix': 'done',
     'nav-add': '+ Add trail',
+    'chip-all': 'All',
+    'chip-done': '✓ Done',
+    'chip-todo': '◷ To do',
   },
   it: {
     'filter-region': 'Regione',
@@ -759,6 +763,9 @@ const TRANSLATIONS = {
     'filter-reset': '↩ Azzera filtri',
     'counter-suffix': 'fatti',
     'nav-add': '+ Aggiungi trail',
+    'chip-all': 'Tutti',
+    'chip-done': '✓ Fatti',
+    'chip-todo': '◷ Da fare',
   }
 };
 
@@ -785,6 +792,8 @@ function setLang(lang) {
     const suffix = (TRANSLATIONS[lang] || TRANSLATIONS['it'])['counter-suffix'];
     counter.innerHTML = '<span id="count-done">' + done + '</span> / <span id="count-total">' + total + '</span> ' + suffix;
   }
+  // Rebuild filter chips with translated labels
+  if (typeof rebuildChips === 'function') rebuildChips();
 }
 
 // Restore language on load
