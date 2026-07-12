@@ -27,7 +27,9 @@ a{color:#38324a;text-decoration:none;}a:hover{color:#c17b8c;}
 .nav-wordmark{font-size:22px;font-weight:800;color:#2e2b38;letter-spacing:-0.01em;display:inline;line-height:1.1;}
 .nav-payoff{font-family:'Instrument Serif',serif;font-style:italic;font-size: 22px; display: inline; margin-left: 0.4em;color:#c17b8c;opacity:0.85;}
 .nav-spacer{min-width:140px;}
-#map-hero{width:100%;height:420px;position:relative;z-index:1;}
+#map-hero{width:100%;height:380px;border-radius:0;}
+.map-section{padding:0 48px 0;margin-top:-24px;}
+.map-section-inner{border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(46,43,56,0.13);border:1px solid rgba(46,43,56,0.08);}
 .trail-header{padding:32px 48px 20px;border-bottom:1px solid rgba(46,43,56,0.08);}
 .trail-header-badge{display:inline-block;font-size:12px;font-weight:800;padding:5px 12px;border-radius:8px;margin-bottom:12px;letter-spacing:0.02em;}
 .badge-done{background:#38324a;color:#fff;}.badge-todo{background:#f0edf0;color:#726e7a;}
@@ -139,7 +141,11 @@ a{color:#38324a;text-decoration:none;}a:hover{color:#c17b8c;}
     <span class="cover-hero-eyebrow">Campitello di Fassa, Trentino-Alto Adige</span>
   </div>
 </div>
-<div id="map-hero"></div>
+<div class="map-section">
+  <div class="map-section-inner">
+    <div id="map-hero"></div>
+  </div>
+</div>
 <div class="trail-header">
   <span class="trail-header-badge badge-done">✓ Fatto</span>
   <div class="trail-header-eyebrow">Campitello di Fassa, Trentino-Alto Adige</div>
@@ -190,7 +196,7 @@ Da lì io prediligo la salita alla Val di Dona dalla variante alta che ti porta 
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 let lbPhotos=[],lbIndex=0;
 function openLightbox(photos,idx){lbPhotos=photos;lbIndex=idx;document.getElementById('lightbox-img').src=photos[idx];document.getElementById('lightbox').classList.add('open');}
