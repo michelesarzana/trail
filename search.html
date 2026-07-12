@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cerca — Every Single Trail</title>
+<meta name="description" content="Cerca percorsi trail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+a { color: #38324a; text-decoration: none; }
+a:hover { color: #c17b8c; }
+button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
+.shell { width: 100%; background: #fff; min-height: 100vh; }
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px; background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-wordmark { font-size: 22px; font-weight: 800; color: #2e2b38; letter-spacing: -0.01em; }
+.nav-back { font-size: 13px; font-weight: 700; color: #38324a; display: flex; align-items: center; gap: 6px; }
+.nav-back:hover { color: #c17b8c; }
+
+.search-hero {
+  padding: 56px 48px 40px;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  background: linear-gradient(180deg, #faf7f4 0%, #fff 100%);
+}
+.search-hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 40px;
+  color: #2e2b38;
+  margin: 0 0 24px;
+}
+.search-wrap {
+  max-width: 680px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  padding: 18px 56px 18px 24px;
+  font-size: 17px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  border: 2px solid rgba(56,50,74,0.15);
+  border-radius: 16px;
+  background: #fff;
+  color: #2e2b38;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(56,50,74,0.08);
+}
+.search-input:focus { border-color: #c17b8c; box-shadow: 0 4px 24px rgba(193,123,140,0.18); }
+.search-icon { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 20px; color: #726e7a; pointer-events: none; }
+
+.results-info { padding: 16px 48px; font-size: 13px; font-weight: 700; color: #726e7a; }
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 24px 48px 48px;
+}
+.trail-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(46,43,56,0.07);
+  transition: border-color .15s, box-shadow .15s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.trail-card:hover { border-color: #c17b8c; box-shadow: 0 4px 18px rgba(193,123,140,0.13); }
+.trail-card-cover { height: 200px; background: #f0edf0; position: relative; overflow: hidden; }
+.trail-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+.trail-card-badge { position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; }
+.badge-done { background: rgba(56,50,74,0.9); color: #fff; }
+.badge-todo { background: rgba(255,255,255,0.92); color: #726e7a; }
+.trail-card-body { padding: 16px 18px; flex: 1; }
+.trail-card-title { font-size: 15px; font-weight: 800; color: #2e2b38; margin: 0 0 6px; line-height: 1.3; }
+.trail-card-loc { font-size: 12px; color: #726e7a; margin: 0 0 10px; }
+.trail-card-stats { display: flex; gap: 10px; font-size: 12.5px; font-weight: 700; color: #2e2b38; }
+.stat-accent { color: #c17b8c; }
+.no-results { text-align: center; padding: 80px 48px; color: #726e7a; }
+.no-results-icon { font-size: 48px; margin-bottom: 16px; }
+
+@media (max-width: 900px) {
+  .nav { padding: 16px 24px; }
+  .search-hero { padding: 36px 24px 28px; }
+  .search-hero h1 { font-size: 28px; }
+  .results-info { padding: 12px 24px; }
+  .results-grid { grid-template-columns: 1fr; padding: 16px 24px 32px; gap: 14px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="nav">
+    <a href="index.html" class="nav-back">← Torna alla mappa</a>
+    <a href="index.html" class="nav-wordmark">Every Single Trail</a>
+    <div></div>
+  </nav>
+
+  <div class="search-hero">
+    <h1>Cerca un percorso</h1>
+    <div class="search-wrap">
+      <input type="search" id="search-input" class="search-input" placeholder="Titolo, luogo, descrizione…" autocomplete="off">
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <div class="results-info" id="results-info"></div>
+
+  <div class="results-grid" id="results-grid">
+    <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
+  </div>
+</div>
+
+<script>
+const DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
+let allTrails = [];
+
+function todoBg() {
+  return 'repeating-linear-gradient(45deg,#efe9ec,#efe9ec 14px,#e3dbe1 14px,#e3dbe1 28px)';
+}
+function fmtDist(km) { return km != null ? km + ' km' : '—'; }
+function fmtGain(m) { return m != null ? '+' + m + ' m' : '—'; }
+function fmtDur(min) {
+  if (!min) return '';
+  const h = Math.floor(min/60), m = min%60;
+  return h > 0 ? (m > 0 ? h+'h '+m+'min' : h+'h') : m+' min';
+}
+function coverSrc(t) {
+  const photos = (t.media||{}).photos||[];
+  return (t.media||{}).cover || t.cover_image || photos[0] || null;
+}
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function locationLine(t) {
+  const loc = t.location||{};
+  return [loc.municipality, loc.province].filter(Boolean).join(', ') || loc.region || '';
+}
+function matchesSearch(t, q) {
+  if (!q) return true;
+  q = q.toLowerCase();
+  const fields = [t.title, t.description, (t.location||{}).municipality, (t.location||{}).region, (t.location||{}).province, (t.location||{}).area].filter(Boolean);
+  return fields.some(f => f.toLowerCase().includes(q));
+}
+
+function renderCard(t) {
+  const isDone = t.status === 'done';
+  const cover = coverSrc(t);
+  const track = t.track||{};
+  const covHtml = cover
+    ? `<img src="${escHtml(cover)}" alt="${escHtml(t.title)}" loading="lazy">`
+    : `<div style="width:100%;height:100%;background:${todoBg()}"></div>`;
+  return `
+    <a class="trail-card" href="trail.html#${t.id}">
+      <div class="trail-card-cover">
+        ${covHtml}
+        <div class="trail-card-badge ${isDone ? 'badge-done' : 'badge-todo'}">${isDone ? '✓ Fatto' : '◷ Da fare'}</div>
+      </div>
+      <div class="trail-card-body">
+        <div class="trail-card-title">${escHtml(t.title)}</div>
+        <div class="trail-card-loc">${escHtml(locationLine(t))}</div>
+        <div class="trail-card-stats">
+          <span>${fmtDist(track.distance_km)}</span>
+          <span class="stat-accent">${fmtGain(track.elevation_gain)}</span>
+          ${track.duration_min ? `<span>${fmtDur(track.duration_min)}</span>` : ''}
+        </div>
+      </div>
+    </a>`;
+}
+
+function renderResults(q) {
+  const filtered = allTrails.filter(t => matchesSearch(t, q));
+  const grid = document.getElementById('results-grid');
+  const info = document.getElementById('results-info');
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results"><div class="no-results-icon">🏔️</div>Nessun percorso trovato per "<strong>${escHtml(q)}</strong>".</div>`;
+    info.textContent = '';
+  } else {
+    grid.innerHTML = filtered.map(renderCard).join('');
+    info.textContent = filtered.length + (filtered.length === 1 ? ' percorso trovato' : ' percorsi trovati') + (q ? ` per "${q}"` : '');
+  }
+}
+
+async function init() {
+  try {
+    const r = await fetch(DB_URL);
+    const data = await r.json();
+    allTrails = data.trails || [];
+  } catch(e) { allTrails = []; }
+
+  // Read ?q= param
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q') || '';
+
+  const input = document.getElementById('search-input');
+  input.value = q;
+  renderResults(q);
+
+  input.addEventListener('input', function() {
+    const newQ = this.value.trim();
+    const url = new URL(window.location);
+    if (newQ) url.searchParams.set('q', newQ);
+    else url.searchParams.delete('q');
+    window.history.replaceState({}, '', url);
+    renderResults(newQ);
+  });
+
+  if (q) input.focus();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
