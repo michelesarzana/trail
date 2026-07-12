@@ -917,7 +917,7 @@ input,textarea,select{font-family:inherit;font-size:14px}
               <div class="form-section-title">📓 Logbook</div>
               <span class="section-arrow">▶</span>
             </div>
-            <div class="form-section-body" style="display:none">
+            <div class="form-section-body">
               <div id="logbook-entries-list"></div>
               <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:16px">
                 <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:12px" id="logbook-form-title">➕ Nuova uscita</div>
@@ -992,7 +992,8 @@ input,textarea,select{font-family:inherit;font-size:14px}
     </div>
     <div class="crop-modal-footer">
       <button class="btn btn-ghost" onclick="closeCropModal()">Annulla</button>
-      <button class="btn btn-primary" id="crop-save-btn" onclick="saveCrop()">⭐ Usa come copertina</button>
+      <button class="btn btn-primary" onclick="saveCrop('hero')">💾 Salva come Hero (16:9)</button>
+      <button class="btn btn-secondary" onclick="saveCrop('card')">💾 Salva come Card</button>
     </div>
   </div>
 </div>
@@ -1526,54 +1527,43 @@ function setCropRatio(ratio, btn) {
   if (cropperInstance) cropperInstance.setAspectRatio(ratio);
 }
 
-async function saveCrop() {
+async function saveCrop(type) {
   if (!cropperInstance || cropPhotoIndex === null) return;
-  const saveBtn = document.getElementById('crop-save-btn');
-  saveBtn.disabled = true;
-  saveBtn.textContent = '⏳ Elaboro…';
-
-  try {
-    // Get cropped canvas
-    const canvas = cropperInstance.getCroppedCanvas({ maxWidth: 2048, maxHeight: 2048, imageSmoothingQuality: 'high' });
-    const trailId = document.getElementById('f-id').value.trim();
-    if (!trailId) { showToast('Salva prima l\'ID del trail', 'error'); saveBtn.disabled = false; saveBtn.textContent = '⭐ Usa come copertina'; return; }
-
-    // Convert canvas to base64
-    const dataURL = canvas.toDataURL('image/jpeg', 0.92);
-    const base64 = dataURL.split(',')[1];
-
-    // Push to GitHub as media/[trail-id]/cover.jpg
-    const ghPath = `media/${trailId}/cover.jpg`;
-    showToast('⏳ Upload copertina su GitHub…', 'info');
-    const existing = await ghGetFile(ghPath);
-    const sha = existing.ok ? existing.data.sha : null;
-    const r = await ghFetch('PUT', `/repos/${REPO}/contents/${ghPath}`, {
-      message: `media: set cover for ${trailId}`,
-      content: base64,
-      branch: 'main',
-      ...(sha && { sha })
-    });
-    if (!r.ok) throw new Error('Upload fallito: ' + (r.data?.message || 'errore sconosciuto'));
-
-    const coverUrl = `https://raw.githubusercontent.com/${REPO}/main/${ghPath}`;
-
-    // Mark photo as cover in local state
-    photos.forEach(p => { p.isCover = false; });
-    photos[cropPhotoIndex].isCover = true;
-    photos[cropPhotoIndex].coverUrl = coverUrl;
-
-    // Update f-cover field
-    document.getElementById('f-cover').value = coverUrl;
-
-    renderPhotoGrid();
-    closeCropModal();
-    showToast('✅ Copertina salvata!', 'success');
-  } catch(e) {
-    showToast('Errore: ' + e.message, 'error');
-  } finally {
-    saveBtn.disabled = false;
-    saveBtn.textContent = '⭐ Usa come copertina';
-  }
+  type = type || 'hero';
+  const canvas = cropperInstance.getCroppedCanvas(
+    type === 'hero' ? {width:1600,height:900} : {width:800,height:800}
+  );
+  canvas.toBlob(function(blob) {
+    const originalName = photos[cropPhotoIndex].name || ('photo_' + cropPhotoIndex);
+    const ext = originalName.split('.').pop() || 'jpg';
+    const baseName = originalName.replace(/\.[^.]+$/, '');
+    const newName = baseName + '_' + type + '.' + ext;
+    const url = URL.createObjectURL(blob);
+    const existingIdx = photos.findIndex(p => p.name === newName);
+    const photoObj = {
+      name: newName,
+      preview: url,
+      url: null,
+      isCover: type === 'hero',
+      cropType: type,
+      isNew: true
+    };
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      photoObj.base64 = e.target.result.split(',')[1];
+      if (existingIdx >= 0) { photos[existingIdx] = photoObj; }
+      else { photos.push(photoObj); }
+      if (type === 'hero') {
+        const newIdx = existingIdx >= 0 ? existingIdx : photos.length-1;
+        photos.forEach((p,i) => { if (i !== newIdx) p.isCover = false; });
+        document.getElementById('f-cover').value = '';
+      }
+      renderPhotoGrid();
+      closeCropModal();
+      showToast('\u2705 ' + (type === 'hero' ? 'Hero' : 'Card') + ' crop salvato!', 'success');
+    };
+    reader.readAsDataURL(blob);
+  }, 'image/jpeg', 0.92);
 }
 
 // Close modal on backdrop click
