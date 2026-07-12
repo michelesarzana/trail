@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trail 340 Molveno - Rifugio Croz dell&#x27;Altissimo — Every Single Trail</title>
+<meta name="description" content="Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!
+
+Rifugio Croz dell’Altissimo
+
+Il rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova ne">
+<!-- Open Graph -->
+<meta property="og:title" content="Trail 340 Molveno - Rifugio Croz dell&#x27;Altissimo">
+<meta property="og:description" content="Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!
+
+Rifugio Croz dell’Altissimo
+
+Il rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova ne">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://michelesarzana.github.io/trail/trails/trail-340-molveno-rifugio-croz-dell-altissimo/">
+<meta property="og:image" content="https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo1.jpg">
+<link rel="canonical" href="https://michelesarzana.github.io/trail/trails/trail-340-molveno-rifugio-croz-dell-altissimo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(46,43,56,0.16); border-radius: 4px; }
+a { color: #38324a; text-decoration: none; }
+a:hover { color: #c17b8c; }
+
+.shell { width: 100%; background: #fff; min-height: 100vh; }
+
+/* NAV */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px; background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky; top: 0; z-index: 200; gap: 16px;
+}
+.nav-back {
+  font-size: 13px; font-weight: 700; color: #38324a;
+  white-space: nowrap; display: flex; align-items: center; gap: 6px; min-width: 140px;
+}
+.nav-back:hover { color: #c17b8c; }
+.nav-center { text-align: center; flex: 1; text-decoration: none; }
+.nav-wordmark { font-size: 22px; font-weight: 800; color: #2e2b38; letter-spacing: -0.01em; display: block; line-height: 1.1; }
+.nav-payoff { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 12px; color: #c17b8c; opacity: 0.85; }
+.nav-spacer { min-width: 140px; }
+
+/* MAP HERO */
+#map-hero { width: 100%; height: 420px; position: relative; z-index: 1; }
+
+/* TRAIL HEADER */
+.trail-header { padding: 32px 48px 20px; border-bottom: 1px solid rgba(46,43,56,0.08); }
+.trail-header-badge {
+  display: inline-block; font-size: 12px; font-weight: 800;
+  padding: 5px 12px; border-radius: 8px; margin-bottom: 12px; letter-spacing: 0.02em;
+}
+.badge-done { background: #38324a; color: #fff; }
+.badge-todo { background: #f0edf0; color: #726e7a; }
+.trail-header-eyebrow {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #726e7a; margin-bottom: 8px;
+}
+.trail-header-title {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: 48px; line-height: 1.08; color: #2e2b38; margin: 0 0 8px;
+}
+.trail-header-stars { font-size: 16px; color: #c17b8c; }
+
+/* STATS BAR */
+.stats-bar {
+  display: flex; gap: 12px; padding: 20px 48px;
+  border-bottom: 1px solid rgba(46,43,56,0.08); flex-wrap: wrap;
+}
+.stat-card {
+  background: #f5f2f5; border-radius: 12px; padding: 14px 20px;
+  min-width: 90px; display: flex; flex-direction: column; gap: 3px;
+}
+.stat-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #726e7a; }
+.stat-value { font-size: 18px; font-weight: 800; color: #2e2b38; font-variant-numeric: tabular-nums; }
+.stat-accent { color: #c17b8c; }
+
+/* ELEVATION */
+.elevation-section { padding: 32px 48px; border-bottom: 1px solid rgba(46,43,56,0.08); }
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #726e7a; margin-bottom: 16px; }
+#elevation-canvas { width: 100%; height: 180px; }
+
+/* GALLERY */
+.gallery-section { padding: 32px 48px; border-bottom: 1px solid rgba(46,43,56,0.08); }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.gallery-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.gallery-item {
+  border-radius: 14px; overflow: hidden; cursor: pointer;
+  aspect-ratio: 4/3; background: #f0edf0; transition: transform 0.15s;
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-item:hover { transform: scale(1.02); }
+
+/* LIGHTBOX */
+#lightbox {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.92);
+  display: none; align-items: center; justify-content: center; z-index: 1000;
+}
+#lightbox.open { display: flex; }
+#lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+#lightbox-close, #lightbox-prev, #lightbox-next {
+  position: absolute; background: rgba(255,255,255,0.1); border: none;
+  color: #fff; font-size: 24px; cursor: pointer; border-radius: 50%;
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Manrope', sans-serif;
+}
+#lightbox-close { top: 24px; right: 24px; }
+#lightbox-prev { left: 24px; }
+#lightbox-next { right: 24px; }
+#lightbox-prev:hover, #lightbox-next:hover, #lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+/* BODY */
+.trail-body { display: flex; gap: 48px; padding: 40px 48px; align-items: flex-start; }
+.trail-body-main { flex: 1; min-width: 0; }
+.trail-body-right { width: 300px; flex-shrink: 0; }
+.section-heading { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #726e7a; margin-bottom: 12px; }
+.section-text { font-size: 17px; line-height: 1.65; color: #2e2b38; max-width: 680px; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+.info-row { display: flex; flex-direction: column; gap: 2px; }
+.info-key { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #726e7a; }
+.info-val { font-size: 14px; font-weight: 600; color: #2e2b38; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-pill { font-size: 12px; font-weight: 600; background: #f0edf0; color: #38324a; padding: 5px 12px; border-radius: 999px; }
+.bool-yes { color: #38324a; }
+.bool-no { color: #726e7a; }
+
+/* SIDEBAR */
+.sidebar-card { background: #faf7f4; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
+.sidebar-card-title { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #726e7a; margin-bottom: 12px; }
+.coords-text { font-size: 13.5px; font-weight: 600; color: #38324a; font-variant-numeric: tabular-nums; }
+.link-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #38324a; color: #fff; font-size: 12.5px; font-weight: 700;
+  padding: 8px 14px; border-radius: 10px; text-decoration: none;
+  margin: 4px 4px 4px 0; transition: background .15s;
+}
+.link-pill:hover { background: #c17b8c; color: #fff; }
+
+/* LOGBOOK */
+.logbook-entry { border-left: 3px solid #c17b8c; padding: 0 0 0 16px; margin-bottom: 20px; }
+.logbook-date { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #726e7a; margin-bottom: 4px; }
+.logbook-notes { font-size: 15px; line-height: 1.6; color: #2e2b38; }
+.logbook-meta { margin-top: 6px; font-size: 12px; color: #726e7a; display: flex; gap: 14px; }
+
+/* FOOTER */
+.footer-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 48px; border-top: 1px solid rgba(46,43,56,0.08);
+}
+.footer-nav-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #f0edf0; color: #38324a; font-size: 13px; font-weight: 700;
+  padding: 10px 20px; border-radius: 12px; text-decoration: none; transition: background .15s;
+}
+.footer-nav-btn:hover { background: #c17b8c; color: #fff; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .trail-header { padding: 24px 20px 16px; }
+  .trail-header-title { font-size: 32px; }
+  .stats-bar { padding: 16px 20px; }
+  .elevation-section, .gallery-section { padding: 24px 20px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .trail-body { flex-direction: column; padding: 24px 20px; gap: 28px; }
+  .trail-body-right { width: 100%; }
+  .footer-nav { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="https://michelesarzana.github.io/trail/" class="nav-back">← Every Single Trail</a>
+    <a href="https://michelesarzana.github.io/trail/" class="nav-center">
+      <span class="nav-wordmark">Every Single Trail</span>
+      <span class="nav-payoff">No map is ever finished.</span>
+    </a>
+    <div class="nav-spacer"></div>
+  </nav>
+
+  
+  
+  <div id="map-hero"></div>
+
+  <!-- TRAIL HEADER -->
+  <div class="trail-header">
+    <span class="trail-header-badge badge-todo">◷ Da fare</span>
+    <div class="trail-header-eyebrow">Molveno, Trentino-Alto Adige</div>
+    <h1 class="trail-header-title">Trail 340 Molveno - Rifugio Croz dell&#x27;Altissimo</h1>
+    
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-card"><span class="stat-label">Distanza</span><span class="stat-value">14.2 km</span></div>
+    <div class="stat-card"><span class="stat-label">Dislivello +</span><span class="stat-value stat-accent">+902 m</span></div>
+    <div class="stat-card"><span class="stat-label">Dislivello −</span><span class="stat-value">−902 m</span></div>
+    <div class="stat-card"><span class="stat-label">Quota max</span><span class="stat-value">1660 m</span></div>
+    <div class="stat-card"><span class="stat-label">Durata</span><span class="stat-value">5h 51min</span></div>
+  </div>
+
+  
+  <div class="elevation-section">
+    <div class="section-title">Altimetria</div>
+    <div id="elevation-chart-wrap" style="background:#faf7f4;border-radius:16px;padding:20px;height:220px;">
+      <div style="color:#726e7a;font-size:14px;padding:20px 0;">Caricamento altimetria…</div>
+    </div>
+  </div>
+  
+  <div class="gallery-section">
+    <div class="section-title">Galleria</div>
+    <div class="gallery-grid gallery-grid-2">
+        <div class="gallery-item" onclick="openLightbox(["https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo1.jpg", "https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo2.jpg"], 0)">
+          <img src="https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo1.jpg" alt="Trail 340 Molveno - Rifugio Croz dell&#x27;Altissimo foto 1" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(["https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo1.jpg", "https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo2.jpg"], 1)">
+          <img src="https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo2.jpg" alt="Trail 340 Molveno - Rifugio Croz dell&#x27;Altissimo foto 2" loading="lazy">
+        </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="trail-body">
+    <div class="trail-body-main">
+      <div class="section-heading">Descrizione</div><div class="section-text">Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!<br><br>Rifugio Croz dell’Altissimo<br><br>Il rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova nella Val delle Seghe, ai piedi della parete sud-ovest dell’omonima Cima Croz dell’Altissimo, lungo la principale via d’accesso al versante orientale del Gruppo di Brenta.<br>Qui passarono, nella seconda metà dell’Ottocento, i pionieri dell’alpinismo che per primi esplorarono questo Gruppo dolomitico attraverso la Bocca di Brenta. Sulla parete di 900 metri che è una tra le più alte e impressionanti delle Dolomiti di Brenta, si misero alla prova i più forti e impavidi scalatori.<br>Il rifugio è stato costruito nel 1962 dai genitori di Felice Spellini.<br>Pochi anni dopo, precisamente il 6 e 7 luglio 1974 Marco Pilati con Valentino Chini, Dario Bonetti e Felice Spellini tracciano l’impegnativa e bella via del “Rifugio Altissimo” sfruttando una serie di fessure sul bellissimo pilastro soprastante il rifugio, scalata bellissima su roccia compatta quasi esclusivamente in libera.</div>
+
+      <div class="section-heading" style="margin-top:32px">Dettagli</div><div class="info-grid"><div class="info-row"><span class="info-key">Regione</span><span class="info-val">Trentino-Alto Adige</span></div><div class="info-row"><span class="info-key">Provincia</span><span class="info-val">Trento</span></div><div class="info-row"><span class="info-key">Comune</span><span class="info-val">Molveno</span></div><div class="info-row"><span class="info-key">Area</span><span class="info-val">Dolimiti di Brenta</span></div><div class="info-row"><span class="info-key">Tipo</span><span class="info-val">loop</span></div></div>
+
+      
+
+      
+    </div>
+
+    <div class="trail-body-right">
+      <!-- Logistics -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Logistica</div>
+        <div class="info-grid">
+          <div class="info-row"><span class="info-key">Dog friendly</span><span class="info-val"><span class="bool-no">No</span></span></div>
+          <div class="info-row"><span class="info-key">Trasporto pub.</span><span class="info-val"><span class="bool-no">No</span></span></div>
+          <div class="info-row"><span class="info-key">Acqua</span><span class="info-val"><span class="bool-no">No</span></span></div>
+        </div>
+        
+      </div>
+
+      
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Coordinate partenza</div>
+          <div class="coords-text">46.13824, 10.96217</div>
+          <a class="link-pill" style="margin-top:10px;display:inline-flex" href="https://maps.google.com/?q=46.13824,10.96217" target="_blank">↗ Google Maps</a>
+        </div>
+
+      
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-nav">
+    <a href="https://michelesarzana.github.io/trail/" class="footer-nav-btn">← Tutti i trail</a>
+    <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:13px;color:#c17b8c;opacity:0.7">No map is ever finished.</span>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button id="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next" onclick="lightboxNav(1)">›</button>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// LIGHTBOX
+let lbPhotos = [], lbIndex = 0;
+function openLightbox(photos, idx) {
+  lbPhotos = photos; lbIndex = idx;
+  document.getElementById('lightbox-img').src = photos[idx];
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+function lightboxNav(dir) {
+  lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
+  document.getElementById('lightbox-img').src = lbPhotos[lbIndex];
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+});
+
+
+// MAP
+const map = L.map('map-hero', {
+  zoomControl: true,
+  attributionControl: true
+});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 18
+}).addTo(map);
+new L.GPX('https://michelesarzana.github.io/trail/gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx', {
+  async: true,
+  polyline_options: { color: '#c17b8c', weight: 3.5, opacity: 0.9 },
+  marker_options: {
+    startIconUrl: null,
+    endIconUrl: null,
+    shadowUrl: null,
+    wptIconUrls: { '': null }
+  }
+}).on('loaded', function(e) {
+  map.fitBounds(e.target.getBounds(), { padding: [30, 30] });
+}).addTo(map);
+
+// ELEVATION
+async function renderElevationChart() {
+  let xml;
+  try {
+    const resp = await fetch('https://michelesarzana.github.io/trail/gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx');
+    if (!resp.ok) return;
+    const text = await resp.text();
+    const parser = new DOMParser();
+    xml = parser.parseFromString(text, 'application/xml');
+  } catch(e) { return; }
+  const trkpts = xml.querySelectorAll('trkpt');
+  if (!trkpts.length) return;
+  const points = [];
+  let cumDist = 0, prev = null;
+  for (const pt of trkpts) {
+    const lat = parseFloat(pt.getAttribute('lat'));
+    const lon = parseFloat(pt.getAttribute('lon'));
+    const eleEl = pt.querySelector('ele');
+    const ele = eleEl ? parseFloat(eleEl.textContent) : null;
+    if (ele === null || isNaN(lat) || isNaN(lon)) continue;
+    if (prev) {
+      const dlat = (lat - prev.lat) * 111320;
+      const dlon = (lon - prev.lon) * 111320 * Math.cos(prev.lat * Math.PI / 180);
+      cumDist += Math.sqrt(dlat*dlat + dlon*dlon) / 1000;
+    }
+    points.push({ lat, lon, ele, dist: Math.round(cumDist * 100) / 100 });
+    prev = { lat, lon };
+  }
+  if (points.length < 2) return;
+  const maxPts = 200;
+  let sampled = points;
+  if (points.length > maxPts) {
+    const step = Math.floor(points.length / maxPts);
+    sampled = points.filter((_, i) => i % step === 0);
+  }
+  const labels = sampled.map(p => p.dist.toFixed(2));
+  const data = sampled.map(p => Math.round(p.ele));
+  const el = document.getElementById('elevation-chart-wrap');
+  if (!el) return;
+  el.innerHTML = '<canvas id="elevation-canvas"></canvas>';
+  const ctx = document.getElementById('elevation-canvas').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        fill: true,
+        backgroundColor: 'rgba(193,123,140,0.18)',
+        borderColor: '#c17b8c',
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: items => items[0].label + ' km',
+            label: item => item.raw + ' m'
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { maxTicksLimit: 8, font: { size: 11 }, color: '#726e7a' },
+          grid: { color: 'rgba(46,43,56,0.06)' }
+        },
+        y: {
+          ticks: { font: { size: 11 }, color: '#726e7a' },
+          grid: { color: 'rgba(46,43,56,0.06)' }
+        }
+      }
+    }
+  });
+}
+renderElevationChart();
+
+</script>
+</body>
+</html>
