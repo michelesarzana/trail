@@ -271,8 +271,7 @@
         "surface": [
           "terra",
           "sterrato"
-        ],
-        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
+        ]
       },
       "classification": {
         "difficulty": "T3",
@@ -297,6 +296,7 @@
         "water_available": false,
         "parking_notes": "Ampio parcheggio con disponibilità di colonnine per la ricarica elettrica"
       },
+      "photo_credit": null,
       "links": {
         "strava": "https://www.strava.com/activities/16031119512",
         "komoot": null,
@@ -304,6 +304,7 @@
         "wikiloc": null,
         "other": null
       },
+      "log": [],
       "media": {
         "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
         "photos": [
@@ -324,15 +325,7 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"
           }
         ]
-      },
-      "log": [
-        {
-          "date": "2025-10-04",
-          "duration_min": 328,
-          "rating": 5,
-          "notes": "L’Alta Via n. 1 della Valle d’Aosta, o Alta Via dei Giganti, è un itinerario escursionistico dallo scenario incomparabile, che si sviluppa ai piedi dei massicci più elevati d’Europa:. il Monte Rosa, il Cervino e il Monte Bianco. L’Alta Via n. 1 collega Donnas a Courmayeur. Il Rifugio Barma rappresenta un punto d’appoggio prezioso per chi intraprende quest’esperienza integralmente o per un tratto.\n\nDal rifugio si possono fare numerose escursioni di difficoltà e lunghezza differenti, percorsi ad a"
-        }
-      ]
+      }
     }
   ]
 }
