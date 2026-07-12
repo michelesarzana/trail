@@ -32,7 +32,7 @@ body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color
 a { color: #38324a; text-decoration: none; }
 a:hover { color: #c17b8c; }
 
-.shell { width: 100%; background: #fff; min-height: 100vh; }
+.shell { width: 100%; background: #fff; min-height: 0; }
 
 /* NAV */
 .nav {
@@ -170,6 +170,7 @@ a:hover { color: #c17b8c; }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+  .shell { min-height: 0 !important; }
   .nav-payoff { display: none; }
   .nav { padding: 16px 20px; }
   .trail-header { padding: 24px 20px 16px; }
