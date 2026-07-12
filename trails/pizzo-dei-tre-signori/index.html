@@ -355,7 +355,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors',
   maxZoom: 18
 }).addTo(map);
-new L.GPX('https://michelesarzana.github.io/trail/gpx/pizzo-dei-tre-signori.gpx', {
+new L.GPX('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/pizzo-dei-tre-signori.gpx', {
   async: true,
   polyline_options: { color: '#c17b8c', weight: 3.5, opacity: 0.9 },
   marker_options: {
@@ -372,7 +372,7 @@ new L.GPX('https://michelesarzana.github.io/trail/gpx/pizzo-dei-tre-signori.gpx'
 async function renderElevationChart() {
   let xml;
   try {
-    const resp = await fetch('https://michelesarzana.github.io/trail/gpx/pizzo-dei-tre-signori.gpx');
+    const resp = await fetch('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/pizzo-dei-tre-signori.gpx');
     if (!resp.ok) return;
     const text = await resp.text();
     const parser = new DOMParser();
