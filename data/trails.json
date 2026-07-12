@@ -43,7 +43,8 @@
         "route_type": "loop",
         "surface": [
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx"
       },
       "classification": {
         "difficulty": null,
