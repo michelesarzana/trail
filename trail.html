@@ -445,11 +445,6 @@ a:hover { color: #c17b8c; }
   .footer-nav { padding: 20px; }
 }
 
-.nav-lang { display:flex; align-items:center; gap:4px; }
-.lang-btn { background:none; border:none; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#726e7a; padding:4px 6px; border-radius:6px; transition:all .15s; }
-.lang-btn.active { color:#38324a; background:#f0edf0; }
-.lang-sep { color:#b0a8b5; font-size:11px; }
-
 /* Photo credit badge */
 .photo-credit {
   position: absolute;
@@ -485,7 +480,7 @@ a:hover { color: #c17b8c; }
 <script>
 /* ===== CONFIG ===== */
 const DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
-const GPX_BASE = 'https://michelesarzana.github.io/trail/';
+const GPX_BASE = 'https://raw.githubusercontent.com/michelesarzana/trail/main/';
 
 /* ===== REDIRECT TO STATIC PAGE ===== */
 (function() {
@@ -829,11 +824,6 @@ function renderPage(trail, allTrails) {
     <nav class="nav">
       <a href="index.html" class="nav-back" data-i18n="nav-back">← Tutti i trail</a>
       <a href="index.html" class="nav-wordmark">Every Single Trail<span class="nav-payoff">No map is ever finished.</span></a>
-      <div class="nav-lang">
-        <button class="lang-btn active" id="lang-it" onclick="setLang('it')">IT</button>
-        <span class="lang-sep">|</span>
-        <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
-      </div>
     </nav>
 
     <!-- COVER HERO or GRADIENT HERO -->
@@ -973,89 +963,12 @@ async function init() {
   }
 
   renderPage(trail, allTrails);
-  setLang(localStorage.getItem('est-lang') || 'it');
 }
 
 document.addEventListener('DOMContentLoaded', init);
 </script>
 
 <script>
-const TRANSLATIONS = {
-  it: {
-    'nav-back': '← Every Single Trail',
-    'badge-done': '✓ Fatto',
-    'badge-todo': '◷ Da fare',
-    'stat-dist': 'Distanza',
-    'stat-dpos': 'Dislivello +',
-    'stat-dneg': 'Dislivello −',
-    'stat-altmax': 'Quota max',
-    'stat-altmin': 'Quota min',
-    'stat-dur': 'Durata',
-    'stat-diff': 'Difficoltà',
-    'section-elevation': 'Altimetria',
-    'section-description': 'Descrizione',
-    'section-details': 'Dettagli',
-    'section-logbook': 'Logbook',
-    'section-tags': 'Tags',
-    'sidebar-logistics': 'Logistica',
-    'sidebar-coords': 'Punto di partenza',
-    'sidebar-links': 'Link esterni',
-    'key-dog': 'Dog friendly',
-    'key-transport': 'Trasporto pub.',
-    'key-water': 'Acqua',
-    'key-region': 'Regione',
-    'key-province': 'Provincia',
-    'key-municipality': 'Comune',
-    'key-type': 'Tipo',
-    'footer-all': '↑ Tutti i trail',
-    'logbook-empty-title': 'Nessuna uscita registrata',
-    'logbook-empty-sub': 'Il logbook apparirà dopo la prima escursione',
-  },
-  en: {
-    'nav-back': '← Every Single Trail',
-    'badge-done': '✓ Done',
-    'badge-todo': '◷ To do',
-    'stat-dist': 'Distance',
-    'stat-dpos': 'Elevation +',
-    'stat-dneg': 'Elevation −',
-    'stat-altmax': 'Max altitude',
-    'stat-altmin': 'Min altitude',
-    'stat-dur': 'Duration',
-    'stat-diff': 'Difficulty',
-    'section-elevation': 'Elevation profile',
-    'section-description': 'Description',
-    'section-details': 'Details',
-    'section-logbook': 'Logbook',
-    'section-tags': 'Tags',
-    'sidebar-logistics': 'Logistics',
-    'sidebar-coords': 'Starting point',
-    'sidebar-links': 'Useful links',
-    'key-dog': 'Dog friendly',
-    'key-transport': 'Public transport',
-    'key-water': 'Water',
-    'key-region': 'Region',
-    'key-province': 'Province',
-    'key-municipality': 'Municipality',
-    'key-type': 'Type',
-    'footer-all': '↑ All trails',
-    'logbook-empty-title': 'No outings recorded',
-    'logbook-empty-sub': 'The logbook will appear after the first hike',
-  }
-};
-
-function setLang(lang) {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
-      el.textContent = TRANSLATIONS[lang][key];
-    }
-  });
-  const btnIt = document.getElementById('lang-it');
-  const btnEn = document.getElementById('lang-en');
-  if (btnIt) btnIt.classList.toggle('active', lang === 'it');
-  if (btnEn) btnEn.classList.toggle('active', lang === 'en');
-  localStorage.setItem('est-lang', lang);
-}
 </script>
 </body>
 </html>
