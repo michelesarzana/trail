@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every Single Trail</title>
+<meta name="description" content="Una mappa personale di percorsi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(46,43,56,0.16); border-radius: 4px; }
+a { color: #38324a; text-decoration: none; }
+a:hover { color: #c17b8c; }
+button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
+
+/* ===== SHELL ===== */
+.shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+  box-shadow: 0 0 60px rgba(0,0,0,0.05);
+}
+
+/* ===== NAV ===== */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-wordmark {
+  font-size: 22px;
+  font-weight: 800;
+  color: #2e2b38;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.nav-wordmark:hover { color: #2e2b38; }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-counter {
+  font-size: 13px;
+  font-weight: 600;
+  color: #726e7a;
+}
+.nav-counter span { font-weight: 800; color: #2e2b38; }
+.nav-add {
+  font-size: 13px;
+  font-weight: 700;
+  color: #38324a;
+  background: #f0edf0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: background .15s;
+  text-decoration: none;
+}
+.nav-add:hover { background: #e4dfe4; color: #38324a; }
+
+/* ===== HERO ===== */
+.hero {
+  padding: 72px 48px 56px;
+  border-bottom: 1px solid rgba(46,43,56,0.06);
+}
+.hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 64px;
+  line-height: 1.08;
+  color: #2e2b38;
+  margin: 0 0 14px;
+}
+.hero-sub {
+  font-size: 17px;
+  color: #726e7a;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* ===== MAP + LIST LAYOUT ===== */
+.map-list-wrap {
+  display: flex;
+  height: calc(100vh - 200px);
+  min-height: 600px;
+}
+
+/* ===== SIDEBAR (filters + list) ===== */
+.sidebar {
+  width: 460px;
+  min-width: 360px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(46,43,56,0.08);
+  overflow: hidden;
+}
+
+/* ===== FILTERS ===== */
+.filters {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid rgba(46,43,56,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fff;
+}
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.filters-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #726e7a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 4px;
+}
+.chip {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  background: #f0edf0;
+  color: #726e7a;
+  font-family: 'Manrope', sans-serif;
+}
+.chip.active {
+  background: #38324a;
+  color: #fff;
+}
+.chip:hover:not(.active) { background: #e4dfe4; }
+.results-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #726e7a;
+  padding: 8px 24px 0;
+}
+
+/* ===== TRAIL LIST ===== */
+.trail-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.trail-list::-webkit-scrollbar { width: 6px; }
+.trail-list::-webkit-scrollbar-thumb { background: rgba(46,43,56,0.12); border-radius: 3px; }
+
+/* ===== TRAIL CARD ===== */
+.trail-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(46,43,56,0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.trail-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(46,43,56,0.12);
+  color: inherit;
+}
+.trail-card-cover {
+  position: relative;
+  height: 130px;
+  overflow: hidden;
+}
+.trail-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.trail-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+}
+.badge-done { background: #38324a; color: #fff; }
+.badge-todo { background: rgba(255,255,255,0.85); color: #726e7a; }
+.trail-card-body { padding: 14px 16px; }
+.trail-card-title { font-size: 16px; font-weight: 800; color: #2e2b38; margin: 0 0 3px; }
+.trail-card-location { font-size: 12.5px; color: #726e7a; margin: 0 0 10px; }
+.trail-card-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.trail-card-stats-left {
+  display: flex;
+  gap: 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2e2b38;
+}
+.stat-accent { color: #c17b8c; }
+.card-link {
+  font-size: 12px;
+  font-weight: 800;
+  color: #38324a;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.card-link:hover { color: #c17b8c; }
+.trail-card-stars { font-size: 12px; color: #c17b8c; margin-top: 6px; }
+
+/* ===== MAP ===== */
+#map {
+  flex: 1;
+  position: relative;
+  z-index: 0;
+}
+
+/* Leaflet popup override */
+.leaflet-popup-content-wrapper {
+  border-radius: 14px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.22) !important;
+  border: none !important;
+}
+.leaflet-popup-content { margin: 0 !important; }
+.leaflet-popup-tip-container { display: none; }
+.map-tooltip {
+  width: 240px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  font-family: 'Manrope', sans-serif;
+}
+.map-tooltip-cover {
+  height: 110px;
+  position: relative;
+}
+.map-tooltip-cover img { width: 100%; height: 100%; object-fit: cover; }
+.map-tooltip-body { padding: 12px 14px; }
+.map-tooltip-title { font-size: 14px; font-weight: 800; color: #2e2b38; margin: 0 0 4px; }
+.map-tooltip-loc { font-size: 11.5px; color: #726e7a; margin: 0 0 8px; }
+.map-tooltip-stats { display: flex; gap: 12px; font-size: 11.5px; font-weight: 700; color: #2e2b38; margin-bottom: 10px; }
+.map-tooltip-btn {
+  display: block;
+  text-align: center;
+  background: #38324a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 8px;
+  text-decoration: none;
+  transition: background .15s;
+}
+.map-tooltip-btn:hover { background: #4a4260; color: #fff; }
+
+/* ===== NO RESULTS ===== */
+.no-results {
+  padding: 60px 20px;
+  text-align: center;
+  color: #8a897f;
+}
+.no-results-icon { font-size: 32px; margin-bottom: 10px; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 28px 48px;
+  border-top: 1px solid rgba(46,43,56,0.08);
+  font-size: 12.5px;
+  color: #726e7a;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .nav { padding: 16px 24px; }
+  .hero { padding: 48px 24px 36px; }
+  .hero-title { font-size: 40px; }
+  .map-list-wrap { flex-direction: column; height: auto; }
+  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(46,43,56,0.08); }
+  #map { height: 380px; }
+  .filters { padding: 14px 16px 10px; }
+  .trail-list { padding: 12px 12px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-wordmark">Every Single Trail</a>
+    <div class="nav-right">
+      <p class="nav-counter" id="nav-counter"><span id="count-total">—</span> trail · <span id="count-done">—</span> fatti</p>
+      <a href="/admin/" class="nav-add">+ Aggiungi trail</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="hero-title">Every single trail.</h1>
+    <p class="hero-sub">Una mappa personale di percorsi.</p>
+  </div>
+
+  <!-- MAP + LIST -->
+  <div class="map-list-wrap">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <!-- FILTERS -->
+      <div class="filters">
+        <div class="filters-row">
+          <span class="filters-label">Stato</span>
+          <button class="chip active" data-filter-status="all" onclick="setStatus('all')">Tutti</button>
+          <button class="chip" data-filter-status="done" onclick="setStatus('done')">✓ Fatto</button>
+          <button class="chip" data-filter-status="todo" onclick="setStatus('todo')">◷ Da fare</button>
+        </div>
+        <div class="filters-row" id="filter-difficulty" style="display:none">
+          <span class="filters-label">Difficoltà</span>
+          <!-- populated by JS -->
+        </div>
+        <div class="filters-row" id="filter-activity" style="display:none">
+          <span class="filters-label">Attività</span>
+          <!-- populated by JS -->
+        </div>
+      </div>
+      <div class="results-label" id="results-label"></div>
+
+      <!-- TRAIL LIST -->
+      <div class="trail-list" id="trail-list">
+        <div style="padding:40px 20px;text-align:center;color:#726e7a;font-size:14px;">
+          <div style="font-size:28px;margin-bottom:10px">🏔️</div>
+          Caricamento trail…
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div id="map"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Every Single Trail — mappa personale di Michele Sarzana
+  </div>
+
+</div><!-- /shell -->
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ===== CONFIG ===== */
+const DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
+
+/* ===== STATE ===== */
+let allTrails = [];
+let filteredTrails = [];
+let statusFilter = 'all';
+let diffFilter = null;
+let actFilter = null;
+let leafletMap = null;
+let markers = [];
+
+/* ===== UTILITIES ===== */
+function fmtDist(km) { return km ? km + ' km' : '—'; }
+function fmtGain(m) { return m ? '+' + m + ' m' : '—'; }
+function fmtDur(min) {
+  if (!min) return null;
+  const h = Math.floor(min / 60), m = min % 60;
+  return h > 0 ? (m > 0 ? h + 'h ' + m + 'm' : h + 'h') : m + 'min';
+}
+function stars(n) {
+  return n ? '★'.repeat(n) + '☆'.repeat(5 - n) : '';
+}
+function locationLine(t) {
+  const loc = t.location || {};
+  const parts = [loc.area, loc.region].filter(Boolean);
+  return parts.join(' · ') || loc.municipality || '—';
+}
+function coverSrc(t) {
+  const m = t.media || {};
+  return m.cover || t.cover_image || null;
+}
+function todoBg() {
+  return 'repeating-linear-gradient(45deg,#efe9ec,#efe9ec 14px,#e3dbe1 14px,#e3dbe1 28px)';
+}
+
+/* ===== RENDER CARD ===== */
+function renderCard(t) {
+  const isDone = t.status === 'done';
+  const cover = coverSrc(t);
+  const track = t.track || {};
+  const loc = t.location || {};
+  const coords = (loc.coordinates || {});
+
+  let coverHtml;
+  if (cover) {
+    coverHtml = `<img src="${cover}" alt="${t.title}" loading="lazy">`;
+  } else {
+    coverHtml = `<div style="width:100%;height:100%;background:${todoBg()}"></div>`;
+  }
+
+  const starsHtml = isDone && t.rating
+    ? `<div class="trail-card-stars">${stars(t.rating)}</div>`
+    : '';
+
+  const actLabel = (t.classification || {}).activity_types?.[0] || '';
+  const diff = (t.classification || {}).difficulty || '';
+
+  return `
+  <a class="trail-card" href="trail.html#${t.id}">
+    <div class="trail-card-cover">
+      ${coverHtml}
+      <div class="trail-card-badge ${isDone ? 'badge-done' : 'badge-todo'}">
+        ${isDone ? '✓ Fatto' : '◷ Da fare'}
+      </div>
+    </div>
+    <div class="trail-card-body">
+      <h3 class="trail-card-title">${t.title}</h3>
+      <p class="trail-card-location">${locationLine(t)}${actLabel ? ' · ' + actLabel : ''}</p>
+      <div class="trail-card-stats">
+        <div class="trail-card-stats-left">
+          <span>${fmtDist(track.distance_km)}</span>
+          <span class="stat-accent">${fmtGain(track.elevation_gain)}</span>
+          ${diff ? `<span>${diff}</span>` : ''}
+          ${track.duration_min ? `<span>${fmtDur(track.duration_min)}</span>` : ''}
+        </div>
+        <span class="card-link">Dettagli →</span>
+      </div>
+      ${starsHtml}
+    </div>
+  </a>`;
+}
+
+/* ===== RENDER MAP TOOLTIP ===== */
+function renderTooltip(t) {
+  const isDone = t.status === 'done';
+  const cover = coverSrc(t);
+  const track = t.track || {};
+  let covHtml;
+  if (cover) {
+    covHtml = `<img src="${cover}" alt="${t.title}">`;
+  } else {
+    covHtml = `<div style="width:100%;height:100%;background:${todoBg()}"></div>`;
+  }
+  return `
+  <div class="map-tooltip">
+    <div class="map-tooltip-cover">${covHtml}</div>
+    <div class="map-tooltip-body">
+      <p class="map-tooltip-title">${t.title}</p>
+      <p class="map-tooltip-loc">${locationLine(t)}</p>
+      <div class="map-tooltip-stats">
+        <span>${fmtDist(track.distance_km)}</span>
+        <span style="color:#c17b8c">${fmtGain(track.elevation_gain)}</span>
+      </div>
+      <a href="trail.html#${t.id}" class="map-tooltip-btn">Scopri →</a>
+    </div>
+  </div>`;
+}
+
+/* ===== CUSTOM MARKER ===== */
+function makeMarker(t) {
+  const isDone = t.status === 'done';
+  const color = isDone ? '#38324a' : '#c17b8c';
+  const html = `<div style="
+    width:16px;height:16px;border-radius:50%;
+    background:${color};
+    border:3px solid #fff;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  "></div>`;
+  return L.divIcon({ html, className: '', iconSize: [16,16], iconAnchor: [8,8] });
+}
+
+/* ===== RENDER MAP ===== */
+function renderMap(trails) {
+  // Clear existing markers
+  markers.forEach(m => m.remove());
+  markers = [];
+
+  const bounds = [];
+
+  trails.forEach(t => {
+    const loc = t.location || {};
+    const coords = (loc.coordinates || {}).start || {};
+    if (!coords.lat || !coords.lng) return;
+
+    const m = L.marker([coords.lat, coords.lng], { icon: makeMarker(t) });
+    m.bindPopup(renderTooltip(t), { maxWidth: 260, minWidth: 240 });
+    m.addTo(leafletMap);
+    markers.push(m);
+    bounds.push([coords.lat, coords.lng]);
+  });
+
+  if (bounds.length > 0) {
+    leafletMap.fitBounds(bounds, { padding: [50, 50], maxZoom: 10 });
+  } else {
+    leafletMap.setView([42.5, 12.5], 6);
+  }
+}
+
+/* ===== APPLY FILTERS ===== */
+function applyFilters() {
+  filteredTrails = allTrails.filter(t => {
+    if (statusFilter !== 'all' && t.status !== statusFilter) return false;
+    const diff = (t.classification || {}).difficulty;
+    if (diffFilter && diff !== diffFilter) return false;
+    const acts = (t.classification || {}).activity_types || [];
+    if (actFilter && !acts.includes(actFilter)) return false;
+    return true;
+  });
+
+  // Update list
+  const listEl = document.getElementById('trail-list');
+  if (filteredTrails.length === 0) {
+    listEl.innerHTML = `<div class="no-results">
+      <div class="no-results-icon">🔎</div>
+      <div style="font-size:14px;font-weight:600">Nessun percorso trovato.</div>
+      <div style="font-size:12.5px;margin-top:6px">Prova ad azzerare i filtri.</div>
+    </div>`;
+  } else {
+    listEl.innerHTML = filteredTrails.map(renderCard).join('');
+  }
+
+  // Update results label
+  document.getElementById('results-label').textContent =
+    filteredTrails.length + ' percorso' + (filteredTrails.length !== 1 ? 'i' : '') + ' trovato' + (filteredTrails.length !== 1 ? 'i' : '');
+
+  // Update map
+  renderMap(filteredTrails);
+}
+
+/* ===== FILTER HELPERS ===== */
+function setStatus(v) {
+  statusFilter = v;
+  document.querySelectorAll('[data-filter-status]').forEach(el => {
+    el.classList.toggle('active', el.dataset.filterStatus === v);
+  });
+  applyFilters();
+}
+function setDiff(v) {
+  diffFilter = diffFilter === v ? null : v;
+  document.querySelectorAll('[data-filter-diff]').forEach(el => {
+    el.classList.toggle('active', el.dataset.filterDiff === diffFilter);
+  });
+  applyFilters();
+}
+function setAct(v) {
+  actFilter = actFilter === v ? null : v;
+  document.querySelectorAll('[data-filter-act]').forEach(el => {
+    el.classList.toggle('active', el.dataset.filterAct === actFilter);
+  });
+  applyFilters();
+}
+
+/* ===== BUILD DYNAMIC FILTER CHIPS ===== */
+function buildFilterChips(trails) {
+  const diffs = [...new Set(trails.map(t => (t.classification||{}).difficulty).filter(Boolean))].sort();
+  const acts  = [...new Set(trails.flatMap(t => (t.classification||{}).activity_types || []))];
+
+  const diffRow = document.getElementById('filter-difficulty');
+  if (diffs.length > 0) {
+    diffRow.style.display = '';
+    diffs.forEach(d => {
+      const btn = document.createElement('button');
+      btn.className = 'chip';
+      btn.textContent = d;
+      btn.dataset.filterDiff = d;
+      btn.onclick = () => setDiff(d);
+      diffRow.appendChild(btn);
+    });
+  }
+
+  const actRow = document.getElementById('filter-activity');
+  if (acts.length > 0) {
+    actRow.style.display = '';
+    acts.forEach(a => {
+      const btn = document.createElement('button');
+      btn.className = 'chip';
+      btn.textContent = a;
+      btn.dataset.filterAct = a;
+      btn.onclick = () => setAct(a);
+      actRow.appendChild(btn);
+    });
+  }
+}
+
+/* ===== INIT MAP ===== */
+function initMap() {
+  leafletMap = L.map('map', { zoomControl: true }).setView([42.5, 12.5], 6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(leafletMap);
+}
+
+/* ===== LOAD DATA ===== */
+async function loadTrails() {
+  try {
+    const r = await fetch(DB_URL);
+    const data = await r.json();
+    return data.trails || [];
+  } catch(e) {
+    console.error('Failed to load trails:', e);
+    return [];
+  }
+}
+
+/* ===== INIT ===== */
+async function init() {
+  initMap();
+
+  allTrails = await loadTrails();
+
+  // Update nav counter
+  const done = allTrails.filter(t => t.status === 'done').length;
+  document.getElementById('count-total').textContent = allTrails.length;
+  document.getElementById('count-done').textContent = done;
+
+  buildFilterChips(allTrails);
+  applyFilters();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
