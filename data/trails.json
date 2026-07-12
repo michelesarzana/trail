@@ -69,6 +69,97 @@
         "cover": null,
         "photos": []
       }
+    },
+    {
+      "id": "lago-antermoia-dal-rifugio-micheluzzi",
+      "title": "Lago Antermoia dal Rifugio Micheluzzi",
+      "status": "done",
+      "description": "Il Rifugio Micheluzzi si raggiunge con un comodo collegamento tramite Van da Campitello (personalmente non amo il sentiero che dal paese porta all'inizio della Val Duron), 10€ a persona a tratta. \n\nDa lì io prediligo la salita alla Val di Dona dalla variante alta che ti porta fino ad avere una vista dall'alto della valle stessa che merita. La salita poi al Passo di Dona è quella tradizionale, l'ultimo strappo prima del bellissimo Lago Antermoia. \n\nDiscesa dal Passo delle Ciaregole, di nuovo fino al Micheluzzi e da qui decidere se riprendere il Van o scendere per il sentiero.",
+      "rating": 5,
+      "completed_at": "2026-06-20",
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Trentino-Alto Adige",
+        "province": "Trento",
+        "municipality": "Campitello di Fassa",
+        "area": "Dolomiti",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 46.4907,
+            "lng": 11.707385
+          },
+          "end": {
+            "lat": 46.490704,
+            "lng": 11.707494
+          }
+        }
+      },
+      "track": {
+        "distance_km": 11.9,
+        "elevation_gain": 906,
+        "elevation_loss": 867,
+        "elevation_max": 2522,
+        "elevation_min": 1842,
+        "duration_min": 316,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato"
+        ],
+        "gpx_file": "gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
+      },
+      "classification": {
+        "difficulty": "T3",
+        "activity_types": [
+          "trail-running",
+          "trekking",
+          "escursionismo"
+        ],
+        "seasons": [
+          "primavera",
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "dolomiti",
+        "antermoia",
+        "val di fassa",
+        "campitello"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": false,
+        "water_available": true,
+        "parking_notes": null
+      },
+      "links": {
+        "strava": "https://www.strava.com/activities/18997353727",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg",
+        "photos": [
+          {
+            "filename": "_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg"
+          },
+          {
+            "filename": "j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg"
+          },
+          {
+            "filename": "BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg"
+          }
+        ]
+      }
     }
   ]
 }
