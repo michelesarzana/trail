@@ -33,7 +33,7 @@
       },
       "track": {
         "gpx_file": null,
-        "distance_km": 14.0,
+        "distance_km": 14,
         "elevation_gain_m": 1200,
         "elevation_loss_m": 1200,
         "altitude_max_m": 2912,
@@ -84,6 +84,70 @@
       },
       "created_at": "2026-07-12T00:00:00Z",
       "updated_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "id": "trail-340-molveno-rifugio-croz-dell-altissimo",
+      "title": "Trail 340 Molveno - Rifugio Croz dell'Altissimo",
+      "status": "todo",
+      "description": "Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!\n\nRifugio Croz dell’Altissimo\n\nIl rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova nella Val delle Seghe, ai piedi della parete sud-ovest dell’omonima Cima Croz dell’Altissimo, lungo la principale via d’accesso al versante orientale del Gruppo di Brenta.\nQui passarono, nella seconda metà dell’Ottocento, i pionieri dell’alpinismo che per primi esplorarono questo Gruppo dolomitico attraverso la Bocca di Brenta. Sulla parete di 900 metri che è una tra le più alte e impressionanti delle Dolomiti di Brenta, si misero alla prova i più forti e impavidi scalatori.\nIl rifugio è stato costruito nel 1962 dai genitori di Felice Spellini.\nPochi anni dopo, precisamente il 6 e 7 luglio 1974 Marco Pilati con Valentino Chini, Dario Bonetti e Felice Spellini tracciano l’impegnativa e bella via del “Rifugio Altissimo” sfruttando una serie di fessure sul bellissimo pilastro soprastante il rifugio, scalata bellissima su roccia compatta quasi esclusivamente in libera.",
+      "rating": null,
+      "completed_at": null,
+      "cover_image": null,
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Trentino-Alto Adige",
+        "province": "Trento",
+        "municipality": "Molveno",
+        "area": "Dolimiti di Brenta",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 46.13824,
+            "lng": 10.96217
+          },
+          "end": {
+            "lat": 46.13824,
+            "lng": 10.96217
+          }
+        }
+      },
+      "track": {
+        "distance_km": 14.2,
+        "elevation_gain": 902,
+        "elevation_loss": 902,
+        "elevation_max": 1660,
+        "elevation_min": 827,
+        "duration_min": 351,
+        "route_type": "loop",
+        "surface": [
+          "sterrato"
+        ],
+        "gpx_file": "gpx/trail-340-molveno-rifugio-croz-dell-altissimo.gpx"
+      },
+      "classification": {
+        "difficulty": null,
+        "activity_types": [],
+        "seasons": []
+      },
+      "tags": [],
+      "logistics": {
+        "dog_friendly": false,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "links": {
+        "strava": null,
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "media": {
+        "cover": null,
+        "photos": []
+      }
     }
   ]
 }
