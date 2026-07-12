@@ -530,8 +530,17 @@ function fmtDur(min) {
 }
 function stars(n) { return n ? '★'.repeat(n) + '☆'.repeat(5-n) : ''; }
 function coverSrc(t) {
-  const photos = (t.media || {}).photos || [];
-  return (t.media || {}).cover || t.cover_image || photos[0] || null;
+  const med = t.media || {};
+  if (med.cover) return med.cover;
+  if (t.cover_image) return t.cover_image;
+  const photos = med.photos || [];
+  if (!photos.length) return null;
+  const p0 = photos[0];
+  return typeof p0 === 'string' ? p0 : (p0.url || ('https://raw.githubusercontent.com/michelesarzana/trail/main/media/' + t.id + '/' + p0.filename));
+}
+function photoUrl(t, p) {
+  if (typeof p === 'string') return p;
+  return p.url || ('https://raw.githubusercontent.com/michelesarzana/trail/main/media/' + t.id + '/' + p.filename);
 }
 function todoBg() {
   return 'repeating-linear-gradient(45deg,#efe9ec,#efe9ec 14px,#e3dbe1 14px,#e3dbe1 28px)';
@@ -770,14 +779,15 @@ function renderPage(trail, allTrails) {
   const hasPhotos = photos.length > 0;
   let galleryHtml = '';
   if (hasPhotos) {
+    const photoSrcs = photos.map(p => photoUrl(trail, p));
     const gridClass = photos.length <= 2 ? 'gallery-grid gallery-grid-2' : 'gallery-grid';
     galleryHtml = `
       <section class="gallery-section">
         <div class="section-title">Galleria fotografica</div>
         <div class="${gridClass}">
-          ${photos.map((p, i) => `
-            <div class="gallery-item" onclick="openLightbox(${JSON.stringify(photos)}, ${i})">
-              <img src="${escHtml(p)}" alt="${escHtml(trail.title)} foto ${i+1}" loading="lazy">
+          ${photoSrcs.map((url, i) => `
+            <div class="gallery-item" onclick="openLightbox(${JSON.stringify(photoSrcs)}, ${i})">
+              <img src="${escHtml(url)}" alt="${escHtml(trail.title)} foto ${i+1}" loading="lazy" onerror="this.parentElement.style.display='none'">
             </div>`).join('')}
         </div>
       </section>`;
