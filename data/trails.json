@@ -227,6 +227,99 @@
           "https://michelesarzana.github.io/trail/media/pizzo-dei-tre-signori/photo2.jpg"
         ]
       }
+    },
+    {
+      "id": "coumarial-rifugio-barma",
+      "title": "Coumarial < > Rifugio Barma",
+      "status": "done",
+      "description": "L’Alta Via n. 1 della Valle d’Aosta, o Alta Via dei Giganti, è un itinerario escursionistico dallo scenario incomparabile, che si sviluppa ai piedi dei massicci più elevati d’Europa:. il Monte Rosa, il Cervino e il Monte Bianco. L’Alta Via n. 1 collega Donnas a Courmayeur. Il Rifugio Barma rappresenta un punto d’appoggio prezioso per chi intraprende quest’esperienza integralmente o per un tratto.\n\nDal rifugio si possono fare numerose escursioni di difficoltà e lunghezza differenti, percorsi ad anello, colli e cime da raggiungere, tratti attrezzati, ferrate e non ultime le falesie di arrampicata. Il rifugio sarà un appoggio sicuro e accogliente dove ricevere indicazioni e supporto.\n\nLeggermente tecnico il percorso all'andata, difficile la salita finale non tanto per tecnicità quanto per dislivello. Molto ben segnato e su strada carrozzabile il ritorno.",
+      "rating": 5,
+      "completed_at": "2025-10-04",
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Valle d'Aosta",
+        "province": "Aosta",
+        "municipality": "Fontainemore",
+        "area": "Monte Rosa",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 45.639885,
+            "lng": 7.878667
+          },
+          "end": {
+            "lat": 45.639908,
+            "lng": 7.878724
+          }
+        }
+      },
+      "track": {
+        "distance_km": 13.5,
+        "elevation_gain": 1009,
+        "elevation_loss": 969,
+        "elevation_max": 2065,
+        "elevation_min": 1451,
+        "duration_min": 328,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato"
+        ],
+        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
+      },
+      "classification": {
+        "difficulty": "T3",
+        "activity_types": [
+          "trail-running",
+          "trekking",
+          "escursionismo"
+        ],
+        "seasons": [
+          "primavera",
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "monte rosa",
+        "valle d'aosta"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": "Ampio parcheggio con disponibilità di colonnine per la ricarica elettrica"
+      },
+      "links": {
+        "strava": "https://www.strava.com/activities/16031119512",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
+        "photos": [
+          {
+            "filename": "DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg"
+          },
+          {
+            "filename": "YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg"
+          },
+          {
+            "filename": "JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg"
+          },
+          {
+            "filename": "o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"
+          }
+        ]
+      }
     }
   ]
 }
