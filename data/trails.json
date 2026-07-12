@@ -271,7 +271,8 @@
         "surface": [
           "terra",
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
       },
       "classification": {
         "difficulty": "T3",
