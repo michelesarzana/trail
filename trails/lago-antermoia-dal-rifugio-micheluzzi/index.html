@@ -216,7 +216,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e
 // MAP
 const map=L.map('map-hero',{zoomControl:true,scrollWheelZoom:false}).setView([46.4907,11.707385],13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(map);
-new L.GPX('https://michelesarzana.github.io/trail/gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx',{
+new L.GPX('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx',{
   async:true,
   polyline_options:{color:'#c17b8c',weight:3.5,opacity:0.9},
   marker_options:{startIconUrl:null,endIconUrl:null,shadowUrl:null,wptIconUrls:{'':null}}
@@ -226,7 +226,7 @@ new L.GPX('https://michelesarzana.github.io/trail/gpx/lago-antermoia-dal-rifugio
 async function renderElevationChart() {
   let xml;
   try {
-    const resp = await fetch('https://michelesarzana.github.io/trail/gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx');
+    const resp = await fetch('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx');
     if (!resp.ok) return;
     const text = await resp.text();
     const parser = new DOMParser();
