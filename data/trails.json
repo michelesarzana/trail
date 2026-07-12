@@ -67,7 +67,10 @@
       },
       "media": {
         "cover": null,
-        "photos": []
+        "photos": [
+          "https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo1.jpg",
+          "https://michelesarzana.github.io/trail/media/trail-340-molveno-rifugio-croz-dell-altissimo/photo2.jpg"
+        ]
       }
     },
     {
@@ -146,18 +149,8 @@
       "media": {
         "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg",
         "photos": [
-          {
-            "filename": "_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg"
-          },
-          {
-            "filename": "j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg"
-          },
-          {
-            "filename": "BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg"
-          }
+          "https://michelesarzana.github.io/trail/media/lago-antermoia-dal-rifugio-micheluzzi/photo1.jpg",
+          "https://michelesarzana.github.io/trail/media/lago-antermoia-dal-rifugio-micheluzzi/photo2.jpg"
         ]
       }
     },
@@ -220,99 +213,9 @@
       },
       "media": {
         "cover": null,
-        "photos": []
-      }
-    },
-    {
-      "id": "coumarial-rifugio-barma",
-      "title": "Coumarial < > Rifugio Barma",
-      "status": "done",
-      "description": null,
-      "rating": null,
-      "completed_at": "2025-10-04",
-      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg",
-      "location": {
-        "country": "Italia",
-        "country_code": "IT",
-        "region": "Valle d'Aosta",
-        "province": "Aosta",
-        "municipality": "Fontainemore",
-        "area": null,
-        "start_address": "Ampio parcheggio con colonnine per la ricarica elettrica",
-        "coordinates": {
-          "start": {
-            "lat": 45.639885,
-            "lng": 7.878667
-          },
-          "end": {
-            "lat": 45.639908,
-            "lng": 7.878724
-          }
-        }
-      },
-      "track": {
-        "distance_km": 13.5,
-        "elevation_gain": 1009,
-        "elevation_loss": 969,
-        "elevation_max": 2065,
-        "elevation_min": 1451,
-        "duration_min": 328,
-        "route_type": "loop",
-        "surface": [
-          "terra",
-          "sterrato",
-          "roccia"
-        ],
-        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
-      },
-      "classification": {
-        "difficulty": "T3",
-        "activity_types": [
-          "trekking",
-          "escursionismo"
-        ],
-        "seasons": [
-          "primavera",
-          "estate",
-          "autunno"
-        ]
-      },
-      "tags": [
-        "valle d'aosta",
-        "con cane"
-      ],
-      "logistics": {
-        "dog_friendly": true,
-        "public_transport": false,
-        "water_available": false,
-        "parking_notes": null
-      },
-      "links": {
-        "strava": "https://www.strava.com/activities/16031119512",
-        "komoot": null,
-        "alltrails": null,
-        "wikiloc": null,
-        "other": null
-      },
-      "media": {
-        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg",
         "photos": [
-          {
-            "filename": "o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"
-          },
-          {
-            "filename": "YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365.jpg"
-          },
-          {
-            "filename": "DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg"
-          },
-          {
-            "filename": "JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/JQGFfaXE4ABdOnTkPLqCq_hmu5ghP2dA3fVD_ZbupEc-1536x2048.jpg"
-          }
+          "https://michelesarzana.github.io/trail/media/pizzo-dei-tre-signori/photo1.jpg",
+          "https://michelesarzana.github.io/trail/media/pizzo-dei-tre-signori/photo2.jpg"
         ]
       }
     }
