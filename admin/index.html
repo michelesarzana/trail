@@ -1499,7 +1499,8 @@ function openCropModal(photoIdx) {
   const modal = document.getElementById('crop-modal');
   modal.classList.add('open');
   // Init cropper after image loads
-  img.onload = () => {
+  function initCropper() {
+    if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
     cropperInstance = new Cropper(img, {
       aspectRatio: cropCurrentRatio,
       viewMode: 1,
@@ -1507,11 +1508,13 @@ function openCropModal(photoIdx) {
       movable: true,
       zoomable: true,
       scalable: false,
-      preview: ['#prev-16', '#prev-11'],
     });
-  };
-  // If already loaded
-  if (img.complete && img.naturalWidth) img.onload();
+  }
+  if (img.complete && img.naturalWidth > 0) {
+    initCropper();
+  } else {
+    img.onload = initCropper;
+  }
 }
 
 function closeCropModal() {
