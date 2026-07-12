@@ -655,10 +655,9 @@ function buildFilterChips(trails) {
     container.appendChild(btn);
   };
 
-  const T = TRANSLATIONS[localStorage.getItem('est-lang') || 'it'] || TRANSLATIONS['it'];
-  addChip(T['chip-all'], () => { activeStatus = 'all'; rebuildChips(); applyFilters(); }, activeStatus === 'all');
-  addChip(T['chip-done'], () => { activeStatus = 'done'; rebuildChips(); applyFilters(); }, activeStatus === 'done');
-  addChip(T['chip-todo'], () => { activeStatus = 'todo'; rebuildChips(); applyFilters(); }, activeStatus === 'todo');
+  addChip('Tutti', () => { activeStatus = 'all'; rebuildChips(); applyFilters(); }, activeStatus === 'all');
+  addChip('Fatti', () => { activeStatus = 'done'; rebuildChips(); applyFilters(); }, activeStatus === 'done');
+  addChip('Da fare', () => { activeStatus = 'todo'; rebuildChips(); applyFilters(); }, activeStatus === 'todo');
 
   if (diffs.length > 0) {
     const sep = document.createElement('div');
@@ -731,11 +730,7 @@ async function init() {
 document.addEventListener('DOMContentLoaded', init);
 
 
-// Restore language on load
-(function() {
-  const saved = localStorage.getItem('est-lang') || 'it';
-  document.addEventListener('DOMContentLoaded', function() { setLang(saved); });
-})();
+// Language restore removed (setLang not implemented)
 
 </script>
 </body>
