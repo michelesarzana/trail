@@ -160,6 +160,68 @@
           }
         ]
       }
+    },
+    {
+      "id": "pizzo-dei-tre-signori",
+      "title": "Pizzo dei Tre Signori",
+      "status": "todo",
+      "description": null,
+      "rating": null,
+      "completed_at": null,
+      "cover_image": null,
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Lombardia",
+        "province": "Lecco",
+        "municipality": "Introbio",
+        "area": null,
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 46.01661,
+            "lng": 9.47129
+          },
+          "end": {
+            "lat": 46.01661,
+            "lng": 9.47129
+          }
+        }
+      },
+      "track": {
+        "distance_km": 13.7,
+        "elevation_gain": 1176,
+        "elevation_loss": 1176,
+        "elevation_max": 2481,
+        "elevation_min": 1487,
+        "duration_min": 400,
+        "route_type": "loop",
+        "surface": [],
+        "gpx_file": "gpx/pizzo-dei-tre-signori.gpx"
+      },
+      "classification": {
+        "difficulty": null,
+        "activity_types": [],
+        "seasons": []
+      },
+      "tags": [],
+      "logistics": {
+        "dog_friendly": false,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "links": {
+        "strava": null,
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "media": {
+        "cover": null,
+        "photos": []
+      }
     }
   ]
 }
