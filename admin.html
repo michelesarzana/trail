@@ -396,7 +396,25 @@ input,textarea,select{font-family:inherit;font-size:14px}
 
 /* ── MAIN re-layout ────────────────────────────────────── */
 
+/* LOGBOOK admin */
+.logbook-admin-entry { background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; }
+.logbook-admin-entry-info { flex: 1; min-width: 0; }
+.logbook-admin-entry-date { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
+.logbook-admin-entry-notes { font-size: 13px; line-height: 1.5; color: var(--text); white-space: pre-line; }
+.logbook-admin-entry-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+.logbook-admin-entry-actions { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.logbook-admin-entry-actions button { font-size: 11px; padding: 4px 8px; border-radius: 5px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text); cursor: pointer; }
+.logbook-admin-entry-actions button:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+#lb-stars span.active { color: var(--accent); }
+
+/* CROP buttons on photo thumbs */
+.photo-crop-btns { position:absolute; bottom:28px; left:0; right:0; display:flex; gap:3px; padding:0 4px; opacity:0; transition:opacity .15s; }
+.photo-thumb:hover .photo-crop-btns { opacity:1; }
+.photo-crop-btns button { flex:1; font-size:9px; font-weight:700; padding:3px 0; border-radius:4px; border:none; background:rgba(0,0,0,0.7); color:#fff; cursor:pointer; }
+.photo-crop-btns button:hover { background:var(--accent); color:#000; }
+
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
 </head>
 <body>
 
@@ -866,8 +884,54 @@ input,textarea,select{font-family:inherit;font-size:14px}
                 <label>Cover Image (URL esterno o lascia vuoto per usare la prima foto)</label>
                 <input type="text" id="f-cover" placeholder="https://… oppure lascia vuoto">
               </div>
+              <div class="field" style="margin-top:8px">
+                <label>Fonte foto (solo per immagini esterne)</label>
+                <input type="text" id="f-photo-credit" placeholder="es. © Mario Rossi / Unsplash">
+              </div>
             </div>
           </div>
+
+          <!-- LOGBOOK -->
+<div class="form-section" id="section-logbook">
+  <div class="form-section-header" onclick="toggleSection(this)">
+    <div class="form-section-title">📓 Logbook</div>
+    <span class="section-arrow">▶</span>
+  </div>
+  <div class="form-section-body" style="display:none">
+    <div id="logbook-entries-list"></div>
+    <div style="margin-top:16px">
+      <div class="form-section-title" style="font-size:13px;margin-bottom:10px" id="logbook-form-title">➕ Nuova uscita</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Data</label>
+          <input type="date" id="lb-date">
+        </div>
+        <div class="field">
+          <label>Durata (minuti)</label>
+          <input type="number" id="lb-duration" min="1" step="1" placeholder="es. 316">
+        </div>
+        <div class="field">
+          <label>Rating</label>
+          <div id="lb-stars" class="star-row" style="font-size:22px;cursor:pointer">
+            <span onclick="setLbRating(1)">☆</span>
+            <span onclick="setLbRating(2)">☆</span>
+            <span onclick="setLbRating(3)">☆</span>
+            <span onclick="setLbRating(4)">☆</span>
+            <span onclick="setLbRating(5)">☆</span>
+          </div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:8px">
+        <label>Note</label>
+        <textarea id="lb-notes" rows="4" placeholder="Racconta l'uscita…"></textarea>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn btn-primary" onclick="addOrUpdateLogEntry()">💾 Salva uscita</button>
+        <button class="btn btn-ghost" id="lb-cancel-btn" style="display:none" onclick="cancelLogEdit()">✕ Annulla</button>
+      </div>
+    </div>
+  </div>
+</div>
 
           <!-- ACTIONS -->
           <div class="form-actions">
@@ -1246,6 +1310,192 @@ function lightboxNav(dir){lbIndex=(lbIndex+dir+lbPhotos.length)%lbPhotos.length;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='ArrowRight')lightboxNav(1);});
 ${mapJs}
 <\/script>
+<!-- CROP MODAL -->
+<div id="crop-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);flex-direction:column;align-items:center;justify-content:center;padding:24px">
+  <div style="background:#1e1e2e;border-radius:14px;padding:24px;max-width:800px;width:100%;max-height:90vh;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div id="crop-modal-title" style="font-weight:700;font-size:16px;color:#fff">Crop immagine</div>
+      <button onclick="closeCropModal()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer">✕</button>
+    </div>
+    <div style="overflow:hidden;max-height:500px;border-radius:8px">
+      <img id="crop-image" src="" style="max-width:100%;display:block">
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn btn-ghost" onclick="closeCropModal()">Annulla</button>
+      <button class="btn btn-primary" onclick="applyCrop()">✂️ Applica crop</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+<script>
+// ===== CROP =====
+let cropperInstance = null;
+let cropTarget = null;
+let cropPhotoIdx = -1;
+
+function openCropModal(photoIdx, target) {
+  cropPhotoIdx = photoIdx;
+  cropTarget = target;
+  const p = photos[photoIdx];
+  const src = p.preview || p.url;
+  const modal = document.getElementById('crop-modal');
+  const img = document.getElementById('crop-image');
+  document.getElementById('crop-modal-title').textContent = target === 'hero' ? '✂️ Crop Hero (16:9)' : '✂️ Crop Card (4:3)';
+  img.src = src;
+  modal.style.display = 'flex';
+  if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
+  img.onload = () => {
+    cropperInstance = new Cropper(img, {
+      aspectRatio: target === 'hero' ? 16/9 : 4/3,
+      viewMode: 1,
+      autoCropArea: 0.85,
+      movable: true,
+      zoomable: true,
+      rotatable: false,
+    });
+  };
+}
+
+function closeCropModal() {
+  document.getElementById('crop-modal').style.display = 'none';
+  if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
+  cropTarget = null;
+  cropPhotoIdx = -1;
+}
+
+function applyCrop() {
+  if (!cropperInstance || cropPhotoIdx < 0) return;
+  const canvas = cropperInstance.getCroppedCanvas({
+    width: cropTarget === 'hero' ? 1280 : 800,
+    height: cropTarget === 'hero' ? 720 : 600,
+    imageSmoothingEnabled: true,
+    imageSmoothingQuality: 'high',
+  });
+  canvas.toBlob(blob => {
+    const p = photos[cropPhotoIdx];
+    const suffix = cropTarget === 'hero' ? '_hero' : '_card';
+    const baseName = p.name.replace(/\.[^.]+$/, '');
+    const ext = p.name.match(/\.[^.]+$/)?.[0] || '.jpg';
+    const newName = baseName + suffix + ext;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const newPhoto = {
+        file: blob,
+        name: newName,
+        base64: e.target.result.split(',')[1],
+        preview: e.target.result,
+        isNew: true,
+      };
+      if (cropTarget === 'hero') {
+        newPhoto.isCroppedHero = true;
+        const existingHeroIdx = photos.findIndex(ph => ph.isCroppedHero);
+        if (existingHeroIdx >= 0) photos.splice(existingHeroIdx, 1);
+        photos.unshift(newPhoto);
+        document.getElementById('f-cover').value = '';
+      } else {
+        newPhoto.isCroppedCard = true;
+        const existingCardIdx = photos.findIndex(ph => ph.isCroppedCard);
+        if (existingCardIdx >= 0) photos.splice(existingCardIdx, 1);
+        photos.push(newPhoto);
+      }
+      renderPhotoGrid();
+      closeCropModal();
+    };
+    reader.readAsDataURL(blob);
+  }, 'image/jpeg', 0.9);
+}
+
+// ===== LOGBOOK ADMIN =====
+let logEntries = [];
+let editingLogIdx = -1;
+let lbRating = 0;
+
+function setLbRating(n) {
+  lbRating = n;
+  renderLbStars();
+}
+function renderLbStars() {
+  const container = document.getElementById('lb-stars');
+  if (!container) return;
+  container.querySelectorAll('span').forEach((s, i) => {
+    s.textContent = i < lbRating ? '★' : '☆';
+    s.classList.toggle('active', i < lbRating);
+  });
+}
+function renderLogbookList() {
+  const list = document.getElementById('logbook-entries-list');
+  if (!list) return;
+  if (!logEntries.length) {
+    list.innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:8px 0">Nessuna uscita registrata</div>';
+    return;
+  }
+  list.innerHTML = logEntries.map((e, i) => `
+    <div class="logbook-admin-entry">
+      <div class="logbook-admin-entry-info">
+        <div class="logbook-admin-entry-date">${e.date || '—'}</div>
+        ${e.notes ? `<div class="logbook-admin-entry-notes">${escHtml(e.notes)}</div>` : ''}
+        <div class="logbook-admin-entry-meta">
+          ${e.rating ? '⭐ ' + e.rating + '/5' : ''}
+          ${e.duration_min ? ' · ⏱ ' + fmtDur(e.duration_min) : ''}
+        </div>
+      </div>
+      <div class="logbook-admin-entry-actions">
+        <button onclick="editLogEntry(${i})">✏️</button>
+        <button onclick="deleteLogEntry(${i})">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
+function addOrUpdateLogEntry() {
+  const date = document.getElementById('lb-date').value;
+  const duration_min = parseInt(document.getElementById('lb-duration').value) || null;
+  const notes = document.getElementById('lb-notes').value.trim() || null;
+  if (!date) { alert('Inserisci la data'); return; }
+  const entry = { date, duration_min, rating: lbRating || null, notes };
+  if (editingLogIdx >= 0) {
+    logEntries[editingLogIdx] = entry;
+  } else {
+    logEntries.push(entry);
+    logEntries.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  }
+  cancelLogEdit();
+  renderLogbookList();
+}
+function editLogEntry(i) {
+  editingLogIdx = i;
+  const e = logEntries[i];
+  document.getElementById('lb-date').value = e.date || '';
+  document.getElementById('lb-duration').value = e.duration_min || '';
+  document.getElementById('lb-notes').value = e.notes || '';
+  lbRating = e.rating || 0;
+  renderLbStars();
+  document.getElementById('logbook-form-title').textContent = '✏️ Modifica uscita';
+  document.getElementById('lb-cancel-btn').style.display = 'inline-flex';
+}
+function deleteLogEntry(i) {
+  if (!confirm('Eliminare questa uscita?')) return;
+  logEntries.splice(i, 1);
+  renderLogbookList();
+}
+function cancelLogEdit() {
+  editingLogIdx = -1;
+  document.getElementById('lb-date').value = '';
+  document.getElementById('lb-duration').value = '';
+  document.getElementById('lb-notes').value = '';
+  lbRating = 0;
+  renderLbStars();
+  document.getElementById('logbook-form-title').textContent = '➕ Nuova uscita';
+  const btn = document.getElementById('lb-cancel-btn');
+  if (btn) btn.style.display = 'none';
+}
+function fmtDur(min) {
+  if (!min) return '';
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return h > 0 ? `${h}h ${m > 0 ? m + 'min' : ''}`.trim() : `${m}min`;
+}
+</script>
 </body>
 </html>`;
 }
@@ -1644,8 +1894,12 @@ function renderPhotoGrid() {
   grid.innerHTML = photos.map((p, i) => `
     <div class="photo-thumb ${i === 0 ? 'cover-photo' : ''}" title="${escHtml(p.name)}">
       <img src="${p.preview || p.url}" alt="${escHtml(p.name)}">
-      <button class="photo-remove" onclick="removePhoto(${i})">✕</button>
+      <button class="photo-remove" onclick="removePhoto(${i})" title="Rimuovi">✕</button>
       ${i === 0 ? '<div class="photo-cover-badge">COVER</div>' : ''}
+      <div class="photo-crop-btns">
+        <button onclick="openCropModal(${i},'hero')" title="Crop 16:9 per hero">Hero</button>
+        <button onclick="openCropModal(${i},'card')" title="Crop per card">Card</button>
+      </div>
     </div>
   `).join('');
 }
@@ -1710,6 +1964,7 @@ function resetForm() {
   document.getElementById('f-wikiloc').value = '';
   document.getElementById('f-link-other').value = '';
   document.getElementById('f-cover').value = '';
+  document.getElementById('f-photo-credit').value = '';
   setChecked('cb-surface', []);
   setChecked('cb-activity', []);
   setChecked('cb-season', []);
@@ -1717,6 +1972,9 @@ function resetForm() {
   tags = []; renderTags();
   photos = []; renderPhotoGrid();
   clearGpx();
+  logEntries = [];
+  cancelLogEdit();
+  renderLogbookList();
 }
 
 function newTrail() {
@@ -1781,6 +2039,7 @@ function populateForm(t) {
   document.getElementById('f-wikiloc').value = lk.wikiloc || '';
   document.getElementById('f-link-other').value = lk.other || '';
   document.getElementById('f-cover').value = t.cover_image || t.media?.cover || '';
+  document.getElementById('f-photo-credit').value = t.photo_credit || '';
   // photos
   photos = (t.media?.photos || []).map(p => ({
     name: p.filename,
@@ -1789,6 +2048,18 @@ function populateForm(t) {
     isSaved: true
   }));
   renderPhotoGrid();
+  // Logbook
+  logEntries = (t.log || []).slice();
+  if (!logEntries.length && t.completed_at) {
+    logEntries = [{
+      date: t.completed_at,
+      duration_min: t.track?.duration_min || null,
+      rating: t.rating || null,
+      notes: null
+    }];
+  }
+  cancelLogEdit();
+  renderLogbookList();
 }
 
 // ── COLLECT FORM ───────────────────────────────────────────────
@@ -1863,7 +2134,9 @@ function collectForm() {
         filename: p.name,
         url: p.url || `https://raw.githubusercontent.com/${REPO}/main/media/${trailId}/${p.name}`
       }))
-    }
+    },
+    photo_credit: document.getElementById('f-photo-credit').value.trim() || null,
+    log: logEntries.slice()
   };
 }
 
