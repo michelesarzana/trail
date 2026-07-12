@@ -39,8 +39,9 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 }
 .nav-wordmark-wrap {
   display: flex;
-  flex-direction: column;
-  gap: 1px;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.4em;
   text-decoration: none;
 }
 .nav-wordmark {
@@ -55,10 +56,9 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .nav-payoff {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 12px;
+  font-size: 22px;
   color: #c17b8c;
   letter-spacing: 0.01em;
-  line-height: 1;
   opacity: 0.85;
 }
 .nav-right {
@@ -83,6 +83,10 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   text-decoration: none;
 }
 .nav-add:hover { background: #e4dfe4; color: #38324a; }
+.nav-lang { display:flex; align-items:center; gap:4px; }
+.lang-btn { background:none; border:none; cursor:pointer; font-family:'Manrope',sans-serif; font-size:12px; font-weight:700; color:#726e7a; padding:4px 6px; border-radius:6px; transition:all .15s; }
+.lang-btn.active { color:#38324a; background:#f0edf0; }
+.lang-sep { color:#b0a8b5; font-size:11px; }
 
 /* ===== HERO WITH SEARCH ===== */
 .hero {
@@ -376,8 +380,13 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
       <span class="nav-payoff">No map is ever finished.</span>
     </a>
     <div class="nav-right">
-      <span class="nav-counter"><span id="count-done">0</span> / <span id="count-total">0</span> fatti</span>
-      <a href="admin/index.html" class="nav-add">+ Aggiungi trail</a>
+      <div class="nav-lang">
+        <button class="lang-btn active" id="lang-it" onclick="setLang('it')">IT</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+      </div>
+      <span class="nav-counter" data-i18n-template="counter"><span id="count-done">0</span> / <span id="count-total">0</span> fatti</span>
+      <a href="admin/index.html" class="nav-add" data-i18n="nav-add">+ Aggiungi trail</a>
     </div>
   </nav>
 
@@ -410,7 +419,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 
   <!-- FOOTER -->
   <footer class="footer">
-    Every Single Trail — ogni sentiero merita di essere ricordato
+    Every Single Trail — No map is ever finished.
   </footer>
 </div>
 
@@ -727,6 +736,62 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+/* ===== I18N / LANG TOGGLE ===== */
+const TRANSLATIONS = {
+  en: {
+    'filter-region': 'Region',
+    'filter-difficulty': 'Difficulty',
+    'filter-activity': 'Activity',
+    'filter-season': 'Season',
+    'filter-rating': 'Min rating',
+    'filter-reset': '↩ Clear filters',
+    'counter-suffix': 'done',
+    'nav-add': '+ Add trail',
+  },
+  it: {
+    'filter-region': 'Regione',
+    'filter-difficulty': 'Difficoltà',
+    'filter-activity': 'Attività',
+    'filter-season': 'Stagione',
+    'filter-rating': 'Rating minimo',
+    'filter-reset': '↩ Azzera filtri',
+    'counter-suffix': 'fatti',
+    'nav-add': '+ Aggiungi trail',
+  }
+};
+
+function setLang(lang) {
+  localStorage.setItem('est-lang', lang);
+  // Toggle active state
+  const btnIt = document.getElementById('lang-it');
+  const btnEn = document.getElementById('lang-en');
+  if (btnIt) btnIt.classList.toggle('active', lang === 'it');
+  if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+  // Translate static elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+      el.textContent = TRANSLATIONS[lang][key];
+    }
+  });
+  // Update counter suffix text node
+  const counter = document.querySelector('.nav-counter');
+  if (counter) {
+    const spans = counter.querySelectorAll('span');
+    const done = spans[0] ? spans[0].textContent : '0';
+    const total = spans[1] ? spans[1].textContent : '0';
+    const suffix = (TRANSLATIONS[lang] || TRANSLATIONS['it'])['counter-suffix'];
+    counter.innerHTML = '<span id="count-done">' + done + '</span> / <span id="count-total">' + total + '</span> ' + suffix;
+  }
+}
+
+// Restore language on load
+(function() {
+  const saved = localStorage.getItem('est-lang') || 'it';
+  document.addEventListener('DOMContentLoaded', function() { setLang(saved); });
+})();
+
 </script>
 </body>
 </html>
