@@ -193,22 +193,6 @@ new L.GPX('https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/couma
   async:true,
   polyline_options:{color:'#c17b8c',weight:3.5,opacity:0.9},
   marker_options:{startIconUrl:null,endIconUrl:null,shadowUrl:null,wptIconUrls:{'':null}}
-  /* Pagine interne — riduci altezze su mobile */
-  .cover-hero { height: 220px !important; }
-  #map-hero { height: 300px !important; }
-  .map-section { padding: 0 0 0 !important; margin-top: 0 !important; }
-  .map-section-inner { border-radius: 0 !important; }
-  .trail-header { padding: 20px 16px 14px !important; }
-  .trail-header-title { font-size: 26px !important; }
-  .stats-bar { padding: 12px 16px !important; flex-wrap: wrap; gap: 8px; }
-  .elevation-section { padding: 20px 16px !important; }
-  .gallery-section { padding: 20px 16px !important; }
-  .trail-body { flex-direction: column; padding: 20px 16px !important; gap: 20px !important; }
-  .trail-body-right { width: 100% !important; }
-  .footer-nav { padding: 16px !important; }
-  .cover-hero-inner { padding: 20px 16px !important; }
-  .cover-hero-title { font-size: 24px !important; }
-  .section-text { font-size: 15px !important; }
 
 }).on('loaded',function(e){map.fitBounds(e.target.getBounds(),{padding:[30,30]});}).addTo(map);
 
