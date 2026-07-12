@@ -499,7 +499,7 @@ function renderCard(t) {
   const diff = (t.classification || {}).difficulty || '';
 
   return `
-  <a class="trail-card" href="trail.html#${t.id}">
+  <a class="trail-card" href="trails/${t.id}/">
     <div class="trail-card-cover">
       ${coverHtml}
       <div class="trail-card-badge ${isDone ? 'badge-done' : 'badge-todo'}">
@@ -543,7 +543,7 @@ function renderTooltip(t) {
         <span>${fmtDist(track.distance_km)}</span>
         <span style="color:#c17b8c">${fmtGain(track.elevation_gain)}</span>
       </div>
-      <a href="trail.html#${t.id}" class="map-tooltip-btn">Scopri →</a>
+      <a href="trails/${t.id}/" class="map-tooltip-btn">Scopri →</a>
     </div>
   </div>`;
 }
@@ -601,7 +601,7 @@ function renderMap(trails) {
         // click on track → go to trail page
         e.target.getLayers().forEach(layer => {
           if (layer.on) {
-            layer.on('click', () => { window.location.href = 'trail.html#' + t.id; });
+            layer.on('click', () => { window.location.href = 'trails/' + t.id + '/'; });
           }
         });
       });
