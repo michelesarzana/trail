@@ -930,10 +930,10 @@ function renderPage(trail, allTrails) {
         ${coordsHtml}
 
         <!-- Links -->
-        ${linkPills || otherLink ? `
+        ${linkPills || otherLink || gpxDownload ? `
           <div class="sidebar-card">
             <div class="sidebar-card-title" data-i18n="sidebar-links">Link esterni</div>
-            ${linkPills}${otherLink}
+            ${linkPills}${otherLink}${gpxDownload}
           </div>` : ''}
       </div>
     </div>
