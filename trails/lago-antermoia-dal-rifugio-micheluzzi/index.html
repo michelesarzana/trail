@@ -959,7 +959,9 @@ function renderNotFound(id) {
 
 /* ===== INIT ===== */
 async function init() {
-  const id = window.location.hash.replace('#', '').trim();
+  // Static page: get trail id from URL path (e.g. /trails/lago-antermoia-.../)
+  const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
+  const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
   const allTrails = await loadTrails();
 
   if (!id || allTrails.length === 0) {
