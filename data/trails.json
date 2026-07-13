@@ -109,7 +109,8 @@
         "surface": [
           "terra",
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
       },
       "classification": {
         "difficulty": "T3",
@@ -263,7 +264,8 @@
         "surface": [
           "terra",
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
       },
       "classification": {
         "difficulty": "T3",
