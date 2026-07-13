@@ -582,10 +582,14 @@ function boolLabel(v) {
 
 /* ===== LOAD TRAILS ===== */
 async function loadTrails() {
+  // Static description patch for lago-antermoia-dal-rifugio-micheluzzi
+  const __descPatch = {'lago-antermoia-dal-rifugio-micheluzzi': "Lago Antermoia dal Rifugio Micheluzzi \u2014 Trekking in Val di Fassa\n\nCi sono trail che iniziano ancora prima di mettere il primo piede sul sentiero.\n\nIl Rifugio Micheluzzi \u00e8 il punto di partenza \u2014 e ci si arriva comodamente in van da Campitello di Fassa, 10\u20ac a tratta. Un trasferimento che consiglio senza riserve: il sentiero diretto dal paese alla Val Duron esiste, ma toglie energie che preferisco conservare per quello che viene dopo.\n\nLa salita. Dal rifugio imbocco la variante alta verso la Val di Dona \u2014 ed \u00e8 questa la prima scelta che fa la differenza. Il sentiero classico porta in valle, ma la variante ti porta *sopra* la valle: ad un certo punto ti ritrovi a guardare dall'alto tutta la Val di Dona che si distende sotto di te, con le Dolomiti attorno che fanno quello che sanno fare meglio. Vale il fiato speso in pi\u00f9.\n\nLa salita al Passo di Dona segue poi il tracciato tradizionale. 11,9 km totali, +906 m di dislivello, quota massima 2.522 m. L'ultimo strappo prima del passo \u00e8 quello che ti consuma \u2014 salita secca, senza pausa \u2014 ma poi succede una cosa: il passo finisce, e davanti a te appare il Lago Antermoia. Blu intenso, immobile, circondato da roccia rossa. Uno di quei momenti in cui ti fermi e basta.\n\nLa discesa. Si scende dal Passo delle Ciaregole, un tracciato diverso dall'andata che regala scorci nuovi e ti riporta al Micheluzzi con le gambe stanche nel modo giusto. Da l\u00ec la scelta: van di ritorno o sentiero a piedi fino a Campitello. Se le gambe lo permettono, il sentiero ha il suo perch\u00e9 \u2014 ma dopo 5 ore e 16 minuti in quota nessuno vi giudicher\u00e0 per aver aspettato il van.\n\nUn anello perfetto. Il tipo di trail che si ricorda."};
   try {
     const r = await fetch(DB_URL);
     const data = await r.json();
-    return data.trails || [];
+    const trails = data.trails || [];
+    trails.forEach(t => { if (__descPatch[t.id] !== undefined && !t.description) t.description = __descPatch[t.id]; });
+    return trails;
   } catch(e) {
     console.error('Failed to load trails:', e);
     return [];
