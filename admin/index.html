@@ -1602,7 +1602,6 @@ function resetForm() {
   document.getElementById('f-title').value = '';
   document.getElementById('f-desc').value = '';
   document.getElementById('f-status').value = 'todo';
-  document.getElementById('f-date').value = '';
   document.getElementById('f-country').value = 'Italia';
   document.getElementById('f-country-code').value = 'IT';
   document.getElementById('f-region').value = '';
@@ -1660,7 +1659,6 @@ function populateForm(t) {
   document.getElementById('f-title').value = t.title || '';
   document.getElementById('f-desc').value = t.description || '';
   document.getElementById('f-status').value = t.status || 'todo';
-  document.getElementById('f-date').value = t.completed_at || '';
   setRating(t.rating || 0);
   // location
   const loc = t.location || {};
@@ -1748,7 +1746,6 @@ function collectForm() {
     id, title, status,
     description: document.getElementById('f-desc').value.trim() || null,
     rating: currentRating,
-    completed_at: document.getElementById('f-date').value || null,
     cover_image: coverUrl || null,
     location: {
       country: document.getElementById('f-country').value.trim() || 'Italia',
