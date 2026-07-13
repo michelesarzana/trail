@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Database trail personale di Michele Sarzana",
     "schema": "./schema/trail.schema.json",
-    "last_updated": "2026-07-12"
+    "last_updated": "2026-07-13"
   },
   "trails": [
     {
@@ -237,7 +237,7 @@
       "id": "coumarial-rifugio-barma",
       "title": "Coumarial < > Rifugio Barma",
       "status": "done",
-      "description": "L’Alta Via n. 1 della Valle d’Aosta, o Alta Via dei Giganti, è un itinerario escursionistico dallo scenario incomparabile, che si sviluppa ai piedi dei massicci più elevati d’Europa:. il Monte Rosa, il Cervino e il Monte Bianco. L’Alta Via n. 1 collega Donnas a Courmayeur. Il Rifugio Barma rappresenta un punto d’appoggio prezioso per chi intraprende quest’esperienza integralmente o per un tratto.\n\nDal rifugio si possono fare numerose escursioni di difficoltà e lunghezza differenti, percorsi ad anello, colli e cime da raggiungere, tratti attrezzati, ferrate e non ultime le falesie di arrampicata. Il rifugio sarà un appoggio sicuro e accogliente dove ricevere indicazioni e supporto.\n\nLeggermente tecnico il percorso all'andata, difficile la salita finale non tanto per tecnicità quanto per dislivello. Molto ben segnato e su strada carrozzabile il ritorno.",
+      "description": "Coumarial → Rifugio Barma — Alta Via n. 1\n\nC'è una categoria di trail che non si fa solo con le gambe. Si fa con gli occhi spalancati.\n\nL'Alta Via n. 1 della Valle d'Aosta — chiamata anche Alta Via dei Giganti — è uno di quegli itinerari che ti ricordano perché esiste l'escursionismo. Si sviluppa ai piedi dei tre massicci più alti d'Europa: il Monte Rosa, il Cervino, il Monte Bianco. Trecentosettanta chilometri da Donnas a Courmayeur, ai piedi di pareti che sembrano non finire mai. Il Rifugio Barma è uno dei punti di sosta di questa traversata leggendaria — e per un giorno è stato anche il mio.\n\nIl percorso. 13,5 km, +1.009 m di dislivello positivo, quota massima 2.065 m. Cinque ore e ventotto minuti. Non è il trail più lungo che abbia fatto, ma il dislivello si fa sentire tutto — soprattutto nel tratto finale, dove la salita non chiede tecnica ma resistenza. Passo dopo passo, senza scorciatoie.\n\nIl tragitto di andata è leggermente tecnico: qualche tratto richiede attenzione, il terreno cambia, il bosco lascia spazio ai pascoli e poi alla pietraia. Il ritorno, invece, è su strada carrozzabile, ben segnato: il tipo di discesa in cui puoi finalmente alzare la testa e guardarti intorno senza dover controllare dove metti i piedi.\n\nIl rifugio. Arrivare al Barma dopo quella salita ha il sapore delle cose guadagnate. Non è solo un posto dove mangiare e riposarsi — è un campo base da cui si aprono altre possibilità: percorsi ad anello, colli, cime, tratti attrezzati, ferrate, persino falesie per chi vuole arrampicare. Un punto di appoggio solido, accogliente, con le persone giuste per orientarti se hai voglia di spingerti oltre.\n\nUn trail che vale ogni metro di dislivello.",
       "rating": 5,
       "completed_at": "2025-10-04",
       "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
@@ -271,8 +271,7 @@
         "surface": [
           "terra",
           "sterrato"
-        ],
-        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
+        ]
       },
       "classification": {
         "difficulty": "T3",
@@ -324,6 +323,10 @@
           {
             "filename": "o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg",
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/o63ISfSKUR-zspacv9RD2lfPiy1cs0DRV7H2ahBWMrs-1365x2048.jpg"
+          },
+          {
+            "filename": "YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365_hero.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365_hero.jpg"
           }
         ]
       }
