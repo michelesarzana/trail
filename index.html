@@ -1094,9 +1094,10 @@ function renderMap(trails) {
       markers.push(marker);
     }
 
-    // Load GPX track if available
-    if ((t.track || {}).gpx_file) {
-      const gpxUrl = GPX_BASE + t.track.gpx_file;
+    // Load GPX track if available (supporta gpx_file root e track.gpx_file)
+    const gpxFilePath = t.gpx_file || ((t.track || {}).gpx_file) || null;
+    if (gpxFilePath) {
+      const gpxUrl = gpxFilePath.startsWith('http') ? gpxFilePath : GPX_BASE + gpxFilePath;
       const gpxLayer = new L.GPX(gpxUrl, {
         async: true,
         polyline_options: {
