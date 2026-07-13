@@ -582,10 +582,14 @@ function boolLabel(v) {
 
 /* ===== LOAD TRAILS ===== */
 async function loadTrails() {
+  // Static description patch for coumarial-rifugio-barma
+  const __descPatch = {'coumarial-rifugio-barma': "Coumarial \u2192 Rifugio Barma \u2014 Alta Via n. 1\n\nC'\u00e8 una categoria di trail che non si fa solo con le gambe. Si fa con gli occhi spalancati.\n\nL'Alta Via n. 1 della Valle d'Aosta \u2014 chiamata anche Alta Via dei Giganti \u2014 \u00e8 uno di quegli itinerari che ti ricordano perch\u00e9 esiste l'escursionismo. Si sviluppa ai piedi dei tre massicci pi\u00f9 alti d'Europa: il Monte Rosa, il Cervino, il Monte Bianco. Trecentosettanta chilometri da Donnas a Courmayeur, ai piedi di pareti che sembrano non finire mai. Il Rifugio Barma \u00e8 uno dei punti di sosta di questa traversata leggendaria \u2014 e per un giorno \u00e8 stato anche il mio.\n\nIl percorso. 13,5 km, +1.009 m di dislivello positivo, quota massima 2.065 m. Cinque ore e ventotto minuti. Non \u00e8 il trail pi\u00f9 lungo che abbia fatto, ma il dislivello si fa sentire tutto \u2014 soprattutto nel tratto finale, dove la salita non chiede tecnica ma resistenza. Passo dopo passo, senza scorciatoie.\n\nIl tragitto di andata \u00e8 leggermente tecnico: qualche tratto richiede attenzione, il terreno cambia, il bosco lascia spazio ai pascoli e poi alla pietraia. Il ritorno, invece, \u00e8 su strada carrozzabile, ben segnato: il tipo di discesa in cui puoi finalmente alzare la testa e guardarti intorno senza dover controllare dove metti i piedi.\n\nIl rifugio. Arrivare al Barma dopo quella salita ha il sapore delle cose guadagnate. Non \u00e8 solo un posto dove mangiare e riposarsi \u2014 \u00e8 un campo base da cui si aprono altre possibilit\u00e0: percorsi ad anello, colli, cime, tratti attrezzati, ferrate, persino falesie per chi vuole arrampicare. Un punto di appoggio solido, accogliente, con le persone giuste per orientarti se hai voglia di spingerti oltre.\n\nUn trail che vale ogni metro di dislivello."};
   try {
     const r = await fetch(DB_URL);
     const data = await r.json();
-    return data.trails || [];
+    const trails = data.trails || [];
+    trails.forEach(t => { if (__descPatch[t.id] !== undefined && !t.description) t.description = __descPatch[t.id]; });
+    return trails;
   } catch(e) {
     console.error('Failed to load trails:', e);
     return [];
