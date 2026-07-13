@@ -627,10 +627,6 @@ input,textarea,select{font-family:inherit;font-size:14px}
                     <option value="done">✅ Done</option>
                   </select>
                 </div>
-                <div class="field">
-                  <label>Data completamento</label>
-                  <input type="date" id="f-date">
-                </div>
                 <div class="field full">
                   <label>Rating</label>
                   <div class="star-rating" id="star-rating">
@@ -1821,6 +1817,53 @@ function editTrail(id) {
   renderList();
 }
 
+
+// ── GENERATE & PUBLISH TRAIL PAGE ──────────────────────────────
+async function generateTrailPage(trail) {
+  // Fetch template
+  const tplRes = await ghGetFile('trail.html');
+  if (!tplRes.ok) throw new Error('Cannot fetch trail.html template');
+  const tplB64 = tplRes.data.content.replace(/\n/g,'');
+  const tpl = decodeURIComponent(escape(atob(tplB64)));
+
+  // Build static page: inject trail-specific <title>, <meta description>, og tags
+  // and embed the trail data as JSON for immediate render (no fetch needed)
+  const title = escHtml(trail.title) + ' — Every Single Trail';
+  const desc = (trail.description || '').slice(0, 160).replace(/"/g, '&quot;');
+  const coverUrl = (function() {
+    const med = trail.media || {};
+    if (med.cover) return med.cover;
+    if (trail.cover_image) return trail.cover_image;
+    const photos = med.photos || [];
+    if (!photos.length) return '';
+    const p0 = photos[0];
+    return typeof p0 === 'string' ? p0 : (p0.url || '');
+  })();
+  const canonicalUrl = 'https://michelesarzana.github.io/trail/trails/' + trail.id + '/';
+
+  let page = tpl
+    .replace(/<title>Trail — Every Single Trail<\/title>/,
+      '<title>' + title + '</title>')
+    .replace(/<meta name="description" content="[^"]*">/,
+      '<meta name="description" content="' + desc + '">')
+    .replace(/<\/head>/,
+      '<meta property="og:title" content="' + escHtml(trail.title) + '">' +
+      '<meta property="og:description" content="' + desc + '">' +
+      '<meta property="og:type" content="website">' +
+      '<meta property="og:url" content="' + canonicalUrl + '">' +
+      (coverUrl ? '<meta property="og:image" content="' + coverUrl + '">' : '') +
+      '<link rel="canonical" href="' + canonicalUrl + '">' +
+      '</head>');
+
+  const trailPath = 'trails/' + trail.id + '/index.html';
+  const existing = await ghGetFile(trailPath);
+  const pageSha = existing.ok ? existing.data.sha : null;
+  const pageRes = await ghPutFile(trailPath, page,
+    'publish: generate page for ' + trail.id, pageSha);
+  if (!pageRes.ok) throw new Error('Errore pubblicazione pagina: ' + (pageRes.data.message || ''));
+  return pageRes;
+}
+
 // ── SAVE ───────────────────────────────────────────────────────
 async function saveTrail() {
   const trail = collectForm();
@@ -1877,6 +1920,14 @@ async function saveTrail() {
     updateMapMarkers();
     updateDashboardBar();
     showToast('✓ Trail salvato!', 'success');
+    // Genera e pubblica la pagina statica
+    try {
+      showToast('⏳ Pubblicazione pagina…', 'info');
+      await generateTrailPage(trail);
+      showToast('🚀 Pagina pubblicata!', 'success');
+    } catch(pubErr) {
+      showToast('⚠️ Salvato ma errore pubblicazione: ' + pubErr.message, 'error');
+    }
   } catch(e) {
     showToast('Errore: ' + e.message, 'error');
   } finally {
