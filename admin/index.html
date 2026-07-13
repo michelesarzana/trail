@@ -920,7 +920,7 @@ input,textarea,select{font-family:inherit;font-size:14px}
                 <div class="form-grid">
                   <div class="field">
                     <label>Data</label>
-                    <input type="date" id="lb-date">
+                    <input type="text" id="lb-date" placeholder="gg/mm/aaaa" maxlength="10" inputmode="numeric">
                   </div>
                   <div class="field">
                     <label>Durata (minuti)</label>
@@ -2167,9 +2167,19 @@ function fmtDurLb(min) {
   const h = Math.floor(min/60), m = min%60;
   return h>0 ? `${h}h${m>0?' '+m+'min':''}` : `${m}min`;
 }
+function parseLbDate(raw) {
+  // Accepts gg/mm/aaaa or aaaa-mm-gg
+  if (!raw) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw; // already ISO
+  const p = raw.split('/');
+  if (p.length === 3 && p[2].length === 4) return p[2] + '-' + p[1].padStart(2,'0') + '-' + p[0].padStart(2,'0');
+  return raw;
+}
 function addOrUpdateLogEntry() {
-  const date = document.getElementById('lb-date').value;
-  if (!date) { alert('Inserisci la data'); return; }
+  const rawDate = document.getElementById('lb-date').value.trim();
+  if (!rawDate) { alert('Inserisci la data'); return; }
+  const date = parseLbDate(rawDate);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) { alert('Formato data non valido. Usa gg/mm/aaaa'); return; }
   const entry = {
     date,
     duration_min: parseInt(document.getElementById('lb-duration').value)||null,
@@ -2184,7 +2194,14 @@ function addOrUpdateLogEntry() {
 function editLogEntry(i) {
   editingLogIdx = i;
   const e = logEntries[i];
-  document.getElementById('lb-date').value = e.date||'';
+  // Converti da yyyy-mm-dd → gg/mm/aaaa per visualizzazione
+  const isoDate = e.date || '';
+  let dispDate = isoDate;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) {
+    const [y,m,g] = isoDate.split('-');
+    dispDate = g + '/' + m + '/' + y;
+  }
+  document.getElementById('lb-date').value = dispDate;
   document.getElementById('lb-duration').value = e.duration_min||'';
   document.getElementById('lb-notes').value = e.notes||'';
   setLbRating(e.rating||0);
