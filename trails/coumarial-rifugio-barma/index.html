@@ -472,11 +472,17 @@ a:hover { color: #c17b8c; }
   z-index: 2;
 }
 </style>
-<meta property="og:title" content="Coumarial &lt; &gt; Rifugio Barma"><meta property="og:description" content="Coumarial → Rifugio Barma — Alta Via n. 1
+<meta property="og:title" content="Coumarial &lt; &gt; Rifugio Barma">
+<meta property="og:description" content="Coumarial → Rifugio Barma — Alta Via n. 1
 
 C'è una categoria di trail che non si fa solo con le gambe. Si fa con gli occhi spalancati.
 
-L'Alta Via n. 1 della Va"><meta property="og:type" content="website"><meta property="og:url" content="https://michelesarzana.github.io/trail/trails/coumarial-rifugio-barma/"><meta property="og:image" content="https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg"><link rel="canonical" href="https://michelesarzana.github.io/trail/trails/coumarial-rifugio-barma/"></head>
+L'Alta Via n. 1 della Va">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://michelesarzana.github.io/trail/trails/coumarial-rifugio-barma/">
+<meta property="og:image" content="https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365_hero.jpg">
+<link rel="canonical" href="https://michelesarzana.github.io/trail/trails/coumarial-rifugio-barma/">
+</head>
 <body>
 <div class="shell" id="app">
   <div style="padding:80px 48px;text-align:center;color:#726e7a;font-size:16px;">Caricamento…</div>
@@ -979,7 +985,6 @@ function renderNotFound(id) {
 
 /* ===== INIT ===== */
 async function init() {
-  // In a static page, id comes from the URL path (e.g. /trails/lago-antermoia-.../)
   const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
   const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
   const allTrails = await loadTrails();
