@@ -526,6 +526,12 @@ function fmtDist(km) { return km != null ? km + ' km' : '—'; }
 function fmtGain(m) { return m != null ? '+' + m + ' m' : '—'; }
 function fmtLoss(m) { return m != null ? '−' + m + ' m' : '—'; }
 function fmtElev(m) { return m != null ? m + ' m' : '—'; }
+function fmtDateIt(d) {
+  if (!d) return '';
+  const parts = d.split('-');
+  if (parts.length === 3) return parts[2] + '/' + parts[1] + '/' + parts[0];
+  return d;
+}
 function fmtDur(min) {
   if (!min) return '—';
   const h = Math.floor(min / 60), m = min % 60;
@@ -812,7 +818,7 @@ function renderPage(trail, allTrails) {
     if (logArr.length > 0) {
       logbookHtml = logArr.map(e => `
         <div class="logbook-entry">
-          <div class="logbook-date">${escHtml(e.date || '')}</div>
+          <div class="logbook-date">${fmtDateIt(e.date)}</div>
           ${e.notes ? `<div class="logbook-notes">${escHtml(e.notes)}</div>` : ''}
           <div class="logbook-meta">
             ${e.rating ? `<span>⭐ ${e.rating}/5</span>` : ''}
@@ -959,7 +965,6 @@ function renderNotFound(id) {
 
 /* ===== INIT ===== */
 async function init() {
-  // Static page: get trail id from URL path (e.g. /trails/lago-antermoia-.../)
   const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
   const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
   const allTrails = await loadTrails();
