@@ -472,17 +472,11 @@ a:hover { color: #c17b8c; }
   z-index: 2;
 }
 </style>
-<meta property="og:title" content="Lago Antermoia dal Rifugio Micheluzzi">
-<meta property="og:description" content="Lago Antermoia dal Rifugio Micheluzzi — Trekking in Val di Fassa
+<meta property="og:title" content="Lago Antermoia dal Rifugio Micheluzzi"><meta property="og:description" content="Lago Antermoia dal Rifugio Micheluzzi — Trekking in Val di Fassa
 
 Ci sono trail che iniziano ancora prima di mettere il primo piede sul sentiero.
 
-Il Rifugio Mi">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://michelesarzana.github.io/trail/trails/lago-antermoia-dal-rifugio-micheluzzi/">
-<meta property="og:image" content="https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048.jpg">
-<link rel="canonical" href="https://michelesarzana.github.io/trail/trails/lago-antermoia-dal-rifugio-micheluzzi/">
-</head>
+Il Rifugio Mi"><meta property="og:type" content="website"><meta property="og:url" content="https://michelesarzana.github.io/trail/trails/lago-antermoia-dal-rifugio-micheluzzi/"><meta property="og:image" content="https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048 (1).jpg"><link rel="canonical" href="https://michelesarzana.github.io/trail/trails/lago-antermoia-dal-rifugio-micheluzzi/"></head>
 <body>
 <div class="shell" id="app">
   <div style="padding:80px 48px;text-align:center;color:#726e7a;font-size:16px;">Caricamento…</div>
@@ -985,6 +979,7 @@ function renderNotFound(id) {
 
 /* ===== INIT ===== */
 async function init() {
+  // In a static page, id comes from the URL path (e.g. /trails/lago-antermoia-.../)
   const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
   const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
   const allTrails = await loadTrails();
