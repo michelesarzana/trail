@@ -1823,8 +1823,6 @@ async function generateTrailPage(trail) {
   const tplB64 = tplRes.data.content.replace(/\n/g,'');
   const tpl = decodeURIComponent(escape(atob(tplB64)));
 
-  // Build static page: inject trail-specific <title>, <meta description>, og tags
-  // and embed the trail data as JSON for immediate render (no fetch needed)
   const title = escHtml(trail.title) + ' — Every Single Trail';
   const desc = (trail.description || '').slice(0, 160).replace(/"/g, '&quot;');
   const coverUrl = (function() {
@@ -1838,19 +1836,54 @@ async function generateTrailPage(trail) {
   })();
   const canonicalUrl = 'https://michelesarzana.github.io/trail/trails/' + trail.id + '/';
 
-  let page = tpl
-    .replace(/<title>Trail — Every Single Trail<\/title>/,
-      '<title>' + title + '</title>')
-    .replace(/<meta name="description" content="[^"]*">/,
-      '<meta name="description" content="' + desc + '">')
-    .replace(/<\/head>/,
-      '<meta property="og:title" content="' + escHtml(trail.title) + '">' +
-      '<meta property="og:description" content="' + desc + '">' +
-      '<meta property="og:type" content="website">' +
-      '<meta property="og:url" content="' + canonicalUrl + '">' +
-      (coverUrl ? '<meta property="og:image" content="' + coverUrl + '">' : '') +
-      '<link rel="canonical" href="' + canonicalUrl + '">' +
-      '</head>');
+  let page = tpl;
+
+  // 1. Patch <title>
+  page = page.replace(/<title>Trail — Every Single Trail<\/title>/, '<title>' + title + '</title>');
+
+  // 2. Patch <meta description>
+  page = page.replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="' + desc + '">');
+
+  // 3. Inject og: / canonical tags before </head>
+  page = page.replace('</head>',
+    '<meta property="og:title" content="' + escHtml(trail.title) + '">' +
+    '<meta property="og:description" content="' + desc + '">' +
+    '<meta property="og:type" content="website">' +
+    '<meta property="og:url" content="' + canonicalUrl + '">' +
+    (coverUrl ? '<meta property="og:image" content="' + coverUrl + '">' : '') +
+    '<link rel="canonical" href="' + canonicalUrl + '">' +
+    '</head>');
+
+  // 4. Remove the root-level redirect block (breaks inside trails/ subdirs)
+  const redirectBlock = `/* ===== REDIRECT TO STATIC PAGE ===== */
+(function() {
+  const id = window.location.hash.replace('#', '').trim();
+  if (id) {
+    window.location.replace('trails/' + id + '/');
+  }
+})();`;
+  page = page.split(redirectBlock).join('');
+
+  // 5. Patch navigateTo to use relative sibling paths (../other-trail/)
+  page = page.replace(
+    'function navigateTo(id) {\n  window.location.hash = id;\n  window.location.reload();\n}',
+    'function navigateTo(id) {\n  window.location.href = \'../' + '\' + id + \'/\';\n}'
+  );
+  // Also handle the minified/compact version
+  page = page.replace(
+    'function navigateTo(id){window.location.hash=id;window.location.reload();}',
+    'function navigateTo(id){window.location.href=\'../\'+id+\'/\';}'
+  );
+
+  // 6. Patch init() to read trail id from URL path instead of hash
+  //    Path is: /trail/trails/<id>/  → last non-empty segment before trailing /
+  const OLD_INIT = `async function init() {
+  const id = window.location.hash.replace('#', '').trim();`;
+  const NEW_INIT = `async function init() {
+  // In a static page, id comes from the URL path (e.g. /trails/lago-antermoia-.../)
+  const pathParts = window.location.pathname.replace(/\\/+$/, '').split('/');
+  const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();`;
+  page = page.replace(OLD_INIT, NEW_INIT);
 
   const trailPath = 'trails/' + trail.id + '/index.html';
   const existing = await ghGetFile(trailPath);
