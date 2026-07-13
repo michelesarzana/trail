@@ -232,7 +232,6 @@
       "status": "done",
       "description": "Coumarial → Rifugio Barma — Alta Via n. 1\n\nC'è una categoria di trail che non si fa solo con le gambe. Si fa con gli occhi spalancati.\n\nL'Alta Via n. 1 della Valle d'Aosta — chiamata anche Alta Via dei Giganti — è uno di quegli itinerari che ti ricordano perché esiste l'escursionismo. Si sviluppa ai piedi dei tre massicci più alti d'Europa: il Monte Rosa, il Cervino, il Monte Bianco. Trecentosettanta chilometri da Donnas a Courmayeur, ai piedi di pareti che sembrano non finire mai. Il Rifugio Barma è uno dei punti di sosta di questa traversata leggendaria — e per un giorno è stato anche il mio.\n\nIl percorso. 13,5 km, +1.009 m di dislivello positivo, quota massima 2.065 m. Cinque ore e ventotto minuti. Non è il trail più lungo che abbia fatto, ma il dislivello si fa sentire tutto — soprattutto nel tratto finale, dove la salita non chiede tecnica ma resistenza. Passo dopo passo, senza scorciatoie.\n\nIl tragitto di andata è leggermente tecnico: qualche tratto richiede attenzione, il terreno cambia, il bosco lascia spazio ai pascoli e poi alla pietraia. Il ritorno, invece, è su strada carrozzabile, ben segnato: il tipo di discesa in cui puoi finalmente alzare la testa e guardarti intorno senza dover controllare dove metti i piedi.\n\nIl rifugio. Arrivare al Barma dopo quella salita ha il sapore delle cose guadagnate. Non è solo un posto dove mangiare e riposarsi — è un campo base da cui si aprono altre possibilità: percorsi ad anello, colli, cime, tratti attrezzati, ferrate, persino falesie per chi vuole arrampicare. Un punto di appoggio solido, accogliente, con le persone giuste per orientarti se hai voglia di spingerti oltre.\n\nUn trail che vale ogni metro di dislivello.",
       "rating": 5,
-      "completed_at": "2025-10-04",
       "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
       "location": {
         "country": "Italia",
@@ -264,8 +263,7 @@
         "surface": [
           "terra",
           "sterrato"
-        ],
-        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
+        ]
       },
       "classification": {
         "difficulty": "T3",
@@ -298,7 +296,14 @@
         "wikiloc": null,
         "other": null
       },
-      "log": [],
+      "log": [
+        {
+          "date": "2025-10-04",
+          "duration_min": 381,
+          "rating": 5,
+          "notes": null
+        }
+      ],
       "media": {
         "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
         "photos": [
