@@ -578,7 +578,7 @@ async function loadTrails() {
 
 /* ===== ELEVATION CHART FROM GPX ===== */
 async function renderElevationChart(gpxFile) {
-  const gpxUrl = GPX_BASE + gpxFile;
+  const gpxUrl = gpxFile.startsWith('http') ? gpxFile : GPX_BASE + gpxFile;
   let xml;
   try {
     const resp = await fetch(gpxUrl);
@@ -712,9 +712,10 @@ function renderMapHero(trail) {
     L.marker([start.lat, start.lng || start.lon], { icon: markerIcon }).addTo(map);
   }
 
-  // GPX track
-  if ((trail.track || {}).gpx_file) {
-    const gpxUrl = GPX_BASE + trail.track.gpx_file;
+  // GPX track — supporta sia trail.gpx_file (root) che trail.track.gpx_file
+  const gpxFilePath = trail.gpx_file || ((trail.track || {}).gpx_file) || null;
+  if (gpxFilePath) {
+    const gpxUrl = gpxFilePath.startsWith('http') ? gpxFilePath : GPX_BASE + gpxFilePath;
     const gpxLayer = new L.GPX(gpxUrl, {
       async: true,
       polyline_options: { color: '#c17b8c', weight: 4, opacity: 0.9 },
@@ -778,6 +779,7 @@ function renderPage(trail, allTrails) {
     `<a href="${escHtml(links[k])}" class="link-pill" target="_blank" rel="noopener">${linkIcons[k] || '↗ '}${linkLabels[k]}</a>`
   ).join('');
   const otherLink = links.other ? `<a href="${escHtml(links.other)}" class="link-pill" target="_blank" rel="noopener">🔗 Link</a>` : '';
+  const gpxDownload = trail.gpx_file ? `<a href="${escHtml(trail.gpx_file)}" class="link-pill" download>⬇️ GPX</a>` : '';
 
   // Coords
   let coordsHtml = '';
@@ -838,7 +840,7 @@ function renderPage(trail, allTrails) {
   }
 
   // Elevation chart section — only if GPX available
-  const hasGpx = !!(track.gpx_file);
+  const hasGpx = !!(trail.gpx_file || track.gpx_file);
   const elevationSection = hasGpx ? `
     <section class="elevation-section">
       <div class="section-title" data-i18n="section-elevation">Altimetria</div>
@@ -950,7 +952,7 @@ function renderPage(trail, allTrails) {
 
   // Init elevation chart
   if (hasGpx) {
-    renderElevationChart(track.gpx_file);
+    renderElevationChart(trail.gpx_file || track.gpx_file);
   }
 }
 
