@@ -286,6 +286,14 @@ a:hover { color: #c17b8c; }
   color: #726e7a;
   margin-bottom: 12px;
 }
+.trail-description-full {
+  padding: 32px 48px;
+  border-bottom: 1px solid rgba(46,43,56,0.07);
+}
+.trail-description-full .section-heading { margin-bottom: 12px; }
+@media (max-width: 900px) {
+  .trail-description-full { padding: 24px 20px; }
+}
 .section-text {
   font-size: 17px;
   line-height: 1.65;
@@ -759,10 +767,17 @@ function renderPage(trail, allTrails) {
   ).join('');
 
   // Links
+  const linkIcons = {
+    strava: '<img src="https://cdn.simpleicons.org/strava/FC4C02" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px" alt="Strava">',
+    komoot: '<img src="https://cdn.simpleicons.org/komoot/6AA127" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px" alt="Komoot">',
+    alltrails: '<img src="https://cdn.simpleicons.org/alltrails/4CAF50" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px" alt="AllTrails">',
+    wikiloc: '🗺️ ',
+  };
+  const linkLabels = { strava:'Strava', komoot:'Komoot', alltrails:'AllTrails', wikiloc:'Wikiloc' };
   const linkPills = ['strava','komoot','alltrails','wikiloc'].filter(k => links[k]).map(k =>
-    `<a href="${escHtml(links[k])}" class="link-pill" target="_blank" rel="noopener">↗ ${k.charAt(0).toUpperCase()+k.slice(1)}</a>`
+    `<a href="${escHtml(links[k])}" class="link-pill" target="_blank" rel="noopener">${linkIcons[k] || '↗ '}${linkLabels[k]}</a>`
   ).join('');
-  const otherLink = links.other ? `<a href="${escHtml(links.other)}" class="link-pill" target="_blank" rel="noopener">↗ Link</a>` : '';
+  const otherLink = links.other ? `<a href="${escHtml(links.other)}" class="link-pill" target="_blank" rel="noopener">🔗 Link</a>` : '';
 
   // Coords
   let coordsHtml = '';
@@ -836,8 +851,8 @@ function renderPage(trail, allTrails) {
   app.innerHTML = `
     <!-- NAV -->
     <nav class="nav">
-      <a href="index.html" class="nav-back" data-i18n="nav-back">← Tutti i trail</a>
-      <a href="index.html" class="nav-wordmark">Every Single Trail<span class="nav-payoff">No map is ever finished.</span></a>
+      <a href="https://michelesarzana.github.io/trail/" class="nav-back" data-i18n="nav-back">← Tutti i trail</a>
+      <a href="https://michelesarzana.github.io/trail/" class="nav-wordmark">Every Single Trail<span class="nav-payoff">No map is ever finished.</span></a>
     </nav>
 
     <!-- COVER HERO or GRADIENT HERO -->
@@ -867,12 +882,17 @@ function renderPage(trail, allTrails) {
     <!-- GALLERY -->
     ${galleryHtml}
 
+    <!-- DESCRIPTION (full width) -->
+    ${trail.description ? `
+    <div class="trail-description-full">
+      <div class="section-heading" data-i18n="section-description">Descrizione</div>
+      <p class="section-text" style="white-space:pre-line;margin:0">${escHtml(trail.description)}</p>
+    </div>` : ''}
+
     <!-- BODY CONTENT -->
     <div class="trail-body">
       <div class="trail-body-main">
-        ${trail.description ? `
-          <div class="section-heading" data-i18n="section-description">Descrizione</div>
-          <p class="section-text" style="white-space:pre-line;margin:0 0 32px">${escHtml(trail.description)}</p>` : ''}
+
 
         ${actTypes.length > 0 || seasons.length > 0 || cls.difficulty ? `
           <div class="section-heading" style="margin-top:24px">Classificazione</div>
@@ -897,9 +917,9 @@ function renderPage(trail, allTrails) {
         <div class="sidebar-card">
           <div class="sidebar-card-title" data-i18n="sidebar-logistics">Logistica</div>
           <div class="info-grid">
-            <div class="info-row"><span class="info-key" data-i18n="key-dog">Dog friendly</span><span class="info-val">${boolLabel(log.dog_friendly)}</span></div>
-            <div class="info-row"><span class="info-key" data-i18n="key-transport">Trasporto pub.</span><span class="info-val">${boolLabel(log.public_transport)}</span></div>
-            <div class="info-row"><span class="info-key" data-i18n="key-water">Acqua</span><span class="info-val">${boolLabel(log.water_available)}</span></div>
+            <div class="info-row"><span class="info-key" data-i18n="key-dog">🐕 Dog friendly</span><span class="info-val">${boolLabel(log.dog_friendly)}</span></div>
+            <div class="info-row"><span class="info-key" data-i18n="key-transport">🚌 Trasporto pub.</span><span class="info-val">${boolLabel(log.public_transport)}</span></div>
+            <div class="info-row"><span class="info-key" data-i18n="key-water">💧 Acqua</span><span class="info-val">${boolLabel(log.water_available)}</span></div>
           </div>
           ${log.parking_notes ? `<p style="font-size:13px;color:#726e7a;margin:10px 0 0">${escHtml(log.parking_notes)}</p>` : ''}
         </div>
@@ -920,7 +940,7 @@ function renderPage(trail, allTrails) {
     <div class="footer-nav">
       <button class="footer-nav-btn" onclick="navigateTo('${prev.id}')">← ${escHtml(prev.title)}</button>
       <div class="footer-nav-center">
-        <a href="index.html" style="color:#726e7a;font-weight:700;font-size:13px" data-i18n="footer-all">↑ Tutti i trail</a>
+        <a href="https://michelesarzana.github.io/trail/" style="color:#726e7a;font-weight:700;font-size:13px" data-i18n="footer-all">↑ Tutti i trail</a>
       </div>
       <button class="footer-nav-btn" onclick="navigateTo('${next.id}')">${escHtml(next.title)} →</button>
     </div>`;
@@ -944,8 +964,8 @@ function navigateTo(id) {
 function renderNotFound(id) {
   document.getElementById('app').innerHTML = `
     <nav class="nav">
-      <a href="index.html" class="nav-back" data-i18n="nav-back">← Tutti i trail</a>
-      <a href="index.html" class="nav-wordmark">Every Single Trail<span class="nav-payoff">No map is ever finished.</span></a>
+      <a href="https://michelesarzana.github.io/trail/" class="nav-back" data-i18n="nav-back">← Tutti i trail</a>
+      <a href="https://michelesarzana.github.io/trail/" class="nav-wordmark">Every Single Trail<span class="nav-payoff">No map is ever finished.</span></a>
       <div></div>
     </nav>
     <div class="not-found">
