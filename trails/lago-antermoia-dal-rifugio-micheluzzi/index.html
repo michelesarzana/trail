@@ -496,13 +496,7 @@ Il Rifugio Mi">
 const DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
 const GPX_BASE = 'https://raw.githubusercontent.com/michelesarzana/trail/main/';
 
-/* ===== REDIRECT TO STATIC PAGE ===== */
-(function() {
-  const id = window.location.hash.replace('#', '').trim();
-  if (id) {
-    window.location.replace('trails/' + id + '/');
-  }
-})();
+
 
 /* ===== LIGHTBOX STATE ===== */
 let lbPhotos = [];
@@ -944,8 +938,7 @@ function renderPage(trail, allTrails) {
 
 /* ===== NAVIGATION ===== */
 function navigateTo(id) {
-  window.location.hash = id;
-  window.location.reload();
+  window.location.href = '../' + id + '/';
 }
 
 /* ===== RENDER NOT FOUND ===== */
