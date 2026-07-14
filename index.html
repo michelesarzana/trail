@@ -56,10 +56,12 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .nav-payoff {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 22px;
+  font-size: 16px;
   color: #c17b8c;
   letter-spacing: 0.01em;
   opacity: 0.85;
+  text-align: center;
+  white-space: nowrap;
 }
 .nav-right {
   display: flex;
@@ -272,10 +274,9 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   /* Shell: no forced full-height on mobile */
   .shell { min-height: 0; }
 
-  .nav { padding: 12px 20px; flex-wrap: wrap; gap: 8px; }
-  .nav-wordmark-wrap { order: -1; width: 100%; justify-content: center; flex-direction: column; align-items: center; gap: 2px; }
-  .nav-wordmark { font-size: 18px; text-align: center; }
-  .nav-payoff { font-size: 13px; text-align: center; opacity: 0.85; }
+  .nav { padding: 12px 20px; }
+  .nav-wordmark { font-size: 17px; }
+  .nav-payoff { font-size: 13px; }
   .hero { padding: 24px 20px 16px; }
   .hero-brand { font-size: 26px; }
   .hero-search-input { font-size: 15px; padding: 14px 48px 14px 18px; }
@@ -351,29 +352,24 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   min-width: 0;
 }
 .search-input {
-  width: 100%; padding: 18px 54px 18px 22px;
-  font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 500;
-  background: #fff; border: 2px solid rgba(56,50,74,0.15);
-  border-radius: 16px; color: #2e2b38; outline: none;
-  box-shadow: 0 4px 20px rgba(56,50,74,0.08); transition: border-color .2s, box-shadow .2s;
+  width: 100%; padding: 10px 44px 10px 18px;
+  font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 500;
+  background: #fff; border: 1.5px solid rgba(56,50,74,0.13);
+  border-radius: 10px; color: #2e2b38; outline: none;
+  box-shadow: 0 2px 10px rgba(56,50,74,0.06); transition: border-color .2s, box-shadow .2s;
+  height: 38px; box-sizing: border-box;
 }
 .search-input:focus {
   border-color: #c17b8c; box-shadow: 0 4px 24px rgba(193,123,140,0.18);
 }
 .search-input::placeholder { color: #b0a8b5; }
 .search-clear {
-  position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
-  background: none; border: none; cursor: pointer; font-size: 18px; color: #b0a8b5;
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 16px; color: #b0a8b5;
   display: none; line-height: 1; padding: 2px;
 }
 .search-clear:hover { color: #2e2b38; }
-.search-kbd {
-  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-  font-size: 11px; font-weight: 600; color: #b0a8b5;
-  background: #f0edf0; border: 1px solid rgba(46,43,56,0.09);
-  border-radius: 5px; padding: 2px 6px; pointer-events: none;
-  font-family: 'Manrope', sans-serif;
-}
+
 
 /* ── AUTOCOMPLETE ── */
 .autocomplete-list {
@@ -401,9 +397,10 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .filter-toggle-btn {
   display: flex; align-items: center; gap: 6px;
   background: #fff; border: 1.5px solid rgba(46,43,56,0.09);
-  border-radius: 10px; padding: 8px 16px; cursor: pointer;
+  border-radius: 10px; padding: 0 16px; cursor: pointer;
   font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #2e2b38;
   transition: border-color .15s; position: relative;
+  height: 38px; box-sizing: border-box; flex-shrink: 0;
 }
 .filter-toggle-btn:hover, .filter-toggle-btn.active { border-color: #c17b8c; }
 .filter-count-badge {
@@ -523,10 +520,9 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     <!-- SEARCH BOX -->
     <div class="search-box-wrap" id="search-wrap">
       <input type="search" id="search-input" class="search-input"
-             placeholder="Nome del trail, regione, difficoltà…"
+             placeholder="Cerca trail…"
              autocomplete="off" spellcheck="false">
       <button class="search-clear" id="search-clear" title="Svuota" aria-label="Svuota ricerca">✕</button>
-      <span class="search-kbd" id="search-kbd">/ per cercare</span>
       <div class="autocomplete-list" id="autocomplete"></div>
     </div>
 
