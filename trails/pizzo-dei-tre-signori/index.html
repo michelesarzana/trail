@@ -42,10 +42,11 @@ a:hover { color: #c17b8c; }
 .nav-back {
   font-size: 13px; font-weight: 700; color: #38324a;
   white-space: nowrap; display: flex; align-items: center; gap: 6px; min-width: 120px;
+  text-decoration: none;
 }
 .nav-back:hover { color: #c17b8c; }
-.nav-center {
-  display: inline-flex;
+.nav-wordmark-wrap {
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1px;
@@ -57,8 +58,7 @@ a:hover { color: #c17b8c; }
   font-weight: 800;
   color: #2e2b38;
   letter-spacing: -0.01em;
-  text-decoration: none;
-  white-space: nowrap;
+  display: block;
   line-height: 1.1;
 }
 .nav-wordmark:hover { color: #2e2b38; }
@@ -71,8 +71,17 @@ a:hover { color: #c17b8c; }
   opacity: 0.85;
   white-space: nowrap;
   line-height: 1.2;
+  display: block;
 }
 .nav-spacer { min-width: 120px; }
+@media (max-width: 600px) {
+  .nav { flex-direction: column; align-items: center; padding: 14px 20px; gap: 10px; }
+  .nav-wordmark-wrap { width: 100%; }
+  .nav-wordmark { font-size: 18px; text-align: center; }
+  .nav-payoff { font-size: 12px; text-align: center; }
+  .nav-back { min-width: auto; justify-content: center; width: 100%; }
+  .nav-spacer { display: none; }
+}
 .nav-spacer { min-width: 140px; }
 
 /* MAP HERO */
@@ -247,19 +256,7 @@ a:hover { color: #c17b8c; }
   letter-spacing: 0.1em;
   color: rgba(255,255,255,0.65);
 }
-@media (max-width: 600px) {
-  .nav {
-    flex-direction: column;
-    align-items: center;
-    padding: 14px 20px;
-    gap: 10px;
-  }
-  .nav-center { width: 100%; }
-  .nav-wordmark { font-size: 18px; text-align: center; }
-  .nav-payoff { font-size: 12px; text-align: center; }
-  .nav-back { min-width: auto; justify-content: center; width: 100%; }
-  .nav-spacer { display: none; }
-}
+
 </style>
 </head>
 <body>
@@ -268,7 +265,7 @@ a:hover { color: #c17b8c; }
   <!-- NAV -->
   <nav class="nav">
     <a href="https://michelesarzana.github.io/trail/" class="nav-back">← Tutti i trail</a>
-    <a href="https://michelesarzana.github.io/trail/" class="nav-center">
+    <a href="https://michelesarzana.github.io/trail/" class="nav-wordmark-wrap">
       <span class="nav-wordmark">Every Single Trail</span>
       <span class="nav-payoff">No map is ever finished.</span>
     </a>
