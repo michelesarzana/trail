@@ -48,7 +48,7 @@ a:hover { color: #c17b8c; }
   min-width: 140px;
 }
 .nav-back:hover { color: #c17b8c; }
-.nav-wordmark-wrap { display: inline-flex; align-items: baseline; text-decoration: none; }
+.nav-wordmark-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; text-decoration: none; }
 .nav-wordmark {
   font-size: 22px;
   font-weight: 800;
@@ -56,16 +56,17 @@ a:hover { color: #c17b8c; }
   letter-spacing: -0.01em;
   text-decoration: none;
   text-align: center;
-  flex: 1;
-  display: inline;
+  white-space: nowrap;
 }
 .nav-payoff {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 22px;
+  font-size: 16px;
   color: #c17b8c;
   letter-spacing: 0.01em;
   opacity: 0.85;
+  text-align: center;
+  white-space: nowrap;
 }
 .nav-wordmark:hover { color: #2e2b38; }
 .nav-prev-next {
