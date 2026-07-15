@@ -294,13 +294,11 @@ a:hover { color: #c17b8c; }
 
 /* ===== BODY CONTENT ===== */
 .trail-body {
-  display: flex;
-  gap: 48px;
-  padding: 40px 48px;
-  align-items: flex-start;
+  padding: 32px 48px;
+  border-bottom: 1px solid rgba(46,43,56,0.07);
 }
-.trail-body-main { flex: 1; min-width: 0; }
-.trail-body-right { width: 300px; flex-shrink: 0; }
+.trail-body-main { width: 100%; }
+.trail-body-right { display: none; }
 
 .section-heading {
   font-size: 11px;
@@ -311,12 +309,37 @@ a:hover { color: #c17b8c; }
   margin-bottom: 12px;
 }
 .trail-description-full {
-  padding: 32px 48px;
+  padding: 32px 48px 40px;
   border-bottom: 1px solid rgba(46,43,56,0.07);
 }
 .trail-description-full .section-heading { margin-bottom: 12px; }
+.trail-desc-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px 56px;
+  align-items: start;
+}
+.trail-desc-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.meta-block {
+  background: #faf7f4;
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+.meta-block-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #726e7a;
+  margin-bottom: 12px;
+}
 @media (max-width: 900px) {
-  .trail-description-full { padding: 24px 20px; }
+  .trail-description-full { padding: 24px 20px 32px; }
+  .trail-desc-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 .section-text {
   font-size: 17px;
@@ -934,56 +957,62 @@ function renderPage(trail, allTrails) {
     ${galleryHtml}
 
     <!-- DESCRIPTION (full width) -->
-    ${trail.description ? `
     <div class="trail-description-full">
-      <div class="section-heading" data-i18n="section-description">Descrizione</div>
-      <p class="section-text" style="white-space:pre-line;margin:0">${escHtml(trail.description)}</p>
-    </div>` : ''}
+      <div class="trail-desc-grid">
+        <!-- colonna sinistra: testo descrizione -->
+        <div>
+          ${trail.description ? `
+            <div class="section-heading" data-i18n="section-description">Descrizione</div>
+            <p class="section-text" style="white-space:pre-line;margin:0 0 0">${escHtml(trail.description)}</p>
+          ` : ''}
+        </div>
+        <!-- colonna destra: logistica + coordinate + link -->
+        <div class="trail-desc-meta">
+          <!-- Logistics -->
+          <div class="meta-block">
+            <div class="meta-block-title" data-i18n="sidebar-logistics">Logistica</div>
+            <div class="info-grid">
+              <div class="info-row"><span class="info-key" data-i18n="key-dog">🐕 Dog friendly</span><span class="info-val">${boolLabel(log.dog_friendly)}</span></div>
+              <div class="info-row"><span class="info-key" data-i18n="key-transport">🚌 Trasporto pub.</span><span class="info-val">${boolLabel(log.public_transport)}</span></div>
+              <div class="info-row"><span class="info-key" data-i18n="key-water">💧 Acqua</span><span class="info-val">${boolLabel(log.water_available)}</span></div>
+            </div>
+            ${log.parking_notes ? `<p style="font-size:13px;color:#726e7a;margin:10px 0 0">${escHtml(log.parking_notes)}</p>` : ''}
+          </div>
+          <!-- Coordinates -->
+          ${startCoords.lat ? `
+          <div class="meta-block">
+            <div class="meta-block-title" data-i18n="sidebar-coords">Punto di partenza</div>
+            <div class="coords-text">${startCoords.lat.toFixed(5)}, ${(startCoords.lng || startCoords.lon || 0).toFixed(5)}</div>
+            <a href="https://maps.google.com/?q=${startCoords.lat},${startCoords.lng || startCoords.lon || 0}" target="_blank" rel="noopener"
+              class="link-pill" style="margin-top:10px">📍 Google Maps</a>
+          </div>` : ''}
+          <!-- Links -->
+          ${linkPills || otherLink || gpxDownload ? `
+          <div class="meta-block">
+            <div class="meta-block-title" data-i18n="sidebar-links">Link esterni</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:stretch">${linkPills}${otherLink}${gpxDownload}</div>
+          </div>` : ''}
+        </div>
+      </div>
+    </div>
 
     <!-- BODY CONTENT -->
     <div class="trail-body">
       <div class="trail-body-main">
-
-
         ${actTypes.length > 0 || seasons.length > 0 || cls.difficulty ? `
-          <div class="section-heading" style="margin-top:24px">Classificazione</div>
+          <div class="section-heading" style="margin-top:0">Classificazione</div>
           <div class="info-grid" style="margin-bottom:32px">
             ${cls.difficulty ? `<div class="info-row"><span class="info-key">Difficoltà</span><span class="info-val">${escHtml(cls.difficulty)}</span></div>` : ''}
             ${actTypes.length > 0 ? `<div class="info-row"><span class="info-key">Attività</span><span class="info-val">${actTypes.map(escHtml).join(', ')}</span></div>` : ''}
             ${seasons.length > 0 ? `<div class="info-row"><span class="info-key">Stagioni</span><span class="info-val">${seasons.map(escHtml).join(', ')}</span></div>` : ''}
             ${track.route_type ? `<div class="info-row"><span class="info-key">Tipo percorso</span><span class="info-val">${escHtml(track.route_type)}</span></div>` : ''}
           </div>` : ''}
-
         ${isDone ? `
           <div class="section-heading" data-i18n="section-logbook">Logbook</div>
           ${logbookHtml}` : ''}
-
         ${trail.tags && trail.tags.length > 0 ? `
           <div class="section-heading" data-i18n="section-tags" style="margin-top:24px">Tags</div>
           <div class="tag-row">${trail.tags.map(tag => `<span class="tag-pill">${escHtml(tag)}</span>`).join('')}</div>` : ''}
-      </div>
-
-      <div class="trail-body-right">
-        <!-- Logistics -->
-        <div class="sidebar-card">
-          <div class="sidebar-card-title" data-i18n="sidebar-logistics">Logistica</div>
-          <div class="info-grid">
-            <div class="info-row"><span class="info-key" data-i18n="key-dog">🐕 Dog friendly</span><span class="info-val">${boolLabel(log.dog_friendly)}</span></div>
-            <div class="info-row"><span class="info-key" data-i18n="key-transport">🚌 Trasporto pub.</span><span class="info-val">${boolLabel(log.public_transport)}</span></div>
-            <div class="info-row"><span class="info-key" data-i18n="key-water">💧 Acqua</span><span class="info-val">${boolLabel(log.water_available)}</span></div>
-          </div>
-          ${log.parking_notes ? `<p style="font-size:13px;color:#726e7a;margin:10px 0 0">${escHtml(log.parking_notes)}</p>` : ''}
-        </div>
-
-        <!-- Coordinates -->
-        ${coordsHtml}
-
-        <!-- Links -->
-        ${linkPills || otherLink || gpxDownload ? `
-          <div class="sidebar-card">
-            <div class="sidebar-card-title" data-i18n="sidebar-links">Link esterni</div>
-            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:stretch">${linkPills}${otherLink}${gpxDownload}</div>
-          </div>` : ''}
       </div>
     </div>
 
