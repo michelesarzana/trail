@@ -31,12 +31,16 @@ body {
 
 /* ── NAV ── */
 .nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(250,247,244,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px; height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  gap: 16px;
 }
 .nav-wordmark-wrap {
   display: inline-flex;
@@ -60,11 +64,24 @@ body {
   gap: 1px;
 }
 .nav-wordmark {
-  font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.01em;
+  font-size: 20px;
+  font-weight: 800;
+  color: #2e2b38;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.1;
 }
+.nav-wordmark:hover { color: #2e2b38; }
 .nav-payoff {
-  font-family: 'Instrument Serif', serif; font-style: italic;
-  font-size: 20px; color: var(--rose); opacity: 0.85; letter-spacing: 0.01em;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #c17b8c;
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 .nav-counter { font-size: 13px; font-weight: 600; color: var(--text-muted); }
@@ -311,7 +328,7 @@ body {
 <body>
 
 <!-- NAV -->
-<nav class="nav">
+  <nav class="nav">
     <a href="index.html" class="nav-wordmark-wrap">
       <img src="https://raw.githubusercontent.com/michelesarzana/trail/main/media/logo.jpg" class="nav-logo" alt="EST logo">
       <div class="nav-wordmark-text">
