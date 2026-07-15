@@ -434,6 +434,103 @@
           }
         ]
       }
+    },
+    {
+      "id": "da-paneveggio-ai-laghi-di-colbricon",
+      "title": "Da Paneveggio ai Laghi di Colbricon",
+      "status": "done",
+      "description": "Partendo dal parcheggio sopra la foresta di Paneveggio il primo regalo te lo fa già il parcheggio: se hai fortuna e un po' di pazienza, i cervi della foresta escono allo scoperto tra gli alberi e ti ricordano che sei entrato in un posto dove l'uomo è ospite.\n\nIl sentiero parte con una salita leggera ma costante, il tipo di pendenza con cui puoi trovare il ritmo e tenertelo per un bel pezzo. Il Lagorai ti accompagna per tutto il percorso sul fianco destro, arcigno e selvatico come sanno essere solo le catene che non finiscono sui dépliant turistici: niente guglie glamour, niente rifugi di lusso, solo creste lunghe e scure che fanno da confine tra il Trentino e il silenzio.\n\nSi cammina così per un bel tratto, con la foresta che si dirada e le praterie alpine che prendono spazio, finché il sentiero non cambia carattere. Poco prima del passo diventa più ripido e un po' più tecnico, qualche passaggio su roccia, qualche ometto che ti indica la direzione. Non è difficile, ma chiede attenzione e te lo fa sentire.\n\nPoi arrivi al Passo di Colbricon e capisci perché val la pena.\n\nI Laghi di Colbricon sono lì sotto, specchi d'acqua incastonati tra i pascoli alti, con il rifugio omonimo che si affaccia sulla riva come se fosse sempre stato parte del paesaggio. Qui puoi fermarti per un pranzo al rifugio, che d'estate è sempre aperto e sempre affollato il giusto, oppure scendere fino alle sponde del lago e aprire il tuo zaino in uno dei posti più tranquilli che troverai in quota. In entrambi i casi non hai fretta di rientrare.",
+      "rating": 4,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/da-paneveggio-ai-laghi-di-colbricon/IMG_3106.jpeg",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Trentino-Alto Adige",
+        "province": "Trento",
+        "municipality": "San Martino di Castrozza",
+        "area": "Dolomiti",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 46.302701,
+            "lng": 11.757773
+          },
+          "end": {
+            "lat": 46.302483,
+            "lng": 11.757917
+          }
+        }
+      },
+      "track": {
+        "distance_km": 9.5,
+        "elevation_gain": 445,
+        "elevation_loss": 445,
+        "elevation_max": 1939,
+        "elevation_min": 1640,
+        "duration_min": 289,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato"
+        ],
+        "gpx_file": "gpx/da-paneveggio-ai-laghi-di-colbricon.gpx"
+      },
+      "classification": {
+        "difficulty": "T2",
+        "activity_types": [
+          "trekking",
+          "escursionismo"
+        ],
+        "seasons": [
+          "primavera",
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "dolomiti",
+        "colbricon",
+        "san martino di castrozza"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "photo_credit": null,
+      "links": {
+        "strava": "https://www.strava.com/activities/15593266308",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [
+        {
+          "date": "2025-08-26",
+          "duration_min": 182,
+          "rating": 5,
+          "notes": null
+        }
+      ],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/da-paneveggio-ai-laghi-di-colbricon/IMG_3106.jpeg",
+        "photos": [
+          {
+            "filename": "IMG_3106.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/da-paneveggio-ai-laghi-di-colbricon/IMG_3106.jpeg"
+          },
+          {
+            "filename": "IMG_7806.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/da-paneveggio-ai-laghi-di-colbricon/IMG_7806.jpeg"
+          },
+          {
+            "filename": "IMG_3143.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/da-paneveggio-ai-laghi-di-colbricon/IMG_3143.jpeg"
+          }
+        ]
+      }
     }
   ]
 }
