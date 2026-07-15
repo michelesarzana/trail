@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Database trail personale di Michele Sarzana",
     "schema": "./schema/trail.schema.json",
-    "last_updated": "2026-07-13"
+    "last_updated": "2026-07-15"
   },
   "trails": [
     {
@@ -328,6 +328,114 @@
         ]
       },
       "gpx_file": "https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/coumarial-rifugio-barma.gpx"
+    },
+    {
+      "id": "campestrin-cortina-d-ampezzo-fkt",
+      "title": "Campestrin → Cortina d’Ampezzo FKT",
+      "status": "done",
+      "description": "C'è una domanda che ogni trail runner che abita in quota si fa prima o poi, magari dopo un aperitivo di troppo: posso uscire di casa e arrivare a Cortina a piedi?\n\nLa risposta, come dimostra questo percorso, è sì. Non solo puoi: puoi farlo passando per tre dei passi più iconici delle Dolomiti, accumulando quasi 3.000 metri di dislivello positivo e arrivando abbastanza presentabile da sederti a un tavolino di via Roma senza che nessuno ti faccia notare di troppo.\n\nIl trail nasce dalla ciclabile di Campestrin, parcheggio ideale di fianco ai Vigili del Fuoco, un dettaglio logistico che in qualche modo rende tutto più epico e meno irresponsabile. Da lì il percorso si distende attraverso il bosco che fiancheggia la strada, un tratto scorrevole che ti scalda le gambe e ti lascia fantasticare su quello che verrà. Il massiccio del Pordoi si avvicina lentamente, prima come sagoma, poi come parete concreta. Quando il sentiero si impenna e imbocchi le piste invernali del Belvedere, le fantasie finiscono: qui si sale sul serio, con le gambe che iniziano a dialogare col cervello su chi comanda davvero.\n\nIl Passo Pordoi a quota 2.239 m è il primo respiro. È anche il confine psicologico tra \"sto facendo una bella uscita\" e \"ormai sono dentro qualcosa di più grande di me\". Da qui parte un lungo traverso, uno di quelli che sulla carta sembrano neutrali e invece nascondono un dislivello subdolo e scorci che ti obbligano a fermarti. Porta Vescovo segna il passaggio verso il Bellunese; Livinallongo del Col di Lana, in basso nella valle, ricorda che il versante sud delle Dolomiti ha una luce diversa, più dorata.\n\nLa salita verso il Falzarego potrebbe essere il finale, e per molti percorsi lo sarebbe, ma qui si devia. L'Averau ti chiama all'ombra, quasi sottovoce, e tu segui. La cima a 2.649 m è uno di quei posti dove le Dolomiti smettono di essere cartoline e diventano silenzio.\n\nAl rifugio Averau una pasta al ragù è la norma, non l'opzione. Hai percorso qualcosa come 50 km e tremila metri di salita: non è il momento di fare i difficili con il menu.\n\nLa discesa verso Cortina chiude tutto. Via Roma ti accoglie con i tavolini all'aperto e una civiltà che ha continuato ad esistere mentre eri sulla montagna. Siediti, ordina qualcosa di freddo, guarda la gente passare.",
+      "rating": 5,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5460.jpeg",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Trentino-Alto Adige",
+        "province": "Trento",
+        "municipality": "Mazzin",
+        "area": "Dolomiti",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 46.461165,
+            "lng": 11.715411
+          },
+          "end": {
+            "lat": 46.537452,
+            "lng": 12.137029
+          }
+        }
+      },
+      "track": {
+        "distance_km": 54.3,
+        "elevation_gain": 3051,
+        "elevation_loss": 3189,
+        "elevation_max": 2418,
+        "elevation_min": 1219,
+        "duration_min": 663,
+        "route_type": "point-to-point",
+        "surface": [
+          "terra",
+          "sterrato",
+          "roccia",
+          "misto"
+        ],
+        "gpx_file": "gpx/campestrin-cortina-d-ampezzo-fkt.gpx"
+      },
+      "classification": {
+        "difficulty": "T2",
+        "activity_types": [
+          "trail-running"
+        ],
+        "seasons": [
+          "estate"
+        ]
+      },
+      "tags": [
+        "trail",
+        "dolomiti",
+        "cortina"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": true,
+        "water_available": true,
+        "parking_notes": null
+      },
+      "photo_credit": null,
+      "links": {
+        "strava": "https://www.strava.com/activities/7653925123/overview",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [
+        {
+          "date": "2022-08-17",
+          "duration_min": 663,
+          "rating": 5,
+          "notes": null
+        }
+      ],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5460.jpeg",
+        "photos": [
+          {
+            "filename": "IMG_5460.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5460.jpeg"
+          },
+          {
+            "filename": "IMG_5454.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5454.jpeg"
+          },
+          {
+            "filename": "IMG_5472.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5472.jpeg"
+          },
+          {
+            "filename": "IMG_5464.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5464.jpeg"
+          },
+          {
+            "filename": "IMG_5467.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5467.jpeg"
+          },
+          {
+            "filename": "IMG_5457.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5457.jpeg"
+          }
+        ]
+      }
     }
   ]
 }
