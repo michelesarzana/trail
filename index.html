@@ -109,7 +109,8 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(46,43,56,0.08);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .results-label {
@@ -121,12 +122,10 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 
 /* ===== TRAIL LIST ===== */
 .trail-list {
-  flex: 1;
-  overflow-y: visible;
-  padding: 12px 16px 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 12px 16px 0;
 }
 .trail-list::-webkit-scrollbar { width: 6px; }
 .trail-list::-webkit-scrollbar-thumb { background: rgba(46,43,56,0.12); border-radius: 3px; }
@@ -210,11 +209,10 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 }
 /* ===== INFINITE LOADER ===== */
 #load-sentinel {
-  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0 40px;
+  padding: 24px 0 48px;
 }
 .loader-dots {
   display: flex;
