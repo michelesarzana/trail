@@ -54,11 +54,24 @@ a:hover { color: #c17b8c; }
 .nav-back:hover { color: #c17b8c; }
 .nav-wordmark-wrap {
   display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.nav-wordmark-text {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1px;
-  text-decoration: none;
-  flex-shrink: 0;
 }
 .nav-wordmark {
   font-size: 20px;
@@ -531,7 +544,13 @@ a:hover { color: #c17b8c; }
   z-index: 2;
 }
 </style>
-<meta property="og:title" content="Campestrin → Cortina d’Ampezzo FKT"><meta property="og:description" content="C'è una domanda che ogni trail runner che abita in quota si fa prima o poi, magari dopo un aperitivo di troppo: posso uscire di casa e arrivare a Cortina a pied"><meta property="og:type" content="website"><meta property="og:url" content="https://michelesarzana.github.io/trail/trails/campestrin-cortina-d-ampezzo-fkt/"><meta property="og:image" content="https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5460.jpeg"><link rel="canonical" href="https://michelesarzana.github.io/trail/trails/campestrin-cortina-d-ampezzo-fkt/"></head>
+<meta property="og:title" content="Campestrin → Cortina d’Ampezzo FKT">
+<meta property="og:description" content="C'è una domanda che ogni trail runner che abita in quota si fa prima o poi, magari dopo un aperitivo di troppo: posso uscire di casa e arrivare a Cortina a pied">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://michelesarzana.github.io/trail/trails/campestrin-cortina-d-ampezzo-fkt/">
+<meta property="og:image" content="https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5460.jpeg">
+<link rel="canonical" href="https://michelesarzana.github.io/trail/trails/campestrin-cortina-d-ampezzo-fkt/">
+</head>
 <body>
 <div class="shell" id="app">
   <div style="padding:80px 48px;text-align:center;color:#726e7a;font-size:16px;">Caricamento…</div>
@@ -1042,7 +1061,6 @@ function renderNotFound(id) {
 
 /* ===== INIT ===== */
 async function init() {
-  // In a static page, id comes from the URL path (e.g. /trails/lago-antermoia-.../)
   const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
   const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
   const allTrails = await loadTrails();
