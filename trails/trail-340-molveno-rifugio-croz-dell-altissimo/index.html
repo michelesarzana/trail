@@ -8,11 +8,7 @@
 <link rel="apple-touch-icon" href="/media/favicon-192.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trail 340 Molveno - Rifugio Croz dell'Altissimo — Every Single Trail</title>
-<meta name="description" content="Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!
-
-Rifugio Croz dell’Altissimo
-
-Il rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova ne">
+<meta name="description" content="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -535,17 +531,7 @@ a:hover { color: #c17b8c; }
   z-index: 2;
 }
 </style>
-<meta property="og:title" content="Trail 340 Molveno - Rifugio Croz dell'Altissimo">
-<meta property="og:description" content="Il Rifugio Croz dell’Altissimo è aperto tutti i giorni! Vi aspettiamo!
-
-Rifugio Croz dell’Altissimo
-
-Il rifugio Croz dell’Altissimo, 1480 mt s.l.m., si trova ne">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://michelesarzana.github.io/trail/trails/trail-340-molveno-rifugio-croz-dell-altissimo/">
-<meta property="og:image" content="https://dgtzuqphqg23d.cloudfront.net/kmuG4ukft3mLsD3uDQQhRXOes2pXgY6M_ydWpelgm3c-2048x1536.jpg">
-<link rel="canonical" href="https://michelesarzana.github.io/trail/trails/trail-340-molveno-rifugio-croz-dell-altissimo/">
-</head>
+<meta property="og:title" content="Trail 340 Molveno - Rifugio Croz dell'Altissimo"><meta property="og:description" content=""><meta property="og:type" content="website"><meta property="og:url" content="https://michelesarzana.github.io/trail/trails/trail-340-molveno-rifugio-croz-dell-altissimo/"><meta property="og:image" content="https://dgtzuqphqg23d.cloudfront.net/kmuG4ukft3mLsD3uDQQhRXOes2pXgY6M_ydWpelgm3c-2048x1536.jpg"><link rel="canonical" href="https://michelesarzana.github.io/trail/trails/trail-340-molveno-rifugio-croz-dell-altissimo/"></head>
 <body>
 <div class="shell" id="app">
   <div style="padding:80px 48px;text-align:center;color:#726e7a;font-size:16px;">Caricamento…</div>
@@ -1056,6 +1042,7 @@ function renderNotFound(id) {
 
 /* ===== INIT ===== */
 async function init() {
+  // In a static page, id comes from the URL path (e.g. /trails/lago-antermoia-.../)
   const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
   const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
   const allTrails = await loadTrails();
