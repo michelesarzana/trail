@@ -44,11 +44,24 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 }
 .nav-wordmark-wrap {
   display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.nav-wordmark-text {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1px;
-  text-decoration: none;
-  flex-shrink: 0;
 }
 .nav-wordmark {
   font-size: 20px;
@@ -550,8 +563,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   <!-- NAV -->
   <nav class="nav">
     <a href="index.html" class="nav-wordmark-wrap">
-      <span class="nav-wordmark">Every Single Trail</span>
-      <span class="nav-payoff">No map is ever finished.</span>
+      <img src="/media/logo.jpg" class="nav-logo" alt="EST logo">
+      <div class="nav-wordmark-text">
+        <span class="nav-wordmark">Every Single Trail</span>
+        <span class="nav-payoff">No map is ever finished.</span>
+      </div>
     </a>
     <div class="nav-right">
       <a href="search.html" class="nav-btn" style="padding:7px 12px;font-size:13px;">🔍</a>
