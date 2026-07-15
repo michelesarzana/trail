@@ -679,8 +679,8 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
       </div>
       <div class="trail-list" id="trail-list">
         <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
+        <div id="load-sentinel" style="display:none"><div class="loader-dots"><span></span><span></span><span></span></div></div>
       </div>
-      <div id="load-sentinel" style="display:none"><div class="loader-dots"><span></span><span></span><span></span></div></div>
     </div>
     <div class="map-area">
       <div id="map"></div>
@@ -865,7 +865,7 @@ function loadMoreCards() {
   const sentinel = document.getElementById('load-sentinel');
   const batch = _filteredTrails.slice(_visibleCount, _visibleCount + PAGE_SIZE);
   batch.forEach(function(t) {
-    listEl.insertAdjacentHTML('beforeend', renderCard(t));
+    sentinel.insertAdjacentHTML('beforebegin', renderCard(t));
   });
   _visibleCount += batch.length;
   if (_visibleCount < _filteredTrails.length) {
@@ -1252,13 +1252,14 @@ document.addEventListener('DOMContentLoaded', function() {
   init();
   var sentinel = document.getElementById('load-sentinel');
   if (sentinel && window.IntersectionObserver) {
-    var observer = new IntersectionObserver(function(entries) {
+    var scrollRoot = document.getElementById('trail-list');
+  var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && _visibleCount < _filteredTrails.length) {
           loadMoreCards();
         }
       });
-    }, { rootMargin: '0px 0px 100px 0px' });
+    }, { root: scrollRoot, rootMargin: '0px 0px 60px 0px' });
     observer.observe(sentinel);
   }
 });
