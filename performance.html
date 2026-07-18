@@ -25,9 +25,16 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Manrope', sans-serif; background: var(--background); color: var(--foreground); font-size: 14px; line-height: 1.6; min-height: 100vh; }
 
+/* ===== STICKY TOP WRAPPER ===== */
+.sticky-top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: #fff;
+}
+
 /* ===== NAV ===== */
 .nav {
-  position: sticky; top: 0; z-index: 100;
   background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
@@ -111,7 +118,6 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
 
 /* ===== FILTER BAR — 2 righe ===== */
 .filter-bar {
-  position: sticky; top: 56px; z-index: 90;
   background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   padding: 10px 40px;
@@ -328,6 +334,7 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
 </head>
 <body>
 
+<div class="sticky-top" id="sticky-top">
 <!-- NAV -->
 <nav class="nav">
   <a class="nav-brand" href="/">
@@ -339,21 +346,6 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
     <a class="nav-btn nav-btn-active" href="/performance">📊 Performance</a>
   </div>
 </nav>
-
-<!-- HEALTH STRIP -->
-<div class="health-strip" id="health-strip">
-  <div class="health-strip-header" id="health-toggle">
-    <span class="health-strip-title">📊 Salute di oggi</span>
-    <span class="health-strip-date" id="health-date">—</span>
-    <div class="health-strip-pills" id="health-summary-pills"></div>
-    <button class="health-collapse-btn" id="health-collapse-btn" aria-label="Espandi/Collassa">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
-  <div class="health-strip-body" id="health-body">
-    <div class="health-cards" id="health-cards"></div>
-  </div>
-</div>
 
 <!-- FILTER BAR -->
 <div class="filter-bar" id="filter-bar">
@@ -376,6 +368,7 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
     </div>
   </div>
 </div>
+</div><!-- end .sticky-top -->
 
 <!-- COMPARE PANEL -->
 <div class="compare-panel" id="compare-panel" style="display:none">
@@ -405,12 +398,28 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
 </div>
 
 <!-- HERO -->
+<div id="page-body">
 <section class="hero">
   <p class="hero-eyebrow">La mia stagione</p>
   <h1 class="hero-title">Ogni passo <em>conta</em>.</h1>
   <p class="hero-meta">Aggiornato il <span id="last-updated">—</span></p>
   <div class="token-banner" id="token-banner" style="display:none">⚠️ Dati non aggiornati — token Garmin scaduto</div>
 </section>
+
+<!-- HEALTH STRIP (nel flusso, non sticky) -->
+<div class="health-strip" id="health-strip">
+  <div class="health-strip-header" id="health-toggle">
+    <span class="health-strip-title">📊 Salute di oggi</span>
+    <span class="health-strip-date" id="health-date">—</span>
+    <div class="health-strip-pills" id="health-summary-pills"></div>
+    <button class="health-collapse-btn" id="health-collapse-btn" aria-label="Espandi/Collassa">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div class="health-strip-body" id="health-body">
+    <div class="health-cards" id="health-cards"></div>
+  </div>
+</div>
 
 <!-- MAIN -->
 <main class="main">
@@ -469,6 +478,7 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
 </main>
 
 <footer class="site-footer">Every Single Trail — <em>No map is ever finished.</em></footer>
+</div><!-- end #page-body -->
 
 
 <script>
@@ -525,6 +535,10 @@ async function init() {
   populateSportPills();
   applyFilters('90', 'all');
 
+  // Padding-top dinamico per sticky-top
+  updateBodyPadding();
+  window.addEventListener('resize', updateBodyPadding);
+
   // Period filter
   document.getElementById('period-filter').addEventListener('click', e => {
     const btn = e.target.closest('.pill');
@@ -540,7 +554,7 @@ async function init() {
 
   // Sport filter
   document.getElementById('sport-filter').addEventListener('click', e => {
-    const btn = e.target.closest('.pill');
+    const btn = e.target.closest('.pill[data-sport]');
     if (!btn) return;
     document.querySelectorAll('#sport-filter .pill').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -559,10 +573,25 @@ async function init() {
   });
 }
 
+/* ===== PADDING DINAMICO ===== */
+function updateBodyPadding() {
+  const stickyEl = document.getElementById('sticky-top');
+  if (stickyEl) {
+    document.getElementById('page-body').style.paddingTop = stickyEl.offsetHeight + 'px';
+  }
+}
+
 /* ===== SPORT PILLS ===== */
 function populateSportPills() {
-  const sports = [...new Set(RAW.all_activities.map(a => a.sport))].sort();
+  let sports = [];
+  if (RAW.all_activities && RAW.all_activities.length > 0) {
+    sports = [...new Set(RAW.all_activities.map(a => a.sport))];
+  } else if (RAW.by_sport) {
+    sports = Object.keys(RAW.by_sport);
+  }
+  sports.sort();
   const container = document.getElementById('sport-filter');
+  container.querySelectorAll('.pill:not([data-sport="all"])').forEach(b => b.remove());
   sports.forEach(s => {
     const btn = document.createElement('button');
     btn.className = 'pill';
@@ -581,7 +610,7 @@ function filterByPeriod(acts, period) {
 }
 
 function filterBySport(acts, sport) {
-  if (sport === 'all') return acts;
+  if (!sport || sport === 'all') return acts;
   return acts.filter(a => a.sport === sport);
 }
 
@@ -868,13 +897,11 @@ function renderTable() {
 
 /* ===== HEALTH STRIP ===== */
 function renderHealthStrip(h) {
-  if (!h || Object.keys(h).length === 0) {
-    document.getElementById('health-strip').style.display = 'none';
-    return;
-  }
+  // Mostra sempre la strip — anche con h vuoto mostriamo le card con "—"
+  if (!h) h = {};
   document.getElementById('health-date').textContent = h.date || '—';
 
-  // Pills header (passi, FC, HRV, Body Battery, Training Status)
+  // Pills header: mostra solo quelle con dati reali
   const pills = [];
   if (h.steps) {
     const pct = Math.round((h.steps / (h.steps_goal || 8000)) * 100);
@@ -895,85 +922,105 @@ function renderHealthStrip(h) {
     const tsCls = h.training_status in tsLabels ? `ts-${h.training_status}` : '';
     pills.push(`<span class="health-pill"><span class="ts-badge ${tsCls}" style="padding:0">📈 ${tsLabels[h.training_status] || h.training_status}</span></span>`);
   }
+  // Se nessuna pill, mostra warning
+  if (pills.length === 0) {
+    pills.push(`<span class="health-pill warn">⚠️ Dati non disponibili</span>`);
+  }
   document.getElementById('health-summary-pills').innerHTML = pills.join('');
 
-  // Cards nel body espanso (11 metriche)
+  // Cards nel body espanso (11 metriche — sempre tutte, "—" se mancano dati)
   const cards = [];
 
   // 1. Passi
-  if (h.steps !== undefined) {
-    const pct = Math.round((h.steps / (h.steps_goal || 8000)) * 100);
+  {
+    const stepsVal = (h.steps != null && h.steps > 0) ? h.steps : null;
+    const pct = stepsVal ? Math.round((stepsVal / (h.steps_goal || 8000)) * 100) : 0;
     const bar = `<div style="height:3px;background:var(--border);border-radius:9999px;margin-top:6px"><div style="height:3px;background:var(--accent);border-radius:9999px;width:${Math.min(100,pct)}%"></div></div>`;
-    cards.push(`<div class="health-card"><span class="health-card-icon">👟</span><span class="health-card-value">${(h.steps||0).toLocaleString('it')}</span><div class="health-card-label">Passi</div><div class="health-card-sub">obiettivo: ${(h.steps_goal||8000).toLocaleString('it')} (${pct}%)</div>${bar}</div>`);
+    cards.push(`<div class="health-card"><span class="health-card-icon">👟</span><span class="health-card-value">${stepsVal ? stepsVal.toLocaleString('it') : '—'}</span><div class="health-card-label">Passi</div><div class="health-card-sub">obiettivo: ${(h.steps_goal||8000).toLocaleString('it')}${stepsVal ? ' (' + pct + '%)' : ''}</div>${bar}</div>`);
   }
 
   // 2. FC a riposo
-  if (h.resting_hr !== undefined) {
-    cards.push(`<div class="health-card"><span class="health-card-icon">❤️</span><span class="health-card-value">${h.resting_hr || '—'}</span><div class="health-card-label">FC a riposo</div><div class="health-card-sub">bpm</div></div>`);
+  {
+    const val = (h.resting_hr != null && h.resting_hr > 0) ? h.resting_hr : '—';
+    cards.push(`<div class="health-card"><span class="health-card-icon">❤️</span><span class="health-card-value">${val}</span><div class="health-card-label">FC a riposo</div><div class="health-card-sub">bpm</div></div>`);
   }
 
   // 3. HRV
-  if (h.hrv_last_night !== undefined) {
-    const badge = h.hrv_status ? `<span class="hrv-badge hrv-${h.hrv_status}">${h.hrv_status}</span>` : '';
+  {
+    const val = (h.hrv_last_night != null && h.hrv_last_night > 0) ? h.hrv_last_night : null;
+    const badge = (val && h.hrv_status) ? `<span class="hrv-badge hrv-${h.hrv_status}">${h.hrv_status}</span>` : '';
     const sub = h.hrv_weekly_avg ? `<div class="health-card-sub">media sett. ${h.hrv_weekly_avg}</div>` : '';
-    cards.push(`<div class="health-card"><span class="health-card-icon">📡</span><span class="health-card-value">${h.hrv_last_night || '—'}</span><div class="health-card-label">HRV notte</div>${badge}${sub}</div>`);
+    cards.push(`<div class="health-card"><span class="health-card-icon">📡</span><span class="health-card-value">${val ?? '—'}</span><div class="health-card-label">HRV notte</div>${badge}${sub}</div>`);
   }
 
   // 4. Body Battery
-  if (h.body_battery_end !== undefined) {
-    const bcol = h.body_battery_end >= 60 ? '#166534' : h.body_battery_end >= 30 ? '#854d0e' : '#991b1b';
-    cards.push(`<div class="health-card"><span class="health-card-icon">🔋</span><span class="health-card-value" style="color:${bcol}">${h.body_battery_end !== null ? h.body_battery_end + '%' : '—'}</span><div class="health-card-label">Body Battery</div></div>`);
+  {
+    const val = (h.body_battery_end != null && h.body_battery_end > 0) ? h.body_battery_end : null;
+    const bcol = val ? (val >= 60 ? '#166534' : val >= 30 ? '#854d0e' : '#991b1b') : 'var(--foreground)';
+    cards.push(`<div class="health-card"><span class="health-card-icon">🔋</span><span class="health-card-value" style="color:${bcol}">${val != null ? val + '%' : '—'}</span><div class="health-card-label">Body Battery</div></div>`);
   }
 
   // 5. Sonno
-  if (h.sleep_hours !== undefined) {
-    const scol = h.sleep_hours >= 7 ? '#166534' : h.sleep_hours >= 5 ? '#854d0e' : '#991b1b';
-    cards.push(`<div class="health-card"><span class="health-card-icon">😴</span><span class="health-card-value" style="color:${scol}">${h.sleep_hours ? h.sleep_hours + 'h' : '—'}</span><div class="health-card-label">Sonno</div></div>`);
+  {
+    const val = (h.sleep_hours != null && h.sleep_hours > 0) ? h.sleep_hours : null;
+    const scol = val ? (val >= 7 ? '#166534' : val >= 5 ? '#854d0e' : '#991b1b') : 'var(--foreground)';
+    cards.push(`<div class="health-card"><span class="health-card-icon">😴</span><span class="health-card-value" style="color:${scol}">${val ? val + 'h' : '—'}</span><div class="health-card-label">Sonno</div></div>`);
   }
 
   // 6. Stress
-  if (h.stress_avg !== undefined) {
-    const sv = h.stress_avg || 0;
-    const scls = sv < 26 ? 'good' : sv < 51 ? '' : sv < 76 ? 'warn' : 'bad';
-    const slabel = sv === 0 ? '—' : sv < 26 ? 'Basso' : sv < 51 ? 'Medio' : sv < 76 ? 'Alto' : 'Molto alto';
-    cards.push(`<div class="health-card"><span class="health-card-icon">🧘</span><span class="health-card-value">${sv || '—'}</span><div class="health-card-label">Stress</div><div class="health-card-sub">${slabel}</div></div>`);
+  {
+    const sv = (h.stress_avg != null && h.stress_avg > 0) ? h.stress_avg : null;
+    const scls = sv ? (sv < 26 ? 'good' : sv < 51 ? '' : sv < 76 ? 'warn' : 'bad') : '';
+    const slabel = sv ? (sv < 26 ? 'Basso' : sv < 51 ? 'Medio' : sv < 76 ? 'Alto' : 'Molto alto') : '—';
+    cards.push(`<div class="health-card"><span class="health-card-icon">🧘</span><span class="health-card-value">${sv ?? '—'}</span><div class="health-card-label">Stress</div><div class="health-card-sub">${slabel}</div></div>`);
   }
 
   // 7. Calorie
-  if (h.calories !== undefined) {
-    cards.push(`<div class="health-card"><span class="health-card-icon">🔥</span><span class="health-card-value">${h.calories ? (h.calories).toLocaleString('it') : '—'}</span><div class="health-card-label">Calorie tot.</div><div class="health-card-sub">attive: ${h.active_calories || 0}</div></div>`);
+  {
+    const val = (h.calories != null && h.calories > 0) ? h.calories : null;
+    const active = (h.active_calories != null) ? h.active_calories : '—';
+    cards.push(`<div class="health-card"><span class="health-card-icon">🔥</span><span class="health-card-value">${val ? val.toLocaleString('it') : '—'}</span><div class="health-card-label">Calorie tot.</div><div class="health-card-sub">attive: ${active}</div></div>`);
   }
 
-  // 8. SpO2 (sempre visibile)
-  const spo2Val = h.spo2_avg !== undefined && h.spo2_avg !== null ? h.spo2_avg + '%' : '—';
-  const spo2col = h.spo2_avg >= 95 ? '#166534' : h.spo2_avg >= 90 ? '#854d0e' : h.spo2_avg ? '#991b1b' : 'var(--muted-foreground)';
-  cards.push(`<div class="health-card"><span class="health-card-icon">🫁</span><span class="health-card-value" style="color:${spo2col}">${spo2Val}</span><div class="health-card-label">SpO₂</div><div class="health-card-sub">saturazione</div></div>`);
+  // 8. SpO2
+  {
+    const val = (h.spo2_avg != null && h.spo2_avg > 0) ? h.spo2_avg : null;
+    const spo2col = val ? (val >= 95 ? '#166534' : val >= 90 ? '#854d0e' : '#991b1b') : 'var(--muted-foreground)';
+    cards.push(`<div class="health-card"><span class="health-card-icon">🫁</span><span class="health-card-value" style="color:${spo2col}">${val ? val + '%' : '—'}</span><div class="health-card-label">SpO₂</div><div class="health-card-sub">saturazione</div></div>`);
+  }
 
-  // 9. Respiration rate (sempre visibile)
-  const respVal = h.respiration_avg !== undefined && h.respiration_avg !== null ? h.respiration_avg : '—';
-  cards.push(`<div class="health-card"><span class="health-card-icon">💨</span><span class="health-card-value">${respVal}</span><div class="health-card-label">Respiri/min</div><div class="health-card-sub">frequenza resp.</div></div>`);
+  // 9. Respiration rate
+  {
+    const val = (h.respiration_avg != null && h.respiration_avg > 0) ? h.respiration_avg : '—';
+    cards.push(`<div class="health-card"><span class="health-card-icon">💨</span><span class="health-card-value">${val}</span><div class="health-card-label">Respiri/min</div><div class="health-card-sub">frequenza resp.</div></div>`);
+  }
 
   // 10. Fitness Age
-  const faVal = h.fitness_age !== undefined && h.fitness_age !== null ? h.fitness_age : null;
-  const caVal = h.chronological_age !== undefined && h.chronological_age !== null ? h.chronological_age : null;
-  const faDiff = faVal && caVal ? caVal - faVal : null;
-  const faColor = faDiff === null ? 'var(--foreground)' : faDiff > 0 ? '#166534' : faDiff < 0 ? '#991b1b' : 'var(--foreground)';
-  const faBadge = faDiff !== null ? `<span class="hrv-badge" style="background:${faDiff > 0 ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)'};color:${faColor}">${faDiff > 0 ? '↓ ' + faDiff + ' anni' : '↑ ' + Math.abs(faDiff) + ' anni'}</span>` : '';
-  cards.push(`<div class="health-card"><span class="health-card-icon">🧬</span><span class="health-card-value" style="color:${faColor}">${faVal !== null ? faVal + ' anni' : '—'}</span><div class="health-card-label">Fitness Age</div>${faBadge}${caVal ? `<div class="health-card-sub">anagrafica: ${caVal} anni</div>` : ''}</div>`);
+  {
+    const faVal = (h.fitness_age != null) ? h.fitness_age : null;
+    const caVal = (h.chronological_age != null) ? h.chronological_age : null;
+    const faDiff = (faVal && caVal) ? caVal - faVal : null;
+    const faColor = faDiff === null ? 'var(--foreground)' : faDiff > 0 ? '#166534' : faDiff < 0 ? '#991b1b' : 'var(--foreground)';
+    const faBadge = faDiff !== null ? `<span class="hrv-badge" style="background:${faDiff > 0 ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)'};color:${faColor}">${faDiff > 0 ? '↓ ' + faDiff + ' anni' : '↑ ' + Math.abs(faDiff) + ' anni'}</span>` : '';
+    cards.push(`<div class="health-card"><span class="health-card-icon">🧬</span><span class="health-card-value" style="color:${faColor}">${faVal !== null ? faVal + ' anni' : '—'}</span><div class="health-card-label">Fitness Age</div>${faBadge}${caVal ? `<div class="health-card-sub">anagrafica: ${caVal} anni</div>` : ''}</div>`);
+  }
 
   // 11. Training Status
-  const tsLabelsMap = { PRODUCTIVE:'Produttivo', PEAKING:'Picco', MAINTAINING:'Mantenimento', OVERREACHING:'Sovraccarico', DETRAINING:'Detrain', RECOVERY:'Recupero' };
-  const tsVal = h.training_status;
-  const tsBadge = tsVal ? `<span class="ts-badge ts-${tsVal}">${tsLabelsMap[tsVal] || tsVal}</span>` : '';
-  const tsLoad = h.training_load_feedback ? `<div class="health-card-sub">${h.training_load_feedback}</div>` : '';
-  const tsAcute = h.acute_load ? `<div class="health-card-sub">carico acuto: ${Math.round(h.acute_load)}</div>` : '';
-  cards.push(`<div class="health-card"><span class="health-card-icon">📈</span><span class="health-card-value" style="font-size:14px;line-height:1.3">${tsVal ? '' : '—'}</span><div class="health-card-label">Training Status</div>${tsBadge}${tsLoad}${tsAcute}</div>`);
+  {
+    const tsLabelsMap = { PRODUCTIVE:'Produttivo', PEAKING:'Picco', MAINTAINING:'Mantenimento', OVERREACHING:'Sovraccarico', DETRAINING:'Detrain', RECOVERY:'Recupero' };
+    const tsVal = h.training_status || null;
+    const tsBadge = tsVal ? `<span class="ts-badge ts-${tsVal}">${tsLabelsMap[tsVal] || tsVal}</span>` : '';
+    const tsLoad = h.training_load_feedback ? `<div class="health-card-sub">${h.training_load_feedback}</div>` : '';
+    const tsAcute = h.acute_load ? `<div class="health-card-sub">carico acuto: ${Math.round(h.acute_load)}</div>` : '';
+    cards.push(`<div class="health-card"><span class="health-card-icon">📈</span><span class="health-card-value" style="font-size:14px;line-height:1.3">${tsVal ? '' : '—'}</span><div class="health-card-label">Training Status</div>${tsBadge}${tsLoad}${tsAcute}</div>`);
+  }
 
   document.getElementById('health-cards').innerHTML = cards.join('');
 
-  // Toggle collassa/espandi
+  // Toggle collassa/espandi — ricalcola padding dopo toggle
   document.getElementById('health-toggle').addEventListener('click', () => {
     document.getElementById('health-strip').classList.toggle('collapsed');
+    setTimeout(updateBodyPadding, 350); // dopo la transizione CSS
   });
 }
 
