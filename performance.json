@@ -1,10 +1,11 @@
 {
-  "last_updated": "18/07/2026 11:24",
+  "last_updated": "18/07/2026 13:34",
+  "token_expired": false,
   "summary_90d": {
+    "sessions": 42,
     "total_hours": 43.0,
     "total_km": 437.0,
     "total_elevation_m": 5231,
-    "sessions": 42,
     "avg_sessions_week": 3.3,
     "avg_hr": 126
   },
@@ -22,9 +23,9 @@
         "date": "2026-07-14",
         "distance_km": 0.0,
         "duration_min": 40.1,
-        "avg_hr": 118.0,
+        "avg_hr": 118,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23572163156,
@@ -32,9 +33,9 @@
         "date": "2026-07-12",
         "distance_km": 0.0,
         "duration_min": 31.7,
-        "avg_hr": 116.0,
+        "avg_hr": 116,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23506562685,
@@ -42,9 +43,9 @@
         "date": "2026-07-07",
         "distance_km": 0.0,
         "duration_min": 39.3,
-        "avg_hr": 131.0,
+        "avg_hr": 131,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23485656106,
@@ -52,9 +53,9 @@
         "date": "2026-07-05",
         "distance_km": 0.0,
         "duration_min": 20.0,
-        "avg_hr": 128.0,
+        "avg_hr": 128,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23467198138,
@@ -62,9 +63,9 @@
         "date": "2026-07-03",
         "distance_km": 0.0,
         "duration_min": 40.4,
-        "avg_hr": 138.0,
+        "avg_hr": 138,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23425928057,
@@ -72,9 +73,9 @@
         "date": "2026-06-30",
         "distance_km": 0.0,
         "duration_min": 38.7,
-        "avg_hr": 123.0,
+        "avg_hr": 123,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23347652392,
@@ -82,9 +83,9 @@
         "date": "2026-06-23",
         "distance_km": 0.0,
         "duration_min": 39.9,
-        "avg_hr": 129.0,
+        "avg_hr": 129,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23265589440,
@@ -92,9 +93,9 @@
         "date": "2026-06-16",
         "distance_km": 0.0,
         "duration_min": 39.2,
-        "avg_hr": 132.0,
+        "avg_hr": 132,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23255881541,
@@ -102,9 +103,9 @@
         "date": "2026-06-15",
         "distance_km": 0.0,
         "duration_min": 18.0,
-        "avg_hr": 120.0,
+        "avg_hr": 120,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23255881432,
@@ -112,9 +113,9 @@
         "date": "2026-06-14",
         "distance_km": 0.0,
         "duration_min": 18.0,
-        "avg_hr": 99.0,
+        "avg_hr": 99,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23183417704,
@@ -122,9 +123,9 @@
         "date": "2026-06-09",
         "distance_km": 0.0,
         "duration_min": 38.5,
-        "avg_hr": 138.0,
+        "avg_hr": 138,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23171986184,
@@ -132,9 +133,9 @@
         "date": "2026-06-08",
         "distance_km": 0.0,
         "duration_min": 18.0,
-        "avg_hr": 118.0,
+        "avg_hr": 118,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23162454262,
@@ -142,9 +143,9 @@
         "date": "2026-06-07",
         "distance_km": 0.0,
         "duration_min": 17.9,
-        "avg_hr": 108.0,
+        "avg_hr": 108,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23132191602,
@@ -152,9 +153,9 @@
         "date": "2026-06-04",
         "distance_km": 0.0,
         "duration_min": 18.0,
-        "avg_hr": 120.0,
+        "avg_hr": 120,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23101673436,
@@ -162,9 +163,9 @@
         "date": "2026-06-02",
         "distance_km": 0.0,
         "duration_min": 18.0,
-        "avg_hr": 98.0,
+        "avg_hr": 98,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23092192249,
@@ -172,9 +173,9 @@
         "date": "2026-06-01",
         "distance_km": 0.0,
         "duration_min": 13.6,
-        "avg_hr": 107.0,
+        "avg_hr": 107,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 23004510224,
@@ -182,9 +183,9 @@
         "date": "2026-05-25",
         "distance_km": 0.0,
         "duration_min": 14.6,
-        "avg_hr": 120.0,
+        "avg_hr": 120,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22993970247,
@@ -192,9 +193,9 @@
         "date": "2026-05-24",
         "distance_km": 0.0,
         "duration_min": 11.9,
-        "avg_hr": 112.0,
+        "avg_hr": 112,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22979319428,
@@ -202,9 +203,9 @@
         "date": "2026-05-23",
         "distance_km": 0.0,
         "duration_min": 11.8,
-        "avg_hr": 111.0,
+        "avg_hr": 111,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22931696570,
@@ -212,9 +213,9 @@
         "date": "2026-05-19",
         "distance_km": 0.0,
         "duration_min": 39.6,
-        "avg_hr": 130.0,
+        "avg_hr": 130,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22850772081,
@@ -222,9 +223,9 @@
         "date": "2026-05-12",
         "distance_km": 0.0,
         "duration_min": 38.3,
-        "avg_hr": 128.0,
+        "avg_hr": 128,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22810890538,
@@ -232,9 +233,9 @@
         "date": "2026-05-08",
         "distance_km": 0.0,
         "duration_min": 41.5,
-        "avg_hr": 131.0,
+        "avg_hr": 131,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22768994410,
@@ -242,9 +243,9 @@
         "date": "2026-05-05",
         "distance_km": 0.0,
         "duration_min": 38.6,
-        "avg_hr": 136.0,
+        "avg_hr": 136,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22685469907,
@@ -252,9 +253,9 @@
         "date": "2026-04-28",
         "distance_km": 0.0,
         "duration_min": 38.8,
-        "avg_hr": 141.0,
+        "avg_hr": 141,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22644407157,
@@ -262,9 +263,9 @@
         "date": "2026-04-24",
         "distance_km": 0.0,
         "duration_min": 40.1,
-        "avg_hr": 137.0,
+        "avg_hr": 137,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22601700198,
@@ -272,9 +273,9 @@
         "date": "2026-04-21",
         "distance_km": 0.0,
         "duration_min": 39.5,
-        "avg_hr": 134.0,
+        "avg_hr": 134,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       }
     ],
     "trail_running": [
@@ -284,9 +285,9 @@
         "date": "2026-07-10",
         "distance_km": 12.81,
         "duration_min": 203.4,
-        "avg_hr": 143.0,
+        "avg_hr": 143,
         "elevation_m": 1165,
-        "avg_speed": 3.8
+        "avg_speed_kmh": 3.8
       },
       {
         "id": 21410240661,
@@ -294,9 +295,9 @@
         "date": "2026-01-01",
         "distance_km": 8.84,
         "duration_min": 71.2,
-        "avg_hr": 143.0,
+        "avg_hr": 143,
         "elevation_m": 387,
-        "avg_speed": 7.5
+        "avg_speed_kmh": 7.5
       },
       {
         "id": 21401440148,
@@ -304,9 +305,9 @@
         "date": "2025-12-31",
         "distance_km": 8.42,
         "duration_min": 80.1,
-        "avg_hr": 137.0,
+        "avg_hr": 137,
         "elevation_m": 469,
-        "avg_speed": 6.3
+        "avg_speed_kmh": 6.3
       },
       {
         "id": 21346200936,
@@ -314,9 +315,9 @@
         "date": "2025-12-25",
         "distance_km": 8.84,
         "duration_min": 76.1,
-        "avg_hr": 141.0,
+        "avg_hr": 141,
         "elevation_m": 371,
-        "avg_speed": 7.0
+        "avg_speed_kmh": 7.0
       },
       {
         "id": 21200228117,
@@ -324,9 +325,9 @@
         "date": "2025-12-08",
         "distance_km": 14.1,
         "duration_min": 113.0,
-        "avg_hr": 139.0,
+        "avg_hr": 139,
         "elevation_m": 463,
-        "avg_speed": 7.5
+        "avg_speed_kmh": 7.5
       }
     ],
     "cycling": [
@@ -336,9 +337,9 @@
         "date": "2026-07-08",
         "distance_km": 16.76,
         "duration_min": 49.6,
-        "avg_hr": 116.0,
+        "avg_hr": 116,
         "elevation_m": 0,
-        "avg_speed": 20.3
+        "avg_speed_kmh": 20.3
       },
       {
         "id": 23384317864,
@@ -346,9 +347,9 @@
         "date": "2026-06-26",
         "distance_km": 55.95,
         "duration_min": 166.1,
-        "avg_hr": 144.0,
+        "avg_hr": 144,
         "elevation_m": 881,
-        "avg_speed": 20.2
+        "avg_speed_kmh": 20.2
       },
       {
         "id": 23278425865,
@@ -356,9 +357,9 @@
         "date": "2026-06-17",
         "distance_km": 21.7,
         "duration_min": 56.8,
-        "avg_hr": 129.0,
+        "avg_hr": 129,
         "elevation_m": 0,
-        "avg_speed": 22.9
+        "avg_speed_kmh": 22.9
       },
       {
         "id": 23195864490,
@@ -366,9 +367,9 @@
         "date": "2026-06-10",
         "distance_km": 18.5,
         "duration_min": 49.8,
-        "avg_hr": 125.0,
+        "avg_hr": 125,
         "elevation_m": 0,
-        "avg_speed": 22.3
+        "avg_speed_kmh": 22.3
       },
       {
         "id": 23111863370,
@@ -376,9 +377,9 @@
         "date": "2026-06-03",
         "distance_km": 19.05,
         "duration_min": 56.7,
-        "avg_hr": 126.0,
+        "avg_hr": 126,
         "elevation_m": 0,
-        "avg_speed": 20.2
+        "avg_speed_kmh": 20.2
       },
       {
         "id": 23027604090,
@@ -388,7 +389,7 @@
         "duration_min": 49.9,
         "avg_hr": 0,
         "elevation_m": 0,
-        "avg_speed": 20.0
+        "avg_speed_kmh": 20.0
       },
       {
         "id": 22910257298,
@@ -396,9 +397,9 @@
         "date": "2026-05-17",
         "distance_km": 58.3,
         "duration_min": 152.4,
-        "avg_hr": 144.0,
+        "avg_hr": 144,
         "elevation_m": 131,
-        "avg_speed": 22.9
+        "avg_speed_kmh": 22.9
       },
       {
         "id": 22863021988,
@@ -406,9 +407,9 @@
         "date": "2026-05-13",
         "distance_km": 20.5,
         "duration_min": 52.4,
-        "avg_hr": 119.0,
+        "avg_hr": 119,
         "elevation_m": 0,
-        "avg_speed": 23.5
+        "avg_speed_kmh": 23.5
       },
       {
         "id": 22781227093,
@@ -416,9 +417,9 @@
         "date": "2026-05-06",
         "distance_km": 18.3,
         "duration_min": 47.2,
-        "avg_hr": 130.0,
+        "avg_hr": 130,
         "elevation_m": 0,
-        "avg_speed": 23.2
+        "avg_speed_kmh": 23.2
       },
       {
         "id": 22816534587,
@@ -426,9 +427,9 @@
         "date": "2026-05-02",
         "distance_km": 34.12,
         "duration_min": 142.1,
-        "avg_hr": 143.0,
+        "avg_hr": 143,
         "elevation_m": 912,
-        "avg_speed": 14.4
+        "avg_speed_kmh": 14.4
       },
       {
         "id": 22736068237,
@@ -436,9 +437,9 @@
         "date": "2026-05-02",
         "distance_km": 34.1,
         "duration_min": 137.5,
-        "avg_hr": 143.0,
+        "avg_hr": 143,
         "elevation_m": 871,
-        "avg_speed": 14.9
+        "avg_speed_kmh": 14.9
       },
       {
         "id": 22665040273,
@@ -446,9 +447,9 @@
         "date": "2026-04-26",
         "distance_km": 69.01,
         "duration_min": 180.8,
-        "avg_hr": 140.0,
+        "avg_hr": 140,
         "elevation_m": 165,
-        "avg_speed": 22.9
+        "avg_speed_kmh": 22.9
       },
       {
         "id": 22614257485,
@@ -456,9 +457,9 @@
         "date": "2026-04-22",
         "distance_km": 19.55,
         "duration_min": 51.0,
-        "avg_hr": 129.0,
+        "avg_hr": 129,
         "elevation_m": 0,
-        "avg_speed": 23.0
+        "avg_speed_kmh": 23.0
       },
       {
         "id": 22581296340,
@@ -466,9 +467,9 @@
         "date": "2026-04-19",
         "distance_km": 60.83,
         "duration_min": 163.4,
-        "avg_hr": 143.0,
+        "avg_hr": 143,
         "elevation_m": 139,
-        "avg_speed": 22.3
+        "avg_speed_kmh": 22.3
       },
       {
         "id": 22497841487,
@@ -476,9 +477,9 @@
         "date": "2026-04-12",
         "distance_km": 58.72,
         "duration_min": 171.5,
-        "avg_hr": 137.0,
+        "avg_hr": 137,
         "elevation_m": 111,
-        "avg_speed": 20.5
+        "avg_speed_kmh": 20.5
       },
       {
         "id": 21719868282,
@@ -486,9 +487,9 @@
         "date": "2026-01-31",
         "distance_km": 50.54,
         "duration_min": 134.8,
-        "avg_hr": 146.0,
+        "avg_hr": 146,
         "elevation_m": 90,
-        "avg_speed": 22.5
+        "avg_speed_kmh": 22.5
       },
       {
         "id": 21659810026,
@@ -496,9 +497,9 @@
         "date": "2026-01-25",
         "distance_km": 57.14,
         "duration_min": 139.7,
-        "avg_hr": 149.0,
+        "avg_hr": 149,
         "elevation_m": 110,
-        "avg_speed": 24.5
+        "avg_speed_kmh": 24.5
       },
       {
         "id": 21575070295,
@@ -506,9 +507,9 @@
         "date": "2026-01-17",
         "distance_km": 24.0,
         "duration_min": 117.3,
-        "avg_hr": 85.0,
+        "avg_hr": 85,
         "elevation_m": 49,
-        "avg_speed": 12.3
+        "avg_speed_kmh": 12.3
       },
       {
         "id": 21552216443,
@@ -516,9 +517,9 @@
         "date": "2026-01-15",
         "distance_km": 15.8,
         "duration_min": 27.4,
-        "avg_hr": 105.17811550151976,
+        "avg_hr": 105,
         "elevation_m": 31,
-        "avg_speed": 34.6
+        "avg_speed_kmh": 34.6
       },
       {
         "id": 21541693689,
@@ -526,9 +527,9 @@
         "date": "2026-01-14",
         "distance_km": 22.09,
         "duration_min": 59.3,
-        "avg_hr": 118.67780898876404,
+        "avg_hr": 118,
         "elevation_m": 160,
-        "avg_speed": 22.3
+        "avg_speed_kmh": 22.3
       }
     ],
     "hiking": [
@@ -538,9 +539,9 @@
         "date": "2026-06-21",
         "distance_km": 9.9,
         "duration_min": 184.1,
-        "avg_hr": 106.0,
+        "avg_hr": 106,
         "elevation_m": 387,
-        "avg_speed": 3.2
+        "avg_speed_kmh": 3.2
       },
       {
         "id": 23317648880,
@@ -548,9 +549,9 @@
         "date": "2026-06-20",
         "distance_km": 11.88,
         "duration_min": 234.9,
-        "avg_hr": 129.0,
+        "avg_hr": 129,
         "elevation_m": 719,
-        "avg_speed": 3.0
+        "avg_speed_kmh": 3.0
       },
       {
         "id": 22415623961,
@@ -558,9 +559,9 @@
         "date": "2026-04-05",
         "distance_km": 7.55,
         "duration_min": 162.7,
-        "avg_hr": 106.0,
+        "avg_hr": 106,
         "elevation_m": 496,
-        "avg_speed": 2.8
+        "avg_speed_kmh": 2.8
       },
       {
         "id": 22405854908,
@@ -568,9 +569,9 @@
         "date": "2026-04-04",
         "distance_km": 4.77,
         "duration_min": 81.3,
-        "avg_hr": 117.0,
+        "avg_hr": 117,
         "elevation_m": 189,
-        "avg_speed": 3.5
+        "avg_speed_kmh": 3.5
       },
       {
         "id": 22337625648,
@@ -578,9 +579,9 @@
         "date": "2026-03-29",
         "distance_km": 7.52,
         "duration_min": 116.3,
-        "avg_hr": 118.0,
+        "avg_hr": 118,
         "elevation_m": 466,
-        "avg_speed": 3.9
+        "avg_speed_kmh": 3.9
       },
       {
         "id": 22258903140,
@@ -588,9 +589,9 @@
         "date": "2026-03-22",
         "distance_km": 3.03,
         "duration_min": 46.0,
-        "avg_hr": 90.0,
+        "avg_hr": 90,
         "elevation_m": 136,
-        "avg_speed": 3.9
+        "avg_speed_kmh": 3.9
       },
       {
         "id": 21947656379,
@@ -598,9 +599,9 @@
         "date": "2026-02-22",
         "distance_km": 4.44,
         "duration_min": 75.8,
-        "avg_hr": 94.0,
+        "avg_hr": 94,
         "elevation_m": 104,
-        "avg_speed": 3.5
+        "avg_speed_kmh": 3.5
       },
       {
         "id": 21905320972,
@@ -608,9 +609,9 @@
         "date": "2026-02-18",
         "distance_km": 5.39,
         "duration_min": 76.1,
-        "avg_hr": 113.0,
+        "avg_hr": 113,
         "elevation_m": 272,
-        "avg_speed": 4.2
+        "avg_speed_kmh": 4.2
       },
       {
         "id": 21893653267,
@@ -618,9 +619,9 @@
         "date": "2026-02-17",
         "distance_km": 5.65,
         "duration_min": 75.4,
-        "avg_hr": 98.0,
+        "avg_hr": 98,
         "elevation_m": 171,
-        "avg_speed": 4.5
+        "avg_speed_kmh": 4.5
       },
       {
         "id": 21884749703,
@@ -628,9 +629,9 @@
         "date": "2026-02-16",
         "distance_km": 5.26,
         "duration_min": 79.2,
-        "avg_hr": 112.0,
+        "avg_hr": 112,
         "elevation_m": 248,
-        "avg_speed": 4.0
+        "avg_speed_kmh": 4.0
       },
       {
         "id": 21876072821,
@@ -638,9 +639,9 @@
         "date": "2026-02-14",
         "distance_km": 6.65,
         "duration_min": 115.3,
-        "avg_hr": 82.0,
+        "avg_hr": 82,
         "elevation_m": 76,
-        "avg_speed": 3.5
+        "avg_speed_kmh": 3.5
       },
       {
         "id": 21392895329,
@@ -648,9 +649,9 @@
         "date": "2025-12-30",
         "distance_km": 9.38,
         "duration_min": 153.0,
-        "avg_hr": 102.0,
+        "avg_hr": 102,
         "elevation_m": 473,
-        "avg_speed": 3.7
+        "avg_speed_kmh": 3.7
       },
       {
         "id": 21383160743,
@@ -658,9 +659,9 @@
         "date": "2025-12-29",
         "distance_km": 4.61,
         "duration_min": 86.1,
-        "avg_hr": 90.0,
+        "avg_hr": 90,
         "elevation_m": 152,
-        "avg_speed": 3.2
+        "avg_speed_kmh": 3.2
       }
     ],
     "multi_sport": [
@@ -672,7 +673,7 @@
         "duration_min": 47.8,
         "avg_hr": 0,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       },
       {
         "id": 22531188128,
@@ -682,7 +683,7 @@
         "duration_min": 46.5,
         "avg_hr": 0,
         "elevation_m": 0,
-        "avg_speed": 0.0
+        "avg_speed_kmh": 0.0
       }
     ],
     "running": [
@@ -692,9 +693,9 @@
         "date": "2026-04-06",
         "distance_km": 5.38,
         "duration_min": 34.4,
-        "avg_hr": 146.0,
+        "avg_hr": 146,
         "elevation_m": 18,
-        "avg_speed": 9.4
+        "avg_speed_kmh": 9.4
       },
       {
         "id": 22391351054,
@@ -702,9 +703,9 @@
         "date": "2026-04-03",
         "distance_km": 7.28,
         "duration_min": 44.9,
-        "avg_hr": 154.0,
+        "avg_hr": 154,
         "elevation_m": 34,
-        "avg_speed": 9.7
+        "avg_speed_kmh": 9.7
       },
       {
         "id": 22325337802,
@@ -712,9 +713,9 @@
         "date": "2026-03-28",
         "distance_km": 5.72,
         "duration_min": 34.2,
-        "avg_hr": 153.0,
+        "avg_hr": 153,
         "elevation_m": 25,
-        "avg_speed": 10.0
+        "avg_speed_kmh": 10.0
       },
       {
         "id": 22247085651,
@@ -722,9 +723,9 @@
         "date": "2026-03-21",
         "distance_km": 8.74,
         "duration_min": 52.6,
-        "avg_hr": 151.0,
+        "avg_hr": 151,
         "elevation_m": 17,
-        "avg_speed": 10.0
+        "avg_speed_kmh": 10.0
       },
       {
         "id": 22199196396,
@@ -732,9 +733,9 @@
         "date": "2026-03-17",
         "distance_km": 7.16,
         "duration_min": 41.3,
-        "avg_hr": 145.0,
+        "avg_hr": 145,
         "elevation_m": 21,
-        "avg_speed": 10.4
+        "avg_speed_kmh": 10.4
       },
       {
         "id": 22168811024,
@@ -742,9 +743,9 @@
         "date": "2026-03-14",
         "distance_km": 8.1,
         "duration_min": 48.3,
-        "avg_hr": 156.0,
+        "avg_hr": 156,
         "elevation_m": 25,
-        "avg_speed": 10.1
+        "avg_speed_kmh": 10.1
       },
       {
         "id": 22101057512,
@@ -752,9 +753,9 @@
         "date": "2026-03-08",
         "distance_km": 7.82,
         "duration_min": 50.0,
-        "avg_hr": 154.0,
+        "avg_hr": 154,
         "elevation_m": 60,
-        "avg_speed": 9.4
+        "avg_speed_kmh": 9.4
       },
       {
         "id": 22027596382,
@@ -762,9 +763,9 @@
         "date": "2026-03-01",
         "distance_km": 7.04,
         "duration_min": 42.1,
-        "avg_hr": 151.0,
+        "avg_hr": 151,
         "elevation_m": 15,
-        "avg_speed": 10.0
+        "avg_speed_kmh": 10.0
       },
       {
         "id": 21791994237,
@@ -772,9 +773,9 @@
         "date": "2026-02-07",
         "distance_km": 10.02,
         "duration_min": 59.9,
-        "avg_hr": 156.0,
+        "avg_hr": 156,
         "elevation_m": 53,
-        "avg_speed": 10.0
+        "avg_speed_kmh": 10.0
       },
       {
         "id": 21448369479,
@@ -782,9 +783,9 @@
         "date": "2026-01-05",
         "distance_km": 9.5,
         "duration_min": 53.5,
-        "avg_hr": 147.0,
+        "avg_hr": 147,
         "elevation_m": 19,
-        "avg_speed": 10.7
+        "avg_speed_kmh": 10.7
       },
       {
         "id": 21439205638,
@@ -792,9 +793,9 @@
         "date": "2026-01-04",
         "distance_km": 13.66,
         "duration_min": 76.0,
-        "avg_hr": 146.0,
+        "avg_hr": 146,
         "elevation_m": 24,
-        "avg_speed": 10.8
+        "avg_speed_kmh": 10.8
       },
       {
         "id": 21371883294,
@@ -802,9 +803,9 @@
         "date": "2025-12-28",
         "distance_km": 16.01,
         "duration_min": 93.8,
-        "avg_hr": 150.0,
+        "avg_hr": 150,
         "elevation_m": 45,
-        "avg_speed": 10.2
+        "avg_speed_kmh": 10.2
       },
       {
         "id": 21330379131,
@@ -812,9 +813,9 @@
         "date": "2025-12-23",
         "distance_km": 10.17,
         "duration_min": 65.9,
-        "avg_hr": 147.0,
+        "avg_hr": 147,
         "elevation_m": 121,
-        "avg_speed": 9.3
+        "avg_speed_kmh": 9.3
       },
       {
         "id": 21252661180,
@@ -822,9 +823,9 @@
         "date": "2025-12-14",
         "distance_km": 10.54,
         "duration_min": 59.9,
-        "avg_hr": 140.0,
+        "avg_hr": 140,
         "elevation_m": 18,
-        "avg_speed": 10.6
+        "avg_speed_kmh": 10.6
       },
       {
         "id": 21235412231,
@@ -832,9 +833,9 @@
         "date": "2025-12-12",
         "distance_km": 10.73,
         "duration_min": 60.5,
-        "avg_hr": 142.0,
+        "avg_hr": 142,
         "elevation_m": 66,
-        "avg_speed": 10.6
+        "avg_speed_kmh": 10.6
       },
       {
         "id": 21184057780,
@@ -842,9 +843,9 @@
         "date": "2025-12-06",
         "distance_km": 12.2,
         "duration_min": 67.1,
-        "avg_hr": 145.0,
+        "avg_hr": 145,
         "elevation_m": 31,
-        "avg_speed": 10.9
+        "avg_speed_kmh": 10.9
       },
       {
         "id": 21166879907,
@@ -852,9 +853,9 @@
         "date": "2025-12-04",
         "distance_km": 10.17,
         "duration_min": 54.5,
-        "avg_hr": 152.0,
+        "avg_hr": 152,
         "elevation_m": 4,
-        "avg_speed": 11.2
+        "avg_speed_kmh": 11.2
       },
       {
         "id": 21148488158,
@@ -862,9 +863,9 @@
         "date": "2025-12-02",
         "distance_km": 10.74,
         "duration_min": 57.7,
-        "avg_hr": 148.0,
+        "avg_hr": 148,
         "elevation_m": 9,
-        "avg_speed": 11.2
+        "avg_speed_kmh": 11.2
       },
       {
         "id": 21121145221,
@@ -872,9 +873,9 @@
         "date": "2025-11-29",
         "distance_km": 15.08,
         "duration_min": 87.8,
-        "avg_hr": 143.0,
+        "avg_hr": 143,
         "elevation_m": 14,
-        "avg_speed": 10.3
+        "avg_speed_kmh": 10.3
       },
       {
         "id": 21095328963,
@@ -882,9 +883,9 @@
         "date": "2025-11-26",
         "distance_km": 10.07,
         "duration_min": 55.1,
-        "avg_hr": 149.0,
+        "avg_hr": 149,
         "elevation_m": 12,
-        "avg_speed": 11.0
+        "avg_speed_kmh": 11.0
       },
       {
         "id": 21076444333,
@@ -892,9 +893,9 @@
         "date": "2025-11-24",
         "distance_km": 14.19,
         "duration_min": 76.1,
-        "avg_hr": 145.0,
+        "avg_hr": 145,
         "elevation_m": 21,
-        "avg_speed": 11.2
+        "avg_speed_kmh": 11.2
       },
       {
         "id": 21058171640,
@@ -902,9 +903,9 @@
         "date": "2025-11-22",
         "distance_km": 11.09,
         "duration_min": 58.0,
-        "avg_hr": 149.0,
+        "avg_hr": 149,
         "elevation_m": 19,
-        "avg_speed": 11.5
+        "avg_speed_kmh": 11.5
       },
       {
         "id": 21042789855,
@@ -912,9 +913,9 @@
         "date": "2025-11-20",
         "distance_km": 10.57,
         "duration_min": 57.4,
-        "avg_hr": 151.0,
+        "avg_hr": 151,
         "elevation_m": 12,
-        "avg_speed": 11.0
+        "avg_speed_kmh": 11.0
       },
       {
         "id": 21011195019,
@@ -922,9 +923,9 @@
         "date": "2025-11-17",
         "distance_km": 10.01,
         "duration_min": 56.2,
-        "avg_hr": 138.0,
+        "avg_hr": 138,
         "elevation_m": 13,
-        "avg_speed": 10.7
+        "avg_speed_kmh": 10.7
       },
       {
         "id": 20995437163,
@@ -932,9 +933,9 @@
         "date": "2025-11-15",
         "distance_km": 11.0,
         "duration_min": 59.7,
-        "avg_hr": 140.0,
+        "avg_hr": 140,
         "elevation_m": 17,
-        "avg_speed": 11.1
+        "avg_speed_kmh": 11.1
       },
       {
         "id": 20966981945,
@@ -942,9 +943,9 @@
         "date": "2025-11-12",
         "distance_km": 10.13,
         "duration_min": 57.2,
-        "avg_hr": 146.0,
+        "avg_hr": 146,
         "elevation_m": 13,
-        "avg_speed": 10.6
+        "avg_speed_kmh": 10.6
       },
       {
         "id": 20946718822,
@@ -952,9 +953,9 @@
         "date": "2025-11-10",
         "distance_km": 10.94,
         "duration_min": 59.5,
-        "avg_hr": 143.0,
+        "avg_hr": 143,
         "elevation_m": 10,
-        "avg_speed": 11.0
+        "avg_speed_kmh": 11.0
       }
     ],
     "walking": [
@@ -964,9 +965,9 @@
         "date": "2026-03-20",
         "distance_km": 4.22,
         "duration_min": 52.8,
-        "avg_hr": 91.0,
+        "avg_hr": 91,
         "elevation_m": 29,
-        "avg_speed": 4.8
+        "avg_speed_kmh": 4.8
       },
       {
         "id": 22091484013,
@@ -974,9 +975,9 @@
         "date": "2026-03-07",
         "distance_km": 4.61,
         "duration_min": 67.3,
-        "avg_hr": 86.0,
+        "avg_hr": 86,
         "elevation_m": 70,
-        "avg_speed": 4.1
+        "avg_speed_kmh": 4.1
       },
       {
         "id": 21730018769,
@@ -984,9 +985,9 @@
         "date": "2026-02-01",
         "distance_km": 7.09,
         "duration_min": 99.3,
-        "avg_hr": 86.0,
+        "avg_hr": 86,
         "elevation_m": 16,
-        "avg_speed": 4.3
+        "avg_speed_kmh": 4.3
       },
       {
         "id": 21586318088,
@@ -994,9 +995,9 @@
         "date": "2026-01-18",
         "distance_km": 6.8,
         "duration_min": 105.8,
-        "avg_hr": 85.0,
+        "avg_hr": 85,
         "elevation_m": 61,
-        "avg_speed": 3.9
+        "avg_speed_kmh": 3.9
       }
     ],
     "skate_skiing_ws": [
@@ -1006,9 +1007,9 @@
         "date": "2026-02-21",
         "distance_km": 5.52,
         "duration_min": 45.4,
-        "avg_hr": 154.0,
+        "avg_hr": 154,
         "elevation_m": 69,
-        "avg_speed": 7.3
+        "avg_speed_kmh": 7.3
       }
     ],
     "resort_skiing": [
@@ -1018,9 +1019,9 @@
         "date": "2026-02-15",
         "distance_km": 90.97,
         "duration_min": 336.9,
-        "avg_hr": 97.0,
+        "avg_hr": 97,
         "elevation_m": 9841,
-        "avg_speed": 16.2
+        "avg_speed_kmh": 16.2
       },
       {
         "id": 21315911547,
@@ -1028,16 +1029,16 @@
         "date": "2025-12-21",
         "distance_km": 72.62,
         "duration_min": 371.4,
-        "avg_hr": 89.0,
+        "avg_hr": 89,
         "elevation_m": 7526,
-        "avg_speed": 11.7
+        "avg_speed_kmh": 11.7
       }
     ]
   },
   "monthly_volume": {
     "2026-07": {
       "hiit": {
-        "hours": 2.8600000000000003,
+        "hours": 2.86,
         "km": 0.0,
         "sessions": 5
       },
@@ -1071,7 +1072,7 @@
     },
     "2026-05": {
       "cycling": {
-        "hours": 9.690000000000001,
+        "hours": 9.69,
         "km": 181.92,
         "sessions": 6
       },
@@ -1089,7 +1090,7 @@
       },
       "cycling": {
         "hours": 9.44,
-        "km": 208.10999999999999,
+        "km": 208.11,
         "sessions": 4
       },
       "multi_sport": {
@@ -1098,12 +1099,12 @@
         "sessions": 2
       },
       "running": {
-        "hours": 1.3199999999999998,
+        "hours": 1.32,
         "km": 12.66,
         "sessions": 2
       },
       "hiking": {
-        "hours": 4.0600000000000005,
+        "hours": 4.06,
         "km": 12.32,
         "sessions": 2
       }
@@ -1111,7 +1112,7 @@
     "2026-03": {
       "hiking": {
         "hours": 2.71,
-        "km": 10.549999999999999,
+        "km": 10.55,
         "sessions": 2
       },
       "running": {
@@ -1155,7 +1156,7 @@
     "2026-01": {
       "cycling": {
         "hours": 7.98,
-        "km": 169.57000000000002,
+        "km": 169.57,
         "sessions": 5
       },
       "walking": {
@@ -1181,8 +1182,8 @@
         "sessions": 3
       },
       "hiking": {
-        "hours": 3.9899999999999998,
-        "km": 13.990000000000002,
+        "hours": 3.99,
+        "km": 13.99,
         "sessions": 2
       },
       "running": {
@@ -1199,7 +1200,7 @@
     "2025-11": {
       "running": {
         "hours": 9.45,
-        "km": 103.07999999999998,
+        "km": 103.08,
         "sessions": 9
       }
     }
@@ -1352,7 +1353,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 40.1,
-      "avg_hr": 118.0,
+      "avg_hr": 118,
       "elevation_m": 0
     },
     {
@@ -1362,7 +1363,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 31.7,
-      "avg_hr": 116.0,
+      "avg_hr": 116,
       "elevation_m": 0
     },
     {
@@ -1372,7 +1373,7 @@
       "sport": "trail_running",
       "distance_km": 12.81,
       "duration_min": 203.4,
-      "avg_hr": 143.0,
+      "avg_hr": 143,
       "elevation_m": 1165
     },
     {
@@ -1382,7 +1383,7 @@
       "sport": "cycling",
       "distance_km": 16.76,
       "duration_min": 49.6,
-      "avg_hr": 116.0,
+      "avg_hr": 116,
       "elevation_m": 0
     },
     {
@@ -1392,7 +1393,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 39.3,
-      "avg_hr": 131.0,
+      "avg_hr": 131,
       "elevation_m": 0
     },
     {
@@ -1402,7 +1403,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 20.0,
-      "avg_hr": 128.0,
+      "avg_hr": 128,
       "elevation_m": 0
     },
     {
@@ -1412,7 +1413,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 40.4,
-      "avg_hr": 138.0,
+      "avg_hr": 138,
       "elevation_m": 0
     },
     {
@@ -1422,7 +1423,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 38.7,
-      "avg_hr": 123.0,
+      "avg_hr": 123,
       "elevation_m": 0
     },
     {
@@ -1432,7 +1433,7 @@
       "sport": "cycling",
       "distance_km": 55.95,
       "duration_min": 166.1,
-      "avg_hr": 144.0,
+      "avg_hr": 144,
       "elevation_m": 881
     },
     {
@@ -1442,7 +1443,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 39.9,
-      "avg_hr": 129.0,
+      "avg_hr": 129,
       "elevation_m": 0
     },
     {
@@ -1452,7 +1453,7 @@
       "sport": "hiking",
       "distance_km": 9.9,
       "duration_min": 184.1,
-      "avg_hr": 106.0,
+      "avg_hr": 106,
       "elevation_m": 387
     },
     {
@@ -1462,7 +1463,7 @@
       "sport": "hiking",
       "distance_km": 11.88,
       "duration_min": 234.9,
-      "avg_hr": 129.0,
+      "avg_hr": 129,
       "elevation_m": 719
     },
     {
@@ -1472,7 +1473,7 @@
       "sport": "cycling",
       "distance_km": 21.7,
       "duration_min": 56.8,
-      "avg_hr": 129.0,
+      "avg_hr": 129,
       "elevation_m": 0
     },
     {
@@ -1482,7 +1483,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 39.2,
-      "avg_hr": 132.0,
+      "avg_hr": 132,
       "elevation_m": 0
     },
     {
@@ -1492,7 +1493,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 18.0,
-      "avg_hr": 120.0,
+      "avg_hr": 120,
       "elevation_m": 0
     },
     {
@@ -1502,7 +1503,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 18.0,
-      "avg_hr": 99.0,
+      "avg_hr": 99,
       "elevation_m": 0
     },
     {
@@ -1512,7 +1513,7 @@
       "sport": "cycling",
       "distance_km": 18.5,
       "duration_min": 49.8,
-      "avg_hr": 125.0,
+      "avg_hr": 125,
       "elevation_m": 0
     },
     {
@@ -1522,7 +1523,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 38.5,
-      "avg_hr": 138.0,
+      "avg_hr": 138,
       "elevation_m": 0
     },
     {
@@ -1532,7 +1533,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 18.0,
-      "avg_hr": 118.0,
+      "avg_hr": 118,
       "elevation_m": 0
     },
     {
@@ -1542,7 +1543,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 17.9,
-      "avg_hr": 108.0,
+      "avg_hr": 108,
       "elevation_m": 0
     },
     {
@@ -1552,7 +1553,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 18.0,
-      "avg_hr": 120.0,
+      "avg_hr": 120,
       "elevation_m": 0
     },
     {
@@ -1562,7 +1563,7 @@
       "sport": "cycling",
       "distance_km": 19.05,
       "duration_min": 56.7,
-      "avg_hr": 126.0,
+      "avg_hr": 126,
       "elevation_m": 0
     },
     {
@@ -1572,7 +1573,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 18.0,
-      "avg_hr": 98.0,
+      "avg_hr": 98,
       "elevation_m": 0
     },
     {
@@ -1582,7 +1583,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 13.6,
-      "avg_hr": 107.0,
+      "avg_hr": 107,
       "elevation_m": 0
     },
     {
@@ -1602,7 +1603,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 14.6,
-      "avg_hr": 120.0,
+      "avg_hr": 120,
       "elevation_m": 0
     },
     {
@@ -1612,7 +1613,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 11.9,
-      "avg_hr": 112.0,
+      "avg_hr": 112,
       "elevation_m": 0
     },
     {
@@ -1622,7 +1623,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 11.8,
-      "avg_hr": 111.0,
+      "avg_hr": 111,
       "elevation_m": 0
     },
     {
@@ -1632,7 +1633,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 39.6,
-      "avg_hr": 130.0,
+      "avg_hr": 130,
       "elevation_m": 0
     },
     {
@@ -1642,7 +1643,7 @@
       "sport": "cycling",
       "distance_km": 58.3,
       "duration_min": 152.4,
-      "avg_hr": 144.0,
+      "avg_hr": 144,
       "elevation_m": 131
     },
     {
@@ -1652,7 +1653,7 @@
       "sport": "cycling",
       "distance_km": 20.5,
       "duration_min": 52.4,
-      "avg_hr": 119.0,
+      "avg_hr": 119,
       "elevation_m": 0
     },
     {
@@ -1662,7 +1663,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 38.3,
-      "avg_hr": 128.0,
+      "avg_hr": 128,
       "elevation_m": 0
     },
     {
@@ -1672,7 +1673,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 41.5,
-      "avg_hr": 131.0,
+      "avg_hr": 131,
       "elevation_m": 0
     },
     {
@@ -1682,7 +1683,7 @@
       "sport": "cycling",
       "distance_km": 18.3,
       "duration_min": 47.2,
-      "avg_hr": 130.0,
+      "avg_hr": 130,
       "elevation_m": 0
     },
     {
@@ -1692,7 +1693,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 38.6,
-      "avg_hr": 136.0,
+      "avg_hr": 136,
       "elevation_m": 0
     },
     {
@@ -1702,7 +1703,7 @@
       "sport": "cycling",
       "distance_km": 34.12,
       "duration_min": 142.1,
-      "avg_hr": 143.0,
+      "avg_hr": 143,
       "elevation_m": 912
     },
     {
@@ -1712,7 +1713,7 @@
       "sport": "cycling",
       "distance_km": 34.1,
       "duration_min": 137.5,
-      "avg_hr": 143.0,
+      "avg_hr": 143,
       "elevation_m": 871
     },
     {
@@ -1722,7 +1723,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 38.8,
-      "avg_hr": 141.0,
+      "avg_hr": 141,
       "elevation_m": 0
     },
     {
@@ -1732,7 +1733,7 @@
       "sport": "cycling",
       "distance_km": 69.01,
       "duration_min": 180.8,
-      "avg_hr": 140.0,
+      "avg_hr": 140,
       "elevation_m": 165
     },
     {
@@ -1742,7 +1743,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 40.1,
-      "avg_hr": 137.0,
+      "avg_hr": 137,
       "elevation_m": 0
     },
     {
@@ -1752,7 +1753,7 @@
       "sport": "cycling",
       "distance_km": 19.55,
       "duration_min": 51.0,
-      "avg_hr": 129.0,
+      "avg_hr": 129,
       "elevation_m": 0
     },
     {
@@ -1762,7 +1763,7 @@
       "sport": "hiit",
       "distance_km": 0.0,
       "duration_min": 39.5,
-      "avg_hr": 134.0,
+      "avg_hr": 134,
       "elevation_m": 0
     },
     {
@@ -1772,7 +1773,7 @@
       "sport": "cycling",
       "distance_km": 60.83,
       "duration_min": 163.4,
-      "avg_hr": 143.0,
+      "avg_hr": 143,
       "elevation_m": 139
     },
     {
@@ -1802,7 +1803,7 @@
       "sport": "cycling",
       "distance_km": 58.72,
       "duration_min": 171.5,
-      "avg_hr": 137.0,
+      "avg_hr": 137,
       "elevation_m": 111
     },
     {
@@ -1812,7 +1813,7 @@
       "sport": "running",
       "distance_km": 5.38,
       "duration_min": 34.4,
-      "avg_hr": 146.0,
+      "avg_hr": 146,
       "elevation_m": 18
     },
     {
@@ -1822,7 +1823,7 @@
       "sport": "hiking",
       "distance_km": 7.55,
       "duration_min": 162.7,
-      "avg_hr": 106.0,
+      "avg_hr": 106,
       "elevation_m": 496
     },
     {
@@ -1832,7 +1833,7 @@
       "sport": "hiking",
       "distance_km": 4.77,
       "duration_min": 81.3,
-      "avg_hr": 117.0,
+      "avg_hr": 117,
       "elevation_m": 189
     },
     {
@@ -1842,7 +1843,7 @@
       "sport": "running",
       "distance_km": 7.28,
       "duration_min": 44.9,
-      "avg_hr": 154.0,
+      "avg_hr": 154,
       "elevation_m": 34
     },
     {
@@ -1852,7 +1853,7 @@
       "sport": "hiking",
       "distance_km": 7.52,
       "duration_min": 116.3,
-      "avg_hr": 118.0,
+      "avg_hr": 118,
       "elevation_m": 466
     },
     {
@@ -1862,7 +1863,7 @@
       "sport": "running",
       "distance_km": 5.72,
       "duration_min": 34.2,
-      "avg_hr": 153.0,
+      "avg_hr": 153,
       "elevation_m": 25
     },
     {
@@ -1872,7 +1873,7 @@
       "sport": "hiking",
       "distance_km": 3.03,
       "duration_min": 46.0,
-      "avg_hr": 90.0,
+      "avg_hr": 90,
       "elevation_m": 136
     },
     {
@@ -1882,7 +1883,7 @@
       "sport": "running",
       "distance_km": 8.74,
       "duration_min": 52.6,
-      "avg_hr": 151.0,
+      "avg_hr": 151,
       "elevation_m": 17
     },
     {
@@ -1892,7 +1893,7 @@
       "sport": "walking",
       "distance_km": 4.22,
       "duration_min": 52.8,
-      "avg_hr": 91.0,
+      "avg_hr": 91,
       "elevation_m": 29
     },
     {
@@ -1902,7 +1903,7 @@
       "sport": "running",
       "distance_km": 7.16,
       "duration_min": 41.3,
-      "avg_hr": 145.0,
+      "avg_hr": 145,
       "elevation_m": 21
     },
     {
@@ -1912,7 +1913,7 @@
       "sport": "running",
       "distance_km": 8.1,
       "duration_min": 48.3,
-      "avg_hr": 156.0,
+      "avg_hr": 156,
       "elevation_m": 25
     },
     {
@@ -1922,7 +1923,7 @@
       "sport": "running",
       "distance_km": 7.82,
       "duration_min": 50.0,
-      "avg_hr": 154.0,
+      "avg_hr": 154,
       "elevation_m": 60
     },
     {
@@ -1932,7 +1933,7 @@
       "sport": "walking",
       "distance_km": 4.61,
       "duration_min": 67.3,
-      "avg_hr": 86.0,
+      "avg_hr": 86,
       "elevation_m": 70
     },
     {
@@ -1942,7 +1943,7 @@
       "sport": "running",
       "distance_km": 7.04,
       "duration_min": 42.1,
-      "avg_hr": 151.0,
+      "avg_hr": 151,
       "elevation_m": 15
     },
     {
@@ -1952,7 +1953,7 @@
       "sport": "hiking",
       "distance_km": 4.44,
       "duration_min": 75.8,
-      "avg_hr": 94.0,
+      "avg_hr": 94,
       "elevation_m": 104
     },
     {
@@ -1962,7 +1963,7 @@
       "sport": "skate_skiing_ws",
       "distance_km": 5.52,
       "duration_min": 45.4,
-      "avg_hr": 154.0,
+      "avg_hr": 154,
       "elevation_m": 69
     },
     {
@@ -1972,7 +1973,7 @@
       "sport": "hiking",
       "distance_km": 5.39,
       "duration_min": 76.1,
-      "avg_hr": 113.0,
+      "avg_hr": 113,
       "elevation_m": 272
     },
     {
@@ -1982,7 +1983,7 @@
       "sport": "hiking",
       "distance_km": 5.65,
       "duration_min": 75.4,
-      "avg_hr": 98.0,
+      "avg_hr": 98,
       "elevation_m": 171
     },
     {
@@ -1992,7 +1993,7 @@
       "sport": "hiking",
       "distance_km": 5.26,
       "duration_min": 79.2,
-      "avg_hr": 112.0,
+      "avg_hr": 112,
       "elevation_m": 248
     },
     {
@@ -2002,7 +2003,7 @@
       "sport": "resort_skiing",
       "distance_km": 90.97,
       "duration_min": 336.9,
-      "avg_hr": 97.0,
+      "avg_hr": 97,
       "elevation_m": 9841
     },
     {
@@ -2012,7 +2013,7 @@
       "sport": "hiking",
       "distance_km": 6.65,
       "duration_min": 115.3,
-      "avg_hr": 82.0,
+      "avg_hr": 82,
       "elevation_m": 76
     },
     {
@@ -2022,7 +2023,7 @@
       "sport": "running",
       "distance_km": 10.02,
       "duration_min": 59.9,
-      "avg_hr": 156.0,
+      "avg_hr": 156,
       "elevation_m": 53
     },
     {
@@ -2032,7 +2033,7 @@
       "sport": "walking",
       "distance_km": 7.09,
       "duration_min": 99.3,
-      "avg_hr": 86.0,
+      "avg_hr": 86,
       "elevation_m": 16
     },
     {
@@ -2042,7 +2043,7 @@
       "sport": "cycling",
       "distance_km": 50.54,
       "duration_min": 134.8,
-      "avg_hr": 146.0,
+      "avg_hr": 146,
       "elevation_m": 90
     },
     {
@@ -2052,7 +2053,7 @@
       "sport": "cycling",
       "distance_km": 57.14,
       "duration_min": 139.7,
-      "avg_hr": 149.0,
+      "avg_hr": 149,
       "elevation_m": 110
     },
     {
@@ -2062,7 +2063,7 @@
       "sport": "walking",
       "distance_km": 6.8,
       "duration_min": 105.8,
-      "avg_hr": 85.0,
+      "avg_hr": 85,
       "elevation_m": 61
     },
     {
@@ -2072,7 +2073,7 @@
       "sport": "cycling",
       "distance_km": 24.0,
       "duration_min": 117.3,
-      "avg_hr": 85.0,
+      "avg_hr": 85,
       "elevation_m": 49
     },
     {
@@ -2082,7 +2083,7 @@
       "sport": "cycling",
       "distance_km": 15.8,
       "duration_min": 27.4,
-      "avg_hr": 105.17811550151976,
+      "avg_hr": 105,
       "elevation_m": 31
     },
     {
@@ -2092,7 +2093,7 @@
       "sport": "cycling",
       "distance_km": 22.09,
       "duration_min": 59.3,
-      "avg_hr": 118.67780898876404,
+      "avg_hr": 118,
       "elevation_m": 160
     },
     {
@@ -2102,7 +2103,7 @@
       "sport": "running",
       "distance_km": 9.5,
       "duration_min": 53.5,
-      "avg_hr": 147.0,
+      "avg_hr": 147,
       "elevation_m": 19
     },
     {
@@ -2112,7 +2113,7 @@
       "sport": "running",
       "distance_km": 13.66,
       "duration_min": 76.0,
-      "avg_hr": 146.0,
+      "avg_hr": 146,
       "elevation_m": 24
     },
     {
@@ -2122,7 +2123,7 @@
       "sport": "trail_running",
       "distance_km": 8.84,
       "duration_min": 71.2,
-      "avg_hr": 143.0,
+      "avg_hr": 143,
       "elevation_m": 387
     },
     {
@@ -2132,7 +2133,7 @@
       "sport": "trail_running",
       "distance_km": 8.42,
       "duration_min": 80.1,
-      "avg_hr": 137.0,
+      "avg_hr": 137,
       "elevation_m": 469
     },
     {
@@ -2142,7 +2143,7 @@
       "sport": "hiking",
       "distance_km": 9.38,
       "duration_min": 153.0,
-      "avg_hr": 102.0,
+      "avg_hr": 102,
       "elevation_m": 473
     },
     {
@@ -2152,7 +2153,7 @@
       "sport": "hiking",
       "distance_km": 4.61,
       "duration_min": 86.1,
-      "avg_hr": 90.0,
+      "avg_hr": 90,
       "elevation_m": 152
     },
     {
@@ -2162,7 +2163,7 @@
       "sport": "running",
       "distance_km": 16.01,
       "duration_min": 93.8,
-      "avg_hr": 150.0,
+      "avg_hr": 150,
       "elevation_m": 45
     },
     {
@@ -2172,7 +2173,7 @@
       "sport": "trail_running",
       "distance_km": 8.84,
       "duration_min": 76.1,
-      "avg_hr": 141.0,
+      "avg_hr": 141,
       "elevation_m": 371
     },
     {
@@ -2182,7 +2183,7 @@
       "sport": "running",
       "distance_km": 10.17,
       "duration_min": 65.9,
-      "avg_hr": 147.0,
+      "avg_hr": 147,
       "elevation_m": 121
     },
     {
@@ -2192,7 +2193,7 @@
       "sport": "resort_skiing",
       "distance_km": 72.62,
       "duration_min": 371.4,
-      "avg_hr": 89.0,
+      "avg_hr": 89,
       "elevation_m": 7526
     },
     {
@@ -2202,7 +2203,7 @@
       "sport": "running",
       "distance_km": 10.54,
       "duration_min": 59.9,
-      "avg_hr": 140.0,
+      "avg_hr": 140,
       "elevation_m": 18
     },
     {
@@ -2212,7 +2213,7 @@
       "sport": "running",
       "distance_km": 10.73,
       "duration_min": 60.5,
-      "avg_hr": 142.0,
+      "avg_hr": 142,
       "elevation_m": 66
     },
     {
@@ -2222,7 +2223,7 @@
       "sport": "trail_running",
       "distance_km": 14.1,
       "duration_min": 113.0,
-      "avg_hr": 139.0,
+      "avg_hr": 139,
       "elevation_m": 463
     },
     {
@@ -2232,7 +2233,7 @@
       "sport": "running",
       "distance_km": 12.2,
       "duration_min": 67.1,
-      "avg_hr": 145.0,
+      "avg_hr": 145,
       "elevation_m": 31
     },
     {
@@ -2242,7 +2243,7 @@
       "sport": "running",
       "distance_km": 10.17,
       "duration_min": 54.5,
-      "avg_hr": 152.0,
+      "avg_hr": 152,
       "elevation_m": 4
     },
     {
@@ -2252,7 +2253,7 @@
       "sport": "running",
       "distance_km": 10.74,
       "duration_min": 57.7,
-      "avg_hr": 148.0,
+      "avg_hr": 148,
       "elevation_m": 9
     },
     {
@@ -2262,7 +2263,7 @@
       "sport": "running",
       "distance_km": 15.08,
       "duration_min": 87.8,
-      "avg_hr": 143.0,
+      "avg_hr": 143,
       "elevation_m": 14
     },
     {
@@ -2272,7 +2273,7 @@
       "sport": "running",
       "distance_km": 10.07,
       "duration_min": 55.1,
-      "avg_hr": 149.0,
+      "avg_hr": 149,
       "elevation_m": 12
     },
     {
@@ -2282,7 +2283,7 @@
       "sport": "running",
       "distance_km": 14.19,
       "duration_min": 76.1,
-      "avg_hr": 145.0,
+      "avg_hr": 145,
       "elevation_m": 21
     },
     {
@@ -2292,7 +2293,7 @@
       "sport": "running",
       "distance_km": 11.09,
       "duration_min": 58.0,
-      "avg_hr": 149.0,
+      "avg_hr": 149,
       "elevation_m": 19
     },
     {
@@ -2302,7 +2303,7 @@
       "sport": "running",
       "distance_km": 10.57,
       "duration_min": 57.4,
-      "avg_hr": 151.0,
+      "avg_hr": 151,
       "elevation_m": 12
     },
     {
@@ -2312,7 +2313,7 @@
       "sport": "running",
       "distance_km": 10.01,
       "duration_min": 56.2,
-      "avg_hr": 138.0,
+      "avg_hr": 138,
       "elevation_m": 13
     },
     {
@@ -2322,7 +2323,7 @@
       "sport": "running",
       "distance_km": 11.0,
       "duration_min": 59.7,
-      "avg_hr": 140.0,
+      "avg_hr": 140,
       "elevation_m": 17
     },
     {
@@ -2332,7 +2333,7 @@
       "sport": "running",
       "distance_km": 10.13,
       "duration_min": 57.2,
-      "avg_hr": 146.0,
+      "avg_hr": 146,
       "elevation_m": 13
     },
     {
@@ -2342,7 +2343,7 @@
       "sport": "running",
       "distance_km": 10.94,
       "duration_min": 59.5,
-      "avg_hr": 143.0,
+      "avg_hr": 143,
       "elevation_m": 10
     }
   ]
