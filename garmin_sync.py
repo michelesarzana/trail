@@ -115,38 +115,26 @@ def garmin_get(url):
         return json.loads(r.read())
 
 def fetch_health_snapshot():
-    """Scarica snapshot salute di oggi (o ieri come fallback) da Garmin Connect.
+    """Scarica snapshot salute da Garmin Connect.
     
     Endpoint verificati con token DI Android (2026-07-18):
-    - usersummary-service: ?calendarDate=  (200, fornisce passi/calorie/distanza)
+    - usersummary-service: ?calendarDate=  (200, passi/calorie/distanza/stress/body battery/SpO2/respiration)
     - wellness/dailyHeartRate?date=         (200, FC min/max/resting)
     - hrv-service/hrv/{date}               (200 o 204 se assente)
     - sleep-service/stats/sleep/daily/     (200, sonno + SpO2 + respirazione + HRV)
     - wellness/dailyStress/{date}          (200, stress)
     
-    Se oggi non ha ancora dati sincronizzati (null), usa ieri come fallback.
+    Cerca fino a 3 giorni indietro perche il device puo non aver ancora sincronizzato oggi.
     """
-    today = datetime.now().strftime('%Y-%m-%d')
-    yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+    today = datetime.utcnow().strftime('%Y-%m-%d')
+    # Build list of dates to try (today, yesterday, 2 days ago, 3 days ago)
+    recent_dates = [(datetime.utcnow() - timedelta(days=i)).strftime('%Y-%m-%d') for i in range(4)]
 
     health = {}
 
-    # Helper: prova today e poi yesterday come fallback
-    def get_date_with_fallback(url_template, check_key=None):
-        for d in [today, yesterday]:
-            try:
-                url = url_template.format(date=d)
-                result = garmin_get(url)
-                if check_key and result.get(check_key) is None:
-                    continue
-                return result, d
-            except Exception:
-                continue
-        return {}, today
-
-    # --- 1. User Summary: passi, calorie, distanza ---
+    # --- 1. User Summary: passi, calorie, distanza, stress, body battery, SpO2, respiration ---
     try:
-        for d in [today, yesterday]:
+        for d in recent_dates:
             url = f"https://connectapi.garmin.com/usersummary-service/usersummary/daily?calendarDate={d}"
             try:
                 data = garmin_get(url)
@@ -158,6 +146,15 @@ def fetch_health_snapshot():
                     health['total_distance_m'] = data.get('totalDistanceMeters', 0)
                     health['floors'] = data.get('floorsAscended', 0)
                     health['active_min'] = (data.get('moderateIntensityMinutes', 0) or 0) + (data.get('vigorousIntensityMinutes', 0) or 0) * 2
+                    health['resting_hr'] = data.get('restingHeartRate')
+                    health['stress_avg'] = data.get('averageStressLevel')
+                    health['body_battery_end'] = data.get('bodyBatteryMostRecentValue')
+                    health['body_battery_max'] = data.get('bodyBatteryHighestValue')
+                    health['body_battery_start'] = data.get('bodyBatteryAtWakeTime')
+                    health['spo2_avg'] = data.get('averageSpo2')
+                    health['spo2_min'] = data.get('lowestSpo2')
+                    health['respiration_avg'] = data.get('avgWakingRespirationValue')
+                    health['sleep_hours'] = round((data.get('sleepingSeconds') or 0) / 3600, 1)
                     health['summary_date'] = d
                     break
             except Exception:
@@ -167,7 +164,7 @@ def fetch_health_snapshot():
 
     # --- 2. Heart Rate: FC resting/max/min ---
     try:
-        for d in [today, yesterday]:
+        for d in recent_dates:
             url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyHeartRate?date={d}"
             try:
                 data = garmin_get(url)
@@ -184,7 +181,7 @@ def fetch_health_snapshot():
 
     # --- 3. Sleep + SpO2 + Respiration + HRV (da sleep-service, fonte piu ricca) ---
     try:
-        for d in [today, yesterday]:
+        for d in recent_dates:
             url = f"https://connectapi.garmin.com/sleep-service/stats/sleep/daily/{d}/{d}"
             try:
                 data = garmin_get(url)
@@ -217,7 +214,7 @@ def fetch_health_snapshot():
 
     # --- 4. HRV summary (hrv-service, piu dettagliato) ---
     try:
-        for d in [today, yesterday]:
+        for d in recent_dates:
             url = f"https://connectapi.garmin.com/hrv-service/hrv/{d}"
             try:
                 req = urllib.request.Request(url, headers=GARMIN_HEADERS)
@@ -242,7 +239,7 @@ def fetch_health_snapshot():
 
     # --- 5. Stress ---
     try:
-        for d in [today, yesterday]:
+        for d in recent_dates:
             url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyStress/{d}"
             try:
                 data = garmin_get(url)
