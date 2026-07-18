@@ -17,11 +17,42 @@ jobs:
           python-version: '3.11'
 
       - name: Run Garmin sync
+        id: sync
         env:
           GARMIN_TOKEN: ${{ secrets.GARMIN_TOKEN }}
-        run: python garmin_sync.py
+        run: |
+          python garmin_sync.py
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Apri issue se token scaduto
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '⚠️ Token Garmin scaduto — aggiornare GARMIN_TOKEN';
+            const body = `Il workflow Garmin Sync ha fallito perché il token è scaduto.\n\n**Come aggiornarlo:**\n1. Vai su [Google Colab](https://colab.research.google.com)\n2. Esegui il login Garmin con garth\n3. Copia il token JSON\n4. Vai su Settings → Secrets → \`GARMIN_TOKEN\` → Update\n\nData: ${new Date().toISOString()}`;
+            
+            // Controlla se esiste già un'issue aperta con questo titolo
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'garmin-token'
+            });
+            
+            if (issues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['garmin-token']
+              });
+            }
 
       - name: Commit performance.json
+        if: success()
         run: |
           git config user.name "garmin-bot"
           git config user.email "bot@everysingletrail.it"
