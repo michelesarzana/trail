@@ -1,5 +1,5 @@
 {
-  "last_updated": "18/07/2026 14:11",
+  "last_updated": "18/07/2026 14:22",
   "token_expired": false,
   "summary_90d": {
     "sessions": 0,
@@ -18,5 +18,16 @@
   "by_sport": {},
   "monthly_volume": {},
   "weekly_volume": {},
-  "all_activities": []
+  "all_activities": [],
+  "health_today": {
+    "spo2_avg": null,
+    "respiration_avg": null,
+    "fitness_age": null,
+    "chronological_age": null,
+    "training_status": null,
+    "training_load_feedback": null,
+    "acute_load": null,
+    "chronic_load": null,
+    "date": "2026-07-18"
+  }
 }
