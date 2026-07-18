@@ -185,6 +185,21 @@ except urllib.error.HTTPError as e:
 
 print(f"  {len(acts)} attivita totali trovate")
 
+# GUARD: se Garmin restituisce 0 attività, non sovrascrivere i dati esistenti
+if len(acts) == 0:
+    print("ATTENZIONE: Garmin ha restituito 0 attività — probabile token scaduto silenziosamente.")
+    try:
+        with open('performance.json', 'r') as f:
+            existing = json.load(f)
+    except:
+        existing = {}
+    existing['token_expired'] = True
+    existing['token_expired_at'] = datetime.now().strftime('%d/%m/%Y %H:%M')
+    with open('performance.json', 'w') as f:
+        json.dump(existing, f, indent=2, ensure_ascii=False)
+    print("Dati precedenti mantenuti, flag token_expired=true impostato.")
+    sys.exit(1)
+
 now = datetime.now()
 ago_90 = now - timedelta(days=90)
 
