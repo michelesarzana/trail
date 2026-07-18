@@ -23,6 +23,7 @@ jobs:
         id: sync
         env:
           GARMIN_TOKEN: ${{ secrets.GARMIN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python garmin_sync.py
           echo "exit_code=$?" >> $GITHUB_OUTPUT
