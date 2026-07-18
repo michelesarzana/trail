@@ -101,7 +101,7 @@ GARMIN_HEADERS = {
 }
 
 # Aggiorna il secret su GitHub con il token rinnovato
-github_token = os.environ.get('GITHUB_TOKEN', '')
+github_token = os.environ.get('GH_PAT', '') or os.environ.get('GITHUB_TOKEN', '')
 if github_token:
     try:
         update_github_secret(token_data, github_token)
