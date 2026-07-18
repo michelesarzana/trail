@@ -59,7 +59,7 @@ jobs:
         run: |
           git config user.name "garmin-bot"
           git config user.email "bot@everysingletrail.it"
-          git pull --rebase
           git add performance.json
           git diff --staged --quiet || git commit -m "chore: update performance.json [$(date +%Y-%m-%d)]"
+          git pull --rebase origin main
           git push
