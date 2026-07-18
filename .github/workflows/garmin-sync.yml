@@ -1,0 +1,30 @@
+name: Garmin Sync
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # ogni giorno alle 06:00 UTC
+  workflow_dispatch:        # run manuale da GitHub UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Garmin sync
+        env:
+          GARMIN_TOKEN: ${{ secrets.GARMIN_TOKEN }}
+        run: python garmin_sync.py
+
+      - name: Commit performance.json
+        run: |
+          git config user.name "garmin-bot"
+          git config user.email "bot@everysingletrail.it"
+          git add performance.json
+          git diff --staged --quiet || git commit -m "chore: update performance.json [$(date +%Y-%m-%d)]"
+          git push
