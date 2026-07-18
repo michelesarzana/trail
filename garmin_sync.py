@@ -7,6 +7,8 @@ Richiede variabile d'ambiente: GARMIN_TOKEN (JSON string del token)
 import json, os, sys, urllib.request, urllib.error
 from datetime import datetime, timedelta
 
+
+
 # Token da env var (GitHub Actions secret)
 token_str = os.environ.get('GARMIN_TOKEN', '')
 if not token_str:
@@ -27,6 +29,95 @@ def garmin_get(url):
     req = urllib.request.Request(url, headers=GARMIN_HEADERS)
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read())
+
+def fetch_health_snapshot():
+    """Scarica snapshot salute di oggi e ieri da Garmin Connect."""
+    today = datetime.now().strftime('%Y-%m-%d')
+    yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+    
+    health = {}
+    
+    # Passi e stress giornalieri (user summary)
+    try:
+        url = f"https://connectapi.garmin.com/usersummary-service/usersummary/daily/{today}?fromDate={today}&untilDate={today}"
+        data = garmin_get(url)
+        health['steps'] = data.get('totalSteps', 0)
+        health['steps_goal'] = data.get('dailyStepGoal', 8000)
+        health['calories'] = data.get('totalKilocalories', 0)
+        health['active_calories'] = data.get('activeKilocalories', 0)
+        health['resting_hr'] = data.get('restingHeartRate', 0)
+        health['stress_avg'] = data.get('averageStressLevel', 0)
+        health['body_battery_end'] = data.get('bodyBatteryMostRecentValue', 0)
+        health['sleep_hours'] = round(data.get('sleepingSeconds', 0) / 3600, 1)
+        health['active_min'] = data.get('moderateIntensityMinutes', 0) + data.get('vigorousIntensityMinutes', 0) * 2
+        health['floors'] = data.get('floorsAscended', 0)
+    except Exception as e:
+        print(f"  Health summary non disponibile: {e}")
+    
+    # HRV settimanale
+    try:
+        url = f"https://connectapi.garmin.com/hrv-service/hrv/{today}"
+        data = garmin_get(url)
+        hrv = data.get('hrvSummary', {})
+        health['hrv_weekly_avg'] = hrv.get('weeklyAvg', 0)
+        health['hrv_last_night'] = hrv.get('lastNight', 0)
+        health['hrv_status'] = hrv.get('hrvStatus', '')  # 'BALANCED', 'LOW', 'HIGH'
+    except Exception as e:
+        print(f"  HRV non disponibile: {e}")
+    
+    # SpO2
+    try:
+        url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyOximetry/{today}"
+        data = garmin_get(url)
+        readings = data.get('oximetryReadings', [])
+        if readings:
+            vals = [r.get('spO2Value', 0) for r in readings if r.get('spO2Value', 0) > 0]
+            health['spo2_avg'] = round(sum(vals)/len(vals), 1) if vals else None
+        else:
+            health['spo2_avg'] = None
+    except Exception as e:
+        print(f"  SpO2 non disponibile: {e}")
+        health['spo2_avg'] = None
+    
+    # Respiration rate
+    try:
+        url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyRespirationRate/{today}"
+        data = garmin_get(url)
+        health['respiration_avg'] = round(data.get('avgBreathingFrequency', 0), 1) or None
+    except Exception as e:
+        print(f"  Respiration non disponibile: {e}")
+        health['respiration_avg'] = None
+    
+    # Fitness Age
+    try:
+        url = f"https://connectapi.garmin.com/metrics-service/metrics/fitnessAge/{today}"
+        data = garmin_get(url)
+        health['fitness_age'] = data.get('fitnessAge', 0) or data.get('value', 0) or None
+        health['chronological_age'] = data.get('chronologicalAge', 0) or None
+    except Exception as e:
+        print(f"  Fitness age non disponibile: {e}")
+        health['fitness_age'] = None
+        health['chronological_age'] = None
+    
+    # Training Status
+    try:
+        url = f"https://connectapi.garmin.com/metrics-service/metrics/trainingStatus/{today}"
+        data = garmin_get(url)
+        ts = data.get('trainingStatus', '') or data.get('mostRecentTrainingStatus', '')
+        ts_load = data.get('trainingLoadFeedback', '') or data.get('acuteLoad', '')
+        health['training_status'] = ts or None
+        health['training_load_feedback'] = ts_load or None
+        health['acute_load'] = data.get('acuteTrainingLoad', 0) or None
+        health['chronic_load'] = data.get('chronicTrainingLoad', 0) or None
+    except Exception as e:
+        print(f"  Training status non disponibile: {e}")
+        health['training_status'] = None
+        health['training_load_feedback'] = None
+        health['acute_load'] = None
+        health['chronic_load'] = None
+    
+    health['date'] = today
+    return health
 
 def sport_label(act):
     t = act.get('activityType', {}).get('typeKey', 'other')
@@ -160,6 +251,14 @@ records = {
     )),
 }
 
+print("Scaricando health snapshot...")
+try:
+    health_snap = fetch_health_snapshot()
+    print(f"  Health: steps={health_snap.get('steps')}, resting_hr={health_snap.get('resting_hr')}, hrv={health_snap.get('hrv_last_night')}")
+except Exception as e:
+    print(f"  Health snapshot fallito: {e}")
+    health_snap = {}
+
 # --- OUTPUT ---
 out = {
     'last_updated':  now.strftime('%d/%m/%Y %H:%M'),
@@ -189,6 +288,7 @@ out = {
         }
         for a in all_acts
     ],
+    'health_today': health_snap,
 }
 
 with open('performance.json', 'w') as f:
