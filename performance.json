@@ -1,5 +1,5 @@
 {
-  "last_updated": "18/07/2026 15:27",
+  "last_updated": "18/07/2026 15:34",
   "token_expired": false,
   "summary_90d": {
     "sessions": 42,
@@ -51420,14 +51420,6 @@
     }
   ],
   "health_today": {
-    "spo2_avg": null,
-    "respiration_avg": null,
-    "fitness_age": null,
-    "chronological_age": null,
-    "training_status": null,
-    "training_load_feedback": null,
-    "acute_load": null,
-    "chronic_load": null,
     "date": "2026-07-18"
   }
 }
