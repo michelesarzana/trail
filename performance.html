@@ -33,6 +33,16 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
   background: #fff;
 }
 
+@media (max-width: 768px) {
+  .sticky-top {
+    position: static !important;
+    top: auto !important;
+  }
+  #page-body {
+    padding-top: 0 !important;
+  }
+}
+
 /* ===== NAV ===== */
 .nav {
   background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
@@ -575,6 +585,10 @@ async function init() {
 
 /* ===== PADDING DINAMICO ===== */
 function updateBodyPadding() {
+  if (window.innerWidth <= 768) {
+    document.getElementById('page-body').style.paddingTop = '0';
+    return;
+  }
   const stickyEl = document.getElementById('sticky-top');
   if (stickyEl) {
     document.getElementById('page-body').style.paddingTop = stickyEl.offsetHeight + 'px';
