@@ -46,31 +46,124 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
 .nav-btn:hover { color: var(--foreground); border-color: var(--border); }
 .nav-btn-active { background: var(--foreground); color: #fff !important; border-color: var(--foreground) !important; }
 
-/* ===== FILTER BAR ===== */
+/* ===== HEALTH STRIP ===== */
+.health-strip {
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.health-strip-header {
+  display: flex; align-items: center; gap: 16px;
+  padding: 10px 40px; cursor: pointer;
+  user-select: none;
+}
+.health-strip-title {
+  font-size: 12px; font-weight: 700; color: var(--foreground);
+  white-space: nowrap;
+}
+.health-strip-date {
+  font-size: 11px; color: var(--muted-foreground); font-weight: 500;
+}
+.health-strip-pills {
+  display: flex; gap: 8px; flex-wrap: wrap; flex: 1;
+}
+.health-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600; color: var(--foreground);
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 9999px; padding: 3px 10px;
+}
+.health-pill.good { border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.07); color: #166534; }
+.health-pill.warn { border-color: rgba(234,179,8,0.3); background: rgba(234,179,8,0.07); color: #854d0e; }
+.health-pill.bad  { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.07); color: #991b1b; }
+.health-collapse-btn {
+  margin-left: auto; background: none; border: none; cursor: pointer;
+  color: var(--muted-foreground); display: flex; align-items: center;
+  transition: transform 0.2s;
+}
+.health-strip.collapsed .health-collapse-btn { transform: rotate(-90deg); }
+.health-strip-body {
+  overflow: hidden;
+  max-height: 200px;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 40px 16px;
+}
+.health-strip.collapsed .health-strip-body {
+  max-height: 0;
+  padding-bottom: 0;
+}
+.health-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.health-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px;
+}
+.health-card-icon { font-size: 18px; display: block; margin-bottom: 4px; }
+.health-card-value { font-size: 20px; font-weight: 800; color: var(--foreground); line-height: 1; }
+.health-card-label { font-size: 10px; font-weight: 700; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.health-card-sub { font-size: 10px; color: var(--muted-foreground); margin-top: 1px; }
+.hrv-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 9999px; margin-top: 3px; }
+.hrv-BALANCED { background: rgba(34,197,94,0.1); color: #166534; }
+.hrv-LOW { background: rgba(239,68,68,0.1); color: #991b1b; }
+.hrv-HIGH { background: rgba(59,130,246,0.1); color: #1e40af; }
+
+/* ===== FILTER BAR — 2 righe ===== */
 .filter-bar {
   position: sticky; top: 56px; z-index: 90;
-  background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
-  padding: 12px 40px;
-  display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+  padding: 10px 40px;
+  display: flex; flex-direction: column; gap: 8px;
 }
-.filter-group { display: flex; align-items: center; gap: 10px; }
-.filter-label { font-size: 11px; font-weight: 700; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+.filter-row {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.filter-label {
+  font-size: 10px; font-weight: 800; color: var(--muted-foreground);
+  text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
+  min-width: 56px;
+}
 .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
 .pill {
   font-size: 12px; font-weight: 600; font-family: 'Manrope', sans-serif;
-  padding: 5px 12px; border-radius: 9999px;
+  padding: 4px 12px; border-radius: 9999px;
   border: 1px solid var(--border); background: var(--card); color: var(--muted-foreground);
-  cursor: pointer; transition: all 0.15s;
+  cursor: pointer; transition: all 0.15s; line-height: 1.4;
 }
 .pill:hover { border-color: var(--accent); color: var(--foreground); }
-.pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.pill.active { background: var(--foreground); border-color: var(--foreground); color: #fff; }
+.pill-compare.active { background: var(--accent); border-color: var(--accent); }
+
+/* ===== COMPARE PANEL ===== */
 .compare-panel {
-  background: var(--muted); border-bottom: 1px solid var(--border);
-  padding: 16px 40px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex; flex-direction: column; gap: 12px;
 }
+.compare-presets { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.compare-cols { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .compare-col { display: flex; align-items: center; gap: 8px; }
-.compare-label { font-size: 11px; font-weight: 700; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 6px; }
+.compare-label {
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.08em; white-space: nowrap; min-width: 64px;
+}
+.compare-a { color: var(--accent); }
+.compare-b { color: #9b8ea8; }
+.compare-arrow { color: var(--muted-foreground); font-size: 14px; }
+.compare-vs {
+  font-size: 11px; font-weight: 800; color: var(--muted-foreground);
+  text-transform: uppercase; letter-spacing: 0.1em; padding: 0 4px;
+}
+.date-input {
+  font-family: 'Manrope', sans-serif; font-size: 12px;
+  padding: 5px 10px; border: 1px solid var(--border);
+  border-radius: 8px; color: var(--foreground); background: var(--card);
+  outline: none; transition: border-color 0.15s; cursor: pointer;
+}
+.date-input:focus { border-color: var(--accent); }
 .compare-col input[type=date] {
   font-family: 'Manrope', sans-serif; font-size: 13px;
   padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px;
@@ -82,6 +175,34 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
   background: var(--accent); color: #fff; cursor: pointer; transition: opacity 0.15s;
 }
 .btn-primary:hover { opacity: 0.85; }
+
+/* COMPARE RESULT KPIs */
+.compare-result-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  margin-top: 4px;
+}
+.compare-kpi-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 16px;
+}
+.compare-kpi-label {
+  font-size: 10px; font-weight: 700; color: var(--muted-foreground);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.compare-kpi-row { display: flex; align-items: flex-end; gap: 10px; }
+.compare-kpi-a { font-size: 20px; font-weight: 800; color: var(--accent); }
+.compare-kpi-b { font-size: 20px; font-weight: 800; color: #9b8ea8; }
+.compare-delta {
+  font-size: 11px; font-weight: 700; padding: 2px 7px;
+  border-radius: 9999px; margin-left: auto;
+}
+.delta-up   { background: rgba(34,197,94,0.1); color: #166534; }
+.delta-down { background: rgba(239,68,68,0.1); color: #991b1b; }
+.delta-flat { background: rgba(107,114,128,0.1); color: #374151; }
+
+/* GARMIN LINK */
+.garmin-link { color: var(--foreground); text-decoration: none; }
+.garmin-link:hover { color: var(--accent); text-decoration: underline; }
 
 /* ===== HERO ===== */
 .hero {
@@ -178,6 +299,15 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
 .pagination button:disabled { opacity: 0.4; cursor: default; }
 .pagination .page-info { font-size: 12px; color: var(--muted-foreground); font-weight: 500; }
 
+/* ===== TRAINING STATUS BADGES ===== */
+.ts-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 9999px; margin-top: 3px; }
+.ts-PRODUCTIVE   { background: rgba(34,197,94,0.1); color: #166534; }
+.ts-PEAKING      { background: rgba(59,130,246,0.1); color: #1e40af; }
+.ts-MAINTAINING  { background: rgba(107,114,128,0.1); color: #374151; }
+.ts-OVERREACHING { background: rgba(239,68,68,0.1); color: #991b1b; }
+.ts-DETRAINING   { background: rgba(234,179,8,0.1); color: #854d0e; }
+.ts-RECOVERY     { background: rgba(168,85,247,0.1); color: #6b21a8; }
+
 /* ===== FOOTER ===== */
 .site-footer { padding: 32px 40px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted-foreground); }
 .site-footer em { font-style: italic; }
@@ -210,21 +340,36 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
   </div>
 </nav>
 
+<!-- HEALTH STRIP -->
+<div class="health-strip" id="health-strip">
+  <div class="health-strip-header" id="health-toggle">
+    <span class="health-strip-title">📊 Salute di oggi</span>
+    <span class="health-strip-date" id="health-date">—</span>
+    <div class="health-strip-pills" id="health-summary-pills"></div>
+    <button class="health-collapse-btn" id="health-collapse-btn" aria-label="Espandi/Collassa">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div class="health-strip-body" id="health-body">
+    <div class="health-cards" id="health-cards"></div>
+  </div>
+</div>
+
 <!-- FILTER BAR -->
 <div class="filter-bar" id="filter-bar">
-  <div class="filter-group">
+  <div class="filter-row">
     <span class="filter-label">Periodo</span>
     <div class="filter-pills" id="period-filter">
+      <button class="pill active" data-period="90">3 mesi</button>
       <button class="pill" data-period="7">7 giorni</button>
       <button class="pill" data-period="30">1 mese</button>
-      <button class="pill active" data-period="90">3 mesi</button>
       <button class="pill" data-period="180">6 mesi</button>
       <button class="pill" data-period="365">12 mesi</button>
       <button class="pill" data-period="all">Tutto</button>
-      <button class="pill" data-period="compare">Confronta</button>
+      <button class="pill pill-compare" data-period="compare">⚡ Confronta</button>
     </div>
   </div>
-  <div class="filter-group">
+  <div class="filter-row">
     <span class="filter-label">Attività</span>
     <div class="filter-pills" id="sport-filter">
       <button class="pill active" data-sport="all">Tutte</button>
@@ -234,19 +379,29 @@ body { font-family: 'Manrope', sans-serif; background: var(--background); color:
 
 <!-- COMPARE PANEL -->
 <div class="compare-panel" id="compare-panel" style="display:none">
-  <div class="compare-col">
-    <span class="compare-label">Periodo A</span>
-    <input type="date" id="compare-a-start">
-    <span style="color:var(--muted-foreground)">→</span>
-    <input type="date" id="compare-a-end">
+  <div class="compare-presets">
+    <span class="filter-label" style="margin-right:8px">Confronto rapido</span>
+    <button class="pill" id="cmp-prev-month">Mese precedente</button>
+    <button class="pill" id="cmp-prev-year">Anno precedente</button>
+    <span style="width:1px;height:24px;background:var(--border);margin:0 8px"></span>
   </div>
-  <div class="compare-col">
-    <span class="compare-label">Periodo B</span>
-    <input type="date" id="compare-b-start">
-    <span style="color:var(--muted-foreground)">→</span>
-    <input type="date" id="compare-b-end">
+  <div class="compare-cols">
+    <div class="compare-col">
+      <span class="compare-label compare-a">Periodo A</span>
+      <input type="date" id="compare-a-start" class="date-input">
+      <span class="compare-arrow">→</span>
+      <input type="date" id="compare-a-end" class="date-input">
+    </div>
+    <span class="compare-vs">vs</span>
+    <div class="compare-col">
+      <span class="compare-label compare-b">Periodo B</span>
+      <input type="date" id="compare-b-start" class="date-input">
+      <span class="compare-arrow">→</span>
+      <input type="date" id="compare-b-end" class="date-input">
+    </div>
+    <button class="btn-primary" id="compare-run">Confronta →</button>
   </div>
-  <button class="btn-primary" id="compare-run">Confronta</button>
+  <div id="compare-result" style="display:none"></div>
 </div>
 
 <!-- HERO -->
@@ -365,6 +520,7 @@ async function init() {
   document.getElementById('last-updated').textContent = RAW.last_updated || '—';
   if (RAW.token_expired) document.getElementById('token-banner').style.display = 'block';
 
+  renderHealthStrip(RAW.health_today || {});
   renderRecords(RAW.records);
   populateSportPills();
   applyFilters('90', 'all');
@@ -710,6 +866,149 @@ function renderTable() {
   document.getElementById('btn-next').addEventListener('click', () => { currentPage++; renderTable(); });
 }
 
+/* ===== HEALTH STRIP ===== */
+function renderHealthStrip(h) {
+  if (!h || Object.keys(h).length === 0) {
+    document.getElementById('health-strip').style.display = 'none';
+    return;
+  }
+  document.getElementById('health-date').textContent = h.date || '—';
+
+  // Pills header (passi, FC, HRV, Body Battery, Training Status)
+  const pills = [];
+  if (h.steps) {
+    const pct = Math.round((h.steps / (h.steps_goal || 8000)) * 100);
+    const cls = pct >= 100 ? 'good' : pct >= 60 ? '' : 'warn';
+    pills.push(`<span class="health-pill ${cls}">👟 ${h.steps.toLocaleString('it')} passi</span>`);
+  }
+  if (h.resting_hr) pills.push(`<span class="health-pill">❤️ ${h.resting_hr} bpm</span>`);
+  if (h.hrv_last_night) {
+    const hcls = h.hrv_status === 'BALANCED' ? 'good' : h.hrv_status === 'LOW' ? 'bad' : '';
+    pills.push(`<span class="health-pill ${hcls}">📡 HRV ${h.hrv_last_night}</span>`);
+  }
+  if (h.body_battery_end) {
+    const bcls = h.body_battery_end >= 60 ? 'good' : h.body_battery_end >= 30 ? 'warn' : 'bad';
+    pills.push(`<span class="health-pill ${bcls}">🔋 ${h.body_battery_end}%</span>`);
+  }
+  if (h.training_status) {
+    const tsLabels = { PRODUCTIVE:'Produttivo', PEAKING:'Picco', MAINTAINING:'Mantenimento', OVERREACHING:'Sovraccarico', DETRAINING:'Detrain', RECOVERY:'Recupero' };
+    const tsCls = h.training_status in tsLabels ? `ts-${h.training_status}` : '';
+    pills.push(`<span class="health-pill"><span class="ts-badge ${tsCls}" style="padding:0">📈 ${tsLabels[h.training_status] || h.training_status}</span></span>`);
+  }
+  document.getElementById('health-summary-pills').innerHTML = pills.join('');
+
+  // Cards nel body espanso (11 metriche)
+  const cards = [];
+
+  // 1. Passi
+  if (h.steps !== undefined) {
+    const pct = Math.round((h.steps / (h.steps_goal || 8000)) * 100);
+    const bar = `<div style="height:3px;background:var(--border);border-radius:9999px;margin-top:6px"><div style="height:3px;background:var(--accent);border-radius:9999px;width:${Math.min(100,pct)}%"></div></div>`;
+    cards.push(`<div class="health-card"><span class="health-card-icon">👟</span><span class="health-card-value">${(h.steps||0).toLocaleString('it')}</span><div class="health-card-label">Passi</div><div class="health-card-sub">obiettivo: ${(h.steps_goal||8000).toLocaleString('it')} (${pct}%)</div>${bar}</div>`);
+  }
+
+  // 2. FC a riposo
+  if (h.resting_hr !== undefined) {
+    cards.push(`<div class="health-card"><span class="health-card-icon">❤️</span><span class="health-card-value">${h.resting_hr || '—'}</span><div class="health-card-label">FC a riposo</div><div class="health-card-sub">bpm</div></div>`);
+  }
+
+  // 3. HRV
+  if (h.hrv_last_night !== undefined) {
+    const badge = h.hrv_status ? `<span class="hrv-badge hrv-${h.hrv_status}">${h.hrv_status}</span>` : '';
+    const sub = h.hrv_weekly_avg ? `<div class="health-card-sub">media sett. ${h.hrv_weekly_avg}</div>` : '';
+    cards.push(`<div class="health-card"><span class="health-card-icon">📡</span><span class="health-card-value">${h.hrv_last_night || '—'}</span><div class="health-card-label">HRV notte</div>${badge}${sub}</div>`);
+  }
+
+  // 4. Body Battery
+  if (h.body_battery_end !== undefined) {
+    const bcol = h.body_battery_end >= 60 ? '#166534' : h.body_battery_end >= 30 ? '#854d0e' : '#991b1b';
+    cards.push(`<div class="health-card"><span class="health-card-icon">🔋</span><span class="health-card-value" style="color:${bcol}">${h.body_battery_end !== null ? h.body_battery_end + '%' : '—'}</span><div class="health-card-label">Body Battery</div></div>`);
+  }
+
+  // 5. Sonno
+  if (h.sleep_hours !== undefined) {
+    const scol = h.sleep_hours >= 7 ? '#166534' : h.sleep_hours >= 5 ? '#854d0e' : '#991b1b';
+    cards.push(`<div class="health-card"><span class="health-card-icon">😴</span><span class="health-card-value" style="color:${scol}">${h.sleep_hours ? h.sleep_hours + 'h' : '—'}</span><div class="health-card-label">Sonno</div></div>`);
+  }
+
+  // 6. Stress
+  if (h.stress_avg !== undefined) {
+    const sv = h.stress_avg || 0;
+    const scls = sv < 26 ? 'good' : sv < 51 ? '' : sv < 76 ? 'warn' : 'bad';
+    const slabel = sv === 0 ? '—' : sv < 26 ? 'Basso' : sv < 51 ? 'Medio' : sv < 76 ? 'Alto' : 'Molto alto';
+    cards.push(`<div class="health-card"><span class="health-card-icon">🧘</span><span class="health-card-value">${sv || '—'}</span><div class="health-card-label">Stress</div><div class="health-card-sub">${slabel}</div></div>`);
+  }
+
+  // 7. Calorie
+  if (h.calories !== undefined) {
+    cards.push(`<div class="health-card"><span class="health-card-icon">🔥</span><span class="health-card-value">${h.calories ? (h.calories).toLocaleString('it') : '—'}</span><div class="health-card-label">Calorie tot.</div><div class="health-card-sub">attive: ${h.active_calories || 0}</div></div>`);
+  }
+
+  // 8. SpO2 (sempre visibile)
+  const spo2Val = h.spo2_avg !== undefined && h.spo2_avg !== null ? h.spo2_avg + '%' : '—';
+  const spo2col = h.spo2_avg >= 95 ? '#166534' : h.spo2_avg >= 90 ? '#854d0e' : h.spo2_avg ? '#991b1b' : 'var(--muted-foreground)';
+  cards.push(`<div class="health-card"><span class="health-card-icon">🫁</span><span class="health-card-value" style="color:${spo2col}">${spo2Val}</span><div class="health-card-label">SpO₂</div><div class="health-card-sub">saturazione</div></div>`);
+
+  // 9. Respiration rate (sempre visibile)
+  const respVal = h.respiration_avg !== undefined && h.respiration_avg !== null ? h.respiration_avg : '—';
+  cards.push(`<div class="health-card"><span class="health-card-icon">💨</span><span class="health-card-value">${respVal}</span><div class="health-card-label">Respiri/min</div><div class="health-card-sub">frequenza resp.</div></div>`);
+
+  // 10. Fitness Age
+  const faVal = h.fitness_age !== undefined && h.fitness_age !== null ? h.fitness_age : null;
+  const caVal = h.chronological_age !== undefined && h.chronological_age !== null ? h.chronological_age : null;
+  const faDiff = faVal && caVal ? caVal - faVal : null;
+  const faColor = faDiff === null ? 'var(--foreground)' : faDiff > 0 ? '#166534' : faDiff < 0 ? '#991b1b' : 'var(--foreground)';
+  const faBadge = faDiff !== null ? `<span class="hrv-badge" style="background:${faDiff > 0 ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)'};color:${faColor}">${faDiff > 0 ? '↓ ' + faDiff + ' anni' : '↑ ' + Math.abs(faDiff) + ' anni'}</span>` : '';
+  cards.push(`<div class="health-card"><span class="health-card-icon">🧬</span><span class="health-card-value" style="color:${faColor}">${faVal !== null ? faVal + ' anni' : '—'}</span><div class="health-card-label">Fitness Age</div>${faBadge}${caVal ? `<div class="health-card-sub">anagrafica: ${caVal} anni</div>` : ''}</div>`);
+
+  // 11. Training Status
+  const tsLabelsMap = { PRODUCTIVE:'Produttivo', PEAKING:'Picco', MAINTAINING:'Mantenimento', OVERREACHING:'Sovraccarico', DETRAINING:'Detrain', RECOVERY:'Recupero' };
+  const tsVal = h.training_status;
+  const tsBadge = tsVal ? `<span class="ts-badge ts-${tsVal}">${tsLabelsMap[tsVal] || tsVal}</span>` : '';
+  const tsLoad = h.training_load_feedback ? `<div class="health-card-sub">${h.training_load_feedback}</div>` : '';
+  const tsAcute = h.acute_load ? `<div class="health-card-sub">carico acuto: ${Math.round(h.acute_load)}</div>` : '';
+  cards.push(`<div class="health-card"><span class="health-card-icon">📈</span><span class="health-card-value" style="font-size:14px;line-height:1.3">${tsVal ? '' : '—'}</span><div class="health-card-label">Training Status</div>${tsBadge}${tsLoad}${tsAcute}</div>`);
+
+  document.getElementById('health-cards').innerHTML = cards.join('');
+
+  // Toggle collassa/espandi
+  document.getElementById('health-toggle').addEventListener('click', () => {
+    document.getElementById('health-strip').classList.toggle('collapsed');
+  });
+}
+
+/* ===== COMPARE SMART ===== */
+function toISO(d) { return d.toISOString().split('T')[0]; }
+
+function setCompareInputs(aStart, aEnd, bStart, bEnd) {
+  document.getElementById('compare-a-start').value = aStart;
+  document.getElementById('compare-a-end').value = aEnd;
+  document.getElementById('compare-b-start').value = bStart;
+  document.getElementById('compare-b-end').value = bEnd;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('cmp-prev-month').addEventListener('click', () => {
+    const now = new Date();
+    const aStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const aEnd = now;
+    const bStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const bEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+    setCompareInputs(toISO(aStart), toISO(aEnd), toISO(bStart), toISO(bEnd));
+  });
+
+  document.getElementById('cmp-prev-year').addEventListener('click', () => {
+    const now = new Date();
+    const periodDays = parseInt(document.querySelector('.pill.active[data-period]')?.dataset.period || '90');
+    const days = isNaN(periodDays) ? 90 : periodDays;
+    const aEnd = now;
+    const aStart = new Date(now); aStart.setDate(aStart.getDate() - days);
+    const bEnd = new Date(now); bEnd.setFullYear(bEnd.getFullYear() - 1);
+    const bStart = new Date(aStart); bStart.setFullYear(bStart.getFullYear() - 1);
+    setCompareInputs(toISO(aStart), toISO(aEnd), toISO(bStart), toISO(bEnd));
+  });
+});
+
 /* ===== COMPARE ===== */
 function runCompare() {
   const aStart = document.getElementById('compare-a-start').value;
@@ -722,17 +1021,53 @@ function runCompare() {
     return;
   }
 
-  const actsA = RAW.all_activities.filter(a => a.date >= aStart && a.date <= aEnd);
-  const actsB = RAW.all_activities.filter(a => a.date >= bStart && a.date <= bEnd);
+  const sport = document.querySelector('.pill.active[data-sport]')?.dataset.sport || 'all';
+  let actsA = RAW.all_activities.filter(a => a.date >= aStart && a.date <= aEnd);
+  let actsB = RAW.all_activities.filter(a => a.date >= bStart && a.date <= bEnd);
+  if (sport !== 'all') { actsA = actsA.filter(a => a.sport === sport); actsB = actsB.filter(a => a.sport === sport); }
 
   filtered = actsA.sort((a, b) => b.date.localeCompare(a.date));
   currentPage = 0;
 
   renderCompareKPIs(computeSummary(actsA), computeSummary(actsB));
+  renderCompareResult(computeSummary(actsA), computeSummary(actsB), aStart, aEnd, bStart, bEnd);
+  document.getElementById('compare-result').style.display = 'block';
   renderMonthlyCompareChart(actsA, actsB, `A (${aStart} → ${aEnd})`, `B (${bStart} → ${bEnd})`);
   renderSportChart(actsA);
   renderWeeklyChart(actsA);
   renderTable();
+}
+
+function renderCompareResult(sA, sB, aStart, aEnd, bStart, bEnd) {
+  const metrics = [
+    { key: 'sessions',          label: 'Sessioni',       fmt: v => v },
+    { key: 'total_hours',       label: 'Ore',            fmt: v => v + 'h' },
+    { key: 'total_km',          label: 'Km',             fmt: v => v + ' km' },
+    { key: 'total_elevation_m', label: 'Dislivello',     fmt: v => (v/1000).toFixed(1) + ' km' },
+    { key: 'avg_sessions_week', label: 'Sess/settimana', fmt: v => v },
+  ];
+  const cards = metrics.map(m => {
+    const vA = sA[m.key] || 0;
+    const vB = sB[m.key] || 0;
+    const delta = vB > 0 ? Math.round((vA - vB) / vB * 100) : null;
+    const dcls = delta === null ? 'delta-flat' : delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : 'delta-flat';
+    const dtext = delta === null ? '—' : (delta > 0 ? '↑' : '↓') + Math.abs(delta) + '%';
+    return `<div class="compare-kpi-card">
+      <div class="compare-kpi-label">${m.label}</div>
+      <div class="compare-kpi-row">
+        <span class="compare-kpi-a">${m.fmt(vA)}</span>
+        <span style="font-size:11px;color:var(--muted-foreground)">vs</span>
+        <span class="compare-kpi-b">${m.fmt(vB)}</span>
+        ${delta !== null ? `<span class="compare-delta ${dcls}">${dtext}</span>` : ''}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:6px;font-size:10px;color:var(--muted-foreground)">
+        <span style="color:var(--accent);font-weight:700">A</span> ${aStart} → ${aEnd}
+        &nbsp;|&nbsp;
+        <span style="color:#9b8ea8;font-weight:700">B</span> ${bStart} → ${bEnd}
+      </div>
+    </div>`;
+  });
+  document.getElementById('compare-result').innerHTML = `<div class="compare-result-grid">${cards.join('')}</div>`;
 }
 
 /* ===== BOOT ===== */
