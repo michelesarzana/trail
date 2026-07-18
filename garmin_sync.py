@@ -4,8 +4,79 @@ garmin_sync.py — Scarica dati da Garmin Connect e genera performance.json
 Usato da GitHub Actions come cron giornaliero.
 Richiede variabile d'ambiente: GARMIN_TOKEN (JSON string del token)
 """
-import json, os, sys, urllib.request, urllib.error
+import json, os, sys, urllib.request, urllib.error, urllib.parse
 from datetime import datetime, timedelta
+
+
+def refresh_di_token(token_data):
+    """Rinnova il token DI di Garmin usando il refresh_token."""
+    url = "https://diauth.garmin.com/di-oauth2-service/oauth/token"
+    payload = urllib.parse.urlencode({
+        "grant_type": "refresh_token",
+        "refresh_token": token_data["di_refresh_token"],
+        "client_id": token_data["di_client_id"],
+    }).encode("utf-8")
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": "GCM-iOS-5.7.2.1 (com.garmin.connect.mobile; build:5.7.2.1; iOS 16.6.0)",
+    }
+    try:
+        req = urllib.request.Request(url, data=payload, headers=headers, method="POST")
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read())
+        token_data["di_token"] = result["access_token"]
+        if result.get("refresh_token"):
+            token_data["di_refresh_token"] = result["refresh_token"]
+        print("Token DI rinnovato con successo")
+    except Exception as e:
+        print(f"ATTENZIONE: refresh token DI fallito: {e}")
+    return token_data
+
+
+def update_github_secret(token_data, github_token):
+    """Cifra il token con la public key del repo e aggiorna il secret GARMIN_TOKEN."""
+    # 1. Installa PyNaCl se necessario
+    try:
+        from nacl import encoding, public
+    except ImportError:
+        import subprocess
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "PyNaCl", "-q"])
+        from nacl import encoding, public
+
+    # 2. Legge la public key del repo
+    pk_url = "https://api.github.com/repos/michelesarzana/trail/actions/secrets/public-key"
+    pk_req = urllib.request.Request(pk_url, headers={
+        "Authorization": f"Bearer {github_token}",
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "garmin-sync-bot",
+    })
+    with urllib.request.urlopen(pk_req, timeout=30) as resp:
+        pk_data = json.loads(resp.read())
+    key_id = pk_data["key_id"]
+    public_key_b64 = pk_data["key"]
+
+    # 3. Cifra il token con sealed box (libsodium via PyNaCl)
+    import base64
+    pk_bytes = base64.b64decode(public_key_b64)
+    sealed_box = public.SealedBox(public.PublicKey(pk_bytes))
+    encrypted = sealed_box.encrypt(json.dumps(token_data).encode("utf-8"))
+    encrypted_value = base64.b64encode(encrypted).decode("utf-8")
+
+    # 4. Aggiorna il secret su GitHub
+    secret_url = "https://api.github.com/repos/michelesarzana/trail/actions/secrets/GARMIN_TOKEN"
+    body = json.dumps({"encrypted_value": encrypted_value, "key_id": key_id}).encode("utf-8")
+    put_req = urllib.request.Request(secret_url, data=body, method="PUT", headers={
+        "Authorization": f"Bearer {github_token}",
+        "Accept": "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+        "User-Agent": "garmin-sync-bot",
+    })
+    with urllib.request.urlopen(put_req, timeout=30) as resp:
+        status = resp.status
+    if status not in (201, 204):
+        print(f"ATTENZIONE: update secret ha risposto HTTP {status}")
+    else:
+        print(f"Secret GARMIN_TOKEN aggiornato su GitHub (HTTP {status})")
 
 
 
@@ -16,6 +87,10 @@ if not token_str:
     sys.exit(1)
 
 token_data = json.loads(token_str)
+
+# Rinnovo token DI
+print("Rinnovo token Garmin...")
+token_data = refresh_di_token(token_data)
 di_token = token_data['di_token']
 
 GARMIN_HEADERS = {
@@ -24,6 +99,15 @@ GARMIN_HEADERS = {
     "X-app-ver": "4.79.0.0",
     "User-Agent": "GCM-iOS-5.7.2.1 (com.garmin.connect.mobile; build:5.7.2.1; iOS 16.6.0)",
 }
+
+# Aggiorna il secret su GitHub con il token rinnovato
+github_token = os.environ.get('GITHUB_TOKEN', '')
+if github_token:
+    try:
+        update_github_secret(token_data, github_token)
+        print("Secret GitHub aggiornato")
+    except Exception as e:
+        print(f"ATTENZIONE: aggiornamento secret GitHub fallito: {e}")
 
 def garmin_get(url):
     req = urllib.request.Request(url, headers=GARMIN_HEADERS)
