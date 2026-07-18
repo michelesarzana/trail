@@ -1,6 +1,6 @@
 {
   "last_updated": "18/07/2026 14:22",
-  "token_expired": false,
+  "token_expired": true,
   "summary_90d": {
     "sessions": 0,
     "total_hours": 0.0,
@@ -29,5 +29,6 @@
     "acute_load": null,
     "chronic_load": null,
     "date": "2026-07-18"
-  }
+  },
+  "token_expired_at": "18/07/2026 14:56"
 }
