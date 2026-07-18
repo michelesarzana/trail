@@ -1,0 +1,2349 @@
+{
+  "last_updated": "18/07/2026 11:24",
+  "summary_90d": {
+    "total_hours": 43.0,
+    "total_km": 437.0,
+    "total_elevation_m": 5231,
+    "sessions": 42,
+    "avg_sessions_week": 3.3,
+    "avg_hr": 126
+  },
+  "records": {
+    "max_distance_km": 90.97,
+    "max_elevation_m": 9841,
+    "max_duration_min": 371.4,
+    "min_avg_hr": 82
+  },
+  "by_sport": {
+    "hiit": [
+      {
+        "id": 23590127794,
+        "name": "HIIT",
+        "date": "2026-07-14",
+        "distance_km": 0.0,
+        "duration_min": 40.1,
+        "avg_hr": 118.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23572163156,
+        "name": "HIIT Workout Kettlebell",
+        "date": "2026-07-12",
+        "distance_km": 0.0,
+        "duration_min": 31.7,
+        "avg_hr": 116.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23506562685,
+        "name": "HIIT",
+        "date": "2026-07-07",
+        "distance_km": 0.0,
+        "duration_min": 39.3,
+        "avg_hr": 131.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23485656106,
+        "name": "HIIT - AMRAP",
+        "date": "2026-07-05",
+        "distance_km": 0.0,
+        "duration_min": 20.0,
+        "avg_hr": 128.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23467198138,
+        "name": "HIIT",
+        "date": "2026-07-03",
+        "distance_km": 0.0,
+        "duration_min": 40.4,
+        "avg_hr": 138.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23425928057,
+        "name": "HIIT",
+        "date": "2026-06-30",
+        "distance_km": 0.0,
+        "duration_min": 38.7,
+        "avg_hr": 123.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23347652392,
+        "name": "HIIT",
+        "date": "2026-06-23",
+        "distance_km": 0.0,
+        "duration_min": 39.9,
+        "avg_hr": 129.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23265589440,
+        "name": "HIIT",
+        "date": "2026-06-16",
+        "distance_km": 0.0,
+        "duration_min": 39.2,
+        "avg_hr": 132.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23255881541,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-15",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 120.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23255881432,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-14",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 99.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23183417704,
+        "name": "HIIT",
+        "date": "2026-06-09",
+        "distance_km": 0.0,
+        "duration_min": 38.5,
+        "avg_hr": 138.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23171986184,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-08",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 118.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23162454262,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-07",
+        "distance_km": 0.0,
+        "duration_min": 17.9,
+        "avg_hr": 108.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23132191602,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-04",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 120.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23101673436,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-02",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 98.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23092192249,
+        "name": "HIIT",
+        "date": "2026-06-01",
+        "distance_km": 0.0,
+        "duration_min": 13.6,
+        "avg_hr": 107.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 23004510224,
+        "name": "HIIT",
+        "date": "2026-05-25",
+        "distance_km": 0.0,
+        "duration_min": 14.6,
+        "avg_hr": 120.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22993970247,
+        "name": "HIIT",
+        "date": "2026-05-24",
+        "distance_km": 0.0,
+        "duration_min": 11.9,
+        "avg_hr": 112.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22979319428,
+        "name": "HIIT",
+        "date": "2026-05-23",
+        "distance_km": 0.0,
+        "duration_min": 11.8,
+        "avg_hr": 111.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22931696570,
+        "name": "HIIT",
+        "date": "2026-05-19",
+        "distance_km": 0.0,
+        "duration_min": 39.6,
+        "avg_hr": 130.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22850772081,
+        "name": "HIIT",
+        "date": "2026-05-12",
+        "distance_km": 0.0,
+        "duration_min": 38.3,
+        "avg_hr": 128.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22810890538,
+        "name": "HIIT",
+        "date": "2026-05-08",
+        "distance_km": 0.0,
+        "duration_min": 41.5,
+        "avg_hr": 131.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22768994410,
+        "name": "HIIT",
+        "date": "2026-05-05",
+        "distance_km": 0.0,
+        "duration_min": 38.6,
+        "avg_hr": 136.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22685469907,
+        "name": "HIIT",
+        "date": "2026-04-28",
+        "distance_km": 0.0,
+        "duration_min": 38.8,
+        "avg_hr": 141.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22644407157,
+        "name": "HIIT",
+        "date": "2026-04-24",
+        "distance_km": 0.0,
+        "duration_min": 40.1,
+        "avg_hr": 137.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22601700198,
+        "name": "HIIT",
+        "date": "2026-04-21",
+        "distance_km": 0.0,
+        "duration_min": 39.5,
+        "avg_hr": 134.0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      }
+    ],
+    "trail_running": [
+      {
+        "id": 23547445269,
+        "name": "Ballabio Trail Running",
+        "date": "2026-07-10",
+        "distance_km": 12.81,
+        "duration_min": 203.4,
+        "avg_hr": 143.0,
+        "elevation_m": 1165,
+        "avg_speed": 3.8
+      },
+      {
+        "id": 21410240661,
+        "name": "Mazzin Trail Running",
+        "date": "2026-01-01",
+        "distance_km": 8.84,
+        "duration_min": 71.2,
+        "avg_hr": 143.0,
+        "elevation_m": 387,
+        "avg_speed": 7.5
+      },
+      {
+        "id": 21401440148,
+        "name": "Mazzin Trail Running",
+        "date": "2025-12-31",
+        "distance_km": 8.42,
+        "duration_min": 80.1,
+        "avg_hr": 137.0,
+        "elevation_m": 469,
+        "avg_speed": 6.3
+      },
+      {
+        "id": 21346200936,
+        "name": "Mazzin Trail Running",
+        "date": "2025-12-25",
+        "distance_km": 8.84,
+        "duration_min": 76.1,
+        "avg_hr": 141.0,
+        "elevation_m": 371,
+        "avg_speed": 7.0
+      },
+      {
+        "id": 21200228117,
+        "name": "Cernusco Lombardone Trail Running",
+        "date": "2025-12-08",
+        "distance_km": 14.1,
+        "duration_min": 113.0,
+        "avg_hr": 139.0,
+        "elevation_m": 463,
+        "avg_speed": 7.5
+      }
+    ],
+    "cycling": [
+      {
+        "id": 23519049597,
+        "name": "Ciclismo indoor",
+        "date": "2026-07-08",
+        "distance_km": 16.76,
+        "duration_min": 49.6,
+        "avg_hr": 116.0,
+        "elevation_m": 0,
+        "avg_speed": 20.3
+      },
+      {
+        "id": 23384317864,
+        "name": "Tenero-Contra Ciclismo",
+        "date": "2026-06-26",
+        "distance_km": 55.95,
+        "duration_min": 166.1,
+        "avg_hr": 144.0,
+        "elevation_m": 881,
+        "avg_speed": 20.2
+      },
+      {
+        "id": 23278425865,
+        "name": "Ciclismo indoor",
+        "date": "2026-06-17",
+        "distance_km": 21.7,
+        "duration_min": 56.8,
+        "avg_hr": 129.0,
+        "elevation_m": 0,
+        "avg_speed": 22.9
+      },
+      {
+        "id": 23195864490,
+        "name": "Ciclismo indoor",
+        "date": "2026-06-10",
+        "distance_km": 18.5,
+        "duration_min": 49.8,
+        "avg_hr": 125.0,
+        "elevation_m": 0,
+        "avg_speed": 22.3
+      },
+      {
+        "id": 23111863370,
+        "name": "Ciclismo indoor",
+        "date": "2026-06-03",
+        "distance_km": 19.05,
+        "duration_min": 56.7,
+        "avg_hr": 126.0,
+        "elevation_m": 0,
+        "avg_speed": 20.2
+      },
+      {
+        "id": 23027604090,
+        "name": "Ciclismo indoor",
+        "date": "2026-05-27",
+        "distance_km": 16.6,
+        "duration_min": 49.9,
+        "avg_hr": 0,
+        "elevation_m": 0,
+        "avg_speed": 20.0
+      },
+      {
+        "id": 22910257298,
+        "name": "Milano Gravel",
+        "date": "2026-05-17",
+        "distance_km": 58.3,
+        "duration_min": 152.4,
+        "avg_hr": 144.0,
+        "elevation_m": 131,
+        "avg_speed": 22.9
+      },
+      {
+        "id": 22863021988,
+        "name": "Ciclismo indoor",
+        "date": "2026-05-13",
+        "distance_km": 20.5,
+        "duration_min": 52.4,
+        "avg_hr": 119.0,
+        "elevation_m": 0,
+        "avg_speed": 23.5
+      },
+      {
+        "id": 22781227093,
+        "name": "Ciclismo indoor",
+        "date": "2026-05-06",
+        "distance_km": 18.3,
+        "duration_min": 47.2,
+        "avg_hr": 130.0,
+        "elevation_m": 0,
+        "avg_speed": 23.2
+      },
+      {
+        "id": 22816534587,
+        "name": "Monforte d'Alba Gravel",
+        "date": "2026-05-02",
+        "distance_km": 34.12,
+        "duration_min": 142.1,
+        "avg_hr": 143.0,
+        "elevation_m": 912,
+        "avg_speed": 14.4
+      },
+      {
+        "id": 22736068237,
+        "name": "Monforte d'Alba Ciclismo",
+        "date": "2026-05-02",
+        "distance_km": 34.1,
+        "duration_min": 137.5,
+        "avg_hr": 143.0,
+        "elevation_m": 871,
+        "avg_speed": 14.9
+      },
+      {
+        "id": 22665040273,
+        "name": "Milano Gravel",
+        "date": "2026-04-26",
+        "distance_km": 69.01,
+        "duration_min": 180.8,
+        "avg_hr": 140.0,
+        "elevation_m": 165,
+        "avg_speed": 22.9
+      },
+      {
+        "id": 22614257485,
+        "name": "Ciclismo indoor",
+        "date": "2026-04-22",
+        "distance_km": 19.55,
+        "duration_min": 51.0,
+        "avg_hr": 129.0,
+        "elevation_m": 0,
+        "avg_speed": 23.0
+      },
+      {
+        "id": 22581296340,
+        "name": "Milano Gravel",
+        "date": "2026-04-19",
+        "distance_km": 60.83,
+        "duration_min": 163.4,
+        "avg_hr": 143.0,
+        "elevation_m": 139,
+        "avg_speed": 22.3
+      },
+      {
+        "id": 22497841487,
+        "name": "Milano Gravel",
+        "date": "2026-04-12",
+        "distance_km": 58.72,
+        "duration_min": 171.5,
+        "avg_hr": 137.0,
+        "elevation_m": 111,
+        "avg_speed": 20.5
+      },
+      {
+        "id": 21719868282,
+        "name": "Milano Ciclismo",
+        "date": "2026-01-31",
+        "distance_km": 50.54,
+        "duration_min": 134.8,
+        "avg_hr": 146.0,
+        "elevation_m": 90,
+        "avg_speed": 22.5
+      },
+      {
+        "id": 21659810026,
+        "name": "Milano Ciclismo",
+        "date": "2026-01-25",
+        "distance_km": 57.14,
+        "duration_min": 139.7,
+        "avg_hr": 149.0,
+        "elevation_m": 110,
+        "avg_speed": 24.5
+      },
+      {
+        "id": 21575070295,
+        "name": "Milano Ciclismo",
+        "date": "2026-01-17",
+        "distance_km": 24.0,
+        "duration_min": 117.3,
+        "avg_hr": 85.0,
+        "elevation_m": 49,
+        "avg_speed": 12.3
+      },
+      {
+        "id": 21552216443,
+        "name": "Ciclismo",
+        "date": "2026-01-15",
+        "distance_km": 15.8,
+        "duration_min": 27.4,
+        "avg_hr": 105.17811550151976,
+        "elevation_m": 31,
+        "avg_speed": 34.6
+      },
+      {
+        "id": 21541693689,
+        "name": "Ciclismo",
+        "date": "2026-01-14",
+        "distance_km": 22.09,
+        "duration_min": 59.3,
+        "avg_hr": 118.67780898876404,
+        "elevation_m": 160,
+        "avg_speed": 22.3
+      }
+    ],
+    "hiking": [
+      {
+        "id": 23329250065,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-06-21",
+        "distance_km": 9.9,
+        "duration_min": 184.1,
+        "avg_hr": 106.0,
+        "elevation_m": 387,
+        "avg_speed": 3.2
+      },
+      {
+        "id": 23317648880,
+        "name": "Campitello di Fassa Escursionismo",
+        "date": "2026-06-20",
+        "distance_km": 11.88,
+        "duration_min": 234.9,
+        "avg_hr": 129.0,
+        "elevation_m": 719,
+        "avg_speed": 3.0
+      },
+      {
+        "id": 22415623961,
+        "name": "Ayas Escursionismo",
+        "date": "2026-04-05",
+        "distance_km": 7.55,
+        "duration_min": 162.7,
+        "avg_hr": 106.0,
+        "elevation_m": 496,
+        "avg_speed": 2.8
+      },
+      {
+        "id": 22405854908,
+        "name": "Ayas Escursionismo",
+        "date": "2026-04-04",
+        "distance_km": 4.77,
+        "duration_min": 81.3,
+        "avg_hr": 117.0,
+        "elevation_m": 189,
+        "avg_speed": 3.5
+      },
+      {
+        "id": 22337625648,
+        "name": "Castiglione d'Intelvi Escursionismo",
+        "date": "2026-03-29",
+        "distance_km": 7.52,
+        "duration_min": 116.3,
+        "avg_hr": 118.0,
+        "elevation_m": 466,
+        "avg_speed": 3.9
+      },
+      {
+        "id": 22258903140,
+        "name": "Castiglione d'Intelvi Escursionismo",
+        "date": "2026-03-22",
+        "distance_km": 3.03,
+        "duration_min": 46.0,
+        "avg_hr": 90.0,
+        "elevation_m": 136,
+        "avg_speed": 3.9
+      },
+      {
+        "id": 21947656379,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-02-22",
+        "distance_km": 4.44,
+        "duration_min": 75.8,
+        "avg_hr": 94.0,
+        "elevation_m": 104,
+        "avg_speed": 3.5
+      },
+      {
+        "id": 21905320972,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-02-18",
+        "distance_km": 5.39,
+        "duration_min": 76.1,
+        "avg_hr": 113.0,
+        "elevation_m": 272,
+        "avg_speed": 4.2
+      },
+      {
+        "id": 21893653267,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-02-17",
+        "distance_km": 5.65,
+        "duration_min": 75.4,
+        "avg_hr": 98.0,
+        "elevation_m": 171,
+        "avg_speed": 4.5
+      },
+      {
+        "id": 21884749703,
+        "name": "Mazzin Escursionismo",
+        "date": "2026-02-16",
+        "distance_km": 5.26,
+        "duration_min": 79.2,
+        "avg_hr": 112.0,
+        "elevation_m": 248,
+        "avg_speed": 4.0
+      },
+      {
+        "id": 21876072821,
+        "name": "Mazzin Escursionismo",
+        "date": "2026-02-14",
+        "distance_km": 6.65,
+        "duration_min": 115.3,
+        "avg_hr": 82.0,
+        "elevation_m": 76,
+        "avg_speed": 3.5
+      },
+      {
+        "id": 21392895329,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2025-12-30",
+        "distance_km": 9.38,
+        "duration_min": 153.0,
+        "avg_hr": 102.0,
+        "elevation_m": 473,
+        "avg_speed": 3.7
+      },
+      {
+        "id": 21383160743,
+        "name": "Primiero San Martino di Castrozza Escursionismo",
+        "date": "2025-12-29",
+        "distance_km": 4.61,
+        "duration_min": 86.1,
+        "avg_hr": 90.0,
+        "elevation_m": 152,
+        "avg_speed": 3.2
+      }
+    ],
+    "multi_sport": [
+      {
+        "id": 22559021206,
+        "name": "Multisport",
+        "date": "2026-04-17",
+        "distance_km": 6.01,
+        "duration_min": 47.8,
+        "avg_hr": 0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      },
+      {
+        "id": 22531188128,
+        "name": "Multisport",
+        "date": "2026-04-15",
+        "distance_km": 6.16,
+        "duration_min": 46.5,
+        "avg_hr": 0,
+        "elevation_m": 0,
+        "avg_speed": 0.0
+      }
+    ],
+    "running": [
+      {
+        "id": 22429736428,
+        "name": "Milano Corsa",
+        "date": "2026-04-06",
+        "distance_km": 5.38,
+        "duration_min": 34.4,
+        "avg_hr": 146.0,
+        "elevation_m": 18,
+        "avg_speed": 9.4
+      },
+      {
+        "id": 22391351054,
+        "name": "Milano Corsa",
+        "date": "2026-04-03",
+        "distance_km": 7.28,
+        "duration_min": 44.9,
+        "avg_hr": 154.0,
+        "elevation_m": 34,
+        "avg_speed": 9.7
+      },
+      {
+        "id": 22325337802,
+        "name": "Milano Corsa",
+        "date": "2026-03-28",
+        "distance_km": 5.72,
+        "duration_min": 34.2,
+        "avg_hr": 153.0,
+        "elevation_m": 25,
+        "avg_speed": 10.0
+      },
+      {
+        "id": 22247085651,
+        "name": "Milano Corsa",
+        "date": "2026-03-21",
+        "distance_km": 8.74,
+        "duration_min": 52.6,
+        "avg_hr": 151.0,
+        "elevation_m": 17,
+        "avg_speed": 10.0
+      },
+      {
+        "id": 22199196396,
+        "name": "Milano Corsa",
+        "date": "2026-03-17",
+        "distance_km": 7.16,
+        "duration_min": 41.3,
+        "avg_hr": 145.0,
+        "elevation_m": 21,
+        "avg_speed": 10.4
+      },
+      {
+        "id": 22168811024,
+        "name": "Milano Corsa",
+        "date": "2026-03-14",
+        "distance_km": 8.1,
+        "duration_min": 48.3,
+        "avg_hr": 156.0,
+        "elevation_m": 25,
+        "avg_speed": 10.1
+      },
+      {
+        "id": 22101057512,
+        "name": "Milano Corsa",
+        "date": "2026-03-08",
+        "distance_km": 7.82,
+        "duration_min": 50.0,
+        "avg_hr": 154.0,
+        "elevation_m": 60,
+        "avg_speed": 9.4
+      },
+      {
+        "id": 22027596382,
+        "name": "Milano Corsa",
+        "date": "2026-03-01",
+        "distance_km": 7.04,
+        "duration_min": 42.1,
+        "avg_hr": 151.0,
+        "elevation_m": 15,
+        "avg_speed": 10.0
+      },
+      {
+        "id": 21791994237,
+        "name": "Milano Corsa",
+        "date": "2026-02-07",
+        "distance_km": 10.02,
+        "duration_min": 59.9,
+        "avg_hr": 156.0,
+        "elevation_m": 53,
+        "avg_speed": 10.0
+      },
+      {
+        "id": 21448369479,
+        "name": "Milano Corsa",
+        "date": "2026-01-05",
+        "distance_km": 9.5,
+        "duration_min": 53.5,
+        "avg_hr": 147.0,
+        "elevation_m": 19,
+        "avg_speed": 10.7
+      },
+      {
+        "id": 21439205638,
+        "name": "Milano Corsa",
+        "date": "2026-01-04",
+        "distance_km": 13.66,
+        "duration_min": 76.0,
+        "avg_hr": 146.0,
+        "elevation_m": 24,
+        "avg_speed": 10.8
+      },
+      {
+        "id": 21371883294,
+        "name": "[M3] Run",
+        "date": "2025-12-28",
+        "distance_km": 16.01,
+        "duration_min": 93.8,
+        "avg_hr": 150.0,
+        "elevation_m": 45,
+        "avg_speed": 10.2
+      },
+      {
+        "id": 21330379131,
+        "name": "Mazzin Corsa",
+        "date": "2025-12-23",
+        "distance_km": 10.17,
+        "duration_min": 65.9,
+        "avg_hr": 147.0,
+        "elevation_m": 121,
+        "avg_speed": 9.3
+      },
+      {
+        "id": 21252661180,
+        "name": "Milano Corsa",
+        "date": "2025-12-14",
+        "distance_km": 10.54,
+        "duration_min": 59.9,
+        "avg_hr": 140.0,
+        "elevation_m": 18,
+        "avg_speed": 10.6
+      },
+      {
+        "id": 21235412231,
+        "name": "Roma Corsa",
+        "date": "2025-12-12",
+        "distance_km": 10.73,
+        "duration_min": 60.5,
+        "avg_hr": 142.0,
+        "elevation_m": 66,
+        "avg_speed": 10.6
+      },
+      {
+        "id": 21184057780,
+        "name": "Milano Corsa",
+        "date": "2025-12-06",
+        "distance_km": 12.2,
+        "duration_min": 67.1,
+        "avg_hr": 145.0,
+        "elevation_m": 31,
+        "avg_speed": 10.9
+      },
+      {
+        "id": 21166879907,
+        "name": "Milano Corsa",
+        "date": "2025-12-04",
+        "distance_km": 10.17,
+        "duration_min": 54.5,
+        "avg_hr": 152.0,
+        "elevation_m": 4,
+        "avg_speed": 11.2
+      },
+      {
+        "id": 21148488158,
+        "name": "Milano Corsa",
+        "date": "2025-12-02",
+        "distance_km": 10.74,
+        "duration_min": 57.7,
+        "avg_hr": 148.0,
+        "elevation_m": 9,
+        "avg_speed": 11.2
+      },
+      {
+        "id": 21121145221,
+        "name": "Milano Corsa",
+        "date": "2025-11-29",
+        "distance_km": 15.08,
+        "duration_min": 87.8,
+        "avg_hr": 143.0,
+        "elevation_m": 14,
+        "avg_speed": 10.3
+      },
+      {
+        "id": 21095328963,
+        "name": "Milano Corsa",
+        "date": "2025-11-26",
+        "distance_km": 10.07,
+        "duration_min": 55.1,
+        "avg_hr": 149.0,
+        "elevation_m": 12,
+        "avg_speed": 11.0
+      },
+      {
+        "id": 21076444333,
+        "name": "Milano Corsa",
+        "date": "2025-11-24",
+        "distance_km": 14.19,
+        "duration_min": 76.1,
+        "avg_hr": 145.0,
+        "elevation_m": 21,
+        "avg_speed": 11.2
+      },
+      {
+        "id": 21058171640,
+        "name": "Milano Corsa",
+        "date": "2025-11-22",
+        "distance_km": 11.09,
+        "duration_min": 58.0,
+        "avg_hr": 149.0,
+        "elevation_m": 19,
+        "avg_speed": 11.5
+      },
+      {
+        "id": 21042789855,
+        "name": "Milano Corsa",
+        "date": "2025-11-20",
+        "distance_km": 10.57,
+        "duration_min": 57.4,
+        "avg_hr": 151.0,
+        "elevation_m": 12,
+        "avg_speed": 11.0
+      },
+      {
+        "id": 21011195019,
+        "name": "Milano Corsa",
+        "date": "2025-11-17",
+        "distance_km": 10.01,
+        "duration_min": 56.2,
+        "avg_hr": 138.0,
+        "elevation_m": 13,
+        "avg_speed": 10.7
+      },
+      {
+        "id": 20995437163,
+        "name": "Milano Corsa",
+        "date": "2025-11-15",
+        "distance_km": 11.0,
+        "duration_min": 59.7,
+        "avg_hr": 140.0,
+        "elevation_m": 17,
+        "avg_speed": 11.1
+      },
+      {
+        "id": 20966981945,
+        "name": "Milano Corsa",
+        "date": "2025-11-12",
+        "distance_km": 10.13,
+        "duration_min": 57.2,
+        "avg_hr": 146.0,
+        "elevation_m": 13,
+        "avg_speed": 10.6
+      },
+      {
+        "id": 20946718822,
+        "name": "Milano Corsa",
+        "date": "2025-11-10",
+        "distance_km": 10.94,
+        "duration_min": 59.5,
+        "avg_hr": 143.0,
+        "elevation_m": 10,
+        "avg_speed": 11.0
+      }
+    ],
+    "walking": [
+      {
+        "id": 22239158804,
+        "name": "Milano Camminata",
+        "date": "2026-03-20",
+        "distance_km": 4.22,
+        "duration_min": 52.8,
+        "avg_hr": 91.0,
+        "elevation_m": 29,
+        "avg_speed": 4.8
+      },
+      {
+        "id": 22091484013,
+        "name": "Lessona Camminata",
+        "date": "2026-03-07",
+        "distance_km": 4.61,
+        "duration_min": 67.3,
+        "avg_hr": 86.0,
+        "elevation_m": 70,
+        "avg_speed": 4.1
+      },
+      {
+        "id": 21730018769,
+        "name": "Milano Camminata",
+        "date": "2026-02-01",
+        "distance_km": 7.09,
+        "duration_min": 99.3,
+        "avg_hr": 86.0,
+        "elevation_m": 16,
+        "avg_speed": 4.3
+      },
+      {
+        "id": 21586318088,
+        "name": "Milano Camminata",
+        "date": "2026-01-18",
+        "distance_km": 6.8,
+        "duration_min": 105.8,
+        "avg_hr": 85.0,
+        "elevation_m": 61,
+        "avg_speed": 3.9
+      }
+    ],
+    "skate_skiing_ws": [
+      {
+        "id": 21936643525,
+        "name": "Mazzin Sci di fondo skating",
+        "date": "2026-02-21",
+        "distance_km": 5.52,
+        "duration_min": 45.4,
+        "avg_hr": 154.0,
+        "elevation_m": 69,
+        "avg_speed": 7.3
+      }
+    ],
+    "resort_skiing": [
+      {
+        "id": 21876268029,
+        "name": "Val di Fassa Sci",
+        "date": "2026-02-15",
+        "distance_km": 90.97,
+        "duration_min": 336.9,
+        "avg_hr": 97.0,
+        "elevation_m": 9841,
+        "avg_speed": 16.2
+      },
+      {
+        "id": 21315911547,
+        "name": "Val di Fassa Sci",
+        "date": "2025-12-21",
+        "distance_km": 72.62,
+        "duration_min": 371.4,
+        "avg_hr": 89.0,
+        "elevation_m": 7526,
+        "avg_speed": 11.7
+      }
+    ]
+  },
+  "monthly_volume": {
+    "2026-07": {
+      "hiit": {
+        "hours": 2.8600000000000003,
+        "km": 0.0,
+        "sessions": 5
+      },
+      "trail_running": {
+        "hours": 3.39,
+        "km": 12.81,
+        "sessions": 1
+      },
+      "cycling": {
+        "hours": 0.83,
+        "km": 16.76,
+        "sessions": 1
+      }
+    },
+    "2026-06": {
+      "hiit": {
+        "hours": 4.63,
+        "km": 0.0,
+        "sessions": 11
+      },
+      "cycling": {
+        "hours": 5.5,
+        "km": 115.2,
+        "sessions": 4
+      },
+      "hiking": {
+        "hours": 6.99,
+        "km": 21.78,
+        "sessions": 2
+      }
+    },
+    "2026-05": {
+      "cycling": {
+        "hours": 9.690000000000001,
+        "km": 181.92,
+        "sessions": 6
+      },
+      "hiit": {
+        "hours": 3.27,
+        "km": 0.0,
+        "sessions": 7
+      }
+    },
+    "2026-04": {
+      "hiit": {
+        "hours": 1.98,
+        "km": 0.0,
+        "sessions": 3
+      },
+      "cycling": {
+        "hours": 9.44,
+        "km": 208.10999999999999,
+        "sessions": 4
+      },
+      "multi_sport": {
+        "hours": 1.58,
+        "km": 12.17,
+        "sessions": 2
+      },
+      "running": {
+        "hours": 1.3199999999999998,
+        "km": 12.66,
+        "sessions": 2
+      },
+      "hiking": {
+        "hours": 4.0600000000000005,
+        "km": 12.32,
+        "sessions": 2
+      }
+    },
+    "2026-03": {
+      "hiking": {
+        "hours": 2.71,
+        "km": 10.549999999999999,
+        "sessions": 2
+      },
+      "running": {
+        "hours": 4.47,
+        "km": 44.58,
+        "sessions": 6
+      },
+      "walking": {
+        "hours": 2.0,
+        "km": 8.83,
+        "sessions": 2
+      }
+    },
+    "2026-02": {
+      "hiking": {
+        "hours": 7.03,
+        "km": 27.39,
+        "sessions": 5
+      },
+      "skate_skiing_ws": {
+        "hours": 0.76,
+        "km": 5.52,
+        "sessions": 1
+      },
+      "resort_skiing": {
+        "hours": 5.61,
+        "km": 90.97,
+        "sessions": 1
+      },
+      "running": {
+        "hours": 1.0,
+        "km": 10.02,
+        "sessions": 1
+      },
+      "walking": {
+        "hours": 1.66,
+        "km": 7.09,
+        "sessions": 1
+      }
+    },
+    "2026-01": {
+      "cycling": {
+        "hours": 7.98,
+        "km": 169.57000000000002,
+        "sessions": 5
+      },
+      "walking": {
+        "hours": 1.76,
+        "km": 6.8,
+        "sessions": 1
+      },
+      "running": {
+        "hours": 2.16,
+        "km": 23.16,
+        "sessions": 2
+      },
+      "trail_running": {
+        "hours": 1.19,
+        "km": 8.84,
+        "sessions": 1
+      }
+    },
+    "2025-12": {
+      "trail_running": {
+        "hours": 4.48,
+        "km": 31.36,
+        "sessions": 3
+      },
+      "hiking": {
+        "hours": 3.9899999999999998,
+        "km": 13.990000000000002,
+        "sessions": 2
+      },
+      "running": {
+        "hours": 7.66,
+        "km": 80.56,
+        "sessions": 7
+      },
+      "resort_skiing": {
+        "hours": 6.19,
+        "km": 72.62,
+        "sessions": 1
+      }
+    },
+    "2025-11": {
+      "running": {
+        "hours": 9.45,
+        "km": 103.07999999999998,
+        "sessions": 9
+      }
+    }
+  },
+  "weekly_volume": {
+    "2026-W28": {
+      "hiit": 1
+    },
+    "2026-W27": {
+      "hiit": 2,
+      "trail_running": 1,
+      "cycling": 1
+    },
+    "2026-W26": {
+      "hiit": 3
+    },
+    "2026-W25": {
+      "cycling": 1,
+      "hiit": 1
+    },
+    "2026-W24": {
+      "hiking": 2,
+      "cycling": 1,
+      "hiit": 2
+    },
+    "2026-W23": {
+      "hiit": 3,
+      "cycling": 1
+    },
+    "2026-W22": {
+      "hiit": 4,
+      "cycling": 1
+    },
+    "2026-W21": {
+      "cycling": 1,
+      "hiit": 1
+    },
+    "2026-W20": {
+      "hiit": 3
+    },
+    "2026-W19": {
+      "cycling": 2,
+      "hiit": 1
+    },
+    "2026-W18": {
+      "hiit": 2,
+      "cycling": 1
+    },
+    "2026-W17": {
+      "cycling": 2,
+      "hiit": 1
+    },
+    "2026-W16": {
+      "cycling": 2,
+      "hiit": 2
+    },
+    "2026-W15": {
+      "cycling": 1,
+      "multi_sport": 2
+    },
+    "2026-W14": {
+      "cycling": 1,
+      "running": 1
+    },
+    "2026-W13": {
+      "hiking": 2,
+      "running": 1
+    },
+    "2026-W12": {
+      "hiking": 1,
+      "running": 1
+    },
+    "2026-W11": {
+      "hiking": 1,
+      "running": 2,
+      "walking": 1
+    },
+    "2026-W10": {
+      "running": 1
+    },
+    "2026-W09": {
+      "running": 1,
+      "walking": 1
+    },
+    "2026-W08": {
+      "running": 1
+    },
+    "2026-W07": {
+      "hiking": 4,
+      "skate_skiing_ws": 1
+    },
+    "2026-W06": {
+      "resort_skiing": 1,
+      "hiking": 1
+    },
+    "2026-W05": {
+      "running": 1
+    },
+    "2026-W04": {
+      "walking": 1,
+      "cycling": 1
+    },
+    "2026-W03": {
+      "cycling": 1
+    },
+    "2026-W02": {
+      "walking": 1,
+      "cycling": 3
+    },
+    "2026-W01": {
+      "running": 1
+    },
+    "2026-W00": {
+      "running": 1,
+      "trail_running": 1
+    },
+    "2025-W52": {
+      "trail_running": 1,
+      "hiking": 2
+    },
+    "2025-W51": {
+      "running": 2,
+      "trail_running": 1
+    },
+    "2025-W50": {
+      "resort_skiing": 1
+    },
+    "2025-W49": {
+      "running": 2,
+      "trail_running": 1
+    },
+    "2025-W48": {
+      "running": 3
+    },
+    "2025-W47": {
+      "running": 3
+    },
+    "2025-W46": {
+      "running": 3
+    },
+    "2025-W45": {
+      "running": 3
+    }
+  },
+  "all_activities": [
+    {
+      "id": 23590127794,
+      "name": "HIIT",
+      "date": "2026-07-14",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 40.1,
+      "avg_hr": 118.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23572163156,
+      "name": "HIIT Workout Kettlebell",
+      "date": "2026-07-12",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 31.7,
+      "avg_hr": 116.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23547445269,
+      "name": "Ballabio Trail Running",
+      "date": "2026-07-10",
+      "sport": "trail_running",
+      "distance_km": 12.81,
+      "duration_min": 203.4,
+      "avg_hr": 143.0,
+      "elevation_m": 1165
+    },
+    {
+      "id": 23519049597,
+      "name": "Ciclismo indoor",
+      "date": "2026-07-08",
+      "sport": "cycling",
+      "distance_km": 16.76,
+      "duration_min": 49.6,
+      "avg_hr": 116.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23506562685,
+      "name": "HIIT",
+      "date": "2026-07-07",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 39.3,
+      "avg_hr": 131.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23485656106,
+      "name": "HIIT - AMRAP",
+      "date": "2026-07-05",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 20.0,
+      "avg_hr": 128.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23467198138,
+      "name": "HIIT",
+      "date": "2026-07-03",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 40.4,
+      "avg_hr": 138.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23425928057,
+      "name": "HIIT",
+      "date": "2026-06-30",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 38.7,
+      "avg_hr": 123.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23384317864,
+      "name": "Tenero-Contra Ciclismo",
+      "date": "2026-06-26",
+      "sport": "cycling",
+      "distance_km": 55.95,
+      "duration_min": 166.1,
+      "avg_hr": 144.0,
+      "elevation_m": 881
+    },
+    {
+      "id": 23347652392,
+      "name": "HIIT",
+      "date": "2026-06-23",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 39.9,
+      "avg_hr": 129.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23329250065,
+      "name": "Pozza di Fassa Escursionismo",
+      "date": "2026-06-21",
+      "sport": "hiking",
+      "distance_km": 9.9,
+      "duration_min": 184.1,
+      "avg_hr": 106.0,
+      "elevation_m": 387
+    },
+    {
+      "id": 23317648880,
+      "name": "Campitello di Fassa Escursionismo",
+      "date": "2026-06-20",
+      "sport": "hiking",
+      "distance_km": 11.88,
+      "duration_min": 234.9,
+      "avg_hr": 129.0,
+      "elevation_m": 719
+    },
+    {
+      "id": 23278425865,
+      "name": "Ciclismo indoor",
+      "date": "2026-06-17",
+      "sport": "cycling",
+      "distance_km": 21.7,
+      "duration_min": 56.8,
+      "avg_hr": 129.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23265589440,
+      "name": "HIIT",
+      "date": "2026-06-16",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 39.2,
+      "avg_hr": 132.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23255881541,
+      "name": "18' HIIT 40/20",
+      "date": "2026-06-15",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 18.0,
+      "avg_hr": 120.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23255881432,
+      "name": "18' HIIT 40/20",
+      "date": "2026-06-14",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 18.0,
+      "avg_hr": 99.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23195864490,
+      "name": "Ciclismo indoor",
+      "date": "2026-06-10",
+      "sport": "cycling",
+      "distance_km": 18.5,
+      "duration_min": 49.8,
+      "avg_hr": 125.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23183417704,
+      "name": "HIIT",
+      "date": "2026-06-09",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 38.5,
+      "avg_hr": 138.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23171986184,
+      "name": "18' HIIT 40/20",
+      "date": "2026-06-08",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 18.0,
+      "avg_hr": 118.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23162454262,
+      "name": "18' HIIT 40/20",
+      "date": "2026-06-07",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 17.9,
+      "avg_hr": 108.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23132191602,
+      "name": "18' HIIT 40/20",
+      "date": "2026-06-04",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 18.0,
+      "avg_hr": 120.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23111863370,
+      "name": "Ciclismo indoor",
+      "date": "2026-06-03",
+      "sport": "cycling",
+      "distance_km": 19.05,
+      "duration_min": 56.7,
+      "avg_hr": 126.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23101673436,
+      "name": "18' HIIT 40/20",
+      "date": "2026-06-02",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 18.0,
+      "avg_hr": 98.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23092192249,
+      "name": "HIIT",
+      "date": "2026-06-01",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 13.6,
+      "avg_hr": 107.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23027604090,
+      "name": "Ciclismo indoor",
+      "date": "2026-05-27",
+      "sport": "cycling",
+      "distance_km": 16.6,
+      "duration_min": 49.9,
+      "avg_hr": 0,
+      "elevation_m": 0
+    },
+    {
+      "id": 23004510224,
+      "name": "HIIT",
+      "date": "2026-05-25",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 14.6,
+      "avg_hr": 120.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22993970247,
+      "name": "HIIT",
+      "date": "2026-05-24",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 11.9,
+      "avg_hr": 112.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22979319428,
+      "name": "HIIT",
+      "date": "2026-05-23",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 11.8,
+      "avg_hr": 111.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22931696570,
+      "name": "HIIT",
+      "date": "2026-05-19",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 39.6,
+      "avg_hr": 130.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22910257298,
+      "name": "Milano Gravel",
+      "date": "2026-05-17",
+      "sport": "cycling",
+      "distance_km": 58.3,
+      "duration_min": 152.4,
+      "avg_hr": 144.0,
+      "elevation_m": 131
+    },
+    {
+      "id": 22863021988,
+      "name": "Ciclismo indoor",
+      "date": "2026-05-13",
+      "sport": "cycling",
+      "distance_km": 20.5,
+      "duration_min": 52.4,
+      "avg_hr": 119.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22850772081,
+      "name": "HIIT",
+      "date": "2026-05-12",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 38.3,
+      "avg_hr": 128.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22810890538,
+      "name": "HIIT",
+      "date": "2026-05-08",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 41.5,
+      "avg_hr": 131.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22781227093,
+      "name": "Ciclismo indoor",
+      "date": "2026-05-06",
+      "sport": "cycling",
+      "distance_km": 18.3,
+      "duration_min": 47.2,
+      "avg_hr": 130.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22768994410,
+      "name": "HIIT",
+      "date": "2026-05-05",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 38.6,
+      "avg_hr": 136.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22816534587,
+      "name": "Monforte d'Alba Gravel",
+      "date": "2026-05-02",
+      "sport": "cycling",
+      "distance_km": 34.12,
+      "duration_min": 142.1,
+      "avg_hr": 143.0,
+      "elevation_m": 912
+    },
+    {
+      "id": 22736068237,
+      "name": "Monforte d'Alba Ciclismo",
+      "date": "2026-05-02",
+      "sport": "cycling",
+      "distance_km": 34.1,
+      "duration_min": 137.5,
+      "avg_hr": 143.0,
+      "elevation_m": 871
+    },
+    {
+      "id": 22685469907,
+      "name": "HIIT",
+      "date": "2026-04-28",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 38.8,
+      "avg_hr": 141.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22665040273,
+      "name": "Milano Gravel",
+      "date": "2026-04-26",
+      "sport": "cycling",
+      "distance_km": 69.01,
+      "duration_min": 180.8,
+      "avg_hr": 140.0,
+      "elevation_m": 165
+    },
+    {
+      "id": 22644407157,
+      "name": "HIIT",
+      "date": "2026-04-24",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 40.1,
+      "avg_hr": 137.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22614257485,
+      "name": "Ciclismo indoor",
+      "date": "2026-04-22",
+      "sport": "cycling",
+      "distance_km": 19.55,
+      "duration_min": 51.0,
+      "avg_hr": 129.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22601700198,
+      "name": "HIIT",
+      "date": "2026-04-21",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 39.5,
+      "avg_hr": 134.0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22581296340,
+      "name": "Milano Gravel",
+      "date": "2026-04-19",
+      "sport": "cycling",
+      "distance_km": 60.83,
+      "duration_min": 163.4,
+      "avg_hr": 143.0,
+      "elevation_m": 139
+    },
+    {
+      "id": 22559021206,
+      "name": "Multisport",
+      "date": "2026-04-17",
+      "sport": "multi_sport",
+      "distance_km": 6.01,
+      "duration_min": 47.8,
+      "avg_hr": 0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22531188128,
+      "name": "Multisport",
+      "date": "2026-04-15",
+      "sport": "multi_sport",
+      "distance_km": 6.16,
+      "duration_min": 46.5,
+      "avg_hr": 0,
+      "elevation_m": 0
+    },
+    {
+      "id": 22497841487,
+      "name": "Milano Gravel",
+      "date": "2026-04-12",
+      "sport": "cycling",
+      "distance_km": 58.72,
+      "duration_min": 171.5,
+      "avg_hr": 137.0,
+      "elevation_m": 111
+    },
+    {
+      "id": 22429736428,
+      "name": "Milano Corsa",
+      "date": "2026-04-06",
+      "sport": "running",
+      "distance_km": 5.38,
+      "duration_min": 34.4,
+      "avg_hr": 146.0,
+      "elevation_m": 18
+    },
+    {
+      "id": 22415623961,
+      "name": "Ayas Escursionismo",
+      "date": "2026-04-05",
+      "sport": "hiking",
+      "distance_km": 7.55,
+      "duration_min": 162.7,
+      "avg_hr": 106.0,
+      "elevation_m": 496
+    },
+    {
+      "id": 22405854908,
+      "name": "Ayas Escursionismo",
+      "date": "2026-04-04",
+      "sport": "hiking",
+      "distance_km": 4.77,
+      "duration_min": 81.3,
+      "avg_hr": 117.0,
+      "elevation_m": 189
+    },
+    {
+      "id": 22391351054,
+      "name": "Milano Corsa",
+      "date": "2026-04-03",
+      "sport": "running",
+      "distance_km": 7.28,
+      "duration_min": 44.9,
+      "avg_hr": 154.0,
+      "elevation_m": 34
+    },
+    {
+      "id": 22337625648,
+      "name": "Castiglione d'Intelvi Escursionismo",
+      "date": "2026-03-29",
+      "sport": "hiking",
+      "distance_km": 7.52,
+      "duration_min": 116.3,
+      "avg_hr": 118.0,
+      "elevation_m": 466
+    },
+    {
+      "id": 22325337802,
+      "name": "Milano Corsa",
+      "date": "2026-03-28",
+      "sport": "running",
+      "distance_km": 5.72,
+      "duration_min": 34.2,
+      "avg_hr": 153.0,
+      "elevation_m": 25
+    },
+    {
+      "id": 22258903140,
+      "name": "Castiglione d'Intelvi Escursionismo",
+      "date": "2026-03-22",
+      "sport": "hiking",
+      "distance_km": 3.03,
+      "duration_min": 46.0,
+      "avg_hr": 90.0,
+      "elevation_m": 136
+    },
+    {
+      "id": 22247085651,
+      "name": "Milano Corsa",
+      "date": "2026-03-21",
+      "sport": "running",
+      "distance_km": 8.74,
+      "duration_min": 52.6,
+      "avg_hr": 151.0,
+      "elevation_m": 17
+    },
+    {
+      "id": 22239158804,
+      "name": "Milano Camminata",
+      "date": "2026-03-20",
+      "sport": "walking",
+      "distance_km": 4.22,
+      "duration_min": 52.8,
+      "avg_hr": 91.0,
+      "elevation_m": 29
+    },
+    {
+      "id": 22199196396,
+      "name": "Milano Corsa",
+      "date": "2026-03-17",
+      "sport": "running",
+      "distance_km": 7.16,
+      "duration_min": 41.3,
+      "avg_hr": 145.0,
+      "elevation_m": 21
+    },
+    {
+      "id": 22168811024,
+      "name": "Milano Corsa",
+      "date": "2026-03-14",
+      "sport": "running",
+      "distance_km": 8.1,
+      "duration_min": 48.3,
+      "avg_hr": 156.0,
+      "elevation_m": 25
+    },
+    {
+      "id": 22101057512,
+      "name": "Milano Corsa",
+      "date": "2026-03-08",
+      "sport": "running",
+      "distance_km": 7.82,
+      "duration_min": 50.0,
+      "avg_hr": 154.0,
+      "elevation_m": 60
+    },
+    {
+      "id": 22091484013,
+      "name": "Lessona Camminata",
+      "date": "2026-03-07",
+      "sport": "walking",
+      "distance_km": 4.61,
+      "duration_min": 67.3,
+      "avg_hr": 86.0,
+      "elevation_m": 70
+    },
+    {
+      "id": 22027596382,
+      "name": "Milano Corsa",
+      "date": "2026-03-01",
+      "sport": "running",
+      "distance_km": 7.04,
+      "duration_min": 42.1,
+      "avg_hr": 151.0,
+      "elevation_m": 15
+    },
+    {
+      "id": 21947656379,
+      "name": "Pozza di Fassa Escursionismo",
+      "date": "2026-02-22",
+      "sport": "hiking",
+      "distance_km": 4.44,
+      "duration_min": 75.8,
+      "avg_hr": 94.0,
+      "elevation_m": 104
+    },
+    {
+      "id": 21936643525,
+      "name": "Mazzin Sci di fondo skating",
+      "date": "2026-02-21",
+      "sport": "skate_skiing_ws",
+      "distance_km": 5.52,
+      "duration_min": 45.4,
+      "avg_hr": 154.0,
+      "elevation_m": 69
+    },
+    {
+      "id": 21905320972,
+      "name": "Pozza di Fassa Escursionismo",
+      "date": "2026-02-18",
+      "sport": "hiking",
+      "distance_km": 5.39,
+      "duration_min": 76.1,
+      "avg_hr": 113.0,
+      "elevation_m": 272
+    },
+    {
+      "id": 21893653267,
+      "name": "Pozza di Fassa Escursionismo",
+      "date": "2026-02-17",
+      "sport": "hiking",
+      "distance_km": 5.65,
+      "duration_min": 75.4,
+      "avg_hr": 98.0,
+      "elevation_m": 171
+    },
+    {
+      "id": 21884749703,
+      "name": "Mazzin Escursionismo",
+      "date": "2026-02-16",
+      "sport": "hiking",
+      "distance_km": 5.26,
+      "duration_min": 79.2,
+      "avg_hr": 112.0,
+      "elevation_m": 248
+    },
+    {
+      "id": 21876268029,
+      "name": "Val di Fassa Sci",
+      "date": "2026-02-15",
+      "sport": "resort_skiing",
+      "distance_km": 90.97,
+      "duration_min": 336.9,
+      "avg_hr": 97.0,
+      "elevation_m": 9841
+    },
+    {
+      "id": 21876072821,
+      "name": "Mazzin Escursionismo",
+      "date": "2026-02-14",
+      "sport": "hiking",
+      "distance_km": 6.65,
+      "duration_min": 115.3,
+      "avg_hr": 82.0,
+      "elevation_m": 76
+    },
+    {
+      "id": 21791994237,
+      "name": "Milano Corsa",
+      "date": "2026-02-07",
+      "sport": "running",
+      "distance_km": 10.02,
+      "duration_min": 59.9,
+      "avg_hr": 156.0,
+      "elevation_m": 53
+    },
+    {
+      "id": 21730018769,
+      "name": "Milano Camminata",
+      "date": "2026-02-01",
+      "sport": "walking",
+      "distance_km": 7.09,
+      "duration_min": 99.3,
+      "avg_hr": 86.0,
+      "elevation_m": 16
+    },
+    {
+      "id": 21719868282,
+      "name": "Milano Ciclismo",
+      "date": "2026-01-31",
+      "sport": "cycling",
+      "distance_km": 50.54,
+      "duration_min": 134.8,
+      "avg_hr": 146.0,
+      "elevation_m": 90
+    },
+    {
+      "id": 21659810026,
+      "name": "Milano Ciclismo",
+      "date": "2026-01-25",
+      "sport": "cycling",
+      "distance_km": 57.14,
+      "duration_min": 139.7,
+      "avg_hr": 149.0,
+      "elevation_m": 110
+    },
+    {
+      "id": 21586318088,
+      "name": "Milano Camminata",
+      "date": "2026-01-18",
+      "sport": "walking",
+      "distance_km": 6.8,
+      "duration_min": 105.8,
+      "avg_hr": 85.0,
+      "elevation_m": 61
+    },
+    {
+      "id": 21575070295,
+      "name": "Milano Ciclismo",
+      "date": "2026-01-17",
+      "sport": "cycling",
+      "distance_km": 24.0,
+      "duration_min": 117.3,
+      "avg_hr": 85.0,
+      "elevation_m": 49
+    },
+    {
+      "id": 21552216443,
+      "name": "Ciclismo",
+      "date": "2026-01-15",
+      "sport": "cycling",
+      "distance_km": 15.8,
+      "duration_min": 27.4,
+      "avg_hr": 105.17811550151976,
+      "elevation_m": 31
+    },
+    {
+      "id": 21541693689,
+      "name": "Ciclismo",
+      "date": "2026-01-14",
+      "sport": "cycling",
+      "distance_km": 22.09,
+      "duration_min": 59.3,
+      "avg_hr": 118.67780898876404,
+      "elevation_m": 160
+    },
+    {
+      "id": 21448369479,
+      "name": "Milano Corsa",
+      "date": "2026-01-05",
+      "sport": "running",
+      "distance_km": 9.5,
+      "duration_min": 53.5,
+      "avg_hr": 147.0,
+      "elevation_m": 19
+    },
+    {
+      "id": 21439205638,
+      "name": "Milano Corsa",
+      "date": "2026-01-04",
+      "sport": "running",
+      "distance_km": 13.66,
+      "duration_min": 76.0,
+      "avg_hr": 146.0,
+      "elevation_m": 24
+    },
+    {
+      "id": 21410240661,
+      "name": "Mazzin Trail Running",
+      "date": "2026-01-01",
+      "sport": "trail_running",
+      "distance_km": 8.84,
+      "duration_min": 71.2,
+      "avg_hr": 143.0,
+      "elevation_m": 387
+    },
+    {
+      "id": 21401440148,
+      "name": "Mazzin Trail Running",
+      "date": "2025-12-31",
+      "sport": "trail_running",
+      "distance_km": 8.42,
+      "duration_min": 80.1,
+      "avg_hr": 137.0,
+      "elevation_m": 469
+    },
+    {
+      "id": 21392895329,
+      "name": "Pozza di Fassa Escursionismo",
+      "date": "2025-12-30",
+      "sport": "hiking",
+      "distance_km": 9.38,
+      "duration_min": 153.0,
+      "avg_hr": 102.0,
+      "elevation_m": 473
+    },
+    {
+      "id": 21383160743,
+      "name": "Primiero San Martino di Castrozza Escursionismo",
+      "date": "2025-12-29",
+      "sport": "hiking",
+      "distance_km": 4.61,
+      "duration_min": 86.1,
+      "avg_hr": 90.0,
+      "elevation_m": 152
+    },
+    {
+      "id": 21371883294,
+      "name": "[M3] Run",
+      "date": "2025-12-28",
+      "sport": "running",
+      "distance_km": 16.01,
+      "duration_min": 93.8,
+      "avg_hr": 150.0,
+      "elevation_m": 45
+    },
+    {
+      "id": 21346200936,
+      "name": "Mazzin Trail Running",
+      "date": "2025-12-25",
+      "sport": "trail_running",
+      "distance_km": 8.84,
+      "duration_min": 76.1,
+      "avg_hr": 141.0,
+      "elevation_m": 371
+    },
+    {
+      "id": 21330379131,
+      "name": "Mazzin Corsa",
+      "date": "2025-12-23",
+      "sport": "running",
+      "distance_km": 10.17,
+      "duration_min": 65.9,
+      "avg_hr": 147.0,
+      "elevation_m": 121
+    },
+    {
+      "id": 21315911547,
+      "name": "Val di Fassa Sci",
+      "date": "2025-12-21",
+      "sport": "resort_skiing",
+      "distance_km": 72.62,
+      "duration_min": 371.4,
+      "avg_hr": 89.0,
+      "elevation_m": 7526
+    },
+    {
+      "id": 21252661180,
+      "name": "Milano Corsa",
+      "date": "2025-12-14",
+      "sport": "running",
+      "distance_km": 10.54,
+      "duration_min": 59.9,
+      "avg_hr": 140.0,
+      "elevation_m": 18
+    },
+    {
+      "id": 21235412231,
+      "name": "Roma Corsa",
+      "date": "2025-12-12",
+      "sport": "running",
+      "distance_km": 10.73,
+      "duration_min": 60.5,
+      "avg_hr": 142.0,
+      "elevation_m": 66
+    },
+    {
+      "id": 21200228117,
+      "name": "Cernusco Lombardone Trail Running",
+      "date": "2025-12-08",
+      "sport": "trail_running",
+      "distance_km": 14.1,
+      "duration_min": 113.0,
+      "avg_hr": 139.0,
+      "elevation_m": 463
+    },
+    {
+      "id": 21184057780,
+      "name": "Milano Corsa",
+      "date": "2025-12-06",
+      "sport": "running",
+      "distance_km": 12.2,
+      "duration_min": 67.1,
+      "avg_hr": 145.0,
+      "elevation_m": 31
+    },
+    {
+      "id": 21166879907,
+      "name": "Milano Corsa",
+      "date": "2025-12-04",
+      "sport": "running",
+      "distance_km": 10.17,
+      "duration_min": 54.5,
+      "avg_hr": 152.0,
+      "elevation_m": 4
+    },
+    {
+      "id": 21148488158,
+      "name": "Milano Corsa",
+      "date": "2025-12-02",
+      "sport": "running",
+      "distance_km": 10.74,
+      "duration_min": 57.7,
+      "avg_hr": 148.0,
+      "elevation_m": 9
+    },
+    {
+      "id": 21121145221,
+      "name": "Milano Corsa",
+      "date": "2025-11-29",
+      "sport": "running",
+      "distance_km": 15.08,
+      "duration_min": 87.8,
+      "avg_hr": 143.0,
+      "elevation_m": 14
+    },
+    {
+      "id": 21095328963,
+      "name": "Milano Corsa",
+      "date": "2025-11-26",
+      "sport": "running",
+      "distance_km": 10.07,
+      "duration_min": 55.1,
+      "avg_hr": 149.0,
+      "elevation_m": 12
+    },
+    {
+      "id": 21076444333,
+      "name": "Milano Corsa",
+      "date": "2025-11-24",
+      "sport": "running",
+      "distance_km": 14.19,
+      "duration_min": 76.1,
+      "avg_hr": 145.0,
+      "elevation_m": 21
+    },
+    {
+      "id": 21058171640,
+      "name": "Milano Corsa",
+      "date": "2025-11-22",
+      "sport": "running",
+      "distance_km": 11.09,
+      "duration_min": 58.0,
+      "avg_hr": 149.0,
+      "elevation_m": 19
+    },
+    {
+      "id": 21042789855,
+      "name": "Milano Corsa",
+      "date": "2025-11-20",
+      "sport": "running",
+      "distance_km": 10.57,
+      "duration_min": 57.4,
+      "avg_hr": 151.0,
+      "elevation_m": 12
+    },
+    {
+      "id": 21011195019,
+      "name": "Milano Corsa",
+      "date": "2025-11-17",
+      "sport": "running",
+      "distance_km": 10.01,
+      "duration_min": 56.2,
+      "avg_hr": 138.0,
+      "elevation_m": 13
+    },
+    {
+      "id": 20995437163,
+      "name": "Milano Corsa",
+      "date": "2025-11-15",
+      "sport": "running",
+      "distance_km": 11.0,
+      "duration_min": 59.7,
+      "avg_hr": 140.0,
+      "elevation_m": 17
+    },
+    {
+      "id": 20966981945,
+      "name": "Milano Corsa",
+      "date": "2025-11-12",
+      "sport": "running",
+      "distance_km": 10.13,
+      "duration_min": 57.2,
+      "avg_hr": 146.0,
+      "elevation_m": 13
+    },
+    {
+      "id": 20946718822,
+      "name": "Milano Corsa",
+      "date": "2025-11-10",
+      "sport": "running",
+      "distance_km": 10.94,
+      "duration_min": 59.5,
+      "avg_hr": 143.0,
+      "elevation_m": 10
+    }
+  ]
+}
