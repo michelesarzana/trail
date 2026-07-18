@@ -25,7 +25,7 @@ GARMIN_HEADERS = {
 
 def garmin_get(url):
     req = urllib.request.Request(url, headers=GARMIN_HEADERS)
-    with urllib.request.urlopen(req, timeout=20) as r:
+    with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read())
 
 def sport_label(act):
@@ -36,22 +36,49 @@ def sport_label(act):
     if 'cycling' in t or 'cycling' in name: return 'cycling'
     if 'running' in t: return 'running'
     if 'hiking' in t or 'hiking' in name: return 'hiking'
+    if 'skate_skiing' in t: return 'skate_skiing_ws'
+    if 'resort_skiing' in t or 'skiing' in t: return 'resort_skiing'
+    if 'walking' in t: return 'walking'
+    if 'multi_sport' in t: return 'multi_sport'
     return t
 
 def parse_date(s):
     try: return datetime.strptime(s[:10], '%Y-%m-%d')
     except: return datetime(2000, 1, 1)
 
-# --- FETCH ATTIVITA ---
-print("Scaricando attivita da Garmin...")
+# --- FETCH TUTTE LE ATTIVITA (paginazione completa) ---
+print("Scaricando tutte le attivita da Garmin...")
+
+def fetch_all_activities():
+    all_acts = []
+    start = 0
+    limit = 100
+    while True:
+        url = (
+            f"https://connectapi.garmin.com/activity-service/activity/search/activities"
+            f"?start={start}&limit={limit}&sortField=startLocal&sortOrder=DESC"
+        )
+        try:
+            batch = garmin_get(url)
+        except urllib.error.HTTPError as e:
+            if e.code in (401, 403):
+                raise
+            print(f"  Errore HTTP {e.code} a start={start}, interrompo paginazione")
+            break
+        if not batch:
+            break
+        all_acts.extend(batch)
+        print(f"  Scaricate {len(all_acts)} attivita...")
+        if len(batch) < limit:
+            break
+        start += limit
+    return all_acts
+
 try:
-    acts = garmin_get(
-        "https://connectapi.garmin.com/activitylist-service/activities/search/activities?limit=100&start=0"
-    )
+    acts = fetch_all_activities()
 except urllib.error.HTTPError as e:
     if e.code in (401, 403):
         print(f"TOKEN SCADUTO (HTTP {e.code}) — aggiorna il secret GARMIN_TOKEN su GitHub.")
-        # Scrivi un performance.json con flag token_expired per mostrarlo in pagina
         try:
             with open('performance.json', 'r') as f:
                 existing = json.load(f)
@@ -65,14 +92,16 @@ except urllib.error.HTTPError as e:
         sys.exit(1)
     raise
 
-print(f"  {len(acts)} attivita trovate")
+print(f"  {len(acts)} attivita totali trovate")
 
 now = datetime.now()
-ago_365 = now - timedelta(days=365)
-ago_90  = now - timedelta(days=90)
+ago_90 = now - timedelta(days=90)
 
-recent = [a for a in acts if parse_date(a.get('startTimeLocal', '')) > ago_365]
-last90  = [a for a in acts if parse_date(a.get('startTimeLocal', '')) > ago_90]
+# Tutte le attività (storico completo)
+all_acts = acts
+
+# Ultimi 90 giorni per summary_90d
+last90 = [a for a in all_acts if parse_date(a.get('startTimeLocal', '')) > ago_90]
 
 # --- AGGREGATI 90gg ---
 total_hours_90 = round(sum(a.get('duration', 0) for a in last90) / 3600, 1)
@@ -81,9 +110,9 @@ total_elev_90  = int(sum(a.get('elevationGain', 0) for a in last90))
 hrs_90 = [a.get('averageHR', 0) for a in last90 if a.get('averageHR', 0) > 0]
 avg_hr_90 = int(sum(hrs_90) / len(hrs_90)) if hrs_90 else 0
 
-# --- PER SPORT (12 mesi) ---
+# --- PER SPORT (tutte le attivita) ---
 by_sport = {}
-for a in recent:
+for a in all_acts:
     s = sport_label(a)
     if s not in by_sport:
         by_sport[s] = []
@@ -98,9 +127,9 @@ for a in recent:
         'avg_speed_kmh': round((a.get('averageSpeed', 0) or 0) * 3.6, 1),
     })
 
-# --- VOLUME MENSILE ---
+# --- VOLUME MENSILE (tutte le attivita) ---
 monthly = {}
-for a in recent:
+for a in all_acts:
     month = a.get('startTimeLocal', '')[:7]
     s = sport_label(a)
     if month not in monthly:
@@ -111,9 +140,9 @@ for a in recent:
     monthly[month][s]['km']       = round(monthly[month][s]['km']    + a.get('distance', 0) / 1000, 2)
     monthly[month][s]['sessions'] += 1
 
-# --- VOLUME SETTIMANALE ---
+# --- VOLUME SETTIMANALE (tutte le attivita) ---
 weekly = {}
-for a in recent:
+for a in all_acts:
     d    = parse_date(a.get('startTimeLocal', ''))
     week = d.strftime('%Y-W%W')
     s    = sport_label(a)
@@ -121,13 +150,13 @@ for a in recent:
         weekly[week] = {}
     weekly[week][s] = weekly[week].get(s, 0) + 1
 
-# --- RECORD ---
+# --- RECORD (tutte le attivita) ---
 records = {
-    'max_distance_km':  round(max((a.get('distance', 0) for a in recent), default=0) / 1000, 2),
-    'max_elevation_m':  int(max((a.get('elevationGain', 0) for a in recent), default=0)),
-    'max_duration_min': round(max((a.get('duration', 0) for a in recent), default=0) / 60, 1),
+    'max_distance_km':  round(max((a.get('distance', 0) for a in all_acts), default=0) / 1000, 2),
+    'max_elevation_m':  int(max((a.get('elevationGain', 0) for a in all_acts), default=0)),
+    'max_duration_min': round(max((a.get('duration', 0) for a in all_acts), default=0) / 60, 1),
     'min_avg_hr':       int(min(
-        (a.get('averageHR', 999) for a in recent if a.get('averageHR', 0) > 0), default=0
+        (a.get('averageHR', 999) for a in all_acts if a.get('averageHR', 0) > 0), default=0
     )),
 }
 
@@ -149,22 +178,22 @@ out = {
     'weekly_volume':  weekly,
     'all_activities': [
         {
-            'id':          a.get('activityId'),
-            'name':        a.get('activityName', ''),
-            'date':        a.get('startTimeLocal', '')[:10],
-            'sport':       sport_label(a),
-            'distance_km': round(a.get('distance', 0) / 1000, 2),
+            'id':           a.get('activityId'),
+            'name':         a.get('activityName', ''),
+            'date':         a.get('startTimeLocal', '')[:10],
+            'sport':        sport_label(a),
+            'distance_km':  round(a.get('distance', 0) / 1000, 2),
             'duration_min': round(a.get('duration', 0) / 60, 1),
-            'avg_hr':      int(a.get('averageHR') or 0),
-            'elevation_m': int(a.get('elevationGain') or 0),
+            'avg_hr':       int(a.get('averageHR') or 0),
+            'elevation_m':  int(a.get('elevationGain') or 0),
         }
-        for a in recent
+        for a in all_acts
     ],
 }
 
 with open('performance.json', 'w') as f:
     json.dump(out, f, indent=2, ensure_ascii=False)
 
-print(f"performance.json generato: {len(recent)} attivita, {len(by_sport)} sport")
+print(f"performance.json generato: {len(all_acts)} attivita totali, {len(by_sport)} sport")
 for s, acts_s in by_sport.items():
     print(f"  {s}: {len(acts_s)} sessioni")
