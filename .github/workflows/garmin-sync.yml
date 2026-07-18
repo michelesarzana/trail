@@ -24,6 +24,7 @@ jobs:
         env:
           GARMIN_TOKEN: ${{ secrets.GARMIN_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           python garmin_sync.py
           echo "exit_code=$?" >> $GITHUB_OUTPUT
