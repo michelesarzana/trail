@@ -115,91 +115,147 @@ def garmin_get(url):
         return json.loads(r.read())
 
 def fetch_health_snapshot():
-    """Scarica snapshot salute di oggi e ieri da Garmin Connect."""
+    """Scarica snapshot salute di oggi (o ieri come fallback) da Garmin Connect.
+    
+    Endpoint verificati con token DI Android (2026-07-18):
+    - usersummary-service: ?calendarDate=  (200, fornisce passi/calorie/distanza)
+    - wellness/dailyHeartRate?date=         (200, FC min/max/resting)
+    - hrv-service/hrv/{date}               (200 o 204 se assente)
+    - sleep-service/stats/sleep/daily/     (200, sonno + SpO2 + respirazione + HRV)
+    - wellness/dailyStress/{date}          (200, stress)
+    
+    Se oggi non ha ancora dati sincronizzati (null), usa ieri come fallback.
+    """
     today = datetime.now().strftime('%Y-%m-%d')
     yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-    
+
     health = {}
-    
-    # Passi e stress giornalieri (user summary)
+
+    # Helper: prova today e poi yesterday come fallback
+    def get_date_with_fallback(url_template, check_key=None):
+        for d in [today, yesterday]:
+            try:
+                url = url_template.format(date=d)
+                result = garmin_get(url)
+                if check_key and result.get(check_key) is None:
+                    continue
+                return result, d
+            except Exception:
+                continue
+        return {}, today
+
+    # --- 1. User Summary: passi, calorie, distanza ---
     try:
-        url = f"https://connectapi.garmin.com/usersummary-service/usersummary/daily/{today}?fromDate={today}&untilDate={today}"
-        data = garmin_get(url)
-        health['steps'] = data.get('totalSteps', 0)
-        health['steps_goal'] = data.get('dailyStepGoal', 8000)
-        health['calories'] = data.get('totalKilocalories', 0)
-        health['active_calories'] = data.get('activeKilocalories', 0)
-        health['resting_hr'] = data.get('restingHeartRate', 0)
-        health['stress_avg'] = data.get('averageStressLevel', 0)
-        health['body_battery_end'] = data.get('bodyBatteryMostRecentValue', 0)
-        health['sleep_hours'] = round(data.get('sleepingSeconds', 0) / 3600, 1)
-        health['active_min'] = data.get('moderateIntensityMinutes', 0) + data.get('vigorousIntensityMinutes', 0) * 2
-        health['floors'] = data.get('floorsAscended', 0)
+        for d in [today, yesterday]:
+            url = f"https://connectapi.garmin.com/usersummary-service/usersummary/daily?calendarDate={d}"
+            try:
+                data = garmin_get(url)
+                if data.get('totalSteps') is not None:
+                    health['steps'] = data.get('totalSteps', 0)
+                    health['steps_goal'] = data.get('dailyStepGoal', 8000)
+                    health['calories'] = data.get('totalKilocalories', 0)
+                    health['active_calories'] = data.get('activeKilocalories', 0)
+                    health['total_distance_m'] = data.get('totalDistanceMeters', 0)
+                    health['floors'] = data.get('floorsAscended', 0)
+                    health['active_min'] = (data.get('moderateIntensityMinutes', 0) or 0) + (data.get('vigorousIntensityMinutes', 0) or 0) * 2
+                    health['summary_date'] = d
+                    break
+            except Exception:
+                continue
     except Exception as e:
-        print(f"  Health summary non disponibile: {e}")
-    
-    # HRV settimanale
+        print(f"  User summary non disponibile: {e}")
+
+    # --- 2. Heart Rate: FC resting/max/min ---
     try:
-        url = f"https://connectapi.garmin.com/hrv-service/hrv/{today}"
-        data = garmin_get(url)
-        hrv = data.get('hrvSummary', {})
-        health['hrv_weekly_avg'] = hrv.get('weeklyAvg', 0)
-        health['hrv_last_night'] = hrv.get('lastNight', 0)
-        health['hrv_status'] = hrv.get('hrvStatus', '')  # 'BALANCED', 'LOW', 'HIGH'
+        for d in [today, yesterday]:
+            url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyHeartRate?date={d}"
+            try:
+                data = garmin_get(url)
+                if data.get('restingHeartRate') is not None:
+                    health['resting_hr'] = data.get('restingHeartRate')
+                    health['max_hr'] = data.get('maxHeartRate')
+                    health['min_hr'] = data.get('minHeartRate')
+                    health['hr_7d_avg_resting'] = data.get('lastSevenDaysAvgRestingHeartRate')
+                    break
+            except Exception:
+                continue
+    except Exception as e:
+        print(f"  Heart rate non disponibile: {e}")
+
+    # --- 3. Sleep + SpO2 + Respiration + HRV (da sleep-service, fonte piu ricca) ---
+    try:
+        for d in [today, yesterday]:
+            url = f"https://connectapi.garmin.com/sleep-service/stats/sleep/daily/{d}/{d}"
+            try:
+                data = garmin_get(url)
+                ind = data.get('individualStats') or []
+                if ind:
+                    sv = ind[0].get('values', {})
+                    health['sleep_seconds'] = sv.get('totalSleepTimeInSeconds', 0)
+                    health['sleep_hours'] = round((sv.get('totalSleepTimeInSeconds') or 0) / 3600, 1)
+                    health['sleep_score'] = sv.get('sleepScore')
+                    health['sleep_score_quality'] = sv.get('sleepScoreQuality')
+                    health['sleep_deep_s'] = sv.get('deepTime', 0)
+                    health['sleep_rem_s'] = sv.get('remTime', 0)
+                    health['sleep_light_s'] = sv.get('lightTime', 0)
+                    health['sleep_awake_s'] = sv.get('awakeTime', 0)
+                    health['sleep_respiration'] = sv.get('respiration')
+                    health['sleep_spo2'] = sv.get('spO2')
+                    health['sleep_resting_hr'] = sv.get('restingHeartRate')
+                    health['sleep_avg_hr'] = sv.get('avgHeartRate')
+                    health['sleep_body_battery_change'] = sv.get('bodyBatteryChange')
+                    health['hrv_last_night'] = sv.get('avgOvernightHrv')
+                    health['hrv_7d_avg'] = sv.get('hrv7dAverage')
+                    health['hrv_status'] = sv.get('hrvStatus')
+                    health['skin_temp_c'] = sv.get('skinTempC')
+                    health['sleep_date'] = d
+                    break
+            except Exception:
+                continue
+    except Exception as e:
+        print(f"  Sleep non disponibile: {e}")
+
+    # --- 4. HRV summary (hrv-service, piu dettagliato) ---
+    try:
+        for d in [today, yesterday]:
+            url = f"https://connectapi.garmin.com/hrv-service/hrv/{d}"
+            try:
+                req = urllib.request.Request(url, headers=GARMIN_HEADERS)
+                with urllib.request.urlopen(req, timeout=30) as r:
+                    if r.status == 204:
+                        continue
+                    hrv_data = json.loads(r.read())
+                    hrv_sum = hrv_data.get('hrvSummary', {})
+                    if hrv_sum.get('lastNightAvg') is not None:
+                        if not health.get('hrv_last_night'):
+                            health['hrv_last_night'] = hrv_sum.get('lastNightAvg')
+                        health['hrv_weekly_avg'] = hrv_sum.get('weeklyAvg')
+                        health['hrv_5min_high'] = hrv_sum.get('lastNight5MinHigh')
+                        if not health.get('hrv_status'):
+                            health['hrv_status'] = hrv_sum.get('status')
+                        health['hrv_date'] = d
+                        break
+            except Exception:
+                continue
     except Exception as e:
         print(f"  HRV non disponibile: {e}")
-    
-    # SpO2
+
+    # --- 5. Stress ---
     try:
-        url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyOximetry/{today}"
-        data = garmin_get(url)
-        readings = data.get('oximetryReadings', [])
-        if readings:
-            vals = [r.get('spO2Value', 0) for r in readings if r.get('spO2Value', 0) > 0]
-            health['spo2_avg'] = round(sum(vals)/len(vals), 1) if vals else None
-        else:
-            health['spo2_avg'] = None
+        for d in [today, yesterday]:
+            url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyStress/{d}"
+            try:
+                data = garmin_get(url)
+                if data.get('avgStressLevel') is not None:
+                    health['stress_avg'] = data.get('avgStressLevel')
+                    health['stress_max'] = data.get('maxStressLevel')
+                    health['stress_date'] = d
+                    break
+            except Exception:
+                continue
     except Exception as e:
-        print(f"  SpO2 non disponibile: {e}")
-        health['spo2_avg'] = None
-    
-    # Respiration rate
-    try:
-        url = f"https://connectapi.garmin.com/wellness-service/wellness/dailyRespirationRate/{today}"
-        data = garmin_get(url)
-        health['respiration_avg'] = round(data.get('avgBreathingFrequency', 0), 1) or None
-    except Exception as e:
-        print(f"  Respiration non disponibile: {e}")
-        health['respiration_avg'] = None
-    
-    # Fitness Age
-    try:
-        url = f"https://connectapi.garmin.com/metrics-service/metrics/fitnessAge/{today}"
-        data = garmin_get(url)
-        health['fitness_age'] = data.get('fitnessAge', 0) or data.get('value', 0) or None
-        health['chronological_age'] = data.get('chronologicalAge', 0) or None
-    except Exception as e:
-        print(f"  Fitness age non disponibile: {e}")
-        health['fitness_age'] = None
-        health['chronological_age'] = None
-    
-    # Training Status
-    try:
-        url = f"https://connectapi.garmin.com/metrics-service/metrics/trainingStatus/{today}"
-        data = garmin_get(url)
-        ts = data.get('trainingStatus', '') or data.get('mostRecentTrainingStatus', '')
-        ts_load = data.get('trainingLoadFeedback', '') or data.get('acuteLoad', '')
-        health['training_status'] = ts or None
-        health['training_load_feedback'] = ts_load or None
-        health['acute_load'] = data.get('acuteTrainingLoad', 0) or None
-        health['chronic_load'] = data.get('chronicTrainingLoad', 0) or None
-    except Exception as e:
-        print(f"  Training status non disponibile: {e}")
-        health['training_status'] = None
-        health['training_load_feedback'] = None
-        health['acute_load'] = None
-        health['chronic_load'] = None
-    
+        print(f"  Stress non disponibile: {e}")
+
     health['date'] = today
     return health
 
