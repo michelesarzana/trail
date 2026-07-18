@@ -230,8 +230,8 @@ def fetch_all_activities():
     limit = 100
     while True:
         url = (
-            f"https://connectapi.garmin.com/activity-service/activity/search/activities"
-            f"?start={start}&limit={limit}&sortField=startLocal&sortOrder=DESC"
+            f"https://connectapi.garmin.com/activitylist-service/activities/search/activities"
+            f"?start={start}&limit={limit}"
         )
         try:
             batch = garmin_get(url)
