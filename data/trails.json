@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Database trail personale di Michele Sarzana",
     "schema": "./schema/trail.schema.json",
-    "last_updated": "2026-07-15"
+    "last_updated": "2026-07-20"
   },
   "trails": [
     {
@@ -530,6 +530,77 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/da-paneveggio-ai-laghi-di-colbricon/IMG_3143.jpeg"
           }
         ]
+      }
+    },
+    {
+      "id": "giro-dei-laghi-alti-del-parco-naturale-del-mont-avic",
+      "title": "Giro dei laghi alti del Parco Naturale del Mont Avic",
+      "status": "todo",
+      "description": "Petit Mont Blanc → Col Mézouve → Rifugio Dondena — Alta Via dei Laghi\n\nC'è una categoria di giri che non si annuncia. Non ha una cima che fa notizia, non è sulle copertine. Eppure ti rimane addosso per giorni.\n\nQuesto anello nella Vallée del Lys è così: un percorso che accumula quota con pazienza, ti porta da un lago all'altro come chi non ha fretta, e a un certo punto scendendo il valloncello dal Col Lago Bianco ti mostra tutta la catena del Monte Rosa all'improvviso, stagliata contro il cielo. Nessuna anticipazione. Solo quella parete che appare.\n\nIl percorso. Si parte dal parcheggio e si risale la mulattiera ripida verso Petit Mont Blanc: la partenza non è segnata con chiarezza, bisogna volerla trovare. Da La Cort in poi il sentiero si popola; il Rifugio Barbustel è frequentato, e si capisce perché. Ma prima di arrivarci c'è il Lago Muffè, e c'è il Col del Lago Bianco, che si raggiunge con un ultimo tratto che non regala nulla.\n\nI laghi. Dal Rifugio Barbustel in poi il percorso cambia natura. Si scende al ponticello tra il Lago Bianco e il Lago Nero, poi si prende quota in mezza costa, con il Lago Cornuto in basso ben visibile, fino al Gran Lago, che si costeggia sulla destra. Ne seguono altri, uno dopo l'altro, quasi senza nome. Il Col Mézouve è il punto di svolta: da lì l'ampio vallone ti riporta verso il basso, lungo il Lago Margheron, fino alla casetta della Forestale.\n\nIl finale. Non è banale. Dal piano si imbocca il sentiero ripido per il Col Estsèly (noto anche come Col Eyeles), poi la mulattiera di caccia verso il Col Fussy, e da lì la discesa lungo la mulattiera reale fino al Rifugio Dondena. La pausa qui è guadagnata.\n\nDopo il rifugio si scende ancora, ripidi prima e più dolci poi, fino al ponte sul torrente. Da lì il tracciato dell'Alta Via n. 1 porta fino a Chardonney, dove l'auto aspetta.\n\nUn giro che si porta a casa in silenzio.",
+      "rating": null,
+      "cover_image": "https://upload.wikimedia.org/wikipedia/commons/7/77/Monte_Rascias_dal_lago_Miserin_01.png",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Valle d'Aosta",
+        "province": "Aosta",
+        "municipality": "Champorcher",
+        "area": null,
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 45.621374,
+            "lng": 7.607045
+          },
+          "end": {
+            "lat": 45.621658,
+            "lng": 7.606532
+          }
+        }
+      },
+      "track": {
+        "distance_km": 27.4,
+        "elevation_gain": 2076,
+        "elevation_loss": 2074,
+        "elevation_max": 2908,
+        "elevation_min": 1437,
+        "duration_min": 744,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato",
+          "roccia",
+          "misto"
+        ],
+        "gpx_file": "gpx/giro-dei-laghi-alti-del-parco-naturale-del-mont-avic.gpx"
+      },
+      "classification": {
+        "difficulty": null,
+        "activity_types": [
+          "trail-running",
+          "trekking"
+        ],
+        "seasons": []
+      },
+      "tags": [],
+      "logistics": {
+        "dog_friendly": false,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "photo_credit": "Wikimedia Commons",
+      "links": {
+        "strava": null,
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": "https://www.monterosaoutdoor.it/itinerari/val-champorcher-alta/"
+      },
+      "log": [],
+      "media": {
+        "cover": "https://upload.wikimedia.org/wikipedia/commons/7/77/Monte_Rascias_dal_lago_Miserin_01.png",
+        "photos": []
       }
     }
   ]
