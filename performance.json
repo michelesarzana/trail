@@ -1,12 +1,12 @@
 {
-  "last_updated": "25/07/2026 08:11",
+  "last_updated": "26/07/2026 08:31",
   "token_expired": false,
   "summary_90d": {
-    "sessions": 39,
-    "total_hours": 38.6,
-    "total_km": 352.9,
-    "total_elevation_m": 5286,
-    "avg_sessions_week": 3.0,
+    "sessions": 40,
+    "total_hours": 41.4,
+    "total_km": 362.3,
+    "total_elevation_m": 5837,
+    "avg_sessions_week": 3.1,
     "avg_hr": 125
   },
   "records": {
@@ -16,6 +16,738 @@
     "min_avg_hr": 32
   },
   "by_sport": {
+    "hiking": [
+      {
+        "id": 23726541840,
+        "name": "Champorcher Hiking",
+        "date": "2026-07-25",
+        "distance_km": 9.35,
+        "duration_min": 164.1,
+        "avg_hr": 123,
+        "elevation_m": 551,
+        "avg_speed_kmh": 3.4
+      },
+      {
+        "id": 23329250065,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-06-21",
+        "distance_km": 9.9,
+        "duration_min": 184.1,
+        "avg_hr": 106,
+        "elevation_m": 387,
+        "avg_speed_kmh": 3.2
+      },
+      {
+        "id": 23317648880,
+        "name": "Campitello di Fassa Escursionismo",
+        "date": "2026-06-20",
+        "distance_km": 11.88,
+        "duration_min": 234.9,
+        "avg_hr": 129,
+        "elevation_m": 719,
+        "avg_speed_kmh": 3.0
+      },
+      {
+        "id": 22415623961,
+        "name": "Ayas Escursionismo",
+        "date": "2026-04-05",
+        "distance_km": 7.55,
+        "duration_min": 162.7,
+        "avg_hr": 106,
+        "elevation_m": 496,
+        "avg_speed_kmh": 2.8
+      },
+      {
+        "id": 22405854908,
+        "name": "Ayas Escursionismo",
+        "date": "2026-04-04",
+        "distance_km": 4.77,
+        "duration_min": 81.3,
+        "avg_hr": 117,
+        "elevation_m": 189,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 22337625648,
+        "name": "Castiglione d'Intelvi Escursionismo",
+        "date": "2026-03-29",
+        "distance_km": 7.52,
+        "duration_min": 116.3,
+        "avg_hr": 118,
+        "elevation_m": 466,
+        "avg_speed_kmh": 3.9
+      },
+      {
+        "id": 22258903140,
+        "name": "Castiglione d'Intelvi Escursionismo",
+        "date": "2026-03-22",
+        "distance_km": 3.03,
+        "duration_min": 46.0,
+        "avg_hr": 90,
+        "elevation_m": 136,
+        "avg_speed_kmh": 3.9
+      },
+      {
+        "id": 21947656379,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-02-22",
+        "distance_km": 4.44,
+        "duration_min": 75.8,
+        "avg_hr": 94,
+        "elevation_m": 104,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 21905320972,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-02-18",
+        "distance_km": 5.39,
+        "duration_min": 76.1,
+        "avg_hr": 113,
+        "elevation_m": 272,
+        "avg_speed_kmh": 4.2
+      },
+      {
+        "id": 21893653267,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2026-02-17",
+        "distance_km": 5.65,
+        "duration_min": 75.4,
+        "avg_hr": 98,
+        "elevation_m": 171,
+        "avg_speed_kmh": 4.5
+      },
+      {
+        "id": 21884749703,
+        "name": "Mazzin Escursionismo",
+        "date": "2026-02-16",
+        "distance_km": 5.26,
+        "duration_min": 79.2,
+        "avg_hr": 112,
+        "elevation_m": 248,
+        "avg_speed_kmh": 4.0
+      },
+      {
+        "id": 21876072821,
+        "name": "Mazzin Escursionismo",
+        "date": "2026-02-14",
+        "distance_km": 6.65,
+        "duration_min": 115.3,
+        "avg_hr": 82,
+        "elevation_m": 76,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 21392895329,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2025-12-30",
+        "distance_km": 9.38,
+        "duration_min": 153.0,
+        "avg_hr": 102,
+        "elevation_m": 473,
+        "avg_speed_kmh": 3.7
+      },
+      {
+        "id": 21383160743,
+        "name": "Primiero San Martino di Castrozza Escursionismo",
+        "date": "2025-12-29",
+        "distance_km": 4.61,
+        "duration_min": 86.1,
+        "avg_hr": 90,
+        "elevation_m": 152,
+        "avg_speed_kmh": 3.2
+      },
+      {
+        "id": 20667342597,
+        "name": "Stradella Escursionismo",
+        "date": "2025-10-12",
+        "distance_km": 4.67,
+        "duration_min": 81.0,
+        "avg_hr": 92,
+        "elevation_m": 133,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 20587307120,
+        "name": "Fontainemore Escursionismo",
+        "date": "2025-10-04",
+        "distance_km": 13.62,
+        "duration_min": 272.0,
+        "avg_hr": 120,
+        "elevation_m": 938,
+        "avg_speed_kmh": 3.0
+      },
+      {
+        "id": 20184277560,
+        "name": "Primiero San Martino di Castrozza Escursionismo",
+        "date": "2025-08-26",
+        "distance_km": 9.5,
+        "duration_min": 174.5,
+        "avg_hr": 95,
+        "elevation_m": 389,
+        "avg_speed_kmh": 3.3
+      },
+      {
+        "id": 20172488567,
+        "name": "Canazei Escursionismo",
+        "date": "2025-08-25",
+        "distance_km": 4.13,
+        "duration_min": 68.9,
+        "avg_hr": 89,
+        "elevation_m": 7,
+        "avg_speed_kmh": 3.6
+      },
+      {
+        "id": 20152522422,
+        "name": "Racines Escursionismo",
+        "date": "2025-08-23",
+        "distance_km": 4.77,
+        "duration_min": 83.2,
+        "avg_hr": 94,
+        "elevation_m": 134,
+        "avg_speed_kmh": 3.4
+      },
+      {
+        "id": 20142196787,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2025-08-22",
+        "distance_km": 10.94,
+        "duration_min": 197.7,
+        "avg_hr": 115,
+        "elevation_m": 648,
+        "avg_speed_kmh": 3.3
+      },
+      {
+        "id": 20106451830,
+        "name": "Rocca Pietore Escursionismo",
+        "date": "2025-08-19",
+        "distance_km": 5.35,
+        "duration_min": 115.9,
+        "avg_hr": 79,
+        "elevation_m": 185,
+        "avg_speed_kmh": 2.8
+      },
+      {
+        "id": 20097107418,
+        "name": "Predazzo Escursionismo",
+        "date": "2025-08-18",
+        "distance_km": 4.3,
+        "duration_min": 102.3,
+        "avg_hr": 86,
+        "elevation_m": 228,
+        "avg_speed_kmh": 2.5
+      },
+      {
+        "id": 20067964282,
+        "name": "Tires Escursionismo",
+        "date": "2025-08-15",
+        "distance_km": 10.62,
+        "duration_min": 157.7,
+        "avg_hr": 94,
+        "elevation_m": 261,
+        "avg_speed_kmh": 4.0
+      },
+      {
+        "id": 20056542587,
+        "name": "Rocca Pietore Escursionismo",
+        "date": "2025-08-14",
+        "distance_km": 13.38,
+        "duration_min": 216.6,
+        "avg_hr": 109,
+        "elevation_m": 664,
+        "avg_speed_kmh": 3.7
+      },
+      {
+        "id": 20045347329,
+        "name": "Primiero San Martino di Castrozza Escursionismo",
+        "date": "2025-08-13",
+        "distance_km": 5.91,
+        "duration_min": 112.4,
+        "avg_hr": 104,
+        "elevation_m": 269,
+        "avg_speed_kmh": 3.2
+      },
+      {
+        "id": 20022896998,
+        "name": "Vigo di Fassa Escursionismo",
+        "date": "2025-08-11",
+        "distance_km": 8.68,
+        "duration_min": 192.6,
+        "avg_hr": 117,
+        "elevation_m": 603,
+        "avg_speed_kmh": 2.7
+      },
+      {
+        "id": 20010140917,
+        "name": "Aldino Escursionismo",
+        "date": "2025-08-08",
+        "distance_km": 5.8,
+        "duration_min": 157.6,
+        "avg_hr": 88,
+        "elevation_m": 256,
+        "avg_speed_kmh": 2.2
+      },
+      {
+        "id": 19980318517,
+        "name": "Canazei Escursionismo",
+        "date": "2025-08-07",
+        "distance_km": 7.54,
+        "duration_min": 129.0,
+        "avg_hr": 99,
+        "elevation_m": 314,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 19937305472,
+        "name": "Pozza di Fassa Escursionismo",
+        "date": "2025-08-03",
+        "distance_km": 6.58,
+        "duration_min": 136.6,
+        "avg_hr": 96,
+        "elevation_m": 276,
+        "avg_speed_kmh": 2.9
+      },
+      {
+        "id": 19862986910,
+        "name": "San Zeno di Montagna Escursionismo",
+        "date": "2025-07-27",
+        "distance_km": 7.28,
+        "duration_min": 131.5,
+        "avg_hr": 107,
+        "elevation_m": 318,
+        "avg_speed_kmh": 3.3
+      },
+      {
+        "id": 19006032125,
+        "name": "Albavilla Escursionismo",
+        "date": "2025-05-02",
+        "distance_km": 7.17,
+        "duration_min": 112.0,
+        "avg_hr": 125,
+        "elevation_m": 437,
+        "avg_speed_kmh": 3.8
+      },
+      {
+        "id": 18409169142,
+        "name": "Predazzo Hiking",
+        "date": "2025-03-01",
+        "distance_km": 8.37,
+        "duration_min": 139.1,
+        "avg_hr": 113,
+        "elevation_m": 282,
+        "avg_speed_kmh": 3.6
+      },
+      {
+        "id": 17668146497,
+        "name": "Cape Woolamai Hiking",
+        "date": "2024-12-02",
+        "distance_km": 8.23,
+        "duration_min": 125.0,
+        "avg_hr": 97,
+        "elevation_m": 161,
+        "avg_speed_kmh": 3.9
+      },
+      {
+        "id": 16823100274,
+        "name": "Moena Hiking",
+        "date": "2024-08-21",
+        "distance_km": 8.14,
+        "duration_min": 101.7,
+        "avg_hr": 95,
+        "elevation_m": 149,
+        "avg_speed_kmh": 4.8
+      },
+      {
+        "id": 16811945840,
+        "name": "Selva di Val Gardena Hiking",
+        "date": "2024-08-20",
+        "distance_km": 6.31,
+        "duration_min": 175.2,
+        "avg_hr": 110,
+        "elevation_m": 598,
+        "avg_speed_kmh": 2.2
+      },
+      {
+        "id": 16793321682,
+        "name": "Vigo di Fassa Hiking",
+        "date": "2024-08-18",
+        "distance_km": 3.97,
+        "duration_min": 111.9,
+        "avg_hr": 86,
+        "elevation_m": 117,
+        "avg_speed_kmh": 2.1
+      },
+      {
+        "id": 16777743670,
+        "name": "Vigo di Fassa Hiking",
+        "date": "2024-08-16",
+        "distance_km": 7.89,
+        "duration_min": 153.0,
+        "avg_hr": 102,
+        "elevation_m": 426,
+        "avg_speed_kmh": 3.1
+      },
+      {
+        "id": 16769807979,
+        "name": "Predazzo Hiking",
+        "date": "2024-08-15",
+        "distance_km": 13.45,
+        "duration_min": 296.4,
+        "avg_hr": 122,
+        "elevation_m": 954,
+        "avg_speed_kmh": 2.7
+      },
+      {
+        "id": 16741714788,
+        "name": "Moena Hiking",
+        "date": "2024-08-12",
+        "distance_km": 10.04,
+        "duration_min": 205.8,
+        "avg_hr": 116,
+        "elevation_m": 707,
+        "avg_speed_kmh": 2.9
+      },
+      {
+        "id": 16734009414,
+        "name": "Canazei Hiking",
+        "date": "2024-08-11",
+        "distance_km": 5.84,
+        "duration_min": 102.7,
+        "avg_hr": 105,
+        "elevation_m": 221,
+        "avg_speed_kmh": 3.4
+      },
+      {
+        "id": 16723357840,
+        "name": "Vigo di Fassa Hiking",
+        "date": "2024-08-10",
+        "distance_km": 5.19,
+        "duration_min": 166.4,
+        "avg_hr": 84,
+        "elevation_m": 145,
+        "avg_speed_kmh": 1.9
+      },
+      {
+        "id": 16723356251,
+        "name": "Vigo di Fassa Hiking",
+        "date": "2024-08-10",
+        "distance_km": 2.17,
+        "duration_min": 38.6,
+        "avg_hr": 90,
+        "elevation_m": 51,
+        "avg_speed_kmh": 3.4
+      },
+      {
+        "id": 16670229871,
+        "name": "Aldino Hiking",
+        "date": "2024-08-04",
+        "distance_km": 3.13,
+        "duration_min": 72.4,
+        "avg_hr": 97,
+        "elevation_m": 126,
+        "avg_speed_kmh": 2.6
+      },
+      {
+        "id": 16665806441,
+        "name": "Pozza di Fassa Hiking",
+        "date": "2024-08-03",
+        "distance_km": 10.22,
+        "duration_min": 149.3,
+        "avg_hr": 98,
+        "elevation_m": 262,
+        "avg_speed_kmh": 4.1
+      },
+      {
+        "id": 13273181093,
+        "name": "Aldino Hiking",
+        "date": "2023-12-29",
+        "distance_km": 4.17,
+        "duration_min": 75.4,
+        "avg_hr": 95,
+        "elevation_m": 146,
+        "avg_speed_kmh": 3.3
+      },
+      {
+        "id": 11838426837,
+        "name": "Selva di Val Gardena Hiking",
+        "date": "2023-08-21",
+        "distance_km": 2.65,
+        "duration_min": 44.7,
+        "avg_hr": 89,
+        "elevation_m": 114,
+        "avg_speed_kmh": 3.6
+      },
+      {
+        "id": 11824620128,
+        "name": "Predazzo Hiking",
+        "date": "2023-08-19",
+        "distance_km": 9.84,
+        "duration_min": 221.8,
+        "avg_hr": 94,
+        "elevation_m": 869,
+        "avg_speed_kmh": 2.7
+      },
+      {
+        "id": 11816298286,
+        "name": "Aldino Hiking",
+        "date": "2023-08-18",
+        "distance_km": 5.64,
+        "duration_min": 167.7,
+        "avg_hr": 76,
+        "elevation_m": 198,
+        "avg_speed_kmh": 2.0
+      },
+      {
+        "id": 11803235721,
+        "name": "Campitello di Fassa Hiking",
+        "date": "2023-08-16",
+        "distance_km": 16.79,
+        "duration_min": 290.9,
+        "avg_hr": 96,
+        "elevation_m": 833,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 11786209870,
+        "name": "Canazei Hiking",
+        "date": "2023-08-14",
+        "distance_km": 13.57,
+        "duration_min": 246.8,
+        "avg_hr": 103,
+        "elevation_m": 772,
+        "avg_speed_kmh": 3.3
+      },
+      {
+        "id": 11771015100,
+        "name": "Predazzo Hiking",
+        "date": "2023-08-12",
+        "distance_km": 6.51,
+        "duration_min": 196.2,
+        "avg_hr": 85,
+        "elevation_m": 278,
+        "avg_speed_kmh": 2.0
+      },
+      {
+        "id": 11370226322,
+        "name": "Faggeto Lario Hiking",
+        "date": "2023-06-18",
+        "distance_km": 3.55,
+        "duration_min": 47.2,
+        "avg_hr": 84,
+        "elevation_m": 2,
+        "avg_speed_kmh": 4.5
+      },
+      {
+        "id": 10970859121,
+        "name": "Piobesi d'Alba Hiking",
+        "date": "2023-04-24",
+        "distance_km": 2.28,
+        "duration_min": 38.1,
+        "avg_hr": 78,
+        "elevation_m": 91,
+        "avg_speed_kmh": 3.6
+      },
+      {
+        "id": 9540711657,
+        "name": "Campitello di Fassa Hiking",
+        "date": "2022-09-04",
+        "distance_km": 13.03,
+        "duration_min": 242.3,
+        "avg_hr": 79,
+        "elevation_m": 230,
+        "avg_speed_kmh": 3.2
+      },
+      {
+        "id": 9474663969,
+        "name": "Tires Hiking",
+        "date": "2022-08-25",
+        "distance_km": 12.7,
+        "duration_min": 204.3,
+        "avg_hr": 82,
+        "elevation_m": 343,
+        "avg_speed_kmh": 3.7
+      },
+      {
+        "id": 9467272091,
+        "name": "Cortina d'Ampezzo Hiking",
+        "date": "2022-08-24",
+        "distance_km": 10.53,
+        "duration_min": 209.5,
+        "avg_hr": 101,
+        "elevation_m": 860,
+        "avg_speed_kmh": 3.0
+      },
+      {
+        "id": 9449313650,
+        "name": "Soraga Hiking",
+        "date": "2022-08-21",
+        "distance_km": 14.94,
+        "duration_min": 231.6,
+        "avg_hr": 101,
+        "elevation_m": 834,
+        "avg_speed_kmh": 3.9
+      },
+      {
+        "id": 9441239087,
+        "name": "Predazzo Hiking",
+        "date": "2022-08-20",
+        "distance_km": 6.32,
+        "duration_min": 200.6,
+        "avg_hr": 81,
+        "elevation_m": 314,
+        "avg_speed_kmh": 1.9
+      },
+      {
+        "id": 9402905411,
+        "name": "Mazzin Hiking",
+        "date": "2022-08-14",
+        "distance_km": 22.87,
+        "duration_min": 392.1,
+        "avg_hr": 99,
+        "elevation_m": 1736,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 9395885870,
+        "name": "Pozza di Fassa Hiking",
+        "date": "2022-08-13",
+        "distance_km": 10.93,
+        "duration_min": 177.4,
+        "avg_hr": 111,
+        "elevation_m": 859,
+        "avg_speed_kmh": 3.7
+      },
+      {
+        "id": 9375795690,
+        "name": "Cortina d'Ampezzo Hiking",
+        "date": "2022-08-10",
+        "distance_km": 9.03,
+        "duration_min": 138.0,
+        "avg_hr": 113,
+        "elevation_m": 678,
+        "avg_speed_kmh": 3.9
+      },
+      {
+        "id": 9355931761,
+        "name": "Pozza di Fassa Hiking",
+        "date": "2022-08-07",
+        "distance_km": 10.18,
+        "duration_min": 134.7,
+        "avg_hr": 93,
+        "elevation_m": 270,
+        "avg_speed_kmh": 4.5
+      },
+      {
+        "id": 7551511646,
+        "name": "Predazzo Hiking",
+        "date": "2021-09-25",
+        "distance_km": 9.01,
+        "duration_min": 149.2,
+        "avg_hr": 102,
+        "elevation_m": 387,
+        "avg_speed_kmh": 3.6
+      },
+      {
+        "id": 7261924977,
+        "name": "Predazzo Hiking",
+        "date": "2021-08-07",
+        "distance_km": 7.79,
+        "duration_min": 160.5,
+        "avg_hr": 90,
+        "elevation_m": 247,
+        "avg_speed_kmh": 2.9
+      },
+      {
+        "id": 5423494811,
+        "name": "Falcade Hiking",
+        "date": "2020-08-22",
+        "distance_km": 9.53,
+        "duration_min": 139.8,
+        "avg_hr": 93,
+        "elevation_m": 175,
+        "avg_speed_kmh": 4.1
+      },
+      {
+        "id": 5153520599,
+        "name": "Sale Marasino Hiking",
+        "date": "2020-06-27",
+        "distance_km": 2.59,
+        "duration_min": 41.6,
+        "avg_hr": 119,
+        "elevation_m": 524,
+        "avg_speed_kmh": 3.7
+      },
+      {
+        "id": 5013834380,
+        "name": "Introbio Hiking",
+        "date": "2020-05-30",
+        "distance_km": 5.51,
+        "duration_min": 76.7,
+        "avg_hr": 93,
+        "elevation_m": 1,
+        "avg_speed_kmh": 4.3
+      },
+      {
+        "id": 4384995675,
+        "name": "Mazzin Hiking",
+        "date": "2019-12-31",
+        "distance_km": 2.91,
+        "duration_min": 53.9,
+        "avg_hr": 98,
+        "elevation_m": 193,
+        "avg_speed_kmh": 3.2
+      },
+      {
+        "id": 3942357942,
+        "name": "Predazzo Hiking",
+        "date": "2019-08-12",
+        "distance_km": 5.14,
+        "duration_min": 120.8,
+        "avg_hr": 82,
+        "elevation_m": 138,
+        "avg_speed_kmh": 2.6
+      },
+      {
+        "id": 3935480096,
+        "name": "Selva di Val Gardena Hiking",
+        "date": "2019-08-10",
+        "distance_km": 2.44,
+        "duration_min": 41.9,
+        "avg_hr": 107,
+        "elevation_m": 75,
+        "avg_speed_kmh": 3.5
+      },
+      {
+        "id": 3911869696,
+        "name": "Campitello di Fassa Hiking",
+        "date": "2019-08-03",
+        "distance_km": 12.27,
+        "duration_min": 196.0,
+        "avg_hr": 96,
+        "elevation_m": 225,
+        "avg_speed_kmh": 3.8
+      },
+      {
+        "id": 3908869188,
+        "name": "Nova Levante Hiking",
+        "date": "2019-08-02",
+        "distance_km": 5.11,
+        "duration_min": 78.5,
+        "avg_hr": 101,
+        "elevation_m": 159,
+        "avg_speed_kmh": 3.9
+      },
+      {
+        "id": 3907874830,
+        "name": "Tires Hiking",
+        "date": "2019-08-02",
+        "distance_km": 4.73,
+        "duration_min": 66.4,
+        "avg_hr": 97,
+        "elevation_m": 116,
+        "avg_speed_kmh": 4.3
+      }
+    ],
     "trail_running": [
       {
         "id": 23651335827,
@@ -2750,728 +3482,6 @@
         "avg_hr": 0,
         "elevation_m": 131,
         "avg_speed_kmh": 23.9
-      }
-    ],
-    "hiking": [
-      {
-        "id": 23329250065,
-        "name": "Pozza di Fassa Escursionismo",
-        "date": "2026-06-21",
-        "distance_km": 9.9,
-        "duration_min": 184.1,
-        "avg_hr": 106,
-        "elevation_m": 387,
-        "avg_speed_kmh": 3.2
-      },
-      {
-        "id": 23317648880,
-        "name": "Campitello di Fassa Escursionismo",
-        "date": "2026-06-20",
-        "distance_km": 11.88,
-        "duration_min": 234.9,
-        "avg_hr": 129,
-        "elevation_m": 719,
-        "avg_speed_kmh": 3.0
-      },
-      {
-        "id": 22415623961,
-        "name": "Ayas Escursionismo",
-        "date": "2026-04-05",
-        "distance_km": 7.55,
-        "duration_min": 162.7,
-        "avg_hr": 106,
-        "elevation_m": 496,
-        "avg_speed_kmh": 2.8
-      },
-      {
-        "id": 22405854908,
-        "name": "Ayas Escursionismo",
-        "date": "2026-04-04",
-        "distance_km": 4.77,
-        "duration_min": 81.3,
-        "avg_hr": 117,
-        "elevation_m": 189,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 22337625648,
-        "name": "Castiglione d'Intelvi Escursionismo",
-        "date": "2026-03-29",
-        "distance_km": 7.52,
-        "duration_min": 116.3,
-        "avg_hr": 118,
-        "elevation_m": 466,
-        "avg_speed_kmh": 3.9
-      },
-      {
-        "id": 22258903140,
-        "name": "Castiglione d'Intelvi Escursionismo",
-        "date": "2026-03-22",
-        "distance_km": 3.03,
-        "duration_min": 46.0,
-        "avg_hr": 90,
-        "elevation_m": 136,
-        "avg_speed_kmh": 3.9
-      },
-      {
-        "id": 21947656379,
-        "name": "Pozza di Fassa Escursionismo",
-        "date": "2026-02-22",
-        "distance_km": 4.44,
-        "duration_min": 75.8,
-        "avg_hr": 94,
-        "elevation_m": 104,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 21905320972,
-        "name": "Pozza di Fassa Escursionismo",
-        "date": "2026-02-18",
-        "distance_km": 5.39,
-        "duration_min": 76.1,
-        "avg_hr": 113,
-        "elevation_m": 272,
-        "avg_speed_kmh": 4.2
-      },
-      {
-        "id": 21893653267,
-        "name": "Pozza di Fassa Escursionismo",
-        "date": "2026-02-17",
-        "distance_km": 5.65,
-        "duration_min": 75.4,
-        "avg_hr": 98,
-        "elevation_m": 171,
-        "avg_speed_kmh": 4.5
-      },
-      {
-        "id": 21884749703,
-        "name": "Mazzin Escursionismo",
-        "date": "2026-02-16",
-        "distance_km": 5.26,
-        "duration_min": 79.2,
-        "avg_hr": 112,
-        "elevation_m": 248,
-        "avg_speed_kmh": 4.0
-      },
-      {
-        "id": 21876072821,
-        "name": "Mazzin Escursionismo",
-        "date": "2026-02-14",
-        "distance_km": 6.65,
-        "duration_min": 115.3,
-        "avg_hr": 82,
-        "elevation_m": 76,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 21392895329,
-        "name": "Pozza di Fassa Escursionismo",
-        "date": "2025-12-30",
-        "distance_km": 9.38,
-        "duration_min": 153.0,
-        "avg_hr": 102,
-        "elevation_m": 473,
-        "avg_speed_kmh": 3.7
-      },
-      {
-        "id": 21383160743,
-        "name": "Primiero San Martino di Castrozza Escursionismo",
-        "date": "2025-12-29",
-        "distance_km": 4.61,
-        "duration_min": 86.1,
-        "avg_hr": 90,
-        "elevation_m": 152,
-        "avg_speed_kmh": 3.2
-      },
-      {
-        "id": 20667342597,
-        "name": "Stradella Escursionismo",
-        "date": "2025-10-12",
-        "distance_km": 4.67,
-        "duration_min": 81.0,
-        "avg_hr": 92,
-        "elevation_m": 133,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 20587307120,
-        "name": "Fontainemore Escursionismo",
-        "date": "2025-10-04",
-        "distance_km": 13.62,
-        "duration_min": 272.0,
-        "avg_hr": 120,
-        "elevation_m": 938,
-        "avg_speed_kmh": 3.0
-      },
-      {
-        "id": 20184277560,
-        "name": "Primiero San Martino di Castrozza Escursionismo",
-        "date": "2025-08-26",
-        "distance_km": 9.5,
-        "duration_min": 174.5,
-        "avg_hr": 95,
-        "elevation_m": 389,
-        "avg_speed_kmh": 3.3
-      },
-      {
-        "id": 20172488567,
-        "name": "Canazei Escursionismo",
-        "date": "2025-08-25",
-        "distance_km": 4.13,
-        "duration_min": 68.9,
-        "avg_hr": 89,
-        "elevation_m": 7,
-        "avg_speed_kmh": 3.6
-      },
-      {
-        "id": 20152522422,
-        "name": "Racines Escursionismo",
-        "date": "2025-08-23",
-        "distance_km": 4.77,
-        "duration_min": 83.2,
-        "avg_hr": 94,
-        "elevation_m": 134,
-        "avg_speed_kmh": 3.4
-      },
-      {
-        "id": 20142196787,
-        "name": "Pozza di Fassa Escursionismo",
-        "date": "2025-08-22",
-        "distance_km": 10.94,
-        "duration_min": 197.7,
-        "avg_hr": 115,
-        "elevation_m": 648,
-        "avg_speed_kmh": 3.3
-      },
-      {
-        "id": 20106451830,
-        "name": "Rocca Pietore Escursionismo",
-        "date": "2025-08-19",
-        "distance_km": 5.35,
-        "duration_min": 115.9,
-        "avg_hr": 79,
-        "elevation_m": 185,
-        "avg_speed_kmh": 2.8
-      },
-      {
-        "id": 20097107418,
-        "name": "Predazzo Escursionismo",
-        "date": "2025-08-18",
-        "distance_km": 4.3,
-        "duration_min": 102.3,
-        "avg_hr": 86,
-        "elevation_m": 228,
-        "avg_speed_kmh": 2.5
-      },
-      {
-        "id": 20067964282,
-        "name": "Tires Escursionismo",
-        "date": "2025-08-15",
-        "distance_km": 10.62,
-        "duration_min": 157.7,
-        "avg_hr": 94,
-        "elevation_m": 261,
-        "avg_speed_kmh": 4.0
-      },
-      {
-        "id": 20056542587,
-        "name": "Rocca Pietore Escursionismo",
-        "date": "2025-08-14",
-        "distance_km": 13.38,
-        "duration_min": 216.6,
-        "avg_hr": 109,
-        "elevation_m": 664,
-        "avg_speed_kmh": 3.7
-      },
-      {
-        "id": 20045347329,
-        "name": "Primiero San Martino di Castrozza Escursionismo",
-        "date": "2025-08-13",
-        "distance_km": 5.91,
-        "duration_min": 112.4,
-        "avg_hr": 104,
-        "elevation_m": 269,
-        "avg_speed_kmh": 3.2
-      },
-      {
-        "id": 20022896998,
-        "name": "Vigo di Fassa Escursionismo",
-        "date": "2025-08-11",
-        "distance_km": 8.68,
-        "duration_min": 192.6,
-        "avg_hr": 117,
-        "elevation_m": 603,
-        "avg_speed_kmh": 2.7
-      },
-      {
-        "id": 20010140917,
-        "name": "Aldino Escursionismo",
-        "date": "2025-08-08",
-        "distance_km": 5.8,
-        "duration_min": 157.6,
-        "avg_hr": 88,
-        "elevation_m": 256,
-        "avg_speed_kmh": 2.2
-      },
-      {
-        "id": 19980318517,
-        "name": "Canazei Escursionismo",
-        "date": "2025-08-07",
-        "distance_km": 7.54,
-        "duration_min": 129.0,
-        "avg_hr": 99,
-        "elevation_m": 314,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 19937305472,
-        "name": "Pozza di Fassa Escursionismo",
-        "date": "2025-08-03",
-        "distance_km": 6.58,
-        "duration_min": 136.6,
-        "avg_hr": 96,
-        "elevation_m": 276,
-        "avg_speed_kmh": 2.9
-      },
-      {
-        "id": 19862986910,
-        "name": "San Zeno di Montagna Escursionismo",
-        "date": "2025-07-27",
-        "distance_km": 7.28,
-        "duration_min": 131.5,
-        "avg_hr": 107,
-        "elevation_m": 318,
-        "avg_speed_kmh": 3.3
-      },
-      {
-        "id": 19006032125,
-        "name": "Albavilla Escursionismo",
-        "date": "2025-05-02",
-        "distance_km": 7.17,
-        "duration_min": 112.0,
-        "avg_hr": 125,
-        "elevation_m": 437,
-        "avg_speed_kmh": 3.8
-      },
-      {
-        "id": 18409169142,
-        "name": "Predazzo Hiking",
-        "date": "2025-03-01",
-        "distance_km": 8.37,
-        "duration_min": 139.1,
-        "avg_hr": 113,
-        "elevation_m": 282,
-        "avg_speed_kmh": 3.6
-      },
-      {
-        "id": 17668146497,
-        "name": "Cape Woolamai Hiking",
-        "date": "2024-12-02",
-        "distance_km": 8.23,
-        "duration_min": 125.0,
-        "avg_hr": 97,
-        "elevation_m": 161,
-        "avg_speed_kmh": 3.9
-      },
-      {
-        "id": 16823100274,
-        "name": "Moena Hiking",
-        "date": "2024-08-21",
-        "distance_km": 8.14,
-        "duration_min": 101.7,
-        "avg_hr": 95,
-        "elevation_m": 149,
-        "avg_speed_kmh": 4.8
-      },
-      {
-        "id": 16811945840,
-        "name": "Selva di Val Gardena Hiking",
-        "date": "2024-08-20",
-        "distance_km": 6.31,
-        "duration_min": 175.2,
-        "avg_hr": 110,
-        "elevation_m": 598,
-        "avg_speed_kmh": 2.2
-      },
-      {
-        "id": 16793321682,
-        "name": "Vigo di Fassa Hiking",
-        "date": "2024-08-18",
-        "distance_km": 3.97,
-        "duration_min": 111.9,
-        "avg_hr": 86,
-        "elevation_m": 117,
-        "avg_speed_kmh": 2.1
-      },
-      {
-        "id": 16777743670,
-        "name": "Vigo di Fassa Hiking",
-        "date": "2024-08-16",
-        "distance_km": 7.89,
-        "duration_min": 153.0,
-        "avg_hr": 102,
-        "elevation_m": 426,
-        "avg_speed_kmh": 3.1
-      },
-      {
-        "id": 16769807979,
-        "name": "Predazzo Hiking",
-        "date": "2024-08-15",
-        "distance_km": 13.45,
-        "duration_min": 296.4,
-        "avg_hr": 122,
-        "elevation_m": 954,
-        "avg_speed_kmh": 2.7
-      },
-      {
-        "id": 16741714788,
-        "name": "Moena Hiking",
-        "date": "2024-08-12",
-        "distance_km": 10.04,
-        "duration_min": 205.8,
-        "avg_hr": 116,
-        "elevation_m": 707,
-        "avg_speed_kmh": 2.9
-      },
-      {
-        "id": 16734009414,
-        "name": "Canazei Hiking",
-        "date": "2024-08-11",
-        "distance_km": 5.84,
-        "duration_min": 102.7,
-        "avg_hr": 105,
-        "elevation_m": 221,
-        "avg_speed_kmh": 3.4
-      },
-      {
-        "id": 16723357840,
-        "name": "Vigo di Fassa Hiking",
-        "date": "2024-08-10",
-        "distance_km": 5.19,
-        "duration_min": 166.4,
-        "avg_hr": 84,
-        "elevation_m": 145,
-        "avg_speed_kmh": 1.9
-      },
-      {
-        "id": 16723356251,
-        "name": "Vigo di Fassa Hiking",
-        "date": "2024-08-10",
-        "distance_km": 2.17,
-        "duration_min": 38.6,
-        "avg_hr": 90,
-        "elevation_m": 51,
-        "avg_speed_kmh": 3.4
-      },
-      {
-        "id": 16670229871,
-        "name": "Aldino Hiking",
-        "date": "2024-08-04",
-        "distance_km": 3.13,
-        "duration_min": 72.4,
-        "avg_hr": 97,
-        "elevation_m": 126,
-        "avg_speed_kmh": 2.6
-      },
-      {
-        "id": 16665806441,
-        "name": "Pozza di Fassa Hiking",
-        "date": "2024-08-03",
-        "distance_km": 10.22,
-        "duration_min": 149.3,
-        "avg_hr": 98,
-        "elevation_m": 262,
-        "avg_speed_kmh": 4.1
-      },
-      {
-        "id": 13273181093,
-        "name": "Aldino Hiking",
-        "date": "2023-12-29",
-        "distance_km": 4.17,
-        "duration_min": 75.4,
-        "avg_hr": 95,
-        "elevation_m": 146,
-        "avg_speed_kmh": 3.3
-      },
-      {
-        "id": 11838426837,
-        "name": "Selva di Val Gardena Hiking",
-        "date": "2023-08-21",
-        "distance_km": 2.65,
-        "duration_min": 44.7,
-        "avg_hr": 89,
-        "elevation_m": 114,
-        "avg_speed_kmh": 3.6
-      },
-      {
-        "id": 11824620128,
-        "name": "Predazzo Hiking",
-        "date": "2023-08-19",
-        "distance_km": 9.84,
-        "duration_min": 221.8,
-        "avg_hr": 94,
-        "elevation_m": 869,
-        "avg_speed_kmh": 2.7
-      },
-      {
-        "id": 11816298286,
-        "name": "Aldino Hiking",
-        "date": "2023-08-18",
-        "distance_km": 5.64,
-        "duration_min": 167.7,
-        "avg_hr": 76,
-        "elevation_m": 198,
-        "avg_speed_kmh": 2.0
-      },
-      {
-        "id": 11803235721,
-        "name": "Campitello di Fassa Hiking",
-        "date": "2023-08-16",
-        "distance_km": 16.79,
-        "duration_min": 290.9,
-        "avg_hr": 96,
-        "elevation_m": 833,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 11786209870,
-        "name": "Canazei Hiking",
-        "date": "2023-08-14",
-        "distance_km": 13.57,
-        "duration_min": 246.8,
-        "avg_hr": 103,
-        "elevation_m": 772,
-        "avg_speed_kmh": 3.3
-      },
-      {
-        "id": 11771015100,
-        "name": "Predazzo Hiking",
-        "date": "2023-08-12",
-        "distance_km": 6.51,
-        "duration_min": 196.2,
-        "avg_hr": 85,
-        "elevation_m": 278,
-        "avg_speed_kmh": 2.0
-      },
-      {
-        "id": 11370226322,
-        "name": "Faggeto Lario Hiking",
-        "date": "2023-06-18",
-        "distance_km": 3.55,
-        "duration_min": 47.2,
-        "avg_hr": 84,
-        "elevation_m": 2,
-        "avg_speed_kmh": 4.5
-      },
-      {
-        "id": 10970859121,
-        "name": "Piobesi d'Alba Hiking",
-        "date": "2023-04-24",
-        "distance_km": 2.28,
-        "duration_min": 38.1,
-        "avg_hr": 78,
-        "elevation_m": 91,
-        "avg_speed_kmh": 3.6
-      },
-      {
-        "id": 9540711657,
-        "name": "Campitello di Fassa Hiking",
-        "date": "2022-09-04",
-        "distance_km": 13.03,
-        "duration_min": 242.3,
-        "avg_hr": 79,
-        "elevation_m": 230,
-        "avg_speed_kmh": 3.2
-      },
-      {
-        "id": 9474663969,
-        "name": "Tires Hiking",
-        "date": "2022-08-25",
-        "distance_km": 12.7,
-        "duration_min": 204.3,
-        "avg_hr": 82,
-        "elevation_m": 343,
-        "avg_speed_kmh": 3.7
-      },
-      {
-        "id": 9467272091,
-        "name": "Cortina d'Ampezzo Hiking",
-        "date": "2022-08-24",
-        "distance_km": 10.53,
-        "duration_min": 209.5,
-        "avg_hr": 101,
-        "elevation_m": 860,
-        "avg_speed_kmh": 3.0
-      },
-      {
-        "id": 9449313650,
-        "name": "Soraga Hiking",
-        "date": "2022-08-21",
-        "distance_km": 14.94,
-        "duration_min": 231.6,
-        "avg_hr": 101,
-        "elevation_m": 834,
-        "avg_speed_kmh": 3.9
-      },
-      {
-        "id": 9441239087,
-        "name": "Predazzo Hiking",
-        "date": "2022-08-20",
-        "distance_km": 6.32,
-        "duration_min": 200.6,
-        "avg_hr": 81,
-        "elevation_m": 314,
-        "avg_speed_kmh": 1.9
-      },
-      {
-        "id": 9402905411,
-        "name": "Mazzin Hiking",
-        "date": "2022-08-14",
-        "distance_km": 22.87,
-        "duration_min": 392.1,
-        "avg_hr": 99,
-        "elevation_m": 1736,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 9395885870,
-        "name": "Pozza di Fassa Hiking",
-        "date": "2022-08-13",
-        "distance_km": 10.93,
-        "duration_min": 177.4,
-        "avg_hr": 111,
-        "elevation_m": 859,
-        "avg_speed_kmh": 3.7
-      },
-      {
-        "id": 9375795690,
-        "name": "Cortina d'Ampezzo Hiking",
-        "date": "2022-08-10",
-        "distance_km": 9.03,
-        "duration_min": 138.0,
-        "avg_hr": 113,
-        "elevation_m": 678,
-        "avg_speed_kmh": 3.9
-      },
-      {
-        "id": 9355931761,
-        "name": "Pozza di Fassa Hiking",
-        "date": "2022-08-07",
-        "distance_km": 10.18,
-        "duration_min": 134.7,
-        "avg_hr": 93,
-        "elevation_m": 270,
-        "avg_speed_kmh": 4.5
-      },
-      {
-        "id": 7551511646,
-        "name": "Predazzo Hiking",
-        "date": "2021-09-25",
-        "distance_km": 9.01,
-        "duration_min": 149.2,
-        "avg_hr": 102,
-        "elevation_m": 387,
-        "avg_speed_kmh": 3.6
-      },
-      {
-        "id": 7261924977,
-        "name": "Predazzo Hiking",
-        "date": "2021-08-07",
-        "distance_km": 7.79,
-        "duration_min": 160.5,
-        "avg_hr": 90,
-        "elevation_m": 247,
-        "avg_speed_kmh": 2.9
-      },
-      {
-        "id": 5423494811,
-        "name": "Falcade Hiking",
-        "date": "2020-08-22",
-        "distance_km": 9.53,
-        "duration_min": 139.8,
-        "avg_hr": 93,
-        "elevation_m": 175,
-        "avg_speed_kmh": 4.1
-      },
-      {
-        "id": 5153520599,
-        "name": "Sale Marasino Hiking",
-        "date": "2020-06-27",
-        "distance_km": 2.59,
-        "duration_min": 41.6,
-        "avg_hr": 119,
-        "elevation_m": 524,
-        "avg_speed_kmh": 3.7
-      },
-      {
-        "id": 5013834380,
-        "name": "Introbio Hiking",
-        "date": "2020-05-30",
-        "distance_km": 5.51,
-        "duration_min": 76.7,
-        "avg_hr": 93,
-        "elevation_m": 1,
-        "avg_speed_kmh": 4.3
-      },
-      {
-        "id": 4384995675,
-        "name": "Mazzin Hiking",
-        "date": "2019-12-31",
-        "distance_km": 2.91,
-        "duration_min": 53.9,
-        "avg_hr": 98,
-        "elevation_m": 193,
-        "avg_speed_kmh": 3.2
-      },
-      {
-        "id": 3942357942,
-        "name": "Predazzo Hiking",
-        "date": "2019-08-12",
-        "distance_km": 5.14,
-        "duration_min": 120.8,
-        "avg_hr": 82,
-        "elevation_m": 138,
-        "avg_speed_kmh": 2.6
-      },
-      {
-        "id": 3935480096,
-        "name": "Selva di Val Gardena Hiking",
-        "date": "2019-08-10",
-        "distance_km": 2.44,
-        "duration_min": 41.9,
-        "avg_hr": 107,
-        "elevation_m": 75,
-        "avg_speed_kmh": 3.5
-      },
-      {
-        "id": 3911869696,
-        "name": "Campitello di Fassa Hiking",
-        "date": "2019-08-03",
-        "distance_km": 12.27,
-        "duration_min": 196.0,
-        "avg_hr": 96,
-        "elevation_m": 225,
-        "avg_speed_kmh": 3.8
-      },
-      {
-        "id": 3908869188,
-        "name": "Nova Levante Hiking",
-        "date": "2019-08-02",
-        "distance_km": 5.11,
-        "duration_min": 78.5,
-        "avg_hr": 101,
-        "elevation_m": 159,
-        "avg_speed_kmh": 3.9
-      },
-      {
-        "id": 3907874830,
-        "name": "Tires Hiking",
-        "date": "2019-08-02",
-        "distance_km": 4.73,
-        "duration_min": 66.4,
-        "avg_hr": 97,
-        "elevation_m": 116,
-        "avg_speed_kmh": 4.3
       }
     ],
     "multi_sport": [
@@ -23783,6 +23793,11 @@
   },
   "monthly_volume": {
     "2026-07": {
+      "hiking": {
+        "hours": 2.73,
+        "km": 9.35,
+        "sessions": 1
+      },
       "trail_running": {
         "hours": 4.22,
         "km": 17.28,
@@ -25687,6 +25702,9 @@
     }
   },
   "weekly_volume": {
+    "2026-W29": {
+      "hiking": 1
+    },
     "2026-W28": {
       "trail_running": 1,
       "hiit": 1
@@ -27709,6 +27727,16 @@
     }
   },
   "all_activities": [
+    {
+      "id": 23726541840,
+      "name": "Champorcher Hiking",
+      "date": "2026-07-25",
+      "sport": "hiking",
+      "distance_km": 9.35,
+      "duration_min": 164.1,
+      "avg_hr": 123,
+      "elevation_m": 551
+    },
     {
       "id": 23651335827,
       "name": "Torri del Benaco Trail Running",
@@ -51441,48 +51469,48 @@
     }
   ],
   "health_today": {
-    "steps": 388,
-    "steps_goal": 11040,
-    "calories": 861.0,
-    "active_calories": 4.0,
-    "total_distance_m": 309,
-    "floors": 2.52493,
+    "steps": 238,
+    "steps_goal": 12070,
+    "calories": 792.0,
+    "active_calories": 0.0,
+    "total_distance_m": 190,
+    "floors": 0.0,
     "active_min": 0,
     "resting_hr": 46,
-    "stress_avg": 21,
-    "body_battery_end": 74,
-    "body_battery_max": 75,
-    "body_battery_start": 75,
+    "stress_avg": 16,
+    "body_battery_end": 75,
+    "body_battery_max": 77,
+    "body_battery_start": 76,
     "spo2_avg": 91.0,
-    "spo2_min": 82,
-    "respiration_avg": 9.0,
-    "sleep_hours": 9.2,
-    "summary_date": "2026-07-25",
-    "max_hr": 83,
+    "spo2_min": 83,
+    "respiration_avg": 14.0,
+    "sleep_hours": 7.8,
+    "summary_date": "2026-07-26",
+    "max_hr": 79,
     "min_hr": 43,
-    "hr_7d_avg_resting": 49,
-    "sleep_seconds": 33060,
-    "sleep_score": 75,
-    "sleep_score_quality": "FAIR",
-    "sleep_deep_s": 3720,
-    "sleep_rem_s": 5580,
-    "sleep_light_s": 23760,
-    "sleep_awake_s": 1320,
-    "sleep_respiration": 12.96,
-    "sleep_spo2": 91.99,
+    "hr_7d_avg_resting": 48,
+    "sleep_seconds": 28020,
+    "sleep_score": 89,
+    "sleep_score_quality": "GOOD",
+    "sleep_deep_s": 5340,
+    "sleep_rem_s": 6000,
+    "sleep_light_s": 16680,
+    "sleep_awake_s": 0,
+    "sleep_respiration": 13.88,
+    "sleep_spo2": 92.89,
     "sleep_resting_hr": 46,
-    "sleep_avg_hr": 57.0,
-    "sleep_body_battery_change": 67,
+    "sleep_avg_hr": 53.0,
+    "sleep_body_battery_change": 68,
     "hrv_last_night": 71.0,
-    "hrv_7d_avg": 60.0,
+    "hrv_7d_avg": 66.0,
     "hrv_status": "BALANCED",
-    "skin_temp_c": -0.2,
-    "sleep_date": "2026-07-25",
-    "hrv_weekly_avg": 60,
-    "hrv_5min_high": 117,
-    "hrv_date": "2026-07-25",
-    "stress_max": 77,
-    "stress_date": "2026-07-25",
-    "date": "2026-07-25"
+    "skin_temp_c": -0.7,
+    "sleep_date": "2026-07-26",
+    "hrv_weekly_avg": 66,
+    "hrv_5min_high": 130,
+    "hrv_date": "2026-07-26",
+    "stress_max": 75,
+    "stress_date": "2026-07-26",
+    "date": "2026-07-26"
   }
 }
