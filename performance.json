@@ -1,9 +1,9 @@
 {
-  "last_updated": "26/07/2026 08:31",
+  "last_updated": "27/07/2026 09:58",
   "token_expired": false,
   "summary_90d": {
     "sessions": 40,
-    "total_hours": 41.4,
+    "total_hours": 41.1,
     "total_km": 362.3,
     "total_elevation_m": 5837,
     "avg_sessions_week": 3.1,
@@ -16,6 +16,438 @@
     "min_avg_hr": 32
   },
   "by_sport": {
+    "hiit": [
+      {
+        "id": 23738401767,
+        "name": "HIIT Workout Kettlebell",
+        "date": "2026-07-26",
+        "distance_km": 0.0,
+        "duration_min": 23.3,
+        "avg_hr": 141,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23590127794,
+        "name": "HIIT",
+        "date": "2026-07-14",
+        "distance_km": 0.0,
+        "duration_min": 40.1,
+        "avg_hr": 118,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23572163156,
+        "name": "HIIT Workout Kettlebell",
+        "date": "2026-07-12",
+        "distance_km": 0.0,
+        "duration_min": 31.7,
+        "avg_hr": 116,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23506562685,
+        "name": "HIIT",
+        "date": "2026-07-07",
+        "distance_km": 0.0,
+        "duration_min": 39.3,
+        "avg_hr": 131,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23485656106,
+        "name": "HIIT - AMRAP",
+        "date": "2026-07-05",
+        "distance_km": 0.0,
+        "duration_min": 20.0,
+        "avg_hr": 128,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23467198138,
+        "name": "HIIT",
+        "date": "2026-07-03",
+        "distance_km": 0.0,
+        "duration_min": 40.4,
+        "avg_hr": 138,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23425928057,
+        "name": "HIIT",
+        "date": "2026-06-30",
+        "distance_km": 0.0,
+        "duration_min": 38.7,
+        "avg_hr": 123,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23347652392,
+        "name": "HIIT",
+        "date": "2026-06-23",
+        "distance_km": 0.0,
+        "duration_min": 39.9,
+        "avg_hr": 129,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23265589440,
+        "name": "HIIT",
+        "date": "2026-06-16",
+        "distance_km": 0.0,
+        "duration_min": 39.2,
+        "avg_hr": 132,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23255881541,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-15",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 120,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23255881432,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-14",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 99,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23183417704,
+        "name": "HIIT",
+        "date": "2026-06-09",
+        "distance_km": 0.0,
+        "duration_min": 38.5,
+        "avg_hr": 138,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23171986184,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-08",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 118,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23162454262,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-07",
+        "distance_km": 0.0,
+        "duration_min": 17.9,
+        "avg_hr": 108,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23132191602,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-04",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 120,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23101673436,
+        "name": "18' HIIT 40/20",
+        "date": "2026-06-02",
+        "distance_km": 0.0,
+        "duration_min": 18.0,
+        "avg_hr": 98,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23092192249,
+        "name": "HIIT",
+        "date": "2026-06-01",
+        "distance_km": 0.0,
+        "duration_min": 13.6,
+        "avg_hr": 107,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 23004510224,
+        "name": "HIIT",
+        "date": "2026-05-25",
+        "distance_km": 0.0,
+        "duration_min": 14.6,
+        "avg_hr": 120,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22993970247,
+        "name": "HIIT",
+        "date": "2026-05-24",
+        "distance_km": 0.0,
+        "duration_min": 11.9,
+        "avg_hr": 112,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22979319428,
+        "name": "HIIT",
+        "date": "2026-05-23",
+        "distance_km": 0.0,
+        "duration_min": 11.8,
+        "avg_hr": 111,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22931696570,
+        "name": "HIIT",
+        "date": "2026-05-19",
+        "distance_km": 0.0,
+        "duration_min": 39.6,
+        "avg_hr": 130,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22850772081,
+        "name": "HIIT",
+        "date": "2026-05-12",
+        "distance_km": 0.0,
+        "duration_min": 38.3,
+        "avg_hr": 128,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22810890538,
+        "name": "HIIT",
+        "date": "2026-05-08",
+        "distance_km": 0.0,
+        "duration_min": 41.5,
+        "avg_hr": 131,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22768994410,
+        "name": "HIIT",
+        "date": "2026-05-05",
+        "distance_km": 0.0,
+        "duration_min": 38.6,
+        "avg_hr": 136,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22685469907,
+        "name": "HIIT",
+        "date": "2026-04-28",
+        "distance_km": 0.0,
+        "duration_min": 38.8,
+        "avg_hr": 141,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22644407157,
+        "name": "HIIT",
+        "date": "2026-04-24",
+        "distance_km": 0.0,
+        "duration_min": 40.1,
+        "avg_hr": 137,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 22601700198,
+        "name": "HIIT",
+        "date": "2026-04-21",
+        "distance_km": 0.0,
+        "duration_min": 39.5,
+        "avg_hr": 134,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 18303780127,
+        "name": "HIIT",
+        "date": "2025-02-17",
+        "distance_km": 0.0,
+        "duration_min": 22.0,
+        "avg_hr": 129,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 14932850812,
+        "name": "10-Minute Body Weight AMRAP",
+        "date": "2024-04-16",
+        "distance_km": 0.0,
+        "duration_min": 10.0,
+        "avg_hr": 133,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12814077829,
+        "name": "HIIT",
+        "date": "2023-11-21",
+        "distance_km": 0.0,
+        "duration_min": 56.8,
+        "avg_hr": 119,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12723432453,
+        "name": "HIIT",
+        "date": "2023-11-14",
+        "distance_km": 0.0,
+        "duration_min": 59.8,
+        "avg_hr": 121,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12631148319,
+        "name": "HIIT",
+        "date": "2023-11-07",
+        "distance_km": 0.0,
+        "duration_min": 57.0,
+        "avg_hr": 116,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12546912649,
+        "name": "HIIT",
+        "date": "2023-10-31",
+        "distance_km": 0.0,
+        "duration_min": 59.5,
+        "avg_hr": 124,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12458429878,
+        "name": "HIIT",
+        "date": "2023-10-25",
+        "distance_km": 0.0,
+        "duration_min": 51.5,
+        "avg_hr": 127,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12349265756,
+        "name": "HIIT",
+        "date": "2023-10-17",
+        "distance_km": 0.0,
+        "duration_min": 60.9,
+        "avg_hr": 126,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12159178445,
+        "name": "HIIT",
+        "date": "2023-10-03",
+        "distance_km": 0.0,
+        "duration_min": 54.1,
+        "avg_hr": 114,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12107614834,
+        "name": "HIIT",
+        "date": "2023-09-26",
+        "distance_km": 0.0,
+        "duration_min": 56.2,
+        "avg_hr": 130,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 12053254580,
+        "name": "HIIT",
+        "date": "2023-09-18",
+        "distance_km": 0.0,
+        "duration_min": 54.9,
+        "avg_hr": 126,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 9590683990,
+        "name": "Combo 5'+5'",
+        "date": "2022-09-12",
+        "distance_km": 0.0,
+        "duration_min": 10.1,
+        "avg_hr": 113,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 9545508485,
+        "name": "10-Minute Body Weight AMRAP",
+        "date": "2022-09-05",
+        "distance_km": 0.0,
+        "duration_min": 10.0,
+        "avg_hr": 119,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 9502188562,
+        "name": "AMRAP Ab Burnout",
+        "date": "2022-08-29",
+        "distance_km": 0.0,
+        "duration_min": 10.1,
+        "avg_hr": 91,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 9361164628,
+        "name": "AMRAP",
+        "date": "2022-08-08",
+        "distance_km": 0.0,
+        "duration_min": 10.1,
+        "avg_hr": 118,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      },
+      {
+        "id": 9331175744,
+        "name": "AMRAP",
+        "date": "2022-08-03",
+        "distance_km": 0.0,
+        "duration_min": 10.1,
+        "avg_hr": 119,
+        "elevation_m": 0,
+        "avg_speed_kmh": 0.0
+      }
+    ],
     "hiking": [
       {
         "id": 23726541840,
@@ -1968,428 +2400,6 @@
         "avg_hr": 154,
         "elevation_m": 193,
         "avg_speed_kmh": 10.2
-      }
-    ],
-    "hiit": [
-      {
-        "id": 23590127794,
-        "name": "HIIT",
-        "date": "2026-07-14",
-        "distance_km": 0.0,
-        "duration_min": 40.1,
-        "avg_hr": 118,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23572163156,
-        "name": "HIIT Workout Kettlebell",
-        "date": "2026-07-12",
-        "distance_km": 0.0,
-        "duration_min": 31.7,
-        "avg_hr": 116,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23506562685,
-        "name": "HIIT",
-        "date": "2026-07-07",
-        "distance_km": 0.0,
-        "duration_min": 39.3,
-        "avg_hr": 131,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23485656106,
-        "name": "HIIT - AMRAP",
-        "date": "2026-07-05",
-        "distance_km": 0.0,
-        "duration_min": 20.0,
-        "avg_hr": 128,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23467198138,
-        "name": "HIIT",
-        "date": "2026-07-03",
-        "distance_km": 0.0,
-        "duration_min": 40.4,
-        "avg_hr": 138,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23425928057,
-        "name": "HIIT",
-        "date": "2026-06-30",
-        "distance_km": 0.0,
-        "duration_min": 38.7,
-        "avg_hr": 123,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23347652392,
-        "name": "HIIT",
-        "date": "2026-06-23",
-        "distance_km": 0.0,
-        "duration_min": 39.9,
-        "avg_hr": 129,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23265589440,
-        "name": "HIIT",
-        "date": "2026-06-16",
-        "distance_km": 0.0,
-        "duration_min": 39.2,
-        "avg_hr": 132,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23255881541,
-        "name": "18' HIIT 40/20",
-        "date": "2026-06-15",
-        "distance_km": 0.0,
-        "duration_min": 18.0,
-        "avg_hr": 120,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23255881432,
-        "name": "18' HIIT 40/20",
-        "date": "2026-06-14",
-        "distance_km": 0.0,
-        "duration_min": 18.0,
-        "avg_hr": 99,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23183417704,
-        "name": "HIIT",
-        "date": "2026-06-09",
-        "distance_km": 0.0,
-        "duration_min": 38.5,
-        "avg_hr": 138,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23171986184,
-        "name": "18' HIIT 40/20",
-        "date": "2026-06-08",
-        "distance_km": 0.0,
-        "duration_min": 18.0,
-        "avg_hr": 118,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23162454262,
-        "name": "18' HIIT 40/20",
-        "date": "2026-06-07",
-        "distance_km": 0.0,
-        "duration_min": 17.9,
-        "avg_hr": 108,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23132191602,
-        "name": "18' HIIT 40/20",
-        "date": "2026-06-04",
-        "distance_km": 0.0,
-        "duration_min": 18.0,
-        "avg_hr": 120,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23101673436,
-        "name": "18' HIIT 40/20",
-        "date": "2026-06-02",
-        "distance_km": 0.0,
-        "duration_min": 18.0,
-        "avg_hr": 98,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23092192249,
-        "name": "HIIT",
-        "date": "2026-06-01",
-        "distance_km": 0.0,
-        "duration_min": 13.6,
-        "avg_hr": 107,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 23004510224,
-        "name": "HIIT",
-        "date": "2026-05-25",
-        "distance_km": 0.0,
-        "duration_min": 14.6,
-        "avg_hr": 120,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22993970247,
-        "name": "HIIT",
-        "date": "2026-05-24",
-        "distance_km": 0.0,
-        "duration_min": 11.9,
-        "avg_hr": 112,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22979319428,
-        "name": "HIIT",
-        "date": "2026-05-23",
-        "distance_km": 0.0,
-        "duration_min": 11.8,
-        "avg_hr": 111,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22931696570,
-        "name": "HIIT",
-        "date": "2026-05-19",
-        "distance_km": 0.0,
-        "duration_min": 39.6,
-        "avg_hr": 130,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22850772081,
-        "name": "HIIT",
-        "date": "2026-05-12",
-        "distance_km": 0.0,
-        "duration_min": 38.3,
-        "avg_hr": 128,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22810890538,
-        "name": "HIIT",
-        "date": "2026-05-08",
-        "distance_km": 0.0,
-        "duration_min": 41.5,
-        "avg_hr": 131,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22768994410,
-        "name": "HIIT",
-        "date": "2026-05-05",
-        "distance_km": 0.0,
-        "duration_min": 38.6,
-        "avg_hr": 136,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22685469907,
-        "name": "HIIT",
-        "date": "2026-04-28",
-        "distance_km": 0.0,
-        "duration_min": 38.8,
-        "avg_hr": 141,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22644407157,
-        "name": "HIIT",
-        "date": "2026-04-24",
-        "distance_km": 0.0,
-        "duration_min": 40.1,
-        "avg_hr": 137,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 22601700198,
-        "name": "HIIT",
-        "date": "2026-04-21",
-        "distance_km": 0.0,
-        "duration_min": 39.5,
-        "avg_hr": 134,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 18303780127,
-        "name": "HIIT",
-        "date": "2025-02-17",
-        "distance_km": 0.0,
-        "duration_min": 22.0,
-        "avg_hr": 129,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 14932850812,
-        "name": "10-Minute Body Weight AMRAP",
-        "date": "2024-04-16",
-        "distance_km": 0.0,
-        "duration_min": 10.0,
-        "avg_hr": 133,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12814077829,
-        "name": "HIIT",
-        "date": "2023-11-21",
-        "distance_km": 0.0,
-        "duration_min": 56.8,
-        "avg_hr": 119,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12723432453,
-        "name": "HIIT",
-        "date": "2023-11-14",
-        "distance_km": 0.0,
-        "duration_min": 59.8,
-        "avg_hr": 121,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12631148319,
-        "name": "HIIT",
-        "date": "2023-11-07",
-        "distance_km": 0.0,
-        "duration_min": 57.0,
-        "avg_hr": 116,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12546912649,
-        "name": "HIIT",
-        "date": "2023-10-31",
-        "distance_km": 0.0,
-        "duration_min": 59.5,
-        "avg_hr": 124,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12458429878,
-        "name": "HIIT",
-        "date": "2023-10-25",
-        "distance_km": 0.0,
-        "duration_min": 51.5,
-        "avg_hr": 127,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12349265756,
-        "name": "HIIT",
-        "date": "2023-10-17",
-        "distance_km": 0.0,
-        "duration_min": 60.9,
-        "avg_hr": 126,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12159178445,
-        "name": "HIIT",
-        "date": "2023-10-03",
-        "distance_km": 0.0,
-        "duration_min": 54.1,
-        "avg_hr": 114,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12107614834,
-        "name": "HIIT",
-        "date": "2023-09-26",
-        "distance_km": 0.0,
-        "duration_min": 56.2,
-        "avg_hr": 130,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 12053254580,
-        "name": "HIIT",
-        "date": "2023-09-18",
-        "distance_km": 0.0,
-        "duration_min": 54.9,
-        "avg_hr": 126,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 9590683990,
-        "name": "Combo 5'+5'",
-        "date": "2022-09-12",
-        "distance_km": 0.0,
-        "duration_min": 10.1,
-        "avg_hr": 113,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 9545508485,
-        "name": "10-Minute Body Weight AMRAP",
-        "date": "2022-09-05",
-        "distance_km": 0.0,
-        "duration_min": 10.0,
-        "avg_hr": 119,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 9502188562,
-        "name": "AMRAP Ab Burnout",
-        "date": "2022-08-29",
-        "distance_km": 0.0,
-        "duration_min": 10.1,
-        "avg_hr": 91,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 9361164628,
-        "name": "AMRAP",
-        "date": "2022-08-08",
-        "distance_km": 0.0,
-        "duration_min": 10.1,
-        "avg_hr": 118,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
-      },
-      {
-        "id": 9331175744,
-        "name": "AMRAP",
-        "date": "2022-08-03",
-        "distance_km": 0.0,
-        "duration_min": 10.1,
-        "avg_hr": 119,
-        "elevation_m": 0,
-        "avg_speed_kmh": 0.0
       }
     ],
     "cycling": [
@@ -23793,6 +23803,11 @@
   },
   "monthly_volume": {
     "2026-07": {
+      "hiit": {
+        "hours": 3.25,
+        "km": 0.0,
+        "sessions": 6
+      },
       "hiking": {
         "hours": 2.73,
         "km": 9.35,
@@ -23802,11 +23817,6 @@
         "hours": 4.22,
         "km": 17.28,
         "sessions": 2
-      },
-      "hiit": {
-        "hours": 2.86,
-        "km": 0.0,
-        "sessions": 5
       },
       "cycling": {
         "hours": 0.83,
@@ -25703,6 +25713,7 @@
   },
   "weekly_volume": {
     "2026-W29": {
+      "hiit": 1,
       "hiking": 1
     },
     "2026-W28": {
@@ -27727,6 +27738,16 @@
     }
   },
   "all_activities": [
+    {
+      "id": 23738401767,
+      "name": "HIIT Workout Kettlebell",
+      "date": "2026-07-26",
+      "sport": "hiit",
+      "distance_km": 0.0,
+      "duration_min": 23.3,
+      "avg_hr": 141,
+      "elevation_m": 0
+    },
     {
       "id": 23726541840,
       "name": "Champorcher Hiking",
@@ -51469,48 +51490,48 @@
     }
   ],
   "health_today": {
-    "steps": 238,
-    "steps_goal": 12070,
-    "calories": 792.0,
-    "active_calories": 0.0,
-    "total_distance_m": 190,
+    "steps": 1010,
+    "steps_goal": 11970,
+    "calories": 802.0,
+    "active_calories": 18.0,
+    "total_distance_m": 804,
     "floors": 0.0,
     "active_min": 0,
-    "resting_hr": 46,
-    "stress_avg": 16,
-    "body_battery_end": 75,
-    "body_battery_max": 77,
-    "body_battery_start": 76,
-    "spo2_avg": 91.0,
-    "spo2_min": 83,
-    "respiration_avg": 14.0,
-    "sleep_hours": 7.8,
-    "summary_date": "2026-07-26",
-    "max_hr": 79,
-    "min_hr": 43,
+    "resting_hr": 45,
+    "stress_avg": 19,
+    "body_battery_end": 70,
+    "body_battery_max": 74,
+    "body_battery_start": 73,
+    "spo2_avg": 92.0,
+    "spo2_min": 86,
+    "respiration_avg": 13.0,
+    "sleep_hours": 7.6,
+    "summary_date": "2026-07-27",
+    "max_hr": 93,
+    "min_hr": 42,
     "hr_7d_avg_resting": 48,
-    "sleep_seconds": 28020,
-    "sleep_score": 89,
+    "sleep_seconds": 27480,
+    "sleep_score": 85,
     "sleep_score_quality": "GOOD",
     "sleep_deep_s": 5340,
-    "sleep_rem_s": 6000,
-    "sleep_light_s": 16680,
-    "sleep_awake_s": 0,
-    "sleep_respiration": 13.88,
-    "sleep_spo2": 92.89,
-    "sleep_resting_hr": 46,
-    "sleep_avg_hr": 53.0,
-    "sleep_body_battery_change": 68,
-    "hrv_last_night": 71.0,
+    "sleep_rem_s": 5880,
+    "sleep_light_s": 16260,
+    "sleep_awake_s": 360,
+    "sleep_respiration": 13.87,
+    "sleep_spo2": 93.54,
+    "sleep_resting_hr": 45,
+    "sleep_avg_hr": 54.0,
+    "sleep_body_battery_change": 60,
+    "hrv_last_night": 65.0,
     "hrv_7d_avg": 66.0,
     "hrv_status": "BALANCED",
-    "skin_temp_c": -0.7,
-    "sleep_date": "2026-07-26",
+    "skin_temp_c": -0.0,
+    "sleep_date": "2026-07-27",
     "hrv_weekly_avg": 66,
-    "hrv_5min_high": 130,
-    "hrv_date": "2026-07-26",
-    "stress_max": 75,
-    "stress_date": "2026-07-26",
-    "date": "2026-07-26"
+    "hrv_5min_high": 114,
+    "hrv_date": "2026-07-27",
+    "stress_max": 80,
+    "stress_date": "2026-07-27",
+    "date": "2026-07-27"
   }
 }
