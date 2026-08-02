@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Database trail personale di Michele Sarzana",
     "schema": "./schema/trail.schema.json",
-    "last_updated": "2026-07-20"
+    "last_updated": "2026-08-02"
   },
   "trails": [
     {
@@ -601,6 +601,130 @@
       "media": {
         "cover": "https://upload.wikimedia.org/wikipedia/commons/7/77/Monte_Rascias_dal_lago_Miserin_01.png",
         "photos": []
+      }
+    },
+    {
+      "id": "rifugio-dondena-lago-del-miserin",
+      "title": "Rifugio Dondena < > Lago del Misérin",
+      "status": "done",
+      "description": "Per raggiungere l'inizio del percorso è consigliabile portare la macchina al Parcheggio Dondena, raggiungebile tramite strada sterrata che prosegue oltre il parcheggio per Lac Muffè, sopra Champorcher. La strada è percorribile, preferibilmente con un 4x4, ma serenamente anche con macchine a due ruote motrici pur con la dovuta attenzione. Il parcheggio non ha a disposizione molti posti, quindi è possibile che lo troviate pieno, non è custodito e in qualche modo bisogna attrezzarsi per trovare posto. \n\nLasciate la macchina cominciate la salita verso il Rifugio Dondena presso il quale potrete rifocillarvi con un primo caffè. Prestate particolare attenzione alle mandrie al pascolo perché sono spesso protette da cani pastore da lavoro, buoni, ma sconsiglierei l'avvicinamento e consiglierei di tenere i propri cani al guinzaglio. \n\nDopo il rifugio Dondena seguite il sentiero 7, inizialmente su una mulattiera e poi, dopo una svolta a destra ben segnalata ma a cui prestare attenzione, su single trail. Il prossimo tratto è leggermente impegnativo, vi porta in costa fin sopra la valle del torrente Ayasse con un panorama splendido - peccato solo per i tralicci dell'alta tensione del Superphénix che rovinano la vista. Superato il costone il sentiero 7 vi porta comodamente in circa mezz'ora fino al lago di Misérin da dove potrete vedere il Col de la Balma e il Col de le Fenetre. Costeggiando sulla destra raggiungerete l'omonimo rifugio per un meritato pranzo. \n\nPer chiudere l'anello, scendete utilizzando l'alta via numero 2 che vi riporta al Dondena e successivamente alla macchina. \n\nIl percorso si può affrontare anche al contrario, secondo me più noioso, e per i più intraprendenti partendo dal fondo valle di Chardonnay (aggiungedo credo almeno 2 ore e 400 metri di dislivello).",
+      "rating": 5,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/IMG_0437.JPEG",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Valle d'Aosta",
+        "province": "Aosta",
+        "municipality": "Champorcher",
+        "area": "Monte Avic",
+        "start_address": "Parcheggio Dondena",
+        "coordinates": {
+          "start": {
+            "lat": 45.616547,
+            "lng": 7.555628
+          },
+          "end": {
+            "lat": 45.616512,
+            "lng": 7.555564
+          }
+        }
+      },
+      "track": {
+        "distance_km": 9.3,
+        "elevation_gain": 643,
+        "elevation_loss": 648,
+        "elevation_max": 2598,
+        "elevation_min": 2094,
+        "duration_min": 219,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato",
+          "roccia"
+        ],
+        "gpx_file": "gpx/rifugio-dondena-lago-del-miserin.gpx"
+      },
+      "classification": {
+        "difficulty": "T2",
+        "activity_types": [
+          "trail-running",
+          "trekking",
+          "escursionismo"
+        ],
+        "seasons": [
+          "primavera",
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "monte avic",
+        "val d'aosta",
+        "aosta",
+        "champorcher"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": false,
+        "water_available": true,
+        "parking_notes": "Parcheggio disponibile anche se molto piccolo poco prima del Rifugio Dondena. Si arriva tramite strada sterrata, consigliabile 4x4 ma agevole anche con trazione normale"
+      },
+      "photo_credit": "Michele Sarzana",
+      "links": {
+        "strava": "https://www.strava.com/activities/19458365356",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [
+        {
+          "date": "2026-07-25",
+          "duration_min": 161,
+          "rating": 5,
+          "notes": null
+        }
+      ],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/IMG_0437.JPEG",
+        "photos": [
+          {
+            "filename": "IMG_0437.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/IMG_0437.JPEG"
+          },
+          {
+            "filename": "DSC04584.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04584.jpg"
+          },
+          {
+            "filename": "DSC04583.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04583.jpg"
+          },
+          {
+            "filename": "DSC04600.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04600.jpg"
+          },
+          {
+            "filename": "DSC04585.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04585.jpg"
+          },
+          {
+            "filename": "IMG_0434.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/IMG_0434.jpg"
+          },
+          {
+            "filename": "DSC04588.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04588.jpg"
+          },
+          {
+            "filename": "DSC04593.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04593.jpg"
+          },
+          {
+            "filename": "DSC04582_hero.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04582_hero.jpg"
+          }
+        ]
       }
     }
   ]
