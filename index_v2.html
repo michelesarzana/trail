@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/media/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/media/favicon-192.png">
+<link rel="apple-touch-icon" href="/media/favicon-192.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every Single Trail — No map is ever finished.</title>
+<meta name="description" content="Every Single Trail — No map is ever finished. Una mappa personale di percorsi di montagna.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #fff; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(46,43,56,0.16); border-radius: 4px; }
+a { color: #38324a; text-decoration: none; }
+a:hover { color: #c17b8c; }
+button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
+
+/* ===== NAV ===== */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  gap: 16px;
+}
+.nav-wordmark-wrap {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.nav-wordmark-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+.nav-wordmark {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2e2b38;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+.nav-wordmark:hover { color: #2e2b38; }
+.nav-payoff {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #c17b8c;
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-counter {
+  font-size: 13px;
+  font-weight: 600;
+  color: #726e7a;
+}
+.nav-counter span { font-weight: 800; color: #2e2b38; }
+.nav-add {
+  font-size: 13px;
+  font-weight: 700;
+  color: #38324a;
+  background: #f0edf0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: background .15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-add:hover { background: #e4dfe4; color: #38324a; }
+
+/* ===== SEARCH HERO ===== */
+.search-hero {
+  padding: 16px 48px 14px;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #fff;
+}
+.search-box-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 520px;
+}
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 16px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1.5px solid rgba(46,43,56,0.12);
+  border-radius: 12px;
+  outline: none;
+  background: #faf9fb;
+  color: #2e2b38;
+  transition: border-color .15s, box-shadow .15s;
+  box-sizing: border-box;
+}
+.search-input:focus { border-color: #c17b8c; box-shadow: 0 4px 24px rgba(193,123,140,0.18); }
+.search-input::placeholder { color: #b0a8b5; }
+.search-clear {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 16px; color: #b0a8b5;
+  display: none; line-height: 1; padding: 2px;
+}
+.search-clear:hover { color: #2e2b38; }
+.autocomplete-list {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  background: #fff; border: 1.5px solid rgba(46,43,56,0.09);
+  border-radius: 12px; box-shadow: 0 4px 20px rgba(46,43,56,0.11);
+  overflow: hidden; z-index: 400; display: none;
+}
+.autocomplete-list.open { display: block; }
+.autocomplete-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 18px; cursor: pointer; transition: background .12s;
+  border-bottom: 1px solid rgba(46,43,56,0.09);
+}
+.autocomplete-item:last-child { border-bottom: none; }
+.autocomplete-item:hover, .autocomplete-item.selected { background: #f5f1f5; }
+.autocomplete-emoji { font-size: 18px; flex-shrink: 0; }
+.autocomplete-title { font-size: 14px; font-weight: 700; color: #2e2b38; }
+.autocomplete-meta { font-size: 12px; color: #726e7a; margin-top: 1px; }
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; flex-shrink: 0;
+}
+.filter-toggle-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: #fff; border: 1.5px solid rgba(46,43,56,0.09);
+  border-radius: 10px; padding: 0 16px; cursor: pointer;
+  font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #2e2b38;
+  transition: border-color .15s; position: relative;
+  height: 38px; box-sizing: border-box; flex-shrink: 0;
+}
+.filter-toggle-btn:hover, .filter-toggle-btn.active { border-color: #c17b8c; }
+.filter-count-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #f0edf0; font-size: 11px; font-weight: 800; color: #726e7a;
+  transition: background .15s, color .15s;
+}
+.filter-count-badge.visible { background: #c17b8c; color: #fff; }
+.filter-clear-btn {
+  display: none; background: none; border: none; cursor: pointer;
+  font-size: 13px; font-weight: 600; color: #726e7a;
+  padding: 8px 12px; border-radius: 8px; transition: background .12s;
+}
+.filter-clear-btn:hover { background: #f0edf0; }
+.filter-clear-btn.visible { display: block; }
+
+/* ===== FILTER PANEL ===== */
+.filter-panel-wrap {
+  width: 100%;
+  order: 10;
+}
+.filter-panel {
+  max-width: 900px;
+  background: #fff; border: 1.5px solid rgba(46,43,56,0.09);
+  border-radius: 14px; padding: 20px 24px;
+  margin-top: 4px;
+  display: none;
+}
+.filter-panel.open { display: block; }
+.filter-row { display: flex; flex-wrap: wrap; gap: 20px 48px; margin-bottom: 16px; }
+.filter-row:last-child { margin-bottom: 0; }
+.filter-group { display: flex; flex-direction: column; gap: 6px; }
+.filter-group-label { font-size: 11.5px; font-weight: 700; color: #726e7a; letter-spacing: 0.05em; text-transform: uppercase; }
+.pill-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  font-size: 12.5px; font-weight: 700; color: #726e7a;
+  background: #f5f1f5; border: 1.5px solid transparent;
+  border-radius: 20px; padding: 5px 13px; cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+  user-select: none;
+}
+.pill:hover { background: #ede8ed; color: #2e2b38; }
+.pill.active { background: #c17b8c; color: #fff; border-color: #c17b8c; }
+.filter-sort-wrap { display: flex; flex-direction: column; gap: 6px; }
+.filter-sort-wrap select {
+  font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600;
+  color: #2e2b38; border: 1.5px solid rgba(46,43,56,0.12); border-radius: 10px;
+  padding: 7px 14px; background: #faf9fb; outline: none; cursor: pointer;
+}
+.filter-range-wrap { display: flex; flex-direction: column; gap: 6px; min-width: 160px; }
+.filter-range-label { font-size: 12px; color: #726e7a; font-weight: 600; }
+.filter-range-label span { font-weight: 800; color: #2e2b38; }
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px; background: #e8e3e8; border-radius: 2px; outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px; background: #c17b8c; border-radius: 50%; cursor: pointer;
+}
+.filter-check-wrap { display: flex; align-items: center; gap: 8px; }
+.filter-check-wrap input[type=checkbox] { accent-color: #c17b8c; width: 16px; height: 16px; cursor: pointer; }
+.filter-check-wrap label { font-size: 13px; font-weight: 600; color: #2e2b38; cursor: pointer; }
+.rating-filter-row { display: flex; gap: 6px; }
+.rating-pill {
+  font-size: 12px; font-weight: 700; background: #f5f1f5; color: #726e7a;
+  border-radius: 20px; padding: 5px 12px; cursor: pointer;
+  border: 1.5px solid transparent; transition: background .12s, color .12s, border-color .12s;
+  user-select: none;
+}
+.rating-pill:hover { background: #ede8ed; color: #2e2b38; }
+.rating-pill.active { background: #c17b8c; color: #fff; border-color: #c17b8c; }
+
+/* ===== STICKY MAP ===== */
+.map-sticky-wrap {
+  position: sticky;
+  top: 57px; /* nav height */
+  z-index: 200;
+  height: 48vh;
+  min-height: 320px;
+  max-height: 560px;
+  width: 100%;
+  border-bottom: 2px solid rgba(46,43,56,0.08);
+}
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== TRAIL GRID SECTION ===== */
+.grid-section {
+  padding: 32px 48px 64px;
+  background: #fff;
+}
+.grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+.grid-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #726e7a;
+}
+.grid-label strong {
+  color: #2e2b38;
+  font-weight: 800;
+}
+
+/* ===== TRAIL GRID ===== */
+.trail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ===== TRAIL CARD (grid version) ===== */
+.trail-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(46,43,56,0.07);
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.trail-card:hover {
+  border-color: #c17b8c;
+  box-shadow: 0 6px 24px rgba(193,123,140,0.15);
+  transform: translateY(-2px);
+  color: inherit;
+}
+.trail-card.highlighted {
+  border-color: #c17b8c;
+  box-shadow: 0 0 0 3px rgba(193,123,140,0.25);
+}
+.trail-card-cover {
+  aspect-ratio: 3 / 2;
+  width: 100%;
+  background: #f0edf0;
+  position: relative;
+  overflow: hidden;
+}
+.trail-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.trail-card:hover .trail-card-cover img { transform: scale(1.04); }
+.trail-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+}
+.badge-done { background: rgba(56,50,74,0.88); color: #fff; }
+.badge-todo { background: rgba(255,255,255,0.92); color: #726e7a; }
+.trail-card-body {
+  padding: 16px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.trail-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #2e2b38;
+  margin: 0;
+  line-height: 1.3;
+}
+.trail-card-location {
+  font-size: 12px;
+  color: #726e7a;
+  margin: 0;
+  font-weight: 500;
+}
+.trail-card-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+.trail-card-stats-left {
+  display: flex;
+  gap: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2e2b38;
+}
+.stat-accent { color: #c17b8c; }
+.trail-card-stars { font-size: 12px; color: #c17b8c; }
+
+/* ===== LOADER ===== */
+#load-sentinel {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0 16px;
+}
+.loader-dots { display: flex; gap: 6px; align-items: center; }
+.loader-dots span {
+  width: 7px; height: 7px; border-radius: 50%; background: #c17b8c;
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+.loader-dots span:nth-child(2) { animation-delay: .2s; }
+.loader-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== NO RESULTS ===== */
+.no-results {
+  grid-column: 1 / -1;
+  padding: 60px 20px;
+  text-align: center;
+  color: #8a897f;
+}
+.no-results-icon { font-size: 32px; margin-bottom: 10px; }
+
+/* ===== LEAFLET POPUP ===== */
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(46,43,56,0.18) !important;
+}
+.leaflet-popup-content { margin: 0 !important; }
+.leaflet-popup-tip-container { display: none; }
+.map-tooltip {
+  width: 240px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  font-family: 'Manrope', sans-serif;
+}
+.map-tooltip-cover { height: 110px; position: relative; }
+.map-tooltip-cover img { width: 100%; height: 100%; object-fit: cover; }
+.map-tooltip-body { padding: 12px 14px; }
+.map-tooltip-title { font-size: 14px; font-weight: 800; color: #2e2b38; margin: 0 0 4px; }
+.map-tooltip-loc { font-size: 11.5px; color: #726e7a; margin: 0 0 8px; }
+.map-tooltip-stats { display: flex; gap: 12px; font-size: 11.5px; font-weight: 700; color: #2e2b38; margin-bottom: 10px; }
+.map-tooltip-btn {
+  display: block; text-align: center; background: #c17b8c; color: #fff;
+  font-size: 12px; font-weight: 700; border-radius: 10px; padding: 8px;
+  text-decoration: none; transition: background .15s;
+}
+.map-tooltip-btn:hover { background: #a85e73; color: #fff; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 28px 48px;
+  border-top: 1px solid rgba(46,43,56,0.08);
+  font-size: 12.5px;
+  color: #726e7a;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+  .trail-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: center; padding: 14px 20px; gap: 10px; }
+  .nav-right { justify-content: center; width: 100%; }
+  .search-hero { padding: 12px 16px 12px; }
+  .map-sticky-wrap { height: 40vh; min-height: 220px; top: 112px; }
+  .grid-section { padding: 20px 16px 48px; }
+  .trail-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-wordmark-wrap" href="/">
+    <img class="nav-logo" src="/media/favicon-192.png" alt="EST logo">
+    <div class="nav-wordmark-text">
+      <span class="nav-wordmark">Every Single Trail</span>
+      <span class="nav-payoff">No map is ever finished.</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="search.html" class="nav-btn" style="padding:7px 12px;font-size:13px;">🔍</a>
+    <span class="nav-counter"><span id="count-done">0</span> / <span id="count-total">0</span> fatti</span>
+    <a href="admin/index.html" class="nav-add">+ ⛰️</a>
+  </div>
+</nav>
+
+<!-- SEARCH HERO -->
+<div class="search-hero">
+  <div class="search-box-wrap" id="search-wrap">
+    <input type="search" id="search-input" class="search-input"
+           placeholder="Cerca trail…"
+           autocomplete="off" spellcheck="false">
+    <button class="search-clear" id="search-clear" title="Svuota" aria-label="Svuota ricerca">✕</button>
+    <div class="autocomplete-list" id="autocomplete"></div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterPanel()">
+      ⚙️ Filtri
+      <span class="filter-count-badge" id="filter-count-badge">0</span>
+    </button>
+    <button class="filter-clear-btn" id="filter-clear-btn" onclick="clearAllFilters()">↩ Azzera tutto</button>
+  </div>
+
+  <div class="filter-panel-wrap">
+    <div class="filter-panel" id="filter-panel">
+      <div class="filter-row">
+        <div class="filter-group">
+          <span class="filter-group-label">Regione</span>
+          <div class="pill-group" id="filter-region"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-group-label">Difficoltà</span>
+          <div class="pill-group" id="filter-difficulty">
+            <span class="pill" data-val="T1" onclick="togglePillFilter('difficulty','T1',this)">T1</span>
+            <span class="pill" data-val="T2" onclick="togglePillFilter('difficulty','T2',this)">T2</span>
+            <span class="pill" data-val="T3" onclick="togglePillFilter('difficulty','T3',this)">T3</span>
+            <span class="pill" data-val="T4" onclick="togglePillFilter('difficulty','T4',this)">T4</span>
+            <span class="pill" data-val="T5" onclick="togglePillFilter('difficulty','T5',this)">T5</span>
+            <span class="pill" data-val="T6" onclick="togglePillFilter('difficulty','T6',this)">T6</span>
+          </div>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-group">
+          <span class="filter-group-label">Attività</span>
+          <div class="pill-group" id="filter-activity"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-group-label">Stagione</span>
+          <div class="pill-group" id="filter-season">
+            <span class="pill" data-val="primavera" onclick="togglePillFilter('season','primavera',this)">🌸 Primavera</span>
+            <span class="pill" data-val="estate" onclick="togglePillFilter('season','estate',this)">☀️ Estate</span>
+            <span class="pill" data-val="autunno" onclick="togglePillFilter('season','autunno',this)">🍂 Autunno</span>
+            <span class="pill" data-val="inverno" onclick="togglePillFilter('season','inverno',this)">❄️ Inverno</span>
+          </div>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-sort-wrap">
+          <span class="filter-group-label">Ordina per</span>
+          <select id="sort-select" onchange="applyFilters()">
+            <option value="relevance">Rilevanza</option>
+            <option value="dist-asc">Distanza ↑</option>
+            <option value="dist-desc">Distanza ↓</option>
+            <option value="rating">Valutazione</option>
+            <option value="recent">Più recenti</option>
+          </select>
+        </div>
+        <div class="filter-range-wrap">
+          <span class="filter-group-label">Distanza max</span>
+          <div class="filter-range-label">fino a <span id="dist-val">–</span> km</div>
+          <input type="range" id="filter-dist" min="1" max="50" value="50"
+                 oninput="onRangeInput('dist',this.value)" onchange="applyFilters()">
+        </div>
+        <div class="filter-range-wrap">
+          <span class="filter-group-label">Dislivello max</span>
+          <div class="filter-range-label">fino a <span id="dplus-val">–</span> m</div>
+          <input type="range" id="filter-dplus" min="0" max="3000" value="3000" step="100"
+                 oninput="onRangeInput('dplus',this.value)" onchange="applyFilters()">
+        </div>
+        <div class="filter-group">
+          <span class="filter-group-label">Valutazione min</span>
+          <div class="rating-filter-row" id="filter-rating">
+            <span class="rating-pill" data-val="3" onclick="setRatingFilter(3,this)">★★★</span>
+            <span class="rating-pill" data-val="4" onclick="setRatingFilter(4,this)">★★★★</span>
+            <span class="rating-pill" data-val="5" onclick="setRatingFilter(5,this)">★★★★★</span>
+          </div>
+        </div>
+        <div class="filter-group" style="justify-content:flex-end">
+          <div class="filter-check-wrap">
+            <input type="checkbox" id="filter-dog" onchange="activeFilters.dog=this.checked;applyFilters()">
+            <label for="filter-dog">🐶 Dog-friendly</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY MAP -->
+<div class="map-sticky-wrap">
+  <div id="map"></div>
+</div>
+
+<!-- TRAIL GRID -->
+<div class="grid-section">
+  <div class="grid-header">
+    <span class="grid-label"><strong id="results-label">0 percorsi</strong></span>
+  </div>
+  <div class="trail-grid" id="trail-list">
+    <!-- cards injected by JS -->
+  </div>
+  <div id="load-sentinel">
+    <div class="loader-dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  Every Single Trail &copy; 2025 &mdash; Michele Sarzana
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ===== CONFIG ===== */
+const DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
+const PAGE_SIZE = 12;
+let allTrails = [];
+let _filteredTrails = [];
+let _visibleCount = 0;
+let leafletMap = null;
+let markersLayer = null;
+let _markerMap = {}; // trail id → marker
+let autocompleteIdx = -1;
+
+/* ===== UTILS ===== */
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function stars(n) {
+  return '★'.repeat(Math.min(5,Math.max(0,n||0)));
+}
+function diffColor(d) {
+  const map = { T1:'#5a9e6f', T2:'#7ab36e', T3:'#e6a832', T4:'#e07e30', T5:'#d95031', T6:'#9b1c1c' };
+  return map[d] || '#726e7a';
+}
+
+/* ===== MAP ===== */
+function initMap() {
+  leafletMap = L.map('map', { zoomControl: true, scrollWheelZoom: true });
+  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenTopoMap',
+    maxZoom: 15,
+  }).addTo(leafletMap);
+  markersLayer = L.layerGroup().addTo(leafletMap);
+}
+
+function renderMap(trails) {
+  markersLayer.clearLayers();
+  _markerMap = {};
+  const bounds = [];
+  trails.forEach(function(t) {
+    const coords = t.location && t.location.coordinates && t.location.coordinates.start;
+    if (!coords || !coords.lat || !coords.lng) return;
+    const isDone = t.status === 'done';
+    const color = isDone ? '#c17b8c' : '#b0a8b5';
+    const icon = L.divIcon({
+      className: '',
+      html: '<div style="width:12px;height:12px;border-radius:50%;background:' + color + ';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.25);transition:all .15s"></div>',
+      iconSize: [12, 12],
+      iconAnchor: [6, 6],
+    });
+    const marker = L.marker([coords.lat, coords.lng], { icon: icon });
+
+    // Popup
+    const cover = (t.media && t.media.cover) || t.cover_image || '';
+    const loc = [(t.location||{}).municipality, (t.location||{}).region].filter(Boolean).join(', ');
+    const dist = t.track && t.track.distance_km ? t.track.distance_km + ' km' : '';
+    const dplus = t.track && t.track.elevation_gain ? '+' + t.track.elevation_gain + ' m' : '';
+    marker.bindPopup(
+      '<div class="map-tooltip">' +
+      (cover ? '<div class="map-tooltip-cover"><img src="' + escHtml(cover) + '" loading="lazy"></div>' : '') +
+      '<div class="map-tooltip-body">' +
+      '<div class="map-tooltip-title">' + escHtml(t.title) + '</div>' +
+      (loc ? '<div class="map-tooltip-loc">📍 ' + escHtml(loc) + '</div>' : '') +
+      '<div class="map-tooltip-stats">' +
+      (dist ? '<span>' + dist + '</span>' : '') +
+      (dplus ? '<span>' + dplus + '</span>' : '') +
+      '</div>' +
+      '<a class="map-tooltip-btn" href="trail.html?id=' + escHtml(t.id) + '">Apri trail →</a>' +
+      '</div></div>',
+      { maxWidth: 260 }
+    );
+
+    // Hover on card → highlight marker
+    marker.on('popupopen', function() {
+      highlightCard(t.id);
+    });
+    marker.on('popupclose', function() {
+      unhighlightCard(t.id);
+    });
+
+    marker.addTo(markersLayer);
+    _markerMap[t.id] = marker;
+    bounds.push([coords.lat, coords.lng]);
+  });
+  if (bounds.length) {
+    leafletMap.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
+  }
+}
+
+function highlightCard(id) {
+  const el = document.querySelector('.trail-card[data-id="' + id + '"]');
+  if (el) {
+    el.classList.add('highlighted');
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+function unhighlightCard(id) {
+  const el = document.querySelector('.trail-card[data-id="' + id + '"]');
+  if (el) el.classList.remove('highlighted');
+}
+function pulseMarker(id) {
+  const m = _markerMap[id];
+  if (m) {
+    m.openPopup();
+    leafletMap.panTo(m.getLatLng(), { animate: true });
+  }
+}
+
+/* ===== RENDER CARD ===== */
+function renderCard(t) {
+  const cover = (t.media && t.media.cover) || t.cover_image || '';
+  const isDone = t.status === 'done';
+  const loc = [(t.location||{}).municipality, (t.location||{}).region].filter(Boolean).join(', ');
+  const dist = t.track && t.track.distance_km ? t.track.distance_km + ' km' : '';
+  const dplus = t.track && t.track.elevation_gain ? '+' + t.track.elevation_gain + ' m' : '';
+  const diff = t.classification && t.classification.difficulty;
+  const starsHtml = t.rating ? '<div class="trail-card-stars" style="color:#c17b8c">' + stars(t.rating) + '</div>' : '';
+
+  return '<a class="trail-card" href="trail.html?id=' + escHtml(t.id) + '" data-id="' + escHtml(t.id) + '"' +
+    ' onmouseenter="pulseMarker(\'' + escHtml(t.id) + '\')"' +
+    '>' +
+    '<div class="trail-card-cover">' +
+    (cover ? '<img src="' + escHtml(cover) + '" loading="lazy" alt="' + escHtml(t.title) + '">' : '') +
+    (isDone
+      ? '<span class="trail-card-badge badge-done">✓ fatto</span>'
+      : '<span class="trail-card-badge badge-todo">○ da fare</span>') +
+    '</div>' +
+    '<div class="trail-card-body">' +
+    '<div class="trail-card-title">' + escHtml(t.title) + '</div>' +
+    (loc ? '<div class="trail-card-location">📍 ' + escHtml(loc) + '</div>' : '') +
+    '<div class="trail-card-stats">' +
+    '<div class="trail-card-stats-left">' +
+    (dist ? '<span>📏 <span class="stat-accent">' + dist + '</span></span>' : '') +
+    (dplus ? '<span>⬆️ <span class="stat-accent">' + dplus + '</span></span>' : '') +
+    '</div>' +
+    (diff ? '<span style="font-size:11px;font-weight:800;color:' + diffColor(diff) + ';background:' + diffColor(diff) + '22;padding:3px 8px;border-radius:6px">' + escHtml(diff) + '</span>' : '') +
+    '</div>' +
+    starsHtml +
+    '</div>' +
+    '</a>';
+}
+
+/* ===== LAZY LOAD CARDS ===== */
+function loadMoreCards() {
+  const listEl = document.getElementById('trail-list');
+  const sentinel = document.getElementById('load-sentinel');
+  const batch = _filteredTrails.slice(_visibleCount, _visibleCount + PAGE_SIZE);
+  batch.forEach(function(t) {
+    listEl.insertAdjacentHTML('beforeend', renderCard(t));
+  });
+  _visibleCount += batch.length;
+  if (sentinel) {
+    sentinel.style.display = _visibleCount >= _filteredTrails.length ? 'none' : 'flex';
+  }
+}
+
+/* ===== FILTER STATE ===== */
+let activeFilters = {
+  q: '',
+  difficulty: [],
+  region: [],
+  activity: [],
+  season: [],
+  rating: 0,
+  dog: false,
+  dist: 50,
+  dplus: 3000,
+};
+let debounceTimer = null;
+
+/* ===== SCORING ===== */
+function scoreTrail(trail, q) {
+  if (!q) return 1;
+  const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+  const haystack = [
+    trail.title || '',
+    (trail.location && trail.location.region) || '',
+    (trail.location && trail.location.municipality) || '',
+    (trail.location && trail.location.area) || '',
+    (trail.classification && trail.classification.difficulty) || '',
+    trail.description || '',
+  ].join(' ').toLowerCase();
+  let score = 0;
+  for (const t of terms) {
+    if (haystack.includes(t)) score++;
+    if ((trail.title||'').toLowerCase().includes(t)) score += 2;
+  }
+  return score;
+}
+
+/* ===== APPLY FILTERS ===== */
+function applyFilters() {
+  if (!allTrails || !allTrails.length) return;
+  const q = activeFilters.q.trim();
+  const sortEl = document.getElementById('sort-select');
+  const sort = sortEl ? sortEl.value : 'relevance';
+
+  let results = allTrails.map(t => ({ trail: t, score: scoreTrail(t, q) }));
+
+  if (q) results = results.filter(r => r.score > 0);
+  if (activeFilters.difficulty.length)
+    results = results.filter(r => activeFilters.difficulty.includes((r.trail.classification||{}).difficulty||''));
+  if (activeFilters.region.length)
+    results = results.filter(r => activeFilters.region.includes((r.trail.location||{}).region||''));
+  if (activeFilters.activity.length)
+    results = results.filter(r => activeFilters.activity.some(a => ((r.trail.classification||{}).activity_types||[]).includes(a)));
+  if (activeFilters.season.length)
+    results = results.filter(r => activeFilters.season.some(s => ((r.trail.classification||{}).seasons||[]).includes(s)));
+  if (activeFilters.rating > 0)
+    results = results.filter(r => (r.trail.rating||0) >= activeFilters.rating);
+  if (activeFilters.dog)
+    results = results.filter(r => r.trail.logistics && r.trail.logistics.dog_friendly);
+  if (activeFilters.dist < 50)
+    results = results.filter(r => ((r.trail.track||{}).distance_km||0) <= activeFilters.dist);
+  if (activeFilters.dplus < 3000)
+    results = results.filter(r => ((r.trail.track||{}).elevation_gain||0) <= activeFilters.dplus);
+
+  if (sort === 'relevance') results.sort((a, b) => b.score - a.score);
+  else if (sort === 'dist-asc') results.sort((a, b) => ((a.trail.track||{}).distance_km||999) - ((b.trail.track||{}).distance_km||999));
+  else if (sort === 'dist-desc') results.sort((a, b) => ((b.trail.track||{}).distance_km||0) - ((a.trail.track||{}).distance_km||0));
+  else if (sort === 'rating') results.sort((a, b) => (b.trail.rating||0) - (a.trail.rating||0));
+  else if (sort === 'recent') results.sort((a, b) => ((b.trail.completed_at||'') > (a.trail.completed_at||'')) ? 1 : -1);
+
+  _filteredTrails = results.map(r => r.trail);
+  _visibleCount = 0;
+  const listEl = document.getElementById('trail-list');
+  const label = document.getElementById('results-label');
+  const sentinel = document.getElementById('load-sentinel');
+  listEl.innerHTML = '';
+
+  if (_filteredTrails.length === 0) {
+    listEl.innerHTML = '<div class="no-results"><div class="no-results-icon">🏔️</div>Nessun percorso trovato.</div>';
+    if (sentinel) sentinel.style.display = 'none';
+  } else {
+    loadMoreCards();
+  }
+
+  if (label) label.textContent = _filteredTrails.length + ' percors' + (_filteredTrails.length === 1 ? 'o' : 'i');
+  renderMap(_filteredTrails);
+  updateFilterBadge();
+}
+
+/* ===== FILTER HELPERS ===== */
+function toggleFilterPanel() {
+  const panel = document.getElementById('filter-panel');
+  const btn = document.getElementById('filter-toggle-btn');
+  panel.classList.toggle('open');
+  btn.classList.toggle('active');
+}
+function togglePillFilter(key, val, el) {
+  const arr = activeFilters[key];
+  const idx = arr.indexOf(val);
+  if (idx >= 0) { arr.splice(idx, 1); el.classList.remove('active'); }
+  else { arr.push(val); el.classList.add('active'); }
+  applyFilters();
+}
+function setRatingFilter(val, el) {
+  if (activeFilters.rating === val) {
+    activeFilters.rating = 0;
+    el.classList.remove('active');
+  } else {
+    activeFilters.rating = val;
+    document.querySelectorAll('#filter-rating .rating-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+  }
+  applyFilters();
+}
+function onRangeInput(key, val) {
+  activeFilters[key] = Number(val);
+  const labelEl = document.getElementById(key + '-val');
+  if (labelEl) labelEl.textContent = val;
+}
+function clearAllFilters() {
+  activeFilters = { q:'', difficulty:[], region:[], activity:[], season:[], rating:0, dog:false, dist:50, dplus:3000 };
+  const inp = document.getElementById('search-input');
+  if (inp) inp.value = '';
+  const clr = document.getElementById('search-clear');
+  if (clr) clr.style.display = 'none';
+  document.querySelectorAll('.pill.active').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#filter-rating .rating-pill').forEach(p => p.classList.remove('active'));
+  const dog = document.getElementById('filter-dog');
+  if (dog) dog.checked = false;
+  const dist = document.getElementById('filter-dist');
+  if (dist) { dist.value = 50; }
+  const dv = document.getElementById('dist-val');
+  if (dv) dv.textContent = '–';
+  const dplus = document.getElementById('filter-dplus');
+  if (dplus) { dplus.value = 3000; }
+  const dpv = document.getElementById('dplus-val');
+  if (dpv) dpv.textContent = '–';
+  applyFilters();
+}
+function updateFilterBadge() {
+  let count = activeFilters.difficulty.length + activeFilters.region.length
+    + activeFilters.activity.length + activeFilters.season.length
+    + (activeFilters.rating > 0 ? 1 : 0) + (activeFilters.dog ? 1 : 0)
+    + (activeFilters.dist < 50 ? 1 : 0) + (activeFilters.dplus < 3000 ? 1 : 0);
+  const badge = document.getElementById('filter-count-badge');
+  if (badge) { badge.textContent = count; badge.classList.toggle('visible', count > 0); }
+  const clearBtn = document.getElementById('filter-clear-btn');
+  if (clearBtn) clearBtn.classList.toggle('visible', count > 0 || !!activeFilters.q);
+}
+
+/* ===== DYNAMIC FILTERS ===== */
+function buildDynamicFilters(trails) {
+  const regions = [...new Set(trails.map(t => (t.location&&t.location.region)||'').filter(Boolean))].sort();
+  const activities = [...new Set(trails.flatMap(t => (t.classification&&t.classification.activity_types)||[]))].sort();
+  const regEl = document.getElementById('filter-region');
+  if (regEl) regEl.innerHTML = regions.map(r =>
+    '<span class="pill" data-val="' + escHtml(r) + '" onclick="togglePillFilter(\'region\',\'' + escHtml(r).replace(/'/g,"\\'") + '\',this)">' + escHtml(r) + '</span>'
+  ).join('');
+  const actEl = document.getElementById('filter-activity');
+  if (actEl) actEl.innerHTML = activities.map(a =>
+    '<span class="pill" data-val="' + escHtml(a) + '" onclick="togglePillFilter(\'activity\',\'' + escHtml(a).replace(/'/g,"\\'") + '\',this)">' + escHtml(a) + '</span>'
+  ).join('');
+}
+
+/* ===== AUTOCOMPLETE ===== */
+function showAutocomplete(q) {
+  const ac = document.getElementById('autocomplete');
+  if (!q || q.length < 2) { ac.classList.remove('open'); return; }
+  const ql = q.toLowerCase();
+  const matches = allTrails.filter(t =>
+    (t.title||'').toLowerCase().includes(ql) ||
+    ((t.location||{}).municipality||'').toLowerCase().includes(ql) ||
+    ((t.location||{}).region||'').toLowerCase().includes(ql)
+  ).slice(0, 6);
+  if (!matches.length) { ac.classList.remove('open'); return; }
+  ac.innerHTML = matches.map(t => {
+    const loc = [(t.location||{}).municipality,(t.location||{}).region].filter(Boolean).join(', ');
+    return '<div class="autocomplete-item" onmousedown="goToTrail(\'' + escHtml(t.id) + '\')">' +
+      '<span class="autocomplete-emoji">🏔️</span>' +
+      '<div><div class="autocomplete-title">' + escHtml(t.title) + '</div>' +
+      (loc ? '<div class="autocomplete-meta">📍 ' + escHtml(loc) + '</div>' : '') +
+      '</div></div>';
+  }).join('');
+  ac.classList.add('open');
+  autocompleteIdx = -1;
+}
+function goToTrail(id) {
+  window.location.href = 'trail.html?id=' + encodeURIComponent(id);
+}
+
+/* ===== SEARCH LISTENERS ===== */
+function setupSearchListeners() {
+  const inp = document.getElementById('search-input');
+  if (!inp) return;
+  inp.addEventListener('input', function() {
+    const v = this.value;
+    const clr = document.getElementById('search-clear');
+    if (clr) clr.style.display = v ? '' : 'none';
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() {
+      activeFilters.q = v;
+      showAutocomplete(v);
+      applyFilters();
+    }, 200);
+  });
+  inp.addEventListener('keydown', function(e) {
+    const items = document.querySelectorAll('.autocomplete-item');
+    if (e.key === 'ArrowDown') {
+      autocompleteIdx = Math.min(autocompleteIdx + 1, items.length - 1);
+      items.forEach(function(el, i) { el.classList.toggle('selected', i === autocompleteIdx); });
+      e.preventDefault();
+    } else if (e.key === 'ArrowUp') {
+      autocompleteIdx = Math.max(autocompleteIdx - 1, -1);
+      items.forEach(function(el, i) { el.classList.toggle('selected', i === autocompleteIdx); });
+      e.preventDefault();
+    } else if (e.key === 'Enter' && autocompleteIdx >= 0 && items[autocompleteIdx]) {
+      items[autocompleteIdx].dispatchEvent(new MouseEvent('mousedown'));
+      e.preventDefault();
+    } else if (e.key === 'Escape') {
+      document.getElementById('autocomplete').classList.remove('open');
+    }
+  });
+  inp.addEventListener('blur', function() {
+    setTimeout(function() {
+      document.getElementById('autocomplete').classList.remove('open');
+    }, 150);
+  });
+  const clrBtn = document.getElementById('search-clear');
+  if (clrBtn) clrBtn.addEventListener('click', function() {
+    inp.value = '';
+    this.style.display = 'none';
+    activeFilters.q = '';
+    document.getElementById('autocomplete').classList.remove('open');
+    applyFilters();
+  });
+}
+
+/* ===== LOAD DATA ===== */
+async function loadTrails() {
+  try {
+    const r = await fetch(DB_URL);
+    const data = await r.json();
+    return data.trails || [];
+  } catch(e) {
+    console.error('Failed to load trails:', e);
+    return [];
+  }
+}
+
+/* ===== INIT ===== */
+async function init() {
+  initMap();
+  allTrails = await loadTrails();
+
+  const done = allTrails.filter(t => t.status === 'done').length;
+  document.getElementById('count-total').textContent = allTrails.length;
+  document.getElementById('count-done').textContent = done;
+
+  buildDynamicFilters(allTrails);
+  setupSearchListeners();
+  applyFilters();
+
+  setTimeout(function() {
+    if (leafletMap) leafletMap.invalidateSize();
+  }, 200);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  init();
+  const sentinel = document.getElementById('load-sentinel');
+  if (sentinel && window.IntersectionObserver) {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && _visibleCount < _filteredTrails.length) {
+          loadMoreCards();
+        }
+      });
+    }, { rootMargin: '0px 0px 80px 0px' });
+    observer.observe(sentinel);
+  }
+});
+</script>
+</body>
+</html>
