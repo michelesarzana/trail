@@ -641,8 +641,7 @@
           "terra",
           "sterrato",
           "roccia"
-        ],
-        "gpx_file": "gpx/rifugio-dondena-lago-del-miserin.gpx"
+        ]
       },
       "classification": {
         "difficulty": "T2",
