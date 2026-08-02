@@ -684,12 +684,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
       <div class="results-sort-row">
         <span class="results-sort-label" id="results-label">0 percorsi</span>
         <select class="sort-select" id="sort-select" onchange="applyFilters()">
-          <option value="inserted" selected>Ordine di inserimento</option>
+          <option value="recent" selected>Più recente</option>
           <option value="relevance">Rilevanza</option>
           <option value="dist-asc">Distanza ↑</option>
           <option value="dist-desc">Distanza ↓</option>
           <option value="rating">Rating ↓</option>
-          <option value="recent">Più recente</option>
         </select>
       </div>
       <div class="trail-list" id="trail-list">
@@ -858,7 +857,13 @@ function applyFilters() {
   } else if (sort === 'rating') {
     results.sort((a, b) => (b.trail.rating||0) - (a.trail.rating||0));
   } else if (sort === 'recent') {
-    results.sort((a, b) => ((b.trail.completed_at||'') > (a.trail.completed_at||'')) ? 1 : -1);
+    // usa la data più recente nel log, fallback a stringa vuota
+    const latestDate = t => {
+      const log = t.log;
+      if (!log || !log.length) return '';
+      return log.map(e => e.date||'').sort().reverse()[0];
+    };
+    results.sort((a, b) => (latestDate(b.trail) > latestDate(a.trail)) ? 1 : -1);
   }
 
   _filteredTrails = results.map(r => r.trail);
