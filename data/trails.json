@@ -641,7 +641,8 @@
           "terra",
           "sterrato",
           "roccia"
-        ]
+        ],
+        "gpx_file": "gpx/rifugio-dondena-lago-del-miserin.gpx"
       },
       "classification": {
         "difficulty": "T2",
@@ -688,10 +689,6 @@
         "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04582_hero.jpg",
         "photos": [
           {
-            "filename": "IMG_0437.JPEG",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/IMG_0437.JPEG"
-          },
-          {
             "filename": "DSC04584.jpg",
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04584.jpg"
           },
@@ -722,6 +719,10 @@
           {
             "filename": "DSC04582_hero.jpg",
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/DSC04582_hero.jpg"
+          },
+          {
+            "filename": "IMG_0437.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-dondena-lago-del-miserin/IMG_0437.JPEG"
           }
         ]
       }
