@@ -55,8 +55,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   padding: 16px 48px;
   border-bottom: 1px solid rgba(46,43,56,0.06);
   background: linear-gradient(180deg, #faf7f4 0%, #fff 100%);
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px;
 }
+.search-hero .search-box-wrap { flex: 1 1 260px; min-width: 0; position: relative; }
+.search-hero .filter-bar { flex-shrink: 0; align-self: flex-start; }
+#filter-panel-wrap { flex: 0 0 100%; width: 100%; margin-top: 4px; }
 .search-box-wrap { position: relative; flex: 1; min-width: 0; }
 .search-input {
   width: 100%; padding: 10px 44px 10px 18px;
@@ -68,9 +71,9 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 }
 .search-input:focus { border-color: #c17b8c; box-shadow: 0 4px 24px rgba(193,123,140,0.18); }
 .search-input::placeholder { color: #b0a8b5; }
-.search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 16px; color: #b0a8b5; display: none; line-height: 1; padding: 2px; }
+.search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 16px; color: #b0a8b5; display: none; line-height: 1; padding: 2px; z-index: 2; }
 .search-clear:hover { color: #2e2b38; }
-.search-kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: #b0a8b5; background: #f0edf0; border-radius: 4px; padding: 2px 6px; pointer-events: none; }
+.search-kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: #b0a8b5; background: #f0edf0; border-radius: 4px; padding: 2px 6px; pointer-events: none; z-index: 1; }
 .autocomplete-list { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #fff; border: 1.5px solid rgba(46,43,56,0.09); border-radius: 12px; box-shadow: 0 4px 20px rgba(46,43,56,0.11); overflow: hidden; z-index: 400; display: none; }
 .autocomplete-list.open { display: block; }
 .autocomplete-item { display: flex; align-items: center; gap: 12px; padding: 12px 18px; cursor: pointer; transition: background .12s; border-bottom: 1px solid rgba(46,43,56,0.09); }
@@ -114,19 +117,48 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .filter-check-wrap label { font-size: 13px; font-weight: 600; color: #2e2b38; cursor: pointer; }
 
 /* ===== RESULTS / SORT BAR ===== */
-.results-sort-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 48px 8px; border-bottom: 1px solid rgba(46,43,56,0.06); background: #fff; }
+.results-sort-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 48px 8px; border-bottom: 1px solid rgba(46,43,56,0.06); border-top: 1px solid rgba(46,43,56,0.06); background: #fff; }
 .results-sort-label { font-size: 13px; font-weight: 600; color: #726e7a; }
 .results-sort-label strong { color: #2e2b38; font-weight: 800; }
 .sort-select { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; color: #2e2b38; border: 1.5px solid rgba(46,43,56,0.12); border-radius: 10px; padding: 6px 12px; background: #fff; outline: none; cursor: pointer; }
 
-/* ===== STICKY MAP ===== */
+/* ===== MAP WRAP (non più sticky) ===== */
 .map-sticky-wrap {
-  position: sticky;
-  top: 0;
-  z-index: 200;
+  position: relative;
+  z-index: 1;
   width: 100%;
   border-bottom: 2px solid rgba(46,43,56,0.08);
 }
+
+/* ===== TORNA ALLA MAPPA (FAB) ===== */
+#back-to-map-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  display: none;
+  align-items: center;
+  gap: 7px;
+  background: #38324a;
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(56,50,74,0.35);
+  transition: background .15s, transform .15s, opacity .2s;
+  opacity: 0;
+  pointer-events: none;
+}
+#back-to-map-btn.visible {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+#back-to-map-btn:hover { background: #c17b8c; transform: translateY(-2px); }
 
 /* ===== TRAIL GRID ===== */
 .grid-section { padding: 32px 48px 64px; background: #fff; }
@@ -247,7 +279,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     </button>
     <button class="filter-clear-btn" id="filter-clear-btn" onclick="clearAllFilters()">↩ Azzera tutto</button>
   </div>
-  <div style="width:100%;order:10" id="filter-panel-wrap">
+  <div id="filter-panel-wrap">
     <div class="filter-panel" id="filter-panel">
       <div class="filter-row">
         <div class="filter-group">
@@ -324,7 +356,12 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   </div>
 </div>
 
-<!-- RESULTS + SORT BAR -->
+<!-- MAP -->
+<div class="map-sticky-wrap" id="map-section">
+  <div id="map" style="width:100%;height:420px;"></div>
+</div>
+
+<!-- RESULTS + SORT BAR (sotto la mappa) -->
 <div class="results-sort-row">
   <span class="results-sort-label"><strong id="results-label">0 percorsi</strong></span>
   <select class="sort-select" id="sort-select" onchange="applyFilters()">
@@ -336,10 +373,8 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   </select>
 </div>
 
-<!-- STICKY MAP -->
-<div class="map-sticky-wrap">
-  <div id="map" style="width:100%;height:420px;"></div>
-</div>
+<!-- FAB TORNA ALLA MAPPA -->
+<button id="back-to-map-btn" onclick="scrollToMap()" title="Torna alla mappa">🗺️ Mappa</button>
 
 <!-- TRAIL GRID -->
 <div class="grid-section">
@@ -476,30 +511,44 @@ function renderMap(trails) {
   });
 }
 
+/* ===== TORNA ALLA MAPPA ===== */
+function scrollToMap() {
+  document.getElementById('map-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function setupMapFab() {
+  var mapEl = document.getElementById('map-section');
+  var fab = document.getElementById('back-to-map-btn');
+  if (!mapEl || !fab || !window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      fab.classList.toggle('visible', !e.isIntersecting);
+    });
+  }, { threshold: 0.1 });
+  obs.observe(mapEl);
+}
+
 /* ===== MOSTRA SULLA MAPPA ===== */
 function showOnMap(id, btnEl) {
-  // Scroll to map
-  document.querySelector('.map-sticky-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Scroll to map first
+  document.getElementById('map-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   // Reset other active buttons
   document.querySelectorAll('.btn-map.active').forEach(function(b) { if (b !== btnEl) b.classList.remove('active'); });
-  if (btnEl) btnEl.classList.toggle('active');
-  // Find trail coords
+  if (btnEl) btnEl.classList.add('active');
+  // Find trail + center on start pin
   var t = allTrails.find(function(x) { return x.id === id; });
   if (!t) return;
-  var marker = _markerMap[id];
-  if (marker) {
-    marker.openPopup();
-    leafletMap.panTo(marker.getLatLng(), { animate: true, duration: 0.8 });
-    leafletMap.setZoom(12);
-  } else {
-    var loc = t.location||{};
-    var start = ((loc.coordinates||{}).start)||{};
-    if (start.lat) {
-      leafletMap.setView([start.lat, start.lng||start.lon], 12, { animate: true });
-    }
+  var loc = t.location||{};
+  var start = ((loc.coordinates||{}).start)||{};
+  var lat = start.lat;
+  var lng = start.lng || start.lon;
+  if (lat && lng) {
+    setTimeout(function() {
+      leafletMap.invalidateSize();
+      leafletMap.setView([lat, lng], 13, { animate: true, duration: 0.8 });
+      var marker = _markerMap[id];
+      if (marker) marker.openPopup();
+    }, 300);
   }
-  // Invalidate size after scroll
-  setTimeout(function() { leafletMap.invalidateSize(); }, 350);
 }
 
 /* ===== RENDER CARD ===== */
@@ -759,6 +808,7 @@ async function init() {
 
 document.addEventListener('DOMContentLoaded', function() {
   init();
+  setupMapFab();
   var sentinel = document.getElementById('load-sentinel');
   if (sentinel && window.IntersectionObserver) {
     var observer = new IntersectionObserver(function(entries) {
