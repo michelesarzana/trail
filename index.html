@@ -684,6 +684,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
       <div class="results-sort-row">
         <span class="results-sort-label" id="results-label">0 percorsi</span>
         <select class="sort-select" id="sort-select" onchange="applyFilters()">
+          <option value="inserted" selected>Ordine di inserimento</option>
           <option value="relevance">Rilevanza</option>
           <option value="dist-asc">Distanza ↑</option>
           <option value="dist-desc">Distanza ↓</option>
@@ -846,7 +847,9 @@ function applyFilters() {
     });
   }
 
-  if (sort === 'relevance' && q) {
+  if (sort === 'inserted') {
+    // mantieni l'ordine originale del JSON (nessun sort)
+  } else if (sort === 'relevance' && q) {
     results.sort((a, b) => b.score - a.score);
   } else if (sort === 'dist-asc') {
     results.sort((a, b) => ((a.trail.track&&a.trail.track.distance_km)||999) - ((b.trail.track&&b.trail.track.distance_km)||999));
