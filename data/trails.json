@@ -794,6 +794,121 @@
           }
         ]
       }
+    },
+    {
+      "id": "dorsale-del-triangolo-lariano",
+      "title": "Dorsale del Triangolo Lariano",
+      "status": "done",
+      "description": "La Dorsale del Triangolo Lariano è uno dei trail più iconici della Lombardia: un percorso ad anello (o traversata) che segue la cresta del promontorio che divide i rami di Como e Lecco, con vista a 360° sul lago e sulle Prealpi. Si parte da Brunate in salita decisa verso il Rifugio Bolletto e il Monte Bolettone, si attraversano boschi e praterie aperte fino al Monte Palanzone e alla Capanna Mara, per poi scendere verso Asso o proseguire fino al Sighignola. Quasi tutte tecnicità su sentiero segnato, con qualche tratto esposto che premia chi ha le gambe e la testa.\n\nUscita di trail interessante per testare le gambe, non comodissimo dal punto di vista logistico, personalmente non il tipo di montagna che amo. Attenzione alle scorte d'acqua perché non sono presenti punti di rifornimento lungo il percorso se non i - pochi - rifugi non sempre aperti, controllate prima di partire.",
+      "rating": 3,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/FE89C99A-0928-4F88-B7E6-A84EEEB3E516.JPEG",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Lombardia",
+        "province": "Como",
+        "municipality": "Como",
+        "area": "Triangolo Lariano",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 45.815114,
+            "lng": 9.083713
+          },
+          "end": {
+            "lat": 45.985445,
+            "lng": 9.26003
+          }
+        }
+      },
+      "track": {
+        "distance_km": 36.1,
+        "elevation_gain": 2147,
+        "elevation_loss": 2146,
+        "elevation_max": 1426,
+        "elevation_min": 203,
+        "duration_min": 406,
+        "route_type": "point-to-point",
+        "surface": [
+          "terra",
+          "sterrato"
+        ],
+        "gpx_file": "gpx/dorsale-del-triangolo-lariano.gpx"
+      },
+      "classification": {
+        "difficulty": "T2",
+        "activity_types": [
+          "trail-running"
+        ],
+        "seasons": [
+          "primavera",
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "como",
+        "lago",
+        "triangolo lariano",
+        "trail running"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "photo_credit": null,
+      "links": {
+        "strava": "https://www.strava.com/activities/6985528820",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [
+        {
+          "date": "2022-04-15",
+          "duration_min": 380,
+          "rating": 3,
+          "notes": null
+        },
+        {
+          "date": "2021-04-02",
+          "duration_min": 405,
+          "rating": 4,
+          "notes": null
+        }
+      ],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/FE89C99A-0928-4F88-B7E6-A84EEEB3E516.JPEG",
+        "photos": [
+          {
+            "filename": "FE89C99A-0928-4F88-B7E6-A84EEEB3E516.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/FE89C99A-0928-4F88-B7E6-A84EEEB3E516.JPEG"
+          },
+          {
+            "filename": "IMG_4276.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/IMG_4276.JPEG"
+          },
+          {
+            "filename": "IMG_7754.JPG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/IMG_7754.JPG"
+          },
+          {
+            "filename": "IMG_7761.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/IMG_7761.JPEG"
+          },
+          {
+            "filename": "GPTempDownload-1.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/GPTempDownload-1.jpg"
+          },
+          {
+            "filename": "GPTempDownload.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/GPTempDownload.jpg"
+          }
+        ]
+      }
     }
   ]
 }
