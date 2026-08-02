@@ -244,7 +244,7 @@ input[type=range]::-webkit-slider-thumb {
 /* ===== STICKY MAP ===== */
 .map-sticky-wrap {
   position: sticky;
-  top: 57px; /* nav height */
+  top: 0;
   z-index: 200;
   height: 48vh;
   min-height: 320px;
@@ -445,7 +445,7 @@ input[type=range]::-webkit-slider-thumb {
   .nav { flex-direction: column; align-items: center; padding: 14px 20px; gap: 10px; }
   .nav-right { justify-content: center; width: 100%; }
   .search-hero { padding: 12px 16px 12px; }
-  .map-sticky-wrap { height: 40vh; min-height: 220px; top: 112px; }
+  .map-sticky-wrap { height: 40vh; min-height: 220px; top: 0; }
   .grid-section { padding: 20px 16px 48px; }
   .trail-grid { grid-template-columns: 1fr; gap: 14px; }
 }
@@ -614,9 +614,10 @@ function diffColor(d) {
 /* ===== MAP ===== */
 function initMap() {
   leafletMap = L.map('map', { zoomControl: true, scrollWheelZoom: true });
-  L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenTopoMap',
-    maxZoom: 15,
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors © CartoDB',
+    subdomains: 'abcd',
+    maxZoom: 19,
   }).addTo(leafletMap);
   markersLayer = L.layerGroup().addTo(leafletMap);
 }
