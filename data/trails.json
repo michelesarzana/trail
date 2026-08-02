@@ -726,6 +726,74 @@
           }
         ]
       }
+    },
+    {
+      "id": "rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona",
+      "title": "Rifugio Antermoia tramite Sentiero Paola e Val di Dona",
+      "status": "todo",
+      "description": null,
+      "rating": null,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/IMG_8500_hero.JPEG",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Trentino-Alto Adige",
+        "province": "Trento",
+        "municipality": "Mazzin",
+        "area": "Catinaccio",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 46.46128,
+            "lng": 11.70601
+          },
+          "end": {
+            "lat": 46.46128,
+            "lng": 11.70601
+          }
+        }
+      },
+      "track": {
+        "distance_km": 18.2,
+        "elevation_gain": 1544,
+        "elevation_loss": 1544,
+        "elevation_max": 2740,
+        "elevation_min": 1399,
+        "duration_min": 528,
+        "route_type": "loop",
+        "surface": [],
+        "gpx_file": "gpx/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona.gpx"
+      },
+      "classification": {
+        "difficulty": null,
+        "activity_types": [],
+        "seasons": []
+      },
+      "tags": [],
+      "logistics": {
+        "dog_friendly": false,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "photo_credit": null,
+      "links": {
+        "strava": null,
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/IMG_8500_hero.JPEG",
+        "photos": [
+          {
+            "filename": "IMG_8500_hero.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/IMG_8500_hero.JPEG"
+          }
+        ]
+      }
     }
   ]
 }
