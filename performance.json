@@ -1,13 +1,13 @@
 {
-  "last_updated": "04/08/2026 08:43",
+  "last_updated": "05/08/2026 08:41",
   "token_expired": false,
   "summary_90d": {
-    "sessions": 38,
-    "total_hours": 40.1,
-    "total_km": 289.0,
-    "total_elevation_m": 4867,
-    "avg_sessions_week": 3.0,
-    "avg_hr": 123
+    "sessions": 40,
+    "total_hours": 43.3,
+    "total_km": 296.1,
+    "total_elevation_m": 5275,
+    "avg_sessions_week": 3.1,
+    "avg_hr": 121
   },
   "records": {
     "max_distance_km": 121.08,
@@ -17,6 +17,26 @@
   },
   "by_sport": {
     "hiking": [
+      {
+        "id": 23849042335,
+        "name": "Mazzin Hiking",
+        "date": "2026-08-04",
+        "distance_km": 4.77,
+        "duration_min": 113.3,
+        "avg_hr": 96,
+        "elevation_m": 322,
+        "avg_speed_kmh": 2.5
+      },
+      {
+        "id": 23846578164,
+        "name": "Vigo di Fassa Hiking",
+        "date": "2026-08-04",
+        "distance_km": 2.33,
+        "duration_min": 80.3,
+        "avg_hr": 79,
+        "elevation_m": 86,
+        "avg_speed_kmh": 1.7
+      },
       {
         "id": 23836299788,
         "name": "Canazei Hiking",
@@ -23824,9 +23844,9 @@
   "monthly_volume": {
     "2026-08": {
       "hiking": {
-        "hours": 5.05,
-        "km": 13.24,
-        "sessions": 2
+        "hours": 8.28,
+        "km": 20.34,
+        "sessions": 4
       }
     },
     "2026-07": {
@@ -25740,7 +25760,7 @@
   },
   "weekly_volume": {
     "2026-W31": {
-      "hiking": 1
+      "hiking": 3
     },
     "2026-W30": {
       "hiking": 1
@@ -27771,6 +27791,26 @@
     }
   },
   "all_activities": [
+    {
+      "id": 23849042335,
+      "name": "Mazzin Hiking",
+      "date": "2026-08-04",
+      "sport": "hiking",
+      "distance_km": 4.77,
+      "duration_min": 113.3,
+      "avg_hr": 96,
+      "elevation_m": 322
+    },
+    {
+      "id": 23846578164,
+      "name": "Vigo di Fassa Hiking",
+      "date": "2026-08-04",
+      "sport": "hiking",
+      "distance_km": 2.33,
+      "duration_min": 80.3,
+      "avg_hr": 79,
+      "elevation_m": 86
+    },
     {
       "id": 23836299788,
       "name": "Canazei Hiking",
@@ -51543,48 +51583,48 @@
     }
   ],
   "health_today": {
-    "steps": 507,
-    "steps_goal": 10700,
-    "calories": 879.0,
-    "active_calories": 5.0,
-    "total_distance_m": 405,
+    "steps": 283,
+    "steps_goal": 12520,
+    "calories": 744.0,
+    "active_calories": 3.0,
+    "total_distance_m": 230,
     "floors": 0.0,
     "active_min": 0,
-    "resting_hr": 43,
-    "stress_avg": 25,
-    "body_battery_end": 66,
-    "body_battery_max": 66,
-    "body_battery_start": 65,
+    "resting_hr": 45,
+    "stress_avg": 18,
+    "body_battery_end": 79,
+    "body_battery_max": 79,
+    "body_battery_start": 78,
     "spo2_avg": 91.0,
-    "spo2_min": 79,
-    "respiration_avg": 14.0,
-    "sleep_hours": 8.6,
-    "summary_date": "2026-08-04",
-    "max_hr": 87,
-    "min_hr": 41,
-    "hr_7d_avg_resting": 48,
-    "sleep_seconds": 30840,
-    "sleep_score": 78,
-    "sleep_score_quality": "FAIR",
-    "sleep_deep_s": 4740,
-    "sleep_rem_s": 5760,
-    "sleep_light_s": 20340,
-    "sleep_awake_s": 1500,
-    "sleep_respiration": 14.89,
-    "sleep_spo2": 93.25,
-    "sleep_resting_hr": 43,
-    "sleep_avg_hr": 59.0,
+    "spo2_min": 81,
+    "respiration_avg": 13.0,
+    "sleep_hours": 7.7,
+    "summary_date": "2026-08-05",
+    "max_hr": 78,
+    "min_hr": 43,
+    "hr_7d_avg_resting": 47,
+    "sleep_seconds": 27720,
+    "sleep_score": 83,
+    "sleep_score_quality": "GOOD",
+    "sleep_deep_s": 5280,
+    "sleep_rem_s": 4260,
+    "sleep_light_s": 18180,
+    "sleep_awake_s": 780,
+    "sleep_respiration": 13.99,
+    "sleep_spo2": 92.46,
+    "sleep_resting_hr": 45,
+    "sleep_avg_hr": 56.0,
     "sleep_body_battery_change": 60,
-    "hrv_last_night": 65.0,
-    "hrv_7d_avg": 59.0,
+    "hrv_last_night": 73.0,
+    "hrv_7d_avg": 62.0,
     "hrv_status": "BALANCED",
-    "skin_temp_c": 0.0,
-    "sleep_date": "2026-08-04",
-    "hrv_weekly_avg": 59,
-    "hrv_5min_high": 133,
-    "hrv_date": "2026-08-04",
-    "stress_max": 81,
-    "stress_date": "2026-08-04",
-    "date": "2026-08-04"
+    "skin_temp_c": 0.1,
+    "sleep_date": "2026-08-05",
+    "hrv_weekly_avg": 62,
+    "hrv_5min_high": 131,
+    "hrv_date": "2026-08-05",
+    "stress_max": 66,
+    "stress_date": "2026-08-05",
+    "date": "2026-08-05"
   }
 }
