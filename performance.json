@@ -1,6 +1,6 @@
 {
   "last_updated": "05/08/2026 08:41",
-  "token_expired": false,
+  "token_expired": true,
   "summary_90d": {
     "sessions": 40,
     "total_hours": 43.3,
@@ -51626,5 +51626,6 @@
     "stress_max": 66,
     "stress_date": "2026-08-05",
     "date": "2026-08-05"
-  }
+  },
+  "token_expired_at": "06/08/2026 08:42"
 }
