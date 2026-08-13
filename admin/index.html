@@ -989,7 +989,18 @@ input,textarea,select{font-family:inherit;font-size:14px}
       </div>
       <input type="hidden" id="peak-rating" value="0">
     </div>
-    <div class="field" style="margin-top:12px"><label>URL Foto</label><input id="peak-photo" type="text" placeholder="https://..."></div>
+    <div class="field" style="margin-top:12px">
+      <label>URL Foto</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input id="peak-photo" type="text" placeholder="https://..." style="flex:1">
+        <button class="btn btn-ghost btn-sm" type="button" onclick="peakUploadPhoto()">&#128194; Carica</button>
+        <input type="file" id="peak-photo-file" accept="image/*" style="display:none" onchange="peakHandleFile(this)">
+      </div>
+      <div id="peak-photo-preview" style="margin-top:8px;display:none;align-items:center">
+        <img id="peak-photo-preview-img" style="max-height:80px;border-radius:6px;object-fit:cover">
+        <span id="peak-photo-upload-status" style="font-size:12px;color:var(--text-dim);margin-left:8px"></span>
+      </div>
+    </div>
     <div class="field" style="margin-top:12px"><label>Trail collegato</label>
       <select id="peak-trail-id"><option value="">-- Nessuno --</option></select>
     </div>
@@ -2413,6 +2424,60 @@ function initPeakCoordMap() {
     if (peakCoordMarker) peakCoordMap.removeLayer(peakCoordMarker);
     peakCoordMarker = L.marker([lat, lon]).addTo(peakCoordMap);
   });
+}
+
+function peakUploadPhoto() {
+  document.getElementById('peak-photo-file').click();
+}
+
+async function peakHandleFile(input) {
+  var file = input.files[0];
+  if (!file) return;
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('peak-photo-preview').style.display = 'flex';
+    document.getElementById('peak-photo-preview-img').src = e.target.result;
+    document.getElementById('peak-photo-upload-status').textContent = 'Caricamento...';
+  };
+  reader.readAsDataURL(file);
+
+  var nameVal = (document.getElementById('peak-name').value || '').trim();
+  var ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+  var baseName = nameVal
+    ? nameVal.toLowerCase()
+        .replace(/[\u00e0\u00e1\u00e2\u00e3]/g,'a').replace(/[\u00e8\u00e9\u00ea\u00eb]/g,'e')
+        .replace(/[\u00ec\u00ed\u00ee]/g,'i').replace(/[\u00f2\u00f3\u00f4]/g,'o')
+        .replace(/[\u00f9\u00fa\u00fb]/g,'u').replace(/[^a-z0-9]+/g,'-')
+        .replace(/^-+|-+$/g,'')
+    : 'peak-' + Date.now();
+  var fileName = baseName + '.' + ext;
+  var path = 'assets/peaks/' + fileName;
+  var rawUrl = 'https://raw.githubusercontent.com/' + REPO + '/main/' + path;
+
+  var arrayBuffer = await file.arrayBuffer();
+  var bytes = new Uint8Array(arrayBuffer);
+  var binary = '';
+  for (var i = 0; i < bytes.length; i++) { binary += String.fromCharCode(bytes[i]); }
+  var b64 = btoa(binary);
+
+  var existingSha = null;
+  try {
+    var checkR = await ghFetch('GET', '/repos/' + REPO + '/contents/' + path, null);
+    if (checkR.ok) { existingSha = checkR.data.sha; }
+  } catch(e) {}
+
+  var body = { message: 'peaks: upload photo ' + fileName, content: b64 };
+  if (existingSha) { body.sha = existingSha; }
+
+  var r = await ghFetch('PUT', '/repos/' + REPO + '/contents/' + path, body);
+  if (r.ok) {
+    document.getElementById('peak-photo').value = rawUrl;
+    document.getElementById('peak-photo-upload-status').textContent = '\u2705 Caricata!';
+  } else {
+    document.getElementById('peak-photo-upload-status').textContent = '\u274c Errore upload';
+    showToast('Errore upload foto: ' + (r.data && r.data.message ? r.data.message : r.status), 'error');
+  }
 }
 
 async function savePeak() {
