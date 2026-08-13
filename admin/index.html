@@ -142,6 +142,10 @@ input,textarea,select{font-family:inherit;font-size:14px}
 .star-btn{background:none;border:none;font-size:24px;color:#333;cursor:pointer;padding:2px;transition:color .15s,transform .1s}
 .star-btn:hover,.star-btn.active{color:var(--accent)}
 .star-btn:hover{transform:scale(1.15)}
+/* Peak rating stars */
+.rating-stars{display:flex;gap:4px}
+.rating-stars .star{font-size:24px;color:var(--text-dim);cursor:pointer;transition:color .15s,transform .1s}
+.rating-stars .star:hover{color:var(--accent);transform:scale(1.15)}
 
 /* Checkboxes */
 .checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
@@ -462,7 +466,12 @@ input,textarea,select{font-family:inherit;font-size:14px}
     <div class="header-logo">🏔️ Trail Admin</div>
     <div class="header-repo">michelesarzana/trail</div>
     <div class="header-spacer"></div>
-    <button class="btn btn-primary btn-sm" onclick="newTrail()">+ Nuovo Trail</button>
+    <div style="display:flex;gap:4px;align-items:center;background:rgba(255,255,255,0.06);border-radius:8px;padding:3px">
+      <button class="btn btn-sm" id="admin-tab-trail" style="background:var(--accent);color:#000;border-radius:6px" onclick="adminSwitchTab('trail')">🥾 Trail</button>
+      <button class="btn btn-ghost btn-sm" id="admin-tab-cima" onclick="adminSwitchTab('cima')">🏔️ Cime</button>
+    </div>
+    <button class="btn btn-primary btn-sm" id="btn-nuovo-trail" onclick="newTrail()">+ Nuovo Trail</button>
+    <button class="btn btn-primary btn-sm" id="btn-nuova-cima" style="display:none" onclick="newPeak()">+ Nuova Cima</button>
     <button class="btn btn-ghost btn-sm" onclick="doLogout()">Esci</button>
   </div>
 
@@ -959,6 +968,94 @@ input,textarea,select{font-family:inherit;font-size:14px}
           <div style="height:40px"></div>
           </div><!-- /form-inner -->
         </div><!-- /form-container -->
+
+        <!-- ── CIMA FORM CONTAINER ──────────────────────────────── -->
+        <div id="peak-form-container" style="display:none">
+          <div class="form-inner">
+            <button class="back-btn" onclick="showMapView()">← Mappa</button>
+            <div class="form-title">
+              <span>🏔️</span>
+              <span id="peak-form-mode-label">Nuova Cima</span>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-header open" onclick="toggleSection(this)">
+                <div class="form-section-title">📋 Informazioni Cima</div>
+                <span class="section-arrow open">▶</span>
+              </div>
+              <div class="form-section-body open">
+                <div class="field-row">
+                  <div class="field">
+                    <label>Nome cima *</label>
+                    <input type="text" id="peak-name" placeholder="es. Monte Castellaz">
+                  </div>
+                  <div class="field">
+                    <label>Altitudine (m) *</label>
+                    <input type="number" id="peak-altitude" placeholder="es. 2333" min="0" max="9000">
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label>Latitudine</label>
+                    <input type="number" id="peak-lat" placeholder="es. 46.307222" step="0.000001">
+                  </div>
+                  <div class="field">
+                    <label>Longitudine</label>
+                    <input type="number" id="peak-lon" placeholder="es. 11.795278" step="0.000001">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Rating</label>
+                  <div class="rating-stars" id="peak-rating-stars">
+                    <span class="star" data-v="1" onclick="setPeakRating(1)">★</span>
+                    <span class="star" data-v="2" onclick="setPeakRating(2)">★</span>
+                    <span class="star" data-v="3" onclick="setPeakRating(3)">★</span>
+                    <span class="star" data-v="4" onclick="setPeakRating(4)">★</span>
+                    <span class="star" data-v="5" onclick="setPeakRating(5)">★</span>
+                  </div>
+                  <input type="hidden" id="peak-rating" value="0">
+                </div>
+                <div class="field">
+                  <label>Trail collegato (opzionale)</label>
+                  <select id="peak-trail-id">
+                    <option value="">— nessun trail —</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>URL Foto (opzionale)</label>
+                  <input type="url" id="peak-photo" placeholder="https://...">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-header" onclick="toggleSection(this)">
+                <div class="form-section-title">📍 Scegli Coordinate sulla Mappa</div>
+                <span class="section-arrow">▶</span>
+              </div>
+              <div class="form-section-body">
+                <p style="font-size:12px;color:var(--text-dim);margin:0 0 10px">Clicca sulla mappa per impostare lat/lon della cima.</p>
+                <div id="peak-coord-map" style="height:280px;border-radius:10px;overflow:hidden;border:1px solid var(--border)"></div>
+                <div id="peak-coord-preview" style="font-size:12px;color:var(--text-dim);margin-top:8px">Nessun punto selezionato</div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="savePeak()">💾 Salva Cima</button>
+              <button class="btn btn-ghost" onclick="resetPeakForm()">↩ Reset</button>
+            </div>
+
+          </div><!-- /form-inner -->
+        </div><!-- /peak-form-container -->
+
+        <!-- ── CIME LIST VIEW ─────────────────────────────────────── -->
+        <div id="peaks-list-view" style="display:none;padding:24px">
+          <h2 style="font-size:20px;font-weight:700;margin:0 0 16px;color:var(--text)">🏔️ Cime</h2>
+          <div id="peaks-list-content">
+            <div style="color:var(--text-dim);text-align:center;padding:40px">Caricamento…</div>
+          </div>
+        </div>
+
     </div><!-- /main -->
   </div><!-- /body -->
 </div><!-- /app -->
@@ -2239,6 +2336,231 @@ if (token) boot();
 document.getElementById('token-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
+
+// ── PEAKS ─────────────────────────────────────────────────────
+let peaksDb = { _meta: {}, peaks: [] };
+let peaksSha = null;
+let currentPeakRating = 0;
+let peakCoordMap = null;
+let peakCoordMarker = null;
+
+const PEAKS_PATH = 'data/peaks.json';
+
+async function loadPeaksDB() {
+  try {
+    const res = await ghGetFile(PEAKS_PATH);
+    if (res.ok) {
+      const raw = atob(res.data.content.replace(/\n/g,''));
+      peaksDb = JSON.parse(raw);
+      peaksSha = res.data.sha;
+    }
+  } catch(e) {
+    console.error('loadPeaksDB error', e);
+  }
+}
+
+async function savePeaksDB(msg) {
+  const str = JSON.stringify(peaksDb, null, 2);
+  const res = await ghPutFile(PEAKS_PATH, str, msg, peaksSha);
+  if (res.ok) {
+    peaksSha = res.data.content.sha;
+    return true;
+  }
+  return false;
+}
+
+function adminSwitchTab(tab) {
+  const trailBtn = document.getElementById('admin-tab-trail');
+  const cimaBtn = document.getElementById('admin-tab-cima');
+  const btnNuovoTrail = document.getElementById('btn-nuovo-trail');
+  const btnNuovaCima = document.getElementById('btn-nuova-cima');
+  const mapView = document.getElementById('map-view');
+  const dashBar = document.getElementById('dashboard-bar');
+  const formContainer = document.getElementById('form-container');
+  const peakForm = document.getElementById('peak-form-container');
+  const peaksListView = document.getElementById('peaks-list-view');
+
+  if (tab === 'trail') {
+    trailBtn.style.background = 'var(--accent)';
+    trailBtn.style.color = '#000';
+    cimaBtn.style.background = '';
+    cimaBtn.style.color = '';
+    btnNuovoTrail.style.display = '';
+    btnNuovaCima.style.display = 'none';
+    if (mapView) mapView.style.display = '';
+    if (dashBar) dashBar.style.display = '';
+    if (formContainer) formContainer.style.display = 'none';
+    if (peakForm) peakForm.style.display = 'none';
+    if (peaksListView) peaksListView.style.display = 'none';
+  } else if (tab === 'cima') {
+    cimaBtn.style.background = 'var(--accent)';
+    cimaBtn.style.color = '#000';
+    trailBtn.style.background = '';
+    trailBtn.style.color = '';
+    btnNuovoTrail.style.display = 'none';
+    btnNuovaCima.style.display = '';
+    if (mapView) mapView.style.display = 'none';
+    if (dashBar) dashBar.style.display = 'none';
+    if (formContainer) formContainer.style.display = 'none';
+    if (peakForm) peakForm.style.display = 'none';
+    if (peaksListView) peaksListView.style.display = '';
+    renderPeaksList();
+  }
+}
+
+function renderPeaksList() {
+  const el = document.getElementById('peaks-list-content');
+  if (!el) return;
+  if (!peaksDb.peaks || !peaksDb.peaks.length) {
+    el.innerHTML = '<div style="color:var(--text-dim);text-align:center;padding:40px">Nessuna cima ancora. Clicca "+ Nuova Cima" per aggiungerne una.</div>';
+    return;
+  }
+  el.innerHTML = peaksDb.peaks.map(p => {
+    const stars = p.rating ? '★'.repeat(p.rating) : '—';
+    return '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'
+      + '<div>'
+        + '<div style="font-weight:700;font-size:15px">' + escHtml(p.name) + '</div>'
+        + '<div style="color:var(--text-dim);font-size:12px">⛰️ ' + (p.altitude || '?') + ' m s.l.m. — ' + (p.lat || '?') + ', ' + (p.lon || '?') + '</div>'
+        + '<div style="color:var(--accent);font-size:13px">' + stars + '</div>'
+      + '</div>'
+      + '<button class="btn btn-danger btn-sm" onclick="deletePeak('' + p.id + '')">🗑️</button>'
+      + '</div>';
+  }).join('');
+}
+
+function newPeak() {
+  resetPeakForm();
+  const mapView = document.getElementById('map-view');
+  const dashBar = document.getElementById('dashboard-bar');
+  const formContainer = document.getElementById('form-container');
+  const peakForm = document.getElementById('peak-form-container');
+  const peaksListView = document.getElementById('peaks-list-view');
+  if (mapView) mapView.style.display = 'none';
+  if (dashBar) dashBar.style.display = 'none';
+  if (formContainer) formContainer.style.display = 'none';
+  if (peaksListView) peaksListView.style.display = 'none';
+  if (peakForm) peakForm.style.display = '';
+
+  setTimeout(function() {
+    if (!peakCoordMap) {
+      peakCoordMap = L.map('peak-coord-map').setView([46.0, 11.0], 7);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap © CARTO', subdomains: 'abcd', maxZoom: 19
+      }).addTo(peakCoordMap);
+      peakCoordMap.on('click', function(e) {
+        const lat = e.latlng.lat.toFixed(6);
+        const lon = e.latlng.lng.toFixed(6);
+        document.getElementById('peak-lat').value = lat;
+        document.getElementById('peak-lon').value = lon;
+        document.getElementById('peak-coord-preview').textContent = 'Lat: ' + lat + ' — Lon: ' + lon;
+        if (peakCoordMarker) peakCoordMarker.remove();
+        peakCoordMarker = L.marker([parseFloat(lat), parseFloat(lon)]).addTo(peakCoordMap);
+      });
+    } else {
+      peakCoordMap.invalidateSize();
+    }
+    const sel = document.getElementById('peak-trail-id');
+    if (sel && db && db.trails) {
+      sel.innerHTML = '<option value="">— nessun trail —</option>'
+        + db.trails.map(function(t) { return '<option value="' + escHtml(t.id) + '">' + escHtml(t.title) + '</option>'; }).join('');
+    }
+  }, 150);
+}
+
+function resetPeakForm() {
+  ['peak-name','peak-altitude','peak-lat','peak-lon','peak-photo'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('peak-rating').value = '0';
+  currentPeakRating = 0;
+  renderPeakStars(0);
+  const prev = document.getElementById('peak-coord-preview');
+  if (prev) prev.textContent = 'Nessun punto selezionato';
+  if (peakCoordMarker) { peakCoordMarker.remove(); peakCoordMarker = null; }
+}
+
+function setPeakRating(n) {
+  currentPeakRating = n;
+  document.getElementById('peak-rating').value = n;
+  renderPeakStars(n);
+}
+
+function renderPeakStars(n) {
+  document.querySelectorAll('#peak-rating-stars .star').forEach(function(el, i) {
+    el.style.color = i < n ? 'var(--accent)' : 'var(--text-dim)';
+  });
+}
+
+async function savePeak() {
+  const name = (document.getElementById('peak-name').value || '').trim();
+  const altitude = parseInt(document.getElementById('peak-altitude').value) || 0;
+  const lat = parseFloat(document.getElementById('peak-lat').value) || null;
+  const lon = parseFloat(document.getElementById('peak-lon').value) || null;
+  const rating = currentPeakRating || parseInt(document.getElementById('peak-rating').value) || null;
+  const trailId = document.getElementById('peak-trail-id').value || null;
+  const photo = (document.getElementById('peak-photo').value || '').trim() || null;
+
+  if (!name) { showToast('Nome cima obbligatorio', 'error'); return; }
+  if (!altitude) { showToast('Altitudine obbligatoria', 'error'); return; }
+
+  const id = name.toLowerCase()
+    .replace(/[àáâã]/g,'a').replace(/[èéêë]/g,'e')
+    .replace(/[ìíî]/g,'i').replace(/[òóô]/g,'o')
+    .replace(/[ùúû]/g,'u').replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'');
+
+  if ((peaksDb.peaks || []).some(function(p) { return p.id === id; })) {
+    showToast('Cima con questo nome già presente', 'error'); return;
+  }
+
+  const peak = { id, name, altitude };
+  if (lat !== null) peak.lat = lat;
+  if (lon !== null) peak.lon = lon;
+  if (rating) peak.rating = rating;
+  if (photo) peak.photo = photo;
+  if (trailId) peak.trail_id = trailId;
+  else peak.trail_id = null;
+
+  if (!peaksDb.peaks) peaksDb.peaks = [];
+  peaksDb.peaks.push(peak);
+  if (!peaksDb._meta) peaksDb._meta = {};
+  peaksDb._meta.last_updated = new Date().toISOString().split('T')[0];
+
+  showToast('Salvataggio…', 'info');
+  const ok = await savePeaksDB('peaks: add ' + name);
+  if (ok) {
+    showToast('✅ Cima salvata!', 'success');
+    adminSwitchTab('cima');
+  } else {
+    peaksDb.peaks = peaksDb.peaks.filter(function(p) { return p.id !== id; });
+    showToast('Errore nel salvataggio', 'error');
+  }
+}
+
+async function deletePeak(id) {
+  if (!confirm('Eliminare la cima "' + id + '"?')) return;
+  const prev = peaksDb.peaks.slice();
+  peaksDb.peaks = peaksDb.peaks.filter(function(p) { return p.id !== id; });
+  const ok = await savePeaksDB('peaks: remove ' + id);
+  if (ok) {
+    showToast('✅ Cima eliminata', 'success');
+    renderPeaksList();
+  } else {
+    peaksDb.peaks = prev;
+    showToast('Errore eliminazione', 'error');
+  }
+}
+
+// Override boot to also load peaks
+const _origBoot = boot;
+function boot() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  loadDB();
+  loadPeaksDB();
+}
+
 </script>
 </body>
 </html>
