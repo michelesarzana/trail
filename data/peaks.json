@@ -4,16 +4,5 @@
     "description": "Database cime personali di Michele Sarzana",
     "last_updated": "2026-08-13"
   },
-  "peaks": [
-    {
-      "id": "monte-castellaz",
-      "name": "Monte Castellaz",
-      "altitude": 2333,
-      "lat": 46.307222,
-      "lon": 11.795278,
-      "rating": 5,
-      "photo": null,
-      "trail_id": null
-    }
-  ]
+  "peaks": []
 }
