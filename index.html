@@ -107,6 +107,25 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 }
 .nav-add:hover { background: #e4dfe4; color: #38324a; }
 
+/* ===== NAV TABS ===== */
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-tab {
+  font-size: 13px;
+  font-weight: 700;
+  color: #726e7a;
+  padding: 7px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+}
+.nav-tab:hover { background: #f0edf0; color: #2e2b38; }
+.nav-tab.active { background: #2e2b38; color: #fff; }
+
 /* ===== MAP + LIST LAYOUT ===== */
 .map-list-wrap {
   display: flex;
@@ -303,6 +322,166 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 }
 .no-results-icon { font-size: 32px; margin-bottom: 10px; }
 
+/* ===== SECTION PAGES (Percorsi / Cime) ===== */
+.section-page {
+  padding: 24px 40px 40px;
+  min-height: calc(100vh - 70px);
+}
+.section-header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #2e2b38;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.section-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.section-search {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: 1.5px solid rgba(46,43,56,0.15);
+  border-radius: 999px;
+  outline: none;
+  width: 240px;
+  transition: border-color .15s;
+}
+.section-search:focus { border-color: #c17b8c; }
+.section-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.spill {
+  background: #f0edf0;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #726e7a;
+  cursor: pointer;
+  transition: all .12s;
+  user-select: none;
+}
+.spill:hover { border-color: #c17b8c; color: #2e2b38; }
+.spill.active { background: #fdc400; border-color: #fdc400; color: #1a1a1a; }
+.cime-altitude-filter { display: flex; align-items: center; gap: 10px; }
+.section-count { font-size: 12px; font-weight: 700; color: #726e7a; }
+
+/* Grid */
+.grid-wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1200px) { .grid-wrap { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px)  { .grid-wrap { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .grid-wrap { grid-template-columns: 1fr; } }
+
+/* Grid Cards */
+.grid-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(46,43,56,0.07);
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.grid-card:hover {
+  border-color: #c17b8c;
+  box-shadow: 0 4px 18px rgba(193,123,140,0.13);
+  transform: translateY(-2px);
+}
+.grid-card-cover {
+  aspect-ratio: 4/3;
+  width: 100%;
+  background: #f0edf0;
+  overflow: hidden;
+  position: relative;
+}
+.grid-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.grid-card-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  background: repeating-linear-gradient(45deg,#efe9ec,#efe9ec 14px,#e3dbe1 14px,#e3dbe1 28px);
+}
+.grid-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.grid-card-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #2e2b38;
+  margin: 0;
+  line-height: 1.3;
+}
+.grid-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #726e7a;
+}
+.grid-card-stars {
+  font-size: 12px;
+  color: #fdc400;
+  letter-spacing: 1px;
+}
+.grid-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f0edf0;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #726e7a;
+  text-decoration: none;
+}
+.grid-card-badge:hover { background: #e4dfe4; color: #2e2b38; }
+.status-done { background: #e8f8f0; color: #22a05a; }
+.status-todo { background: #f0edf0; color: #726e7a; }
+.peak-alt { font-size: 13px; font-weight: 800; color: #2e2b38; }
+
+/* Peak marker popup */
+.peak-popup { width: 200px; font-family: 'Manrope', sans-serif; }
+.peak-popup-title { font-size: 14px; font-weight: 800; color: #2e2b38; margin: 0 0 4px; }
+.peak-popup-alt { font-size: 12px; color: #726e7a; margin: 0 0 6px; }
+.peak-popup-stars { font-size: 13px; color: #fdc400; margin-bottom: 6px; }
+.peak-popup-trail-link { font-size: 12px; font-weight: 700; color: #c17b8c; }
+.peak-popup img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
+
+@media (max-width: 600px) {
+  .section-page { padding: 16px 16px 32px; }
+  .section-search { width: 100%; }
+}
+
 /* ===== FOOTER ===== */
 .footer {
   padding: 28px 48px;
@@ -323,6 +502,8 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   .nav-wordmark-wrap { align-items: center; }
   .nav-wordmark { font-size: 18px; text-align: center; }
   .nav-payoff { font-size: 12px; text-align: center; }
+  .nav-tabs { width: 100%; justify-content: center; }
+  .nav-tab { font-size: 12px; padding: 6px 10px; }
   .nav-right { justify-content: center; width: 100%; }
   .nav-back { justify-content: center; }
   .nav-prev-next { justify-content: center; width: 100%; }
@@ -569,6 +750,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
         <span class="nav-payoff">No map is ever finished.</span>
       </div>
     </a>
+    <div class="nav-tabs">
+      <a href="#" class="nav-tab active" data-tab="mappa" onclick="switchTab('mappa',this)">🗺️ Mappa</a>
+      <a href="#" class="nav-tab" data-tab="percorsi" onclick="switchTab('percorsi',this)">🥾 Percorsi</a>
+      <a href="#" class="nav-tab" data-tab="cime" onclick="switchTab('cime',this)">🏔️ Cime</a>
+    </div>
     <div class="nav-right">
       <a href="search.html" class="nav-btn" style="padding:7px 12px;font-size:13px;">🔍</a>
       <span class="nav-counter" data-i18n-template="counter"><span id="count-done">0</span> / <span id="count-total">0</span> fatti</span>
@@ -679,7 +865,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 
 
   <!-- MAP + LIST -->
-  <div class="map-list-wrap">
+  <div class="map-list-wrap" id="section-mappa">
     <div class="sidebar">
       <div class="results-sort-row">
         <span class="results-sort-label" id="results-label">0 percorsi</span>
@@ -698,6 +884,58 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     </div>
     <div class="map-area">
       <div id="map"></div>
+    </div>
+  </div>
+
+  <!-- SECTION: PERCORSI -->
+  <div id="section-percorsi" class="section-page" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">🥾 Percorsi</h2>
+      <div class="section-controls">
+        <input type="search" id="percorsi-search" class="section-search" placeholder="Cerca percorso…" oninput="filterPercorsi()">
+        <div class="section-pills" id="percorsi-status-pills">
+          <span class="spill active" data-val="all" onclick="setPillPercorsiStatus('all',this)">Tutti</span>
+          <span class="spill" data-val="done" onclick="setPillPercorsiStatus('done',this)">✅ Completati</span>
+          <span class="spill" data-val="todo" onclick="setPillPercorsiStatus('todo',this)">📌 Da fare</span>
+        </div>
+        <div class="section-pills" id="percorsi-rating-pills">
+          <span class="spill active" data-val="0" onclick="setPillPercorsiRating(0,this)">⭐ Tutti</span>
+          <span class="spill" data-val="3" onclick="setPillPercorsiRating(3,this)">3+</span>
+          <span class="spill" data-val="4" onclick="setPillPercorsiRating(4,this)">4+</span>
+          <span class="spill" data-val="5" onclick="setPillPercorsiRating(5,this)">5 ★</span>
+        </div>
+      </div>
+      <div class="section-count" id="percorsi-count">0 percorsi</div>
+    </div>
+    <div class="grid-wrap" id="percorsi-grid">
+      <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
+    </div>
+  </div>
+
+  <!-- SECTION: CIME -->
+  <div id="section-cime" class="section-page" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">🏔️ Cime</h2>
+      <div class="section-controls">
+        <input type="search" id="cime-search" class="section-search" placeholder="Cerca cima…" oninput="filterCime()">
+        <div class="section-pills" id="cime-rating-pills">
+          <span class="spill active" data-val="0" onclick="setPillCimeRating(0,this)">⭐ Tutti</span>
+          <span class="spill" data-val="3" onclick="setPillCimeRating(3,this)">3+</span>
+          <span class="spill" data-val="4" onclick="setPillCimeRating(4,this)">4+</span>
+          <span class="spill" data-val="5" onclick="setPillCimeRating(5,this)">5 ★</span>
+        </div>
+        <div class="cime-altitude-filter">
+          <label class="filter-group-label" style="font-size:11px;font-weight:800;color:#726e7a;text-transform:uppercase;letter-spacing:.08em;">
+            Altitudine min: <span id="cime-alt-val">0 m</span>
+          </label>
+          <input type="range" min="0" max="4000" step="100" value="0" id="cime-alt-slider"
+            class="range-slider" oninput="setCimeAltitude(this.value)">
+        </div>
+      </div>
+      <div class="section-count" id="cime-count">0 cime</div>
+    </div>
+    <div class="grid-wrap" id="cime-grid">
+      <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
     </div>
   </div>
 
@@ -1252,7 +1490,7 @@ async function loadTrails() {
 async function init() {
   initMap();
 
-  allTrails = await loadTrails();
+  [allTrails, allPeaks] = await Promise.all([loadTrails(), loadPeaks()]);
 
   // Update nav counter
   const done = allTrails.filter(t => t.status === 'done').length;
@@ -1263,8 +1501,10 @@ async function init() {
   setupSearchListeners();
   applyFilters();
 
+  // Render peak markers on map
+  renderPeakMarkers(allPeaks);
+
   // After render, let Leaflet recalculate map size
-  // (needed on mobile where layout height settles after DOM update)
   setTimeout(function() {
     if (leafletMap) leafletMap.invalidateSize();
   }, 200);
@@ -1284,6 +1524,247 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(sentinel);
   }
 });
+
+
+/* ===== PEAKS DATA & MARKERS ===== */
+const PEAKS_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/peaks.json';
+let allPeaks = [];
+let peakMarkers = [];
+
+function makePeakMarker() {
+  return L.divIcon({
+    html: '<div style="font-size:22px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,.3));cursor:pointer">🏔️</div>',
+    className: '',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12]
+  });
+}
+
+function renderPeakPopup(p) {
+  const stars = p.rating ? '⭐'.repeat(p.rating) : '';
+  const trailLink = p.trail_id
+    ? '<a class="peak-popup-trail-link" href="/trails/' + p.trail_id + '/">→ Vedi il trail</a>'
+    : '';
+  const img = p.photo
+    ? '<img src="' + escHtml(p.photo) + '" alt="' + escHtml(p.name) + '">'
+    : '';
+  return '<div class="peak-popup">'
+    + img
+    + '<p class="peak-popup-title">' + escHtml(p.name) + '</p>'
+    + '<p class="peak-popup-alt">⛰️ ' + p.altitude + ' m s.l.m.</p>'
+    + (stars ? '<div class="peak-popup-stars">' + stars + '</div>' : '')
+    + trailLink
+    + '</div>';
+}
+
+function renderPeakMarkers(peaks) {
+  peakMarkers.forEach(m => m.remove());
+  peakMarkers = [];
+  peaks.forEach(p => {
+    if (!p.lat || !p.lon) return;
+    const marker = L.marker([p.lat, p.lon], { icon: makePeakMarker() });
+    marker.bindPopup(renderPeakPopup(p), { maxWidth: 220, minWidth: 200 });
+    marker.addTo(leafletMap);
+    peakMarkers.push(marker);
+  });
+}
+
+async function loadPeaks() {
+  try {
+    const r = await fetch(PEAKS_URL);
+    const data = await r.json();
+    return data.peaks || [];
+  } catch(e) {
+    console.error('Failed to load peaks:', e);
+    return [];
+  }
+}
+
+/* ===== TAB SWITCHING ===== */
+function switchTab(tab, el) {
+  // update active tab style
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  // hide all sections
+  const mappa = document.getElementById('section-mappa');
+  const percorsi = document.getElementById('section-percorsi');
+  const cime = document.getElementById('section-cime');
+  const hero = document.querySelector('.search-hero');
+  const filters = document.getElementById('filters-hero');
+
+  if (mappa) mappa.style.display = 'none';
+  if (percorsi) percorsi.style.display = 'none';
+  if (cime) cime.style.display = 'none';
+
+  if (tab === 'mappa') {
+    if (mappa) mappa.style.display = '';
+    if (hero) hero.style.display = '';
+    if (filters) filters.style.display = '';
+    setTimeout(function() { if (leafletMap) leafletMap.invalidateSize(); }, 200);
+  } else if (tab === 'percorsi') {
+    if (percorsi) percorsi.style.display = '';
+    if (hero) hero.style.display = 'none';
+    if (filters) filters.style.display = 'none';
+    renderPercorsiGrid(allTrails);
+  } else if (tab === 'cime') {
+    if (cime) cime.style.display = '';
+    if (hero) hero.style.display = 'none';
+    if (filters) filters.style.display = 'none';
+    renderCimeGrid(allPeaks);
+  }
+}
+
+/* ===== PERCORSI GRID ===== */
+let percorsiStatusFilter = 'all';
+let percorsiRatingFilter = 0;
+
+function starsHtml(n) {
+  if (!n) return '';
+  return '⭐'.repeat(n);
+}
+
+function renderPercorsiGrid(trails) {
+  const q = (document.getElementById('percorsi-search') || {}).value || '';
+  let list = trails;
+
+  // filter by status
+  if (percorsiStatusFilter !== 'all') {
+    list = list.filter(t => t.status === percorsiStatusFilter);
+  }
+  // filter by rating
+  if (percorsiRatingFilter > 0) {
+    list = list.filter(t => (t.rating || 0) >= percorsiRatingFilter);
+  }
+  // filter by search
+  if (q.trim()) {
+    const ql = q.trim().toLowerCase();
+    list = list.filter(t => {
+      return [t.title, (t.location||{}).municipality, (t.location||{}).region, t.description]
+        .filter(Boolean).some(f => f.toLowerCase().includes(ql));
+    });
+  }
+
+  const grid = document.getElementById('percorsi-grid');
+  const countEl = document.getElementById('percorsi-count');
+  if (countEl) countEl.textContent = list.length + ' percors' + (list.length === 1 ? 'o' : 'i');
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="no-results"><div class="no-results-icon">🏔️</div>Nessun percorso trovato.</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(t => {
+    const cover = coverSrc(t);
+    const track = t.track || {};
+    const isDone = t.status === 'done';
+    const dist = track.distance_km ? track.distance_km + ' km' : '—';
+    const gain = track.elevation_gain ? '+' + track.elevation_gain + ' m' : '—';
+    const stars = starsHtml(t.rating);
+    const href = 'trails/' + t.id + '/';
+    const statusCls = isDone ? 'status-done' : 'status-todo';
+    const statusLabel = isDone ? '✅ Completato' : '📌 Da fare';
+    const coverHtml = cover
+      ? '<img src="' + escHtml(cover) + '" alt="' + escHtml(t.title) + '" loading="lazy">'
+      : '<div class="grid-card-cover-placeholder">🏔️</div>';
+    return '<a href="' + href + '" class="grid-card">'
+      + '<div class="grid-card-cover">' + coverHtml + '</div>'
+      + '<div class="grid-card-body">'
+      + '<div class="grid-card-title">' + escHtml(t.title) + '</div>'
+      + '<div class="grid-card-meta"><span>' + dist + '</span><span>' + gain + '</span></div>'
+      + (stars ? '<div class="grid-card-stars">' + stars + '</div>' : '')
+      + '<span class="grid-card-badge ' + statusCls + '">' + statusLabel + '</span>'
+      + '</div></a>';
+  }).join('');
+}
+
+function filterPercorsi() { renderPercorsiGrid(allTrails); }
+
+function setPillPercorsiStatus(val, el) {
+  percorsiStatusFilter = val;
+  document.querySelectorAll('#percorsi-status-pills .spill').forEach(e => e.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderPercorsiGrid(allTrails);
+}
+
+function setPillPercorsiRating(val, el) {
+  percorsiRatingFilter = parseInt(val) || 0;
+  document.querySelectorAll('#percorsi-rating-pills .spill').forEach(e => e.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderPercorsiGrid(allTrails);
+}
+
+/* ===== CIME GRID ===== */
+let cimeRatingFilter = 0;
+let cimeAltFilter = 0;
+
+function renderCimeGrid(peaks) {
+  const q = (document.getElementById('cime-search') || {}).value || '';
+  let list = peaks;
+
+  // filter by rating
+  if (cimeRatingFilter > 0) {
+    list = list.filter(p => (p.rating || 0) >= cimeRatingFilter);
+  }
+  // filter by altitude
+  if (cimeAltFilter > 0) {
+    list = list.filter(p => (p.altitude || 0) >= cimeAltFilter);
+  }
+  // filter by search
+  if (q.trim()) {
+    const ql = q.trim().toLowerCase();
+    list = list.filter(p => (p.name || '').toLowerCase().includes(ql));
+  }
+
+  const grid = document.getElementById('cime-grid');
+  const countEl = document.getElementById('cime-count');
+  if (countEl) countEl.textContent = list.length + ' cim' + (list.length === 1 ? 'a' : 'e');
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="no-results"><div class="no-results-icon">🏔️</div>Nessuna cima trovata.</div>';
+    return;
+  }
+
+  const trailMap = {};
+  allTrails.forEach(t => { trailMap[t.id] = t; });
+
+  grid.innerHTML = list.map(p => {
+    const stars = starsHtml(p.rating);
+    const trailBadge = p.trail_id && trailMap[p.trail_id]
+      ? '<a class="grid-card-badge" href="trails/' + p.trail_id + '/" onclick="event.stopPropagation()">🥾 ' + escHtml(trailMap[p.trail_id].title) + '</a>'
+      : '';
+    const coverHtml = p.photo
+      ? '<img src="' + escHtml(p.photo) + '" alt="' + escHtml(p.name) + '" loading="lazy">'
+      : '<div class="grid-card-cover-placeholder">🏔️</div>';
+    return '<div class="grid-card">'
+      + '<div class="grid-card-cover">' + coverHtml + '</div>'
+      + '<div class="grid-card-body">'
+      + '<div class="grid-card-title">' + escHtml(p.name) + '</div>'
+      + '<div class="peak-alt">' + (p.altitude ? p.altitude + ' m s.l.m.' : '—') + '</div>'
+      + (stars ? '<div class="grid-card-stars">' + stars + '</div>' : '')
+      + trailBadge
+      + '</div></div>';
+  }).join('');
+}
+
+function filterCime() { renderCimeGrid(allPeaks); }
+
+function setPillCimeRating(val, el) {
+  cimeRatingFilter = parseInt(val) || 0;
+  document.querySelectorAll('#cime-rating-pills .spill').forEach(e => e.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderCimeGrid(allPeaks);
+}
+
+function setCimeAltitude(val) {
+  cimeAltFilter = parseInt(val) || 0;
+  const label = document.getElementById('cime-alt-val');
+  if (label) label.textContent = val + ' m';
+  renderCimeGrid(allPeaks);
+}
+
+/* ===== OVERRIDE INIT to also load peaks ===== */
+
 
 
 </script>
