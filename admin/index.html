@@ -1130,6 +1130,7 @@ function boot() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   loadDB();
+  loadPeaksDB();
 }
 
 // ── GITHUB API ────────────────────────────────────────────────
@@ -2552,14 +2553,6 @@ async function deletePeak(id) {
   }
 }
 
-// Override boot to also load peaks
-const _origBoot = boot;
-function boot() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  loadDB();
-  loadPeaksDB();
-}
 
 </script>
 </body>
