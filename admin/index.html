@@ -34,6 +34,7 @@ input,textarea,select{font-family:inherit;font-size:14px}
 
 /* ── LOGIN ────────────────────────────────────────────── */
 #login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+#login-screen.hidden,.hidden{display:none!important}
 .login-box{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:40px 36px;width:100%;max-width:420px;text-align:center}
 .login-box .logo{font-size:48px;margin-bottom:12px}
 .login-box h1{font-size:22px;font-weight:700;margin-bottom:6px}
@@ -1123,11 +1124,11 @@ function doLogout() {
   token = '';
   db = { trails: [], _meta: {} };
   currentId = null;
-  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-screen').classList.remove('hidden');
   document.getElementById('app').style.display = 'none';
 }
 function boot() {
-  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('app').style.display = 'flex';
   loadDB();
   loadPeaksDB();
