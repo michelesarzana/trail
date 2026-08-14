@@ -1428,10 +1428,11 @@ function renderMap(trails) {
     const gpxFilePath = t.gpx_file || ((t.track || {}).gpx_file) || null;
     if (gpxFilePath) {
       const gpxUrl = gpxFilePath.startsWith('http') ? gpxFilePath : GPX_BASE + gpxFilePath;
+      const gpxColor = t.status === 'done' ? '#38324a' : '#c17b8c';
       const gpxLayer = new L.GPX(gpxUrl, {
         async: true,
         polyline_options: {
-          color: '#c17b8c',
+          color: gpxColor,
           weight: 3,
           opacity: 0.85
         },
