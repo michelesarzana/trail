@@ -886,11 +886,10 @@
         "surface": [
           "terra",
           "sterrato"
-        ],
-        "gpx_file": "gpx/dorsale-del-triangolo-lariano.gpx"
+        ]
       },
       "classification": {
-        "difficulty": 2,
+        "difficulty": 4,
         "activity_types": [
           "trail-running"
         ],
