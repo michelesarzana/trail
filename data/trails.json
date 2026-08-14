@@ -108,7 +108,8 @@
         "surface": [
           "terra",
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
       },
       "classification": {
         "difficulty": 4,
@@ -166,7 +167,8 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048 (1)_hero.jpg"
           }
         ]
-      }
+      },
+      "gpx_file": "gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
     },
     {
       "id": "pizzo-dei-tre-signori",
@@ -268,7 +270,8 @@
         "surface": [
           "terra",
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
       },
       "classification": {
         "difficulty": 4,
@@ -322,7 +325,8 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365_hero.jpg"
           }
         ]
-      }
+      },
+      "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
     },
     {
       "id": "campestrin-cortina-d-ampezzo-fkt",
@@ -363,7 +367,8 @@
           "sterrato",
           "roccia",
           "misto"
-        ]
+        ],
+        "gpx_file": "gpx/campestrin-cortina-d-ampezzo-fkt.gpx"
       },
       "classification": {
         "difficulty": 5,
@@ -429,7 +434,8 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/campestrin-cortina-d-ampezzo-fkt/IMG_5457.jpeg"
           }
         ]
-      }
+      },
+      "gpx_file": "gpx/campestrin-cortina-d-ampezzo-fkt.gpx"
     },
     {
       "id": "da-paneveggio-ai-laghi-di-colbricon",
@@ -882,7 +888,8 @@
         "surface": [
           "terra",
           "sterrato"
-        ]
+        ],
+        "gpx_file": "gpx/dorsale-del-triangolo-lariano.gpx"
       },
       "classification": {
         "difficulty": 4,
@@ -957,7 +964,8 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/dorsale-del-triangolo-lariano/GPTempDownload.jpg"
           }
         ]
-      }
+      },
+      "gpx_file": "gpx/dorsale-del-triangolo-lariano.gpx"
     },
     {
       "id": "trekking-del-cristo-pensante",
