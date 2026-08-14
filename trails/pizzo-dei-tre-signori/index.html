@@ -1067,32 +1067,50 @@ function renderNotFound(id) {
       <div style="font-size:48px;margin-bottom:16px">🏔️</div>
       <h2>Trail non trovato</h2>
       <p>Il percorso <code>${escHtml(id)}</code> non esiste nel database.</p>
-      <a href="index.html" style="display:inline-block;margin-top:20px;background:#c17b8c;color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;font-size:14px">← Torna alla homepage</a>
+      <a href="https://michelesarzana.github.io/trail/" style="display:inline-block;margin-top:20px;background:#c17b8c;color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;font-size:14px">← Torna alla homepage</a>
     </div>`;
 }
 
 /* ===== INIT ===== */
 async function init() {
-  const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
-  const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
-  const allTrails = await loadTrails();
+  try {
+    const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
+    const id = pathParts[pathParts.length - 1] || window.location.hash.replace('#', '').trim();
 
-  if (!id || allTrails.length === 0) {
-    if (allTrails.length > 0) {
-      navigateTo(allTrails[0].id);
-    } else {
-      renderNotFound('(nessun ID)');
+    if (!id) {
+      renderNotFound('(nessun ID nel percorso URL)');
+      return;
     }
-    return;
-  }
 
-  const trail = allTrails.find(t => t.id === id);
-  if (!trail) {
-    renderNotFound(id);
-    return;
-  }
+    const allTrails = await loadTrails();
 
-  renderPage(trail, allTrails);
+    if (allTrails.length === 0) {
+      // fetch failed or DB empty - show specific error
+      document.getElementById('app').innerHTML = `
+        <nav class="nav">
+          <a href="https://michelesarzana.github.io/trail/" class="nav-back">← Tutti i trail</a>
+        </nav>
+        <div class="not-found">
+          <div style="font-size:48px;margin-bottom:16px">⚠️</div>
+          <h2>Errore di caricamento</h2>
+          <p>Non è stato possibile caricare il database dei percorsi. Controlla la connessione e riprova.</p>
+          <a href="https://michelesarzana.github.io/trail/" style="display:inline-block;margin-top:20px;background:#c17b8c;color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;font-size:14px">← Torna alla homepage</a>
+        </div>`;
+      return;
+    }
+
+    const trail = allTrails.find(t => t.id === id);
+    if (!trail) {
+      renderNotFound(id);
+      return;
+    }
+
+    renderPage(trail, allTrails);
+  } catch(e) {
+    console.error('Trail page init error:', e);
+    const app = document.getElementById('app');
+    if (app) app.innerHTML = '<div style="padding:40px;text-align:center;color:#c17b8c"><h2>Errore</h2><p>' + (e.message || 'Errore sconosciuto') + '</p><a href="https://michelesarzana.github.io/trail/" style="color:#c17b8c;font-weight:700">← Torna alla homepage</a></div>';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);
