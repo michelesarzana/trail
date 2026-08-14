@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cime — Every Single Trail</title>
+<meta name="description" content="Tutte le cime censite. Mappa interattiva e griglia con dettagli.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+a { color: #38324a; text-decoration: none; }
+a:hover { color: #c17b8c; }
+button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
+
+/* ===== CSS VARS ===== */
+:root {
+  --accent: #c17b8c;
+  --dark: #2e2b38;
+  --muted: #726e7a;
+  --bg: #faf7f4;
+  --border: rgba(46,43,56,0.09);
+}
+
+/* ===== NAV ===== */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px; background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky; top: 0; z-index: 1000; gap: 16px;
+}
+.nav-wordmark-wrap {
+  display: inline-flex; flex-direction: row; align-items: center;
+  gap: 10px; text-decoration: none; flex-shrink: 0;
+}
+.nav-logo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.nav-wordmark-text { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+.nav-wordmark { font-size: 20px; font-weight: 800; color: #2e2b38; letter-spacing: -0.01em; white-space: nowrap; line-height: 1.1; }
+.nav-wordmark:hover { color: #2e2b38; }
+.nav-payoff { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 13px; color: #c17b8c; opacity: 0.85; white-space: nowrap; line-height: 1.2; }
+.nav-tabs { display: flex; gap: 4px; background: rgba(46,43,56,0.05); border-radius: 10px; padding: 3px; }
+.nav-tab {
+  padding: 7px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;
+  color: #726e7a; text-decoration: none; transition: all .15s; white-space: nowrap;
+}
+.nav-tab:hover { color: #2e2b38; background: rgba(255,255,255,0.7); }
+.nav-tab.active { background: #fff; color: #2e2b38; box-shadow: 0 1px 4px rgba(46,43,56,0.12); }
+.nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-counter { font-size: 13px; font-weight: 600; color: #726e7a; }
+.nav-counter span { font-weight: 800; color: #2e2b38; }
+.nav-add { font-size: 13px; font-weight: 700; color: #38324a; background: #f0edf0; border-radius: 8px; padding: 7px 14px; transition: background .15s; }
+.nav-add:hover { background: #e4dfe4; color: #2e2b38; }
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  padding: 32px 48px 24px; background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.06);
+}
+.page-header-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px; font-weight: 400; color: #2e2b38; margin: 0 0 4px;
+}
+.page-header-sub { font-size: 14px; color: #726e7a; margin: 0; }
+
+/* ===== MAP ===== */
+.map-container {
+  height: 420px; width: 100%;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+}
+#peaks-map { height: 100%; width: 100%; }
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  padding: 16px 48px; background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.06);
+  display: flex; align-items: center; gap: 12px;
+}
+.search-input {
+  flex: 1; max-width: 360px; padding: 10px 14px;
+  font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 500;
+  background: #faf7f4; border: 1.5px solid rgba(56,50,74,0.13);
+  border-radius: 10px; color: #2e2b38; outline: none; height: 38px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-input:focus { border-color: #c17b8c; box-shadow: 0 4px 24px rgba(193,123,140,0.18); background: #fff; }
+.search-input::placeholder { color: #b0a8b5; }
+.results-label { font-size: 13px; font-weight: 600; color: #726e7a; }
+.results-label strong { color: #2e2b38; font-weight: 800; }
+
+/* ===== GRID ===== */
+.peaks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 32px 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.peak-card {
+  background: #fff; border-radius: 14px;
+  border: 1.5px solid rgba(46,43,56,0.07);
+  box-shadow: 0 2px 8px rgba(46,43,56,0.06);
+  overflow: hidden; cursor: pointer;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.peak-card:hover {
+  border-color: #c17b8c;
+  box-shadow: 0 4px 18px rgba(193,123,140,0.13);
+  transform: translateY(-2px);
+}
+.peak-card-photo {
+  width: 100%; height: 160px; object-fit: cover; display: block;
+}
+.peak-card-photo-placeholder {
+  width: 100%; height: 160px; display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+  background: repeating-linear-gradient(45deg,#efe9ec,#efe9ec 14px,#e3dbe1 14px,#e3dbe1 28px);
+}
+.peak-card-body { padding: 14px 16px 16px; }
+.peak-card-name { font-size: 15px; font-weight: 800; color: #2e2b38; margin: 0 0 6px; }
+.peak-alt { font-size: 22px; font-weight: 800; color: #2e2b38; font-family: 'Instrument Serif', serif; }
+.peak-alt-label { font-size: 12px; color: #726e7a; font-weight: 600; }
+.peak-stars { font-size: 14px; color: #fdc400; letter-spacing: 1px; margin: 4px 0; }
+.peak-coords { font-size: 11px; color: #b0a8b5; font-weight: 500; margin-top: 4px; }
+.peak-maps-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 10px; padding: 6px 12px; border-radius: 8px;
+  background: #f0edf0; font-size: 12px; font-weight: 700; color: #38324a;
+  transition: background .15s;
+}
+.peak-maps-link:hover { background: #e4dfe4; color: #2e2b38; }
+
+/* Trail link */
+.peak-trail-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 6px; margin-left: 4px; padding: 6px 12px; border-radius: 8px;
+  background: #f5f0fc; font-size: 12px; font-weight: 700; color: #5b3f8c;
+  transition: background .15s;
+}
+.peak-trail-link:hover { background: #ebe0ff; color: #3a2460; }
+
+/* No results */
+.no-results { text-align: center; padding: 64px 32px; grid-column: 1/-1; }
+.no-results-icon { font-size: 48px; margin-bottom: 12px; }
+.no-results p { font-size: 15px; color: #726e7a; margin: 0; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 32px 48px; border-top: 1px solid rgba(46,43,56,0.07);
+  font-size: 13px; color: #b0a8b5; text-align: center; background: #fff; margin-top: 32px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav { padding: 12px 16px; }
+  .page-header { padding: 20px 16px 16px; }
+  .search-bar { padding: 12px 16px; }
+  .peaks-grid { padding: 16px; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .map-container { height: 300px; }
+  .nav-tabs { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-wordmark-wrap">
+    <img src="https://raw.githubusercontent.com/michelesarzana/trail/main/media/logo.jpg" class="nav-logo" alt="EST logo">
+    <div class="nav-wordmark-text">
+      <span class="nav-wordmark">Every Single Trail</span>
+      <span class="nav-payoff">No map is ever finished.</span>
+    </div>
+  </a>
+  <div class="nav-tabs">
+    <a href="index.html" class="nav-tab" data-tab="mappa">🗺️ Mappa</a>
+    <a href="percorsi.html" class="nav-tab" data-tab="percorsi">🥾 Percorsi</a>
+    <a href="cime.html" class="nav-tab active" data-tab="cime">🏔️ Cime</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-counter"><span id="count-peaks">0</span> cime</span>
+    <a href="admin/index.html" class="nav-add">+ ⛰️</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title">🏔️ Cime</h1>
+  <p class="page-header-sub" id="results-sub">Caricamento…</p>
+</div>
+
+<div class="map-container">
+  <div id="peaks-map"></div>
+</div>
+
+<div class="search-bar">
+  <input type="search" id="search-input" class="search-input" placeholder="Cerca cima…" autocomplete="off" oninput="onSearch(this.value)">
+</div>
+
+<div class="peaks-grid" id="peaks-grid"></div>
+
+<footer class="footer">
+  Every Single Trail &nbsp;·&nbsp; <a href="index.html">🗺️ Torna alla mappa</a>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var PEAKS_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/peaks.json';
+
+var allPeaks = [];
+var filterQ = '';
+var peaksMap = null;
+var peakMarkers = {};
+
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function starsHtml(n) {
+  if (!n) return '';
+  var s = '';
+  for (var i = 0; i < n; i++) s += '★';
+  return s;
+}
+
+function initMap(peaks) {
+  peaksMap = L.map('peaks-map').setView([45.5, 11.5], 7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(peaksMap);
+
+  var bounds = [];
+  peaks.forEach(function(p) {
+    if (!p.lat || !p.lon) return;
+
+    var icon = L.divIcon({
+      html: '<div style="font-size:24px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4))">🏔️</div>',
+      className: '',
+      iconAnchor: [12, 12]
+    });
+
+    var marker = L.marker([p.lat, p.lon], { icon: icon });
+
+    var popupParts = ['<div style="min-width:160px;font-family:Manrope,sans-serif">'];
+    if (p.photo) {
+      popupParts.push('<img src="' + escHtml(p.photo) + '" style="width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:8px">');
+    }
+    popupParts.push('<strong style="font-size:14px;color:#2e2b38">' + escHtml(p.name || '') + '</strong>');
+    if (p.altitude) {
+      popupParts.push('<div style="font-size:13px;color:#726e7a;margin-top:2px">⛰ ' + p.altitude + ' m s.l.m.</div>');
+    }
+    if (p.rating) {
+      popupParts.push('<div style="font-size:13px;color:#fdc400;margin-top:2px">' + starsHtml(p.rating) + '</div>');
+    }
+    if (p.lat && p.lon) {
+      var mapsUrl = 'https://www.google.com/maps?q=' + p.lat + ',' + p.lon;
+      popupParts.push('<a href="' + mapsUrl + '" target="_blank" style="display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:#007aff;text-decoration:none">🔗 Apri in Maps</a>');
+    }
+    popupParts.push('</div>');
+    marker.bindPopup(popupParts.join(''), { maxWidth: 220, minWidth: 180 });
+
+    marker.addTo(peaksMap);
+    peakMarkers[p.id] = marker;
+    bounds.push([p.lat, p.lon]);
+  });
+
+  if (bounds.length === 1) {
+    peaksMap.setView(bounds[0], 11);
+  } else if (bounds.length > 1) {
+    peaksMap.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
+  }
+}
+
+function focusPeak(id) {
+  var m = peakMarkers[id];
+  if (m && peaksMap) {
+    peaksMap.setView(m.getLatLng(), 12);
+    m.openPopup();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function onSearch(v) {
+  filterQ = v.trim().toLowerCase();
+  renderGrid();
+}
+
+function renderGrid() {
+  var grid = document.getElementById('peaks-grid');
+  var sub = document.getElementById('results-sub');
+
+  var list = allPeaks.filter(function(p) {
+    if (!filterQ) return true;
+    return (p.name || '').toLowerCase().includes(filterQ);
+  });
+
+  var n = list.length;
+  if (sub) sub.textContent = n + ' cim' + (n === 1 ? 'a' : 'e');
+
+  if (!n) {
+    grid.innerHTML = '<div class="no-results"><div class="no-results-icon">🔍</div><p>Nessuna cima trovata.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(function(p) {
+    var starStr = starsHtml(p.rating);
+    var mapsUrl = (p.lat && p.lon) ? 'https://www.google.com/maps?q=' + p.lat + ',' + p.lon : '';
+    var coordStr = (p.lat && p.lon) ? p.lat.toFixed(4) + ', ' + p.lon.toFixed(4) : '';
+    var trailHref = p.trail_id ? 'trails/' + p.trail_id + '/' : '';
+
+    var photoHtml = p.photo
+      ? '<img class="peak-card-photo" src="' + escHtml(p.photo) + '" alt="' + escHtml(p.name) + '" loading="lazy">'
+      : '<div class="peak-card-photo-placeholder">🏔️</div>';
+
+    var html = '<div class="peak-card" onclick="focusPeak(\'' + escHtml(p.id) + '\')">';
+    html += photoHtml;
+    html += '<div class="peak-card-body">';
+    html += '<div class="peak-card-name">' + escHtml(p.name || '') + '</div>';
+    if (p.altitude) {
+      html += '<div><span class="peak-alt">' + p.altitude + '</span> <span class="peak-alt-label">m s.l.m.</span></div>';
+    }
+    if (starStr) html += '<div class="peak-stars">' + starStr + '</div>';
+    if (coordStr) html += '<div class="peak-coords">' + coordStr + '</div>';
+    html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">';
+    if (mapsUrl) {
+      html += '<a class="peak-maps-link" href="' + mapsUrl + '" target="_blank" onclick="event.stopPropagation()">🔗 Apri in Maps</a>';
+    }
+    if (trailHref) {
+      html += '<a class="peak-trail-link" href="' + escHtml(trailHref) + '" onclick="event.stopPropagation()">🥾 Trail</a>';
+    }
+    html += '</div>';
+    html += '</div></div>';
+    return html;
+  }).join('');
+}
+
+async function init() {
+  try {
+    var r = await fetch(PEAKS_URL);
+    var data = await r.json();
+    allPeaks = data.peaks || (Array.isArray(data) ? data : []);
+  } catch(e) {
+    allPeaks = [];
+    console.error('Failed to load peaks:', e);
+  }
+
+  document.getElementById('count-peaks').textContent = allPeaks.length;
+  var n = allPeaks.length;
+  var sub = document.getElementById('results-sub');
+  if (sub) sub.textContent = n + ' cim' + (n === 1 ? 'a' : 'e');
+
+  initMap(allPeaks);
+  renderGrid();
+}
+
+document.addEventListener('DOMContentLoaded', function() { init(); });
+</script>
+</body>
+</html>
