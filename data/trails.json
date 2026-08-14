@@ -273,7 +273,7 @@
         ]
       },
       "classification": {
-        "difficulty": 3,
+        "difficulty": 4,
         "activity_types": [
           "trail-running",
           "trekking",
@@ -305,7 +305,7 @@
       },
       "log": [],
       "media": {
-        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365_hero.jpg",
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
         "photos": [
           {
             "filename": "DspFkc6UsO1-t85dFnuOYOcm_AsPcaPPYQOQWWyGuY0-1365x2048.jpg",
@@ -324,8 +324,7 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/coumarial-rifugio-barma/YYg-DBaGDOAOhKtQnFV5sKVxdH1z-KHESS6zMW5IeYs-2048x1365_hero.jpg"
           }
         ]
-      },
-      "gpx_file": "https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/coumarial-rifugio-barma.gpx"
+      }
     },
     {
       "id": "campestrin-cortina-d-ampezzo-fkt",
