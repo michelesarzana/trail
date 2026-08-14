@@ -111,7 +111,7 @@
         ]
       },
       "classification": {
-        "difficulty": 3,
+        "difficulty": 4,
         "activity_types": [
           "trail-running",
           "trekking",
@@ -167,8 +167,7 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048 (1)_hero.jpg"
           }
         ]
-      },
-      "gpx_file": "https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
+      }
     },
     {
       "id": "pizzo-dei-tre-signori",
