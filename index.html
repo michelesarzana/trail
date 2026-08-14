@@ -1465,26 +1465,32 @@ async function loadTrails() {
 
 /* ===== INIT ===== */
 async function init() {
-  initMap();
+  try {
+    initMap();
 
-  [allTrails, allPeaks] = await Promise.all([loadTrails(), loadPeaks()]);
+    [allTrails, allPeaks] = await Promise.all([loadTrails(), loadPeaks()]);
 
-  // Update nav counter
-  const done = allTrails.filter(t => t.status === 'done').length;
-  document.getElementById('count-total').textContent = allTrails.length;
-  document.getElementById('count-done').textContent = done;
+    // Update nav counter
+    const done = allTrails.filter(t => t.status === 'done').length;
+    document.getElementById('count-total').textContent = allTrails.length;
+    document.getElementById('count-done').textContent = done;
 
-  buildDynamicFilters(allTrails);
-  setupSearchListeners();
-  applyFilters();
+    buildDynamicFilters(allTrails);
+    setupSearchListeners();
+    applyFilters();
 
-  // Render peak markers on main map
-  renderPeakMarkers(allPeaks);
+    // Render peak markers on main map
+    renderPeakMarkers(allPeaks);
 
-  // After render, let Leaflet recalculate map size
-  setTimeout(function() {
-    if (leafletMap) leafletMap.invalidateSize();
-  }, 200);
+    // After render, let Leaflet recalculate map size
+    setTimeout(function() {
+      if (leafletMap) leafletMap.invalidateSize();
+    }, 200);
+  } catch(e) {
+    console.error('init error:', e);
+    var tl = document.getElementById('trail-list');
+    if (tl) tl.innerHTML = '<div class="no-results"><div class="no-results-icon">⚠️</div>Errore di caricamento: ' + e.message + '</div>';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -1854,7 +1860,7 @@ function renderPeaksHomeList() {
     var p = peaks[i];
     var stars = p.rating ? '&#9733;'.repeat(p.rating) : '';
     var mapsUrl = (p.lat && p.lon) ? 'https://www.google.com/maps?q=' + p.lat + ',' + p.lon : '';
-    html += '<div style="background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer" onclick="focusPeakOnMap('' + p.id + '')">';
+    html += '<div style="background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer" onclick="focusPeakOnMap(\'' + escHtml(p.id) + '\')">';
     if (p.photo) html += '<img src="' + p.photo + '" style="width:100%;height:100px;object-fit:cover;border-radius:8px;margin-bottom:6px">';
     html += '<strong style="font-size:14px">' + escHtml(p.name || '') + '</strong><br>';
     if (p.altitude) html += '<span style="color:#888;font-size:12px">&#9968; ' + p.altitude + ' m s.l.m.</span><br>';
