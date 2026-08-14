@@ -358,6 +358,9 @@ var COMPARISONS = [
     id: 'iss', icon: '🛸', title: 'Orbita ISS', dist: 408000, hasBar: true
   },
   {
+    id: 'terra', icon: '🌍', title: 'Circonferenza terrestre', dist: 40075000, hasBar: true
+  },
+  {
     id: 'luna', icon: '🌕', title: 'Distanza Terra–Luna', dist: 384400000, hasBar: true
   },
   {
@@ -374,30 +377,32 @@ function buildComparisons(totalM) {
   var html = '';
   for (var i = 0; i < COMPARISONS.length; i++) {
     var c = COMPARISONS[i];
-    var pct = Math.min(100, (totalM / c.dist) * 100);
-    var pctDisplay;
-    if (pct >= 100) {
-      pctDisplay = '≥ 100%';
+    var ratio = totalM / c.dist;
+    var pct = Math.min(100, ratio * 100);
+    var valDisplay;
+    if (ratio >= 1) {
+      /* Superato: mostra quante volte */
+      var times = ratio.toFixed(ratio >= 10 ? 1 : 1);
+      valDisplay = times + 'x';
     } else if (pct >= 0.01) {
-      pctDisplay = pct.toFixed(pct < 1 ? 2 : 1) + '%';
+      valDisplay = pct.toFixed(pct < 1 ? 2 : 1) + '%';
     } else if (pct >= 0.0001) {
-      pctDisplay = pct.toFixed(4) + '%';
+      valDisplay = pct.toFixed(4) + '%';
     } else {
-      pctDisplay = pct.toExponential(2) + '%';
+      valDisplay = pct.toExponential(2) + '%';
     }
-    /* barra: minimo 1px visibile anche se pct è minuscolo */
-    var barW = pct >= 100 ? 100 : Math.max(pct, 0.15);
+    /* barra: 100% se superato, altrimenti pct con minimo visibile */
+    var barW = ratio >= 1 ? 100 : Math.max(pct, 0.15);
     html += '<div class="cmp-card">';
     html += '<div class="cmp-icon">' + c.icon + '</div>';
     html += '<div class="cmp-body">';
     html += '<div class="cmp-title">' + escHtml(c.title) + '</div>';
-    html += '<div class="cmp-value">' + pctDisplay + '</div>';
+    html += '<div class="cmp-value">' + valDisplay + '</div>';
     html += '<div class="cmp-bar-wrap"><div class="cmp-bar" style="width:' + barW.toFixed(4) + '%"></div></div>';
     html += '</div></div>';
   }
   el.innerHTML = html;
 }
-
 function toggleComparisons() {
   var drawer = document.getElementById('comparisons-drawer');
   var btn = document.getElementById('comparisons-toggle');
