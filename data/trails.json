@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Database trail personale di Michele Sarzana",
     "schema": "./schema/trail.schema.json",
-    "last_updated": "2026-08-02"
+    "last_updated": "2026-08-14"
   },
   "trails": [
     {
@@ -730,10 +730,10 @@
     {
       "id": "rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona",
       "title": "Rifugio Antermoia tramite Sentiero Paola e Val di Dona",
-      "status": "todo",
-      "description": null,
-      "rating": null,
-      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/IMG_8500_hero.JPEG",
+      "status": "done",
+      "description": "Raggiungere l'Antermoia attraverso il Sentiero Paola era l'ultima casella da spuntare. Tutte le altre vie di accesso le avevo già percorse; questa mi era rimasta sospesa, in attesa del momento giusto.\n\nIl punto di partenza è il Residence Solaria a Mazzin, oppure direttamente dal centro del paese. Da qui si imbocca la Val Udai, che nei primi chilometri non inganna: terreno agevole, pendenza gestibile, il tipo di avvicinamento che invita a prendere un ritmo tranquillo. È un'illusione. La salita si fa sentire quasi subito, e la valle, nella sua seconda parte, non risparmia nulla.\n\nCirca a metà percorso, prima che il tratto più impegnativo inizi davvero, cercate sulla sinistra una deviazione poco segnalata: è l'imbocco del Sentiero Paola. Facile da mancare se non si sa dove guardare.\n\nDa quel bivio iniziano 4,5 chilometri e oltre 1000 metri di dislivello che non concedono pause vere. Il primo tratto scorre nel bosco, con il vantaggio di restare riparati dal sole nei mesi caldi. Poi il bosco finisce e il sentiero si apre su ghiaioni e rocce esposte, dove l'irraggiamento si fa sentire e il terreno richiede attenzione a ogni passo. Il Sentiero Paola non allenta mai il ritmo: sale continuo, pendenza costante, fino a portarvi sotto alla Crepes de Lausa e all'omonimo passo a quota 2700 metri sul livello del mare.\n\nA quel punto ci si ritrova nel cuore del gruppo del Catinaccio, con tre direzioni davanti. A sinistra scende verso il Passo delle Scalette, chiuso ad agosto 2026 ho scritto questo resoconto. Dritto porta al Passo Principe. A destra c'è il Lago Antermoia, che appare all'improvviso dall'alto, senza preavviso, come solo certi posti in quota sanno fare. Peccato che la sera precedente avesse piovuto: l'acqua era torbida e il colore, in altre condizioni probabilmente straordinario, era opaco. Capita.\n\nDopo la sosta al rifugio, il percorso non è ancora finito. Mancano un'ultima ventina di metri di dislivello fino al Passo Dona, poi la discesa in mezzo alla Val de Dona, che dopo ore di roccia pura risulta quasi una sorpresa visiva: verde, aperta, con uno scenario che si apprezza di più proprio perché arriva a fine giornata.\n\nSi scende al Rifugio Dona e poi inizia l'ultimo tratto, quello meno nobile del giro: una mulattiera asfaltata, pendente, brutta senza mezzi termini, che riporta fino alla partenza. Occhio alle ginocchia, soprattutto se avete già accumulato tutto il resto nelle gambe.\n\nAttenzione ai vostri amici a quattro zampe: il percorso è fattibile ma il primo vero punto acqua è il lago/rifugio Antermoia!",
+      "rating": 5,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/6.jpg",
       "location": {
         "country": "Italia",
         "country_code": "IT",
@@ -744,50 +744,109 @@
         "start_address": null,
         "coordinates": {
           "start": {
-            "lat": 46.46128,
-            "lng": 11.70601
+            "lat": 46.461768,
+            "lng": 11.706231
           },
           "end": {
-            "lat": 46.46128,
-            "lng": 11.70601
+            "lat": 46.461473,
+            "lng": 11.705726
           }
         }
       },
       "track": {
         "distance_km": 18.2,
-        "elevation_gain": 1544,
-        "elevation_loss": 1544,
-        "elevation_max": 2740,
-        "elevation_min": 1399,
-        "duration_min": 528,
+        "elevation_gain": 1629,
+        "elevation_loss": 1627,
+        "elevation_max": 2774,
+        "elevation_min": 1414,
+        "duration_min": 308,
         "route_type": "loop",
-        "surface": [],
-        "gpx_file": null
+        "surface": [
+          "terra",
+          "sterrato",
+          "roccia"
+        ],
+        "gpx_file": "gpx/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona.gpx"
       },
       "classification": {
-        "difficulty": null,
-        "activity_types": [],
-        "seasons": []
+        "difficulty": 5,
+        "activity_types": [
+          "trail-running",
+          "trekking",
+          "escursionismo"
+        ],
+        "seasons": [
+          "estate",
+          "autunno"
+        ]
       },
-      "tags": [],
+      "tags": [
+        "antermoia",
+        "catinaccio",
+        "val di fassa"
+      ],
       "logistics": {
-        "dog_friendly": false,
-        "public_transport": false,
+        "dog_friendly": true,
+        "public_transport": true,
         "water_available": false,
         "parking_notes": null
       },
       "photo_credit": null,
       "links": {
-        "strava": null,
+        "strava": "https://www.strava.com/activities/19626189169",
         "komoot": null,
         "alltrails": null,
         "wikiloc": null,
         "other": null
       },
-      "log": [],
+      "log": [
+        {
+          "date": "2026-08-06",
+          "duration_min": 308,
+          "rating": 5,
+          "notes": null
+        }
+      ],
       "media": {
-        "cover": null,
-        "photos": []
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/6.jpg",
+        "photos": [
+          {
+            "filename": "6.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/6.jpg"
+          },
+          {
+            "filename": "4.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/4.jpg"
+          },
+          {
+            "filename": "antermoia3.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/antermoia3.jpg"
+          },
+          {
+            "filename": "7.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/7.jpg"
+          },
+          {
+            "filename": "8.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/8.jpg"
+          },
+          {
+            "filename": "5.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/5.jpg"
+          },
+          {
+            "filename": "antermoia2.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/antermoia2.jpg"
+          },
+          {
+            "filename": "antermoia1.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/antermoia1.jpg"
+          },
+          {
+            "filename": "9_hero.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/9_hero.jpg"
+          }
+        ]
       }
     },
     {
