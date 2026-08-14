@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Percorsi — Every Single Trail</title>
+<meta name="description" content="Tutti i percorsi di montagna catalogati. Filtra per difficoltà, stagione, stato.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: #faf7f4; font-family: 'Manrope', sans-serif; color: #2e2b38; }
+a { color: #38324a; text-decoration: none; }
+a:hover { color: #c17b8c; }
+button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
+
+/* ===== CSS VARS ===== */
+:root {
+  --accent: #c17b8c;
+  --dark: #2e2b38;
+  --muted: #726e7a;
+  --bg: #faf7f4;
+  --bg-card: #ffffff;
+  --border: rgba(46,43,56,0.09);
+  --shadow-sm: 0 2px 8px rgba(46,43,56,0.07);
+  --shadow-md: 0 4px 20px rgba(46,43,56,0.11);
+  --radius: 14px;
+}
+
+/* ===== NAV ===== */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px; background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.08);
+  position: sticky; top: 0; z-index: 200; gap: 16px;
+}
+.nav-wordmark-wrap {
+  display: inline-flex; flex-direction: row; align-items: center;
+  gap: 10px; text-decoration: none; flex-shrink: 0;
+}
+.nav-logo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.nav-wordmark-text { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+.nav-wordmark { font-size: 20px; font-weight: 800; color: #2e2b38; letter-spacing: -0.01em; white-space: nowrap; line-height: 1.1; }
+.nav-wordmark:hover { color: #2e2b38; }
+.nav-payoff { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 13px; color: #c17b8c; opacity: 0.85; white-space: nowrap; line-height: 1.2; }
+.nav-tabs { display: flex; gap: 4px; background: rgba(46,43,56,0.05); border-radius: 10px; padding: 3px; }
+.nav-tab {
+  padding: 7px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;
+  color: #726e7a; text-decoration: none; transition: all .15s; white-space: nowrap;
+}
+.nav-tab:hover { color: #2e2b38; background: rgba(255,255,255,0.7); }
+.nav-tab.active { background: #fff; color: #2e2b38; box-shadow: 0 1px 4px rgba(46,43,56,0.12); }
+.nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-counter { font-size: 13px; font-weight: 600; color: #726e7a; }
+.nav-counter span { font-weight: 800; color: #2e2b38; }
+.nav-add { font-size: 13px; font-weight: 700; color: #38324a; background: #f0edf0; border-radius: 8px; padding: 7px 14px; transition: background .15s; }
+.nav-add:hover { background: #e4dfe4; color: #2e2b38; }
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  padding: 32px 48px 24px;
+  background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.06);
+}
+.page-header-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px; font-weight: 400; color: #2e2b38; margin: 0 0 4px;
+}
+.page-header-sub { font-size: 14px; color: #726e7a; margin: 0; }
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  padding: 16px 48px;
+  background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.06);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.search-box-wrap { position: relative; flex: 1; min-width: 200px; max-width: 360px; }
+.search-input {
+  width: 100%; padding: 10px 40px 10px 14px;
+  font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 500;
+  background: #faf7f4; border: 1.5px solid rgba(56,50,74,0.13);
+  border-radius: 10px; color: #2e2b38; outline: none; height: 38px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-input:focus { border-color: #c17b8c; box-shadow: 0 4px 24px rgba(193,123,140,0.18); background: #fff; }
+.search-input::placeholder { color: #b0a8b5; }
+
+/* Status pills */
+.status-pills { display: flex; gap: 6px; }
+.spill {
+  padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  background: #f0edf0; color: #726e7a; cursor: pointer; border: none;
+  transition: all .15s; white-space: nowrap;
+}
+.spill:hover { background: #e4dfe4; color: #2e2b38; }
+.spill.active { background: #2e2b38; color: #fff; }
+
+/* Rating filter */
+.rating-filter { display: flex; align-items: center; gap: 6px; }
+.rating-filter span { font-size: 13px; font-weight: 600; color: #726e7a; }
+.star-btn {
+  background: none; border: none; cursor: pointer; font-size: 18px;
+  color: #ddd; padding: 0 1px; transition: color .12s;
+}
+.star-btn.active { color: #fdc400; }
+
+/* Difficulty pills */
+.diff-pills { display: flex; gap: 4px; }
+.dpill {
+  width: 28px; height: 28px; border-radius: 50%; font-size: 11px; font-weight: 800;
+  background: #f0edf0; color: #726e7a; cursor: pointer; border: none; display: flex;
+  align-items: center; justify-content: center; transition: all .15s;
+}
+.dpill:hover { background: #e4dfe4; }
+.dpill.active { background: #2e2b38; color: #fff; }
+
+/* Results count */
+.results-label { font-size: 13px; font-weight: 600; color: #726e7a; white-space: nowrap; }
+.results-label strong { color: #2e2b38; }
+
+/* Sort select */
+.sort-select {
+  background: #faf7f4; border: 1.5px solid rgba(46,43,56,0.09);
+  border-radius: 8px; padding: 6px 10px; font-family: 'Manrope', sans-serif;
+  font-size: 12px; font-weight: 600; color: #2e2b38; cursor: pointer; outline: none;
+}
+
+/* ===== GRID ===== */
+.grid-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 32px 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.grid-card {
+  display: flex; flex-direction: column;
+  background: #fff; border-radius: 14px;
+  border: 1.5px solid rgba(46,43,56,0.07);
+  box-shadow: 0 2px 8px rgba(46,43,56,0.06);
+  overflow: hidden; text-decoration: none;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.grid-card:hover {
+  border-color: #c17b8c;
+  box-shadow: 0 4px 18px rgba(193,123,140,0.13);
+  transform: translateY(-2px);
+}
+.grid-card-cover {
+  aspect-ratio: 4/3; width: 100%; background: #f0edf0;
+  overflow: hidden; position: relative;
+}
+.grid-card-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.grid-card-cover-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  background: repeating-linear-gradient(45deg,#efe9ec,#efe9ec 14px,#e3dbe1 14px,#e3dbe1 28px);
+}
+.grid-card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.grid-card-title { font-size: 14px; font-weight: 800; color: #2e2b38; margin: 0; line-height: 1.3; }
+.grid-card-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; font-weight: 600; color: #726e7a; }
+.grid-card-stars { font-size: 12px; color: #fdc400; letter-spacing: 1px; }
+.grid-card-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #f0edf0; border-radius: 999px; padding: 3px 10px;
+  font-size: 11px; font-weight: 700; color: #726e7a;
+}
+.status-done { background: #e8f8f0; color: #22a05a; }
+.status-todo { background: #f0edf0; color: #726e7a; }
+
+/* No results */
+.no-results { text-align: center; padding: 64px 32px; grid-column: 1/-1; }
+.no-results-icon { font-size: 48px; margin-bottom: 12px; }
+.no-results p { font-size: 15px; color: #726e7a; margin: 0; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 32px 48px; border-top: 1px solid rgba(46,43,56,0.07);
+  font-size: 13px; color: #b0a8b5; text-align: center; background: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav { padding: 12px 16px; }
+  .page-header { padding: 20px 16px 16px; }
+  .filter-bar { padding: 12px 16px; gap: 8px; }
+  .grid-wrap { padding: 16px; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .nav-tabs { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-wordmark-wrap">
+    <img src="https://raw.githubusercontent.com/michelesarzana/trail/main/media/logo.jpg" class="nav-logo" alt="EST logo">
+    <div class="nav-wordmark-text">
+      <span class="nav-wordmark">Every Single Trail</span>
+      <span class="nav-payoff">No map is ever finished.</span>
+    </div>
+  </a>
+  <div class="nav-tabs">
+    <a href="index.html" class="nav-tab" data-tab="mappa">🗺️ Mappa</a>
+    <a href="percorsi.html" class="nav-tab active" data-tab="percorsi">🥾 Percorsi</a>
+    <a href="cime.html" class="nav-tab" data-tab="cime">🏔️ Cime</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-counter"><span id="count-done">0</span> / <span id="count-total">0</span> fatti</span>
+    <a href="admin/index.html" class="nav-add">+ ⛰️</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title">🥾 Percorsi</h1>
+  <p class="page-header-sub" id="results-sub">Caricamento…</p>
+</div>
+
+<div class="filter-bar">
+  <div class="search-box-wrap">
+    <input type="search" id="search-input" class="search-input" placeholder="Cerca percorso…" autocomplete="off" oninput="onSearch(this.value)">
+  </div>
+  <div class="status-pills">
+    <button class="spill active" id="spill-all" onclick="setStatus('all',this)">Tutti</button>
+    <button class="spill" id="spill-done" onclick="setStatus('done',this)">✅ Completati</button>
+    <button class="spill" id="spill-todo" onclick="setStatus('todo',this)">📌 Da fare</button>
+  </div>
+  <div class="diff-pills" id="diff-pills">
+    <button class="dpill" data-d="1" onclick="toggleDiff(1,this)">1</button>
+    <button class="dpill" data-d="2" onclick="toggleDiff(2,this)">2</button>
+    <button class="dpill" data-d="3" onclick="toggleDiff(3,this)">3</button>
+    <button class="dpill" data-d="4" onclick="toggleDiff(4,this)">4</button>
+    <button class="dpill" data-d="5" onclick="toggleDiff(5,this)">5</button>
+    <button class="dpill" data-d="6" onclick="toggleDiff(6,this)">6</button>
+  </div>
+  <div class="rating-filter">
+    <span>Min ⭐</span>
+    <button class="star-btn" data-r="1" onclick="setRating(1)">★</button>
+    <button class="star-btn" data-r="2" onclick="setRating(2)">★</button>
+    <button class="star-btn" data-r="3" onclick="setRating(3)">★</button>
+    <button class="star-btn" data-r="4" onclick="setRating(4)">★</button>
+    <button class="star-btn" data-r="5" onclick="setRating(5)">★</button>
+  </div>
+  <select class="sort-select" id="sort-select" onchange="renderGrid()">
+    <option value="recent" selected>Più recente</option>
+    <option value="az">A → Z</option>
+    <option value="dist-asc">Distanza ↑</option>
+    <option value="dist-desc">Distanza ↓</option>
+    <option value="rating">Rating ↓</option>
+    <option value="gain-desc">Dislivello ↓</option>
+  </select>
+</div>
+
+<div class="grid-wrap" id="grid"></div>
+
+<footer class="footer">
+  Every Single Trail &nbsp;·&nbsp; <a href="index.html">🗺️ Torna alla mappa</a>
+</footer>
+
+<script>
+var DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
+
+var allTrails = [];
+var filters = { q: '', status: 'all', diff: [], rating: 0 };
+
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function starsHtml(n) {
+  if (!n) return '';
+  var s = '';
+  for (var i = 0; i < n; i++) s += '★';
+  return s;
+}
+
+function coverSrc(t) {
+  var photos = [];
+  if (t.media && t.media.photos) photos = t.media.photos;
+  return (t.media && t.media.cover) || t.cover_image || photos[0] || null;
+}
+
+function locationLine(t) {
+  var loc = t.location || {};
+  return [loc.municipality, loc.province].filter(Boolean).join(', ') || loc.region || '';
+}
+
+function fmtDist(km) { return km ? km + ' km' : '—'; }
+function fmtGain(g) { return g ? '+' + g + ' m' : '—'; }
+
+function onSearch(v) {
+  filters.q = v.trim();
+  renderGrid();
+}
+
+function setStatus(val, el) {
+  filters.status = val;
+  document.querySelectorAll('.spill').forEach(function(b) { b.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  renderGrid();
+}
+
+function toggleDiff(n, el) {
+  var idx = filters.diff.indexOf(n);
+  if (idx >= 0) { filters.diff.splice(idx, 1); el.classList.remove('active'); }
+  else { filters.diff.push(n); el.classList.add('active'); }
+  renderGrid();
+}
+
+function setRating(n) {
+  if (filters.rating === n) { filters.rating = 0; }
+  else { filters.rating = n; }
+  document.querySelectorAll('.star-btn').forEach(function(b, i) {
+    b.classList.toggle('active', i < filters.rating);
+  });
+  renderGrid();
+}
+
+function getLatestDate(t) {
+  var log = t.log;
+  if (!log || !log.length) return '';
+  var dates = log.map(function(e) { return e.date || ''; }).sort();
+  return dates[dates.length - 1];
+}
+
+function renderGrid() {
+  var q = filters.q.toLowerCase();
+  var sort = document.getElementById('sort-select').value;
+
+  var list = allTrails.filter(function(t) {
+    // search
+    if (q) {
+      var haystack = [t.title, (t.location||{}).municipality, (t.location||{}).region, t.description].filter(Boolean).join(' ').toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    // status
+    if (filters.status !== 'all' && t.status !== filters.status) return false;
+    // difficulty
+    if (filters.diff.length) {
+      var d = (t.classification && t.classification.difficulty) || '';
+      if (!filters.diff.includes(parseInt(d, 10)) && !filters.diff.includes(d)) return false;
+    }
+    // rating
+    if (filters.rating > 0 && (t.rating || 0) < filters.rating) return false;
+    return true;
+  });
+
+  // Sort
+  if (sort === 'az') {
+    list.sort(function(a, b) { return (a.title||'').localeCompare(b.title||''); });
+  } else if (sort === 'dist-asc') {
+    list.sort(function(a, b) { return ((a.track&&a.track.distance_km)||999) - ((b.track&&b.track.distance_km)||999); });
+  } else if (sort === 'dist-desc') {
+    list.sort(function(a, b) { return ((b.track&&b.track.distance_km)||0) - ((a.track&&a.track.distance_km)||0); });
+  } else if (sort === 'rating') {
+    list.sort(function(a, b) { return (b.rating||0) - (a.rating||0); });
+  } else if (sort === 'gain-desc') {
+    list.sort(function(a, b) { return ((b.track&&b.track.elevation_gain)||0) - ((a.track&&a.track.elevation_gain)||0); });
+  } else {
+    // recent: by latest log date
+    list.sort(function(a, b) {
+      var da = getLatestDate(a), db = getLatestDate(b);
+      return db > da ? 1 : db < da ? -1 : 0;
+    });
+  }
+
+  var grid = document.getElementById('grid');
+  var sub = document.getElementById('results-sub');
+  var n = list.length;
+  if (sub) sub.textContent = n + ' percors' + (n === 1 ? 'o' : 'i');
+
+  if (!n) {
+    grid.innerHTML = '<div class="no-results"><div class="no-results-icon">🔍</div><p>Nessun percorso trovato.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(function(t) {
+    var cover = coverSrc(t);
+    var track = t.track || {};
+    var isDone = t.status === 'done';
+    var statusCls = isDone ? 'status-done' : 'status-todo';
+    var statusLabel = isDone ? '✅ Completato' : '📌 Da fare';
+    var href = 'trails/' + t.id + '/';
+    var diff = (t.classification && t.classification.difficulty) || '';
+    var dist = fmtDist(track.distance_km);
+    var gain = fmtGain(track.elevation_gain);
+    var loc = locationLine(t);
+    var starStr = starsHtml(t.rating);
+
+    var coverHtml = cover
+      ? '<img src="' + escHtml(cover) + '" alt="' + escHtml(t.title) + '" loading="lazy">'
+      : '<div class="grid-card-cover-placeholder">🏔️</div>';
+
+    return '<a href="' + escHtml(href) + '" class="grid-card">'
+      + '<div class="grid-card-cover">' + coverHtml + '</div>'
+      + '<div class="grid-card-body">'
+      + '<div class="grid-card-title">' + escHtml(t.title) + '</div>'
+      + '<div class="grid-card-meta">'
+      + '<span>' + escHtml(dist) + '</span>'
+      + '<span>' + escHtml(gain) + '</span>'
+      + (diff ? '<span>' + escHtml(String(diff)) + '</span>' : '')
+      + (loc ? '<span>' + escHtml(loc) + '</span>' : '')
+      + '</div>'
+      + (starStr ? '<div class="grid-card-stars">' + starStr + '</div>' : '')
+      + '<span class="grid-card-badge ' + statusCls + '">' + statusLabel + '</span>'
+      + '</div></a>';
+  }).join('');
+}
+
+async function init() {
+  try {
+    var r = await fetch(DB_URL);
+    var data = await r.json();
+    allTrails = data.trails || [];
+  } catch(e) {
+    allTrails = [];
+    console.error('Failed to load trails:', e);
+  }
+
+  // Update counters
+  var done = allTrails.filter(function(t) { return t.status === 'done'; }).length;
+  document.getElementById('count-done').textContent = done;
+  document.getElementById('count-total').textContent = allTrails.length;
+
+  renderGrid();
+}
+
+document.addEventListener('DOMContentLoaded', function() { init(); });
+</script>
+</body>
+</html>
