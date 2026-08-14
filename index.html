@@ -917,20 +917,6 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   <div id="section-percorsi" class="section-page" style="display:none">
     <div class="section-header">
       <h2 class="section-title">🥾 Percorsi</h2>
-      <div class="section-controls">
-        <input type="search" id="percorsi-search" class="section-search" placeholder="Cerca percorso…" oninput="filterPercorsi()">
-        <div class="section-pills" id="percorsi-status-pills">
-          <span class="spill active" data-val="all" onclick="setPillPercorsiStatus('all',this)">Tutti</span>
-          <span class="spill" data-val="done" onclick="setPillPercorsiStatus('done',this)">✅ Completati</span>
-          <span class="spill" data-val="todo" onclick="setPillPercorsiStatus('todo',this)">📌 Da fare</span>
-        </div>
-        <div class="section-pills" id="percorsi-rating-pills">
-          <span class="spill active" data-val="0" onclick="setPillPercorsiRating(0,this)">⭐ Tutti</span>
-          <span class="spill" data-val="3" onclick="setPillPercorsiRating(3,this)">3+</span>
-          <span class="spill" data-val="4" onclick="setPillPercorsiRating(4,this)">4+</span>
-          <span class="spill" data-val="5" onclick="setPillPercorsiRating(5,this)">5 ★</span>
-        </div>
-      </div>
       <div class="section-count" id="percorsi-count">0 percorsi</div>
     </div>
     <div class="grid-wrap" id="percorsi-grid">
@@ -1145,6 +1131,11 @@ function applyFilters() {
   if (label) label.textContent = _filteredTrails.length + ' percors' + (_filteredTrails.length === 1 ? 'o' : 'i');
   renderMap(_filteredTrails);
   updateFilterBadge();
+  // sync griglia Percorsi se quella tab è attiva
+  var percorsiSec = document.getElementById('section-percorsi');
+  if (percorsiSec && percorsiSec.style.display !== 'none') {
+    renderPercorsiGrid(_filteredTrails);
+  }
 }
 
 function loadMoreCards() {
@@ -1633,15 +1624,13 @@ function switchTab(tab, el) {
     setTimeout(function() { if (leafletMap) leafletMap.invalidateSize(); }, 200);
   } else if (tab === 'percorsi') {
     if (percorsi) percorsi.style.display = '';
-    if (cime) cime.style.display = '';
-    if (hero) hero.style.display = 'none';
-    if (filters) filters.style.display = 'none';
+    if (cime) cime.style.display = 'none';
+    if (hero) hero.style.display = '';
+    if (filters) filters.style.display = '';
     var cf = document.getElementById('content-filter');
-    if (cf) cf.style.display = 'flex';
-    currentContentFilter = 'all';
-    applyContentFilter();
-    renderPercorsiGrid(allTrails);
-    renderCimeGrid(allPeaks);
+    if (cf) cf.style.display = 'none';
+    applyFilters();
+    renderPercorsiGrid(_filteredTrails);
   } else if (tab === 'cime') {
     if (cime) cime.style.display = '';
     if (percorsi) percorsi.style.display = 'none';
@@ -1658,37 +1647,15 @@ function switchTab(tab, el) {
 }
 
 /* ===== PERCORSI GRID ===== */
-let percorsiStatusFilter = 'all';
-let percorsiRatingFilter = 0;
-
 function starsHtml(n) {
   if (!n) return '';
   return '⭐'.repeat(n);
 }
 
 function renderPercorsiGrid(trails) {
-  const q = (document.getElementById('percorsi-search') || {}).value || '';
-  let list = trails;
-
-  // filter by status
-  if (percorsiStatusFilter !== 'all') {
-    list = list.filter(t => t.status === percorsiStatusFilter);
-  }
-  // filter by rating
-  if (percorsiRatingFilter > 0) {
-    list = list.filter(t => (t.rating || 0) >= percorsiRatingFilter);
-  }
-  // filter by search
-  if (q.trim()) {
-    const ql = q.trim().toLowerCase();
-    list = list.filter(t => {
-      return [t.title, (t.location||{}).municipality, (t.location||{}).region, t.description]
-        .filter(Boolean).some(f => f.toLowerCase().includes(ql));
-    });
-  }
-
   const grid = document.getElementById('percorsi-grid');
   const countEl = document.getElementById('percorsi-count');
+  const list = trails || [];
   if (countEl) countEl.textContent = list.length + ' percors' + (list.length === 1 ? 'o' : 'i');
 
   if (!list.length) {
@@ -1718,22 +1685,6 @@ function renderPercorsiGrid(trails) {
       + '<span class="grid-card-badge ' + statusCls + '">' + statusLabel + '</span>'
       + '</div></a>';
   }).join('');
-}
-
-function filterPercorsi() { renderPercorsiGrid(allTrails); }
-
-function setPillPercorsiStatus(val, el) {
-  percorsiStatusFilter = val;
-  document.querySelectorAll('#percorsi-status-pills .spill').forEach(e => e.classList.remove('active'));
-  if (el) el.classList.add('active');
-  renderPercorsiGrid(allTrails);
-}
-
-function setPillPercorsiRating(val, el) {
-  percorsiRatingFilter = parseInt(val) || 0;
-  document.querySelectorAll('#percorsi-rating-pills .spill').forEach(e => e.classList.remove('active'));
-  if (el) el.classList.add('active');
-  renderPercorsiGrid(allTrails);
 }
 
 /* ===== CIME GRID ===== */
