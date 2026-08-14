@@ -117,6 +117,17 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .dpill:hover { background: #e4dfe4; }
 .dpill.active { background: #2e2b38; color: #fff; }
 
+/* Generic pill group (activity, season, dist, dplus) */
+.pill-group { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.pill-group-label { font-size: 11px; font-weight: 700; color: #b0a8b5; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
+.gpill {
+  padding: 5px 11px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  background: #f0edf0; color: #726e7a; cursor: pointer; border: none;
+  transition: all .15s; white-space: nowrap;
+}
+.gpill:hover { background: #e4dfe4; color: #2e2b38; }
+.gpill.active { background: #2e2b38; color: #fff; }
+
 /* Results count */
 .results-label { font-size: 13px; font-weight: 600; color: #726e7a; white-space: nowrap; }
 .results-label strong { color: #2e2b38; }
@@ -236,6 +247,36 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     <button class="dpill" data-d="5" onclick="toggleDiff(5,this)">5</button>
     <button class="dpill" data-d="6" onclick="toggleDiff(6,this)">6</button>
   </div>
+  <div class="pill-group" id="dist-pills">
+    <span class="pill-group-label">km</span>
+    <button class="gpill active" id="dist-all" onclick="setDistFilter('all',this)">Tutti</button>
+    <button class="gpill" onclick="setDistFilter('lt10',this)">&lt;10</button>
+    <button class="gpill" onclick="setDistFilter('10-25',this)">10-25</button>
+    <button class="gpill" onclick="setDistFilter('25-50',this)">25-50</button>
+    <button class="gpill" onclick="setDistFilter('gt50',this)">&gt;50</button>
+  </div>
+  <div class="pill-group" id="dplus-pills">
+    <span class="pill-group-label">D+</span>
+    <button class="gpill active" id="dplus-all" onclick="setDplusFilter('all',this)">Tutti</button>
+    <button class="gpill" onclick="setDplusFilter('lt500',this)">&lt;500</button>
+    <button class="gpill" onclick="setDplusFilter('500-1500',this)">500-1500</button>
+    <button class="gpill" onclick="setDplusFilter('gt1500',this)">&gt;1500</button>
+  </div>
+  <div class="pill-group" id="activity-pills">
+    <span class="pill-group-label">Attività</span>
+    <button class="gpill active" id="activity-all" onclick="setActivityFilter('all',this)">Tutti</button>
+    <button class="gpill" onclick="setActivityFilter('escursionismo',this)">🥾 Escursionismo</button>
+    <button class="gpill" onclick="setActivityFilter('trekking',this)">⛺ Trekking</button>
+    <button class="gpill" onclick="setActivityFilter('trail-running',this)">🏃 Trail running</button>
+  </div>
+  <div class="pill-group" id="season-pills">
+    <span class="pill-group-label">Stagione</span>
+    <button class="gpill active" id="season-all" onclick="setSeasonFilter('all',this)">Tutti</button>
+    <button class="gpill" onclick="setSeasonFilter('primavera',this)">🌸 Primavera</button>
+    <button class="gpill" onclick="setSeasonFilter('estate',this)">☀️ Estate</button>
+    <button class="gpill" onclick="setSeasonFilter('autunno',this)">🍂 Autunno</button>
+    <button class="gpill" onclick="setSeasonFilter('inverno',this)">❄️ Inverno</button>
+  </div>
   <div class="rating-filter">
     <span>Min ⭐</span>
     <button class="star-btn" data-r="1" onclick="setRating(1)">★</button>
@@ -264,7 +305,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 var DB_URL = 'https://raw.githubusercontent.com/michelesarzana/trail/main/data/trails.json';
 
 var allTrails = [];
-var filters = { q: '', status: 'all', diff: [], rating: 0 };
+var filters = { q: '', status: 'all', diff: [], rating: 0, dist: 'all', dplus: 'all', activity: 'all', season: 'all' };
 
 function escHtml(str) {
   if (!str) return '';
@@ -320,6 +361,34 @@ function setRating(n) {
   renderGrid();
 }
 
+function setDistFilter(val, el) {
+  filters.dist = val;
+  document.querySelectorAll('#dist-pills .gpill').forEach(function(b) { b.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  renderGrid();
+}
+
+function setDplusFilter(val, el) {
+  filters.dplus = val;
+  document.querySelectorAll('#dplus-pills .gpill').forEach(function(b) { b.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  renderGrid();
+}
+
+function setActivityFilter(val, el) {
+  filters.activity = val;
+  document.querySelectorAll('#activity-pills .gpill').forEach(function(b) { b.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  renderGrid();
+}
+
+function setSeasonFilter(val, el) {
+  filters.season = val;
+  document.querySelectorAll('#season-pills .gpill').forEach(function(b) { b.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  renderGrid();
+}
+
 function getLatestDate(t) {
   var log = t.log;
   if (!log || !log.length) return '';
@@ -343,6 +412,31 @@ function renderGrid() {
     if (filters.diff.length) {
       var d = (t.classification && t.classification.difficulty) || '';
       if (!filters.diff.includes(parseInt(d, 10)) && !filters.diff.includes(d)) return false;
+    }
+    // distance
+    if (filters.dist !== 'all') {
+      var km = (t.track && t.track.distance_km) || 0;
+      if (filters.dist === 'lt10' && km >= 10) return false;
+      if (filters.dist === '10-25' && (km < 10 || km > 25)) return false;
+      if (filters.dist === '25-50' && (km < 25 || km > 50)) return false;
+      if (filters.dist === 'gt50' && km <= 50) return false;
+    }
+    // elevation gain
+    if (filters.dplus !== 'all') {
+      var gain = (t.track && t.track.elevation_gain) || 0;
+      if (filters.dplus === 'lt500' && gain >= 500) return false;
+      if (filters.dplus === '500-1500' && (gain < 500 || gain > 1500)) return false;
+      if (filters.dplus === 'gt1500' && gain <= 1500) return false;
+    }
+    // activity
+    if (filters.activity !== 'all') {
+      var acts = (t.classification && t.classification.activity_types) || [];
+      if (!acts.includes(filters.activity)) return false;
+    }
+    // season
+    if (filters.season !== 'all') {
+      var seasons = (t.classification && t.classification.seasons) || [];
+      if (!seasons.includes(filters.season)) return false;
     }
     // rating
     if (filters.rating > 0 && (t.rating || 0) < filters.rating) return false;
