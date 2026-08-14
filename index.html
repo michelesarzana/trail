@@ -752,6 +752,31 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 [data-tooltip] { position:relative; cursor:help; }
 [data-tooltip]::after { content:attr(data-tooltip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:#222; color:#fff; font-size:11px; white-space:nowrap; padding:4px 8px; border-radius:6px; pointer-events:none; opacity:0; transition:opacity .2s; z-index:9999; }
 [data-tooltip]:hover::after { opacity:1; }
+
+/* ===== MAP FILTER OVERLAY ===== */
+#map-content-filter {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 999px;
+  padding: 4px 6px;
+  box-shadow: 0 2px 12px rgba(46,43,56,0.16);
+  pointer-events: all;
+}
+.map-filter-btn {
+  border: none; border-radius: 999px;
+  padding: 6px 14px; font-family: 'Manrope', sans-serif;
+  font-size: 12px; font-weight: 700; color: #726e7a;
+  background: transparent; cursor: pointer;
+  transition: all .15s; white-space: nowrap;
+}
+.map-filter-btn:hover { background: #f0edf0; color: #2e2b38; }
+.map-filter-btn.active { background: #2e2b38; color: #fff; }
 </style>
 <meta property="og:image" content="https://michelesarzana.github.io/trail/media/favicon-512.png">
 </head>
@@ -893,11 +918,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
           <option value="rating">Rating ↓</option>
         </select>
       </div>
-      <div id="home-content-filter" style="display:flex;gap:4px;background:rgba(0,0,0,0.05);border-radius:10px;padding:3px;margin:0 12px 10px;width:fit-content">
-        <button class="filter-btn active" id="hfilter-all" onclick="setHomeFilter('all')">&#x1F97E;&#x1F3D4;&#xFE0F; Tutti</button>
-        <button class="filter-btn" id="hfilter-trails" onclick="setHomeFilter('trails')">&#x1F97E; Percorsi</button>
-        <button class="filter-btn" id="hfilter-peaks" onclick="setHomeFilter('peaks')">&#x1F3D4;&#xFE0F; Cime</button>
-      </div>
+      
       <div class="trail-list" id="trail-list">
         <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
       </div>
@@ -906,6 +927,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     </div>
     <div class="map-area">
       <div id="map"></div>
+      <div id="map-content-filter">
+        <button class="map-filter-btn active" id="mfilter-all" onclick="setHomeFilter('all')">🥾🏔️ Tutti</button>
+        <button class="map-filter-btn" id="mfilter-trails" onclick="setHomeFilter('trails')">🥾 Percorsi</button>
+        <button class="map-filter-btn" id="mfilter-peaks" onclick="setHomeFilter('peaks')">🏔️ Cime</button>
+      </div>
     </div>
   </div>
 
@@ -1588,8 +1614,7 @@ function switchTab(tab, el) {
     if (mappa) mappa.style.display = '';
     if (hero) hero.style.display = '';
     if (filters) filters.style.display = '';
-    var hcf = document.getElementById('home-content-filter');
-    if (hcf) hcf.style.display = 'flex';
+    /* map-content-filter always visible via CSS */
     setTimeout(function() { if (leafletMap) leafletMap.invalidateSize(); }, 200);
   } else if (tab === 'percorsi') {
     if (percorsi) percorsi.style.display = '';
@@ -1597,8 +1622,7 @@ function switchTab(tab, el) {
     if (filters) filters.style.display = 'none';
     var cf = document.getElementById('content-filter');
     if (cf) cf.style.display = 'none';
-    var hcf2 = document.getElementById('home-content-filter');
-    if (hcf2) hcf2.style.display = 'none';
+    
     renderPercorsiGrid(allTrails);
   } else if (tab === 'cime') {
     if (cime) cime.style.display = '';
@@ -1606,8 +1630,7 @@ function switchTab(tab, el) {
     if (filters) filters.style.display = 'none';
     var cf = document.getElementById('content-filter');
     if (cf) cf.style.display = 'none';
-    var hcf3 = document.getElementById('home-content-filter');
-    if (hcf3) hcf3.style.display = 'none';
+    
     renderCimeGrid(allPeaks);
     setTimeout(function() { if (peaksOsmMap) peaksOsmMap.invalidateSize(); }, 250);
   }
@@ -1828,7 +1851,7 @@ var currentHomeFilter = 'all';
 
 function setHomeFilter(f) {
   currentHomeFilter = f;
-  document.querySelectorAll('#home-content-filter .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('#map-content-filter .map-filter-btn').forEach(function(b) { b.classList.remove('active'); });
   var btn = document.getElementById('hfilter-' + f);
   if (btn) btn.classList.add('active');
   applyHomeFilter();
