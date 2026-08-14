@@ -972,7 +972,7 @@ input,textarea,select{font-family:inherit;font-size:14px}
 <div id="section-cime" style="display:none;flex:1;overflow-y:auto;padding:20px;gap:16px;flex-direction:column">
   <div id="peaks-list" style="display:flex;flex-direction:column;gap:8px"></div>
   <div id="peaks-form" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px;display:none">
-    <h3 style="margin-bottom:16px;font-size:16px">Nuova Cima</h3>
+    <h3 id="peaks-form-title" style="margin-bottom:16px;font-size:16px">Nuova Cima</h3>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div class="field"><label>Nome *</label><input id="peak-name" type="text" placeholder="Monte Rosso"></div>
       <div class="field"><label>Altitudine (m) *</label><input id="peak-altitude" type="number" placeholder="2500"></div>
@@ -2301,6 +2301,7 @@ document.getElementById('token-input').addEventListener('keydown', e => {
 var peaksDb = { peaks: [], _meta: {} };
 var peaksDbSha = null;
 var currentPeakRating = 0;
+let currentEditPeakId = null;
 var peakCoordMap = null;
 var peakCoordMarker = null;
 
@@ -2353,18 +2354,55 @@ function renderPeaksList() {
     return '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">' +
       '<div><strong>' + escHtml(p.name) + '</strong> <span style="color:var(--text-dim)">' + (p.altitude || '') + 'm</span>' +
       (stars ? ' <span style="color:var(--accent)">' + stars + '</span>' : '') + '</div>' +
+      '<div style="display:flex;gap:6px">' +
+      '<button class="btn btn-ghost btn-sm" onclick="editPeak(\'' + p.id + '\')">\u270f\ufe0f</button>' +
       '<button class="btn btn-ghost btn-sm" onclick="deletePeak(\'' + p.id + '\')">\uD83D\uDDD1</button>' +
+      '</div>' +
       '</div>';
   }).join('');
 }
 
 function newPeak() {
+  currentEditPeakId = null;
+  document.getElementById('peaks-form-title').textContent = 'Nuova Cima';
   document.getElementById('peaks-form').style.display = 'block';
   resetPeakForm();
 }
 
 function cancelPeak() {
+  currentEditPeakId = null;
   document.getElementById('peaks-form').style.display = 'none';
+}
+
+function editPeak(id) {
+  var peak = (peaksDb.peaks || []).find(function(p) { return p.id === id; });
+  if (!peak) return;
+  currentEditPeakId = id;
+  document.getElementById('peaks-form-title').textContent = 'Modifica Cima';
+  document.getElementById('peaks-form').style.display = 'block';
+  document.getElementById('peak-name').value = peak.name || '';
+  document.getElementById('peak-altitude').value = peak.altitude || '';
+  document.getElementById('peak-lat').value = peak.lat || '';
+  document.getElementById('peak-lon').value = peak.lon || '';
+  document.getElementById('peak-photo').value = peak.photo || '';
+  var trailSel = document.getElementById('peak-trail-id');
+  if (trailSel) { trailSel.value = peak.trail_id || ''; }
+  currentPeakRating = peak.rating || 0;
+  document.getElementById('peak-rating').value = currentPeakRating;
+  renderPeakStars(currentPeakRating);
+  if (peak.photo) {
+    var prev = document.getElementById('peak-photo-preview');
+    var prevImg = document.getElementById('peak-photo-preview-img');
+    var status = document.getElementById('peak-photo-upload-status');
+    if (prev) prev.style.display = 'flex';
+    if (prevImg) prevImg.src = peak.photo;
+    if (status) status.textContent = '';
+  }
+  if (peak.lat && peak.lon && peakCoordMap) {
+    if (peakCoordMarker) { peakCoordMap.removeLayer(peakCoordMarker); }
+    peakCoordMarker = L.marker([peak.lat, peak.lon]).addTo(peakCoordMap);
+    peakCoordMap.setView([peak.lat, peak.lon], 12);
+  }
 }
 
 function resetPeakForm() {
@@ -2492,36 +2530,60 @@ async function savePeak() {
   if (!name) { showToast('Nome cima obbligatorio', 'error'); return; }
   if (!altitude) { showToast('Altitudine obbligatoria', 'error'); return; }
 
-  var id = name.toLowerCase()
-    .replace(/[\u00e0\u00e1\u00e2\u00e3]/g,'a').replace(/[\u00e8\u00e9\u00ea\u00eb]/g,'e')
-    .replace(/[\u00ec\u00ed\u00ee]/g,'i').replace(/[\u00f2\u00f3\u00f4]/g,'o')
-    .replace(/[\u00f9\u00fa\u00fb]/g,'u').replace(/[^a-z0-9]+/g,'-')
-    .replace(/^-+|-+$/g,'');
-
-  if ((peaksDb.peaks || []).some(function(p) { return p.id === id; })) {
-    showToast('Cima gia presente', 'error'); return;
-  }
-
-  var peak = { id: id, name: name, altitude: altitude };
-  if (lat !== null) peak.lat = lat;
-  if (lon !== null) peak.lon = lon;
-  if (rating) peak.rating = rating;
-  if (photo) peak.photo = photo;
-  peak.trail_id = trailId || null;
-
-  if (!peaksDb.peaks) peaksDb.peaks = [];
-  peaksDb.peaks.push(peak);
-  if (!peaksDb._meta) peaksDb._meta = {};
-  peaksDb._meta.last_updated = new Date().toISOString().split('T')[0];
-
-  showToast('Salvataggio...', 'info');
-  var ok = await savePeaksDB('peaks: add ' + name);
-  if (ok) {
-    showToast('Cima salvata!', 'success');
-    cancelPeak();
-    renderPeaksList();
+  if (currentEditPeakId) {
+    // UPDATE
+    var idx = (peaksDb.peaks || []).findIndex(function(p) { return p.id === currentEditPeakId; });
+    if (idx === -1) { showToast('Cima non trovata', 'error'); return; }
+    var existing = peaksDb.peaks[idx];
+    existing.name = name;
+    existing.altitude = altitude;
+    if (lat !== null) { existing.lat = lat; } else { delete existing.lat; }
+    if (lon !== null) { existing.lon = lon; } else { delete existing.lon; }
+    if (rating) { existing.rating = rating; } else { delete existing.rating; }
+    if (photo) { existing.photo = photo; } else { delete existing.photo; }
+    existing.trail_id = trailId || null;
+    if (!peaksDb._meta) { peaksDb._meta = {}; }
+    peaksDb._meta.last_updated = new Date().toISOString().split('T')[0];
+    showToast('Salvataggio...', 'info');
+    var ok = await savePeaksDB('peaks: update ' + existing.id);
+    if (ok) {
+      showToast('\u2705 Cima aggiornata!', 'success');
+      cancelPeak();
+      renderPeaksList();
+    }
   } else {
-    peaksDb.peaks = peaksDb.peaks.filter(function(p) { return p.id !== id; });
+    // INSERT
+    var id = name.toLowerCase()
+      .replace(/[\u00e0\u00e1\u00e2\u00e3]/g,'a').replace(/[\u00e8\u00e9\u00ea\u00eb]/g,'e')
+      .replace(/[\u00ec\u00ed\u00ee]/g,'i').replace(/[\u00f2\u00f3\u00f4]/g,'o')
+      .replace(/[\u00f9\u00fa\u00fb]/g,'u').replace(/[^a-z0-9]+/g,'-')
+      .replace(/^-+|-+$/g,'');
+
+    if ((peaksDb.peaks || []).some(function(p) { return p.id === id; })) {
+      showToast('Cima gia presente', 'error'); return;
+    }
+
+    var peak = { id: id, name: name, altitude: altitude };
+    if (lat !== null) { peak.lat = lat; }
+    if (lon !== null) { peak.lon = lon; }
+    if (rating) { peak.rating = rating; }
+    if (photo) { peak.photo = photo; }
+    peak.trail_id = trailId || null;
+
+    if (!peaksDb.peaks) { peaksDb.peaks = []; }
+    peaksDb.peaks.push(peak);
+    if (!peaksDb._meta) { peaksDb._meta = {}; }
+    peaksDb._meta.last_updated = new Date().toISOString().split('T')[0];
+
+    showToast('Salvataggio...', 'info');
+    var ok = await savePeaksDB('peaks: add ' + name);
+    if (ok) {
+      showToast('\u2705 Cima salvata!', 'success');
+      cancelPeak();
+      renderPeaksList();
+    } else {
+      peaksDb.peaks = peaksDb.peaks.filter(function(p) { return p.id !== id; });
+    }
   }
 }
 
