@@ -366,11 +366,10 @@
           "sterrato",
           "roccia",
           "misto"
-        ],
-        "gpx_file": "gpx/campestrin-cortina-d-ampezzo-fkt.gpx"
+        ]
       },
       "classification": {
-        "difficulty": 2,
+        "difficulty": 5,
         "activity_types": [
           "trail-running"
         ],
