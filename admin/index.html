@@ -1167,6 +1167,9 @@ async function loadDB() {
 }
 
 async function saveDB(msg) {
+  // Recupera SHA fresco per evitare conflitti su commit concorrenti
+  const freshR = await ghGetFile('data/trails.json');
+  if (freshR.ok) { dbSha = freshR.data.sha; }
   const json = JSON.stringify(db, null, 2);
   const res = await ghPutFile('data/trails.json', json, msg, dbSha);
   if (!res.ok) throw new Error(res.data.message || 'Errore salvataggio');
@@ -2340,6 +2343,9 @@ async function loadPeaksDB() {
 }
 
 async function savePeaksDB(message) {
+  // Recupera SHA fresco per evitare conflitti su commit concorrenti
+  var freshR = await ghGetFile('data/peaks.json');
+  if (freshR.ok) { peaksDbSha = freshR.data.sha; }
   var content = JSON.stringify(peaksDb, null, 2);
   var b64 = btoa(unescape(encodeURIComponent(content)));
   var body = { message: message, content: b64, sha: peaksDbSha };
