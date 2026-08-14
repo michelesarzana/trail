@@ -1331,7 +1331,7 @@ function renderCard(t) {
         <div class="trail-card-stats-left">
           <span>${fmtDist(track.distance_km)}</span>
           <span class="stat-accent">${fmtGain(track.elevation_gain)}</span>
-          ${diff ? `<span data-tooltip="&#x26A0;&#xFE0F; La difficolt\u00e0 \u00e8 soggettiva!" style="cursor:help">${escHtml(diff)}</span>` : ''}
+          ${diff ? `<span data-tooltip="&#x26A0;&#xFE0F; La difficolt\u00e0 \u00e8 soggettiva!" style="cursor:help;color:#726e7a;font-size:11px">Difficolt\u00e0 ${escHtml(diff)}</span>` : ''}
           ${track.duration_min ? `<span>${fmtDur(track.duration_min)}</span>` : ''}
         </div>
         <span class="card-link">Dettagli →</span>
@@ -1478,6 +1478,9 @@ async function init() {
     buildDynamicFilters(allTrails);
     setupSearchListeners();
     applyFilters();
+
+    // Ensure ALL trails are shown on map (override filtered renderMap)
+    renderMap(allTrails);
 
     // Render peak markers on main map
     renderPeakMarkers(allPeaks);
@@ -1835,15 +1838,30 @@ function applyHomeFilter() {
   var showTrails = currentHomeFilter === 'all' || currentHomeFilter === 'trails';
   var showPeaks  = currentHomeFilter === 'all' || currentHomeFilter === 'peaks';
 
-  var trailList = document.getElementById('trail-list');
-  var sentinel = document.getElementById('load-sentinel');
-  var peaksList = document.getElementById('peaks-home-list');
-
-  if (trailList) trailList.style.display = showTrails ? '' : 'none';
-  if (sentinel) sentinel.style.display = showTrails ? '' : 'none';
-  if (peaksList) {
-    peaksList.style.display = showPeaks ? '' : 'none';
-    if (showPeaks) renderPeaksHomeList();
+  // Agisce sulla mappa: mostra/nasconde tracce GPX trail e marker cime
+  if (typeof gpxLayers !== 'undefined') {
+    gpxLayers.forEach(function(l) {
+      if (leafletMap) {
+        if (showTrails) { try { l.addTo(leafletMap); } catch(e) {} }
+        else { try { leafletMap.removeLayer(l); } catch(e) {} }
+      }
+    });
+  }
+  if (typeof markers !== 'undefined') {
+    markers.forEach(function(m) {
+      if (leafletMap) {
+        if (showTrails) { try { m.addTo(leafletMap); } catch(e) {} }
+        else { try { leafletMap.removeLayer(m); } catch(e) {} }
+      }
+    });
+  }
+  if (typeof peakMarkers !== 'undefined') {
+    peakMarkers.forEach(function(m) {
+      if (leafletMap) {
+        if (showPeaks) { try { m.addTo(leafletMap); } catch(e) {} }
+        else { try { leafletMap.removeLayer(m); } catch(e) {} }
+      }
+    });
   }
 }
 
