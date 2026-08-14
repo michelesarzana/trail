@@ -963,6 +963,104 @@
           }
         ]
       }
+    },
+    {
+      "id": "trekking-del-cristo-pensante",
+      "title": "Trekking del Cristo Pensante",
+      "status": "done",
+      "description": "Il trekking del Cristo Pensante è uno di quei percorsi che non stancano mai, neanche alla seconda o terza volta. Tecnicamente semplice, visivamente fuori scala: per tutta la camminata le Pale di San Martino sono lì, costanti, a fare da sfondo a ogni passo.\n\nSi parte dal parcheggio del Passo Rolle. Consiglio di arrivare presto, meglio se prima delle otto: nelle giornate di alta stagione i posti si esauriscono in fretta e ritrovarsi a cercare dove lasciare la macchina non è il modo migliore per iniziare una giornata in quota. Da qui il percorso si sviluppa sulle piste del comprensorio sciistico, con un andamento a leggero saliscendi che non impegna mai davvero le gambe. Il terreno è curato, il panorama è già aperto, e si arriva al Rifugio Cervino senza particolare fatica.\n\nAl bivio davanti al rifugio la scelta è semplice: a destra si prosegue verso la Baita Segantini, a sinistra inizia la salita verso il Monte Castellaz. Prendete a sinistra. Il sentiero è diretto, roccioso, con qualche tratto che richiede attenzione ai piedi ma niente che metta in difficoltà un escursionista medio. La salita è breve e il guadagno di quota si sente subito nella vista: una volta in cima, accanto al Cristo Pensante, si apre un panorama a 360° che vale da solo tutta la giornata. Il Lagorai, le Pale, il Luisa, la Marmolada, tutto insieme, tutto nitido.\n\nLa discesa dal Monte Castellaz riserva un'altra sorpresa: lungo il percorso si incontrano i resti della Prima Guerra Mondiale, depositi e postazioni ancora leggibili nel paesaggio, accompagnati da targhe che ne ricostruiscono la storia. Vale la pena fermarsi a leggerle, non solo a scattare foto.\n\nScesi a valle, il sentiero torna a farsi comodo e accompagna senza fretta fino alla Baita Segantini, tappa ideale per una sosta. Il giro si chiude passando di nuovo dal Rifugio Cervino, dove abbiamo mangiato molto bene e che vi consiglio senza riserve per il pranzo o la merenda prima di rientrare.",
+      "rating": 5,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/trekking-del-cristo-pensante/IMG_0868 (1).JPEG",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Trentino-Alto Adige",
+        "province": "Trento",
+        "municipality": "San Martino di Castrozza",
+        "area": "Pale di San Martino",
+        "start_address": "https://maps.app.goo.gl/Xjc2iNPFMYuWV1cF9",
+        "coordinates": {
+          "start": {
+            "lat": 46.296269,
+            "lng": 11.784406
+          },
+          "end": {
+            "lat": 46.296361,
+            "lng": 11.783912
+          }
+        }
+      },
+      "track": {
+        "distance_km": 8.9,
+        "elevation_gain": 601,
+        "elevation_loss": 604,
+        "elevation_max": 2340,
+        "elevation_min": 1964,
+        "duration_min": 195,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato",
+          "roccia"
+        ],
+        "gpx_file": "gpx/trekking-del-cristo-pensante.gpx"
+      },
+      "classification": {
+        "difficulty": 2,
+        "activity_types": [
+          "trail-running",
+          "trekking",
+          "escursionismo"
+        ],
+        "seasons": [
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "pale di san martino",
+        "monte castellaz",
+        "baita segantini"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": true,
+        "water_available": false,
+        "parking_notes": "Parcheggio disponibile al Passo Rolle, suggerisco di arrivare presto la mattina in agosto per evitare di non trovare posto"
+      },
+      "photo_credit": null,
+      "links": {
+        "strava": "https://www.strava.com/activities/19723934047",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [
+        {
+          "date": "2026-08-13",
+          "duration_min": 185,
+          "rating": 5,
+          "notes": null
+        }
+      ],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/trekking-del-cristo-pensante/IMG_0868 (1).JPEG",
+        "photos": [
+          {
+            "filename": "IMG_0868 (1).JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/trekking-del-cristo-pensante/IMG_0868 (1).JPEG"
+          },
+          {
+            "filename": "DSC04727.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/trekking-del-cristo-pensante/DSC04727.JPEG"
+          },
+          {
+            "filename": "DSC04728_hero.JPEG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/trekking-del-cristo-pensante/DSC04728_hero.JPEG"
+          }
+        ]
+      }
     }
   ]
 }
