@@ -111,7 +111,7 @@
         ]
       },
       "classification": {
-        "difficulty": "T3",
+        "difficulty": 3,
         "activity_types": [
           "trail-running",
           "trekking",
@@ -273,7 +273,7 @@
         ]
       },
       "classification": {
-        "difficulty": "T3",
+        "difficulty": 3,
         "activity_types": [
           "trail-running",
           "trekking",
@@ -370,7 +370,7 @@
         "gpx_file": "gpx/campestrin-cortina-d-ampezzo-fkt.gpx"
       },
       "classification": {
-        "difficulty": "T2",
+        "difficulty": 2,
         "activity_types": [
           "trail-running"
         ],
@@ -476,7 +476,7 @@
         "gpx_file": "gpx/da-paneveggio-ai-laghi-di-colbricon.gpx"
       },
       "classification": {
-        "difficulty": "T2",
+        "difficulty": 2,
         "activity_types": [
           "trekking",
           "escursionismo"
@@ -645,7 +645,7 @@
         "gpx_file": "gpx/rifugio-dondena-lago-del-miserin.gpx"
       },
       "classification": {
-        "difficulty": "T2",
+        "difficulty": 2,
         "activity_types": [
           "trail-running",
           "trekking",
@@ -831,7 +831,7 @@
         "gpx_file": "gpx/dorsale-del-triangolo-lariano.gpx"
       },
       "classification": {
-        "difficulty": "T2",
+        "difficulty": 2,
         "activity_types": [
           "trail-running"
         ],
