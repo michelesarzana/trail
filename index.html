@@ -767,9 +767,9 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
       </div>
     </a>
     <div class="nav-tabs">
-      <a href="#" class="nav-tab active" data-tab="mappa" onclick="switchTab('mappa',this)">🗺️ Mappa</a>
-      <a href="#" class="nav-tab" data-tab="percorsi" onclick="switchTab('percorsi',this)">🥾 Percorsi</a>
-      <a href="#" class="nav-tab" data-tab="cime" onclick="switchTab('cime',this)">🏔️ Cime</a>
+      <a href="index.html" class="nav-tab active" data-tab="mappa">🗺️ Mappa</a>
+      <a href="percorsi.html" class="nav-tab" data-tab="percorsi">🥾 Percorsi</a>
+      <a href="cime.html" class="nav-tab" data-tab="cime">🏔️ Cime</a>
     </div>
     <div class="nav-right">
       <a href="search.html" class="nav-btn" style="padding:7px 12px;font-size:13px;">🔍</a>
@@ -914,59 +914,6 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     <button class="filter-btn active" id="filter-all" onclick="setContentFilter('all')">🥾🏔️ Tutti</button>
     <button class="filter-btn" id="filter-trails" onclick="setContentFilter('trails')">🥾 Percorsi</button>
     <button class="filter-btn" id="filter-peaks" onclick="setContentFilter('peaks')">🏔️ Cime</button>
-  </div>
-
-  <!-- SECTION: PERCORSI -->
-  <div id="section-percorsi" class="section-page" style="display:none">
-    <div class="section-header">
-      <h2 class="section-title">🥾 Percorsi</h2>
-      <div class="section-controls">
-        <input type="search" id="percorsi-search" class="section-search" placeholder="Cerca percorso…" oninput="filterPercorsi()">
-        <div class="section-pills" id="percorsi-status-pills">
-          <span class="spill active" data-val="all" onclick="setPillPercorsiStatus('all',this)">Tutti</span>
-          <span class="spill" data-val="done" onclick="setPillPercorsiStatus('done',this)">✅ Completati</span>
-          <span class="spill" data-val="todo" onclick="setPillPercorsiStatus('todo',this)">📌 Da fare</span>
-        </div>
-        <div class="section-pills" id="percorsi-rating-pills">
-          <span class="spill active" data-val="0" onclick="setPillPercorsiRating(0,this)">⭐ Tutti</span>
-          <span class="spill" data-val="3" onclick="setPillPercorsiRating(3,this)">3+</span>
-          <span class="spill" data-val="4" onclick="setPillPercorsiRating(4,this)">4+</span>
-          <span class="spill" data-val="5" onclick="setPillPercorsiRating(5,this)">5 ★</span>
-        </div>
-      </div>
-      <div class="section-count" id="percorsi-count">0 percorsi</div>
-    </div>
-    <div class="grid-wrap" id="percorsi-grid">
-      <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
-    </div>
-  </div>
-
-  <!-- SECTION: CIME -->
-  <div id="section-cime" class="section-page" style="display:none">
-    <div class="section-header">
-      <h2 class="section-title">🏔️ Cime</h2>
-      <div class="section-controls">
-        <input type="search" id="cime-search" class="section-search" placeholder="Cerca cima…" oninput="filterCime()">
-        <div class="section-pills" id="cime-rating-pills">
-          <span class="spill active" data-val="0" onclick="setPillCimeRating(0,this)">⭐ Tutti</span>
-          <span class="spill" data-val="3" onclick="setPillCimeRating(3,this)">3+</span>
-          <span class="spill" data-val="4" onclick="setPillCimeRating(4,this)">4+</span>
-          <span class="spill" data-val="5" onclick="setPillCimeRating(5,this)">5 ★</span>
-        </div>
-        <div class="cime-altitude-filter">
-          <label class="filter-group-label" style="font-size:11px;font-weight:800;color:#726e7a;text-transform:uppercase;letter-spacing:.08em;">
-            Altitudine min: <span id="cime-alt-val">0 m</span>
-          </label>
-          <input type="range" min="0" max="4000" step="100" value="0" id="cime-alt-slider"
-            class="range-slider" oninput="setCimeAltitude(this.value)">
-        </div>
-      </div>
-      <div class="section-count" id="cime-count">0 cime</div>
-    </div>
-    <div id="peaks-osm-map"></div>
-    <div class="grid-wrap" id="cime-grid">
-      <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
-    </div>
   </div>
 
   <!-- FOOTER -->
@@ -1531,10 +1478,8 @@ async function init() {
   setupSearchListeners();
   applyFilters();
 
-  // Render peak markers on map
+  // Render peak markers on main map
   renderPeakMarkers(allPeaks);
-  // Init peaks OSM map (cime tab)
-  initPeaksMap(allPeaks);
 
   // After render, let Leaflet recalculate map size
   setTimeout(function() {
