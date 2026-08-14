@@ -202,6 +202,35 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   .grid-wrap { padding: 16px; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   .nav-tabs { display: none; }
 }
+
+/* Filter toggle + collapsible panel */
+.filter-toggle-btn {
+  background: #f0edf0; border: none; border-radius: 999px;
+  padding: 7px 16px; font-family: 'Manrope', sans-serif;
+  font-size: 12px; font-weight: 700; color: #726e7a;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+  transition: all .15s;
+}
+.filter-toggle-btn:hover { background: #e4dfe4; color: #2e2b38; }
+.filter-toggle-btn.active { background: #2e2b38; color: #fff; }
+.filter-count-badge {
+  background: #c17b8c; color: #fff; border-radius: 999px;
+  font-size: 10px; font-weight: 800; min-width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center; padding: 0 4px;
+}
+.filter-count-badge:empty { display: none; }
+.filter-panel {
+  padding: 16px 48px 20px;
+  background: #fff;
+  border-bottom: 1px solid rgba(46,43,56,0.06);
+  display: none; flex-wrap: wrap; gap: 14px 28px; align-items: flex-start;
+}
+.filter-panel.open { display: flex; }
+.filter-panel-group { display: flex; flex-direction: column; gap: 7px; }
+.filter-panel-label {
+  font-size: 10px; font-weight: 800; color: #b0a8b5;
+  text-transform: uppercase; letter-spacing: 0.07em;
+}
 </style>
 </head>
 <body>
@@ -227,7 +256,6 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 
 <div class="page-header">
   <h1 class="page-header-title">🥾 Percorsi</h1>
-  <p class="page-header-sub" id="results-sub">Caricamento…</p>
 </div>
 
 <div class="filter-bar">
@@ -239,60 +267,85 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     <button class="spill" id="spill-done" onclick="setStatus('done',this)">✅ Completati</button>
     <button class="spill" id="spill-todo" onclick="setStatus('todo',this)">📌 Da fare</button>
   </div>
-  <div class="diff-pills" id="diff-pills">
-    <button class="dpill" data-d="1" onclick="toggleDiff(1,this)">1</button>
-    <button class="dpill" data-d="2" onclick="toggleDiff(2,this)">2</button>
-    <button class="dpill" data-d="3" onclick="toggleDiff(3,this)">3</button>
-    <button class="dpill" data-d="4" onclick="toggleDiff(4,this)">4</button>
-    <button class="dpill" data-d="5" onclick="toggleDiff(5,this)">5</button>
-    <button class="dpill" data-d="6" onclick="toggleDiff(6,this)">6</button>
+  <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterPanel()">
+    ⚙️ Filtri
+    <span class="filter-count-badge" id="filter-count-badge"></span>
+  </button>
+  <span class="results-label" id="results-sub">Caricamento…</span>
+</div>
+
+<div class="filter-panel" id="filter-panel">
+  <div class="filter-panel-group">
+    <span class="filter-panel-label">Difficoltà</span>
+    <div class="diff-pills" id="diff-pills">
+      <button class="dpill" data-d="1" onclick="toggleDiff(1,this)">1</button>
+      <button class="dpill" data-d="2" onclick="toggleDiff(2,this)">2</button>
+      <button class="dpill" data-d="3" onclick="toggleDiff(3,this)">3</button>
+      <button class="dpill" data-d="4" onclick="toggleDiff(4,this)">4</button>
+      <button class="dpill" data-d="5" onclick="toggleDiff(5,this)">5</button>
+      <button class="dpill" data-d="6" onclick="toggleDiff(6,this)">6</button>
+    </div>
   </div>
-  <div class="pill-group" id="dist-pills">
-    <span class="pill-group-label">km</span>
-    <button class="gpill active" id="dist-all" onclick="setDistFilter('all',this)">Tutti</button>
-    <button class="gpill" onclick="setDistFilter('lt10',this)">&lt;10</button>
-    <button class="gpill" onclick="setDistFilter('10-25',this)">10-25</button>
-    <button class="gpill" onclick="setDistFilter('25-50',this)">25-50</button>
-    <button class="gpill" onclick="setDistFilter('gt50',this)">&gt;50</button>
+  <div class="filter-panel-group">
+    <span class="filter-panel-label">Distanza</span>
+    <div class="pill-group" id="dist-pills">
+      <button class="gpill active" id="dist-all" onclick="setDistFilter('all',this)">Tutti</button>
+      <button class="gpill" onclick="setDistFilter('lt10',this)">&lt;10 km</button>
+      <button class="gpill" onclick="setDistFilter('10-25',this)">10–25 km</button>
+      <button class="gpill" onclick="setDistFilter('25-50',this)">25–50 km</button>
+      <button class="gpill" onclick="setDistFilter('gt50',this)">&gt;50 km</button>
+    </div>
   </div>
-  <div class="pill-group" id="dplus-pills">
-    <span class="pill-group-label">D+</span>
-    <button class="gpill active" id="dplus-all" onclick="setDplusFilter('all',this)">Tutti</button>
-    <button class="gpill" onclick="setDplusFilter('lt500',this)">&lt;500</button>
-    <button class="gpill" onclick="setDplusFilter('500-1500',this)">500-1500</button>
-    <button class="gpill" onclick="setDplusFilter('gt1500',this)">&gt;1500</button>
+  <div class="filter-panel-group">
+    <span class="filter-panel-label">Dislivello</span>
+    <div class="pill-group" id="dplus-pills">
+      <button class="gpill active" id="dplus-all" onclick="setDplusFilter('all',this)">Tutti</button>
+      <button class="gpill" onclick="setDplusFilter('lt500',this)">&lt;500 m</button>
+      <button class="gpill" onclick="setDplusFilter('500-1500',this)">500–1500 m</button>
+      <button class="gpill" onclick="setDplusFilter('gt1500',this)">&gt;1500 m</button>
+    </div>
   </div>
-  <div class="pill-group" id="activity-pills">
-    <span class="pill-group-label">Attività</span>
-    <button class="gpill active" id="activity-all" onclick="setActivityFilter('all',this)">Tutti</button>
-    <button class="gpill" onclick="setActivityFilter('escursionismo',this)">🥾 Escursionismo</button>
-    <button class="gpill" onclick="setActivityFilter('trekking',this)">⛺ Trekking</button>
-    <button class="gpill" onclick="setActivityFilter('trail-running',this)">🏃 Trail running</button>
+  <div class="filter-panel-group">
+    <span class="filter-panel-label">Attività</span>
+    <div class="pill-group" id="activity-pills">
+      <button class="gpill active" id="act-all" onclick="setActivityFilter('all',this)">Tutte</button>
+      <button class="gpill" onclick="setActivityFilter('trail-running',this)">🏃 Trail</button>
+      <button class="gpill" onclick="setActivityFilter('hiking',this)">🥾 Hiking</button>
+      <button class="gpill" onclick="setActivityFilter('via-ferrata',this)">🧗 Via ferrata</button>
+      <button class="gpill" onclick="setActivityFilter('ciaspolata',this)">❄️ Ciaspolata</button>
+    </div>
   </div>
-  <div class="pill-group" id="season-pills">
-    <span class="pill-group-label">Stagione</span>
-    <button class="gpill active" id="season-all" onclick="setSeasonFilter('all',this)">Tutti</button>
-    <button class="gpill" onclick="setSeasonFilter('primavera',this)">🌸 Primavera</button>
-    <button class="gpill" onclick="setSeasonFilter('estate',this)">☀️ Estate</button>
-    <button class="gpill" onclick="setSeasonFilter('autunno',this)">🍂 Autunno</button>
-    <button class="gpill" onclick="setSeasonFilter('inverno',this)">❄️ Inverno</button>
+  <div class="filter-panel-group">
+    <span class="filter-panel-label">Stagione</span>
+    <div class="pill-group" id="season-pills">
+      <button class="gpill active" id="sea-all" onclick="setSeasonFilter('all',this)">Tutte</button>
+      <button class="gpill" onclick="setSeasonFilter('primavera',this)">🌸 Primavera</button>
+      <button class="gpill" onclick="setSeasonFilter('estate',this)">☀️ Estate</button>
+      <button class="gpill" onclick="setSeasonFilter('autunno',this)">🍂 Autunno</button>
+      <button class="gpill" onclick="setSeasonFilter('inverno',this)">❄️ Inverno</button>
+    </div>
   </div>
-  <div class="rating-filter">
-    <span>Min ⭐</span>
-    <button class="star-btn" data-r="1" onclick="setRating(1)">★</button>
-    <button class="star-btn" data-r="2" onclick="setRating(2)">★</button>
-    <button class="star-btn" data-r="3" onclick="setRating(3)">★</button>
-    <button class="star-btn" data-r="4" onclick="setRating(4)">★</button>
-    <button class="star-btn" data-r="5" onclick="setRating(5)">★</button>
+  <div class="filter-panel-group">
+    <span class="filter-panel-label">Rating min</span>
+    <div class="rating-filter">
+      <button class="star-btn" data-r="1" onclick="setRating(1)">★</button>
+      <button class="star-btn" data-r="2" onclick="setRating(2)">★</button>
+      <button class="star-btn" data-r="3" onclick="setRating(3)">★</button>
+      <button class="star-btn" data-r="4" onclick="setRating(4)">★</button>
+      <button class="star-btn" data-r="5" onclick="setRating(5)">★</button>
+    </div>
   </div>
-  <select class="sort-select" id="sort-select" onchange="renderGrid()">
-    <option value="recent" selected>Più recente</option>
-    <option value="az">A → Z</option>
-    <option value="dist-asc">Distanza ↑</option>
-    <option value="dist-desc">Distanza ↓</option>
-    <option value="rating">Rating ↓</option>
-    <option value="gain-desc">Dislivello ↓</option>
-  </select>
+  <div class="filter-panel-group">
+    <span class="filter-panel-label">Ordina</span>
+    <select class="sort-select" id="sort-select" onchange="renderGrid()">
+      <option value="recent" selected>Più recente</option>
+      <option value="az">A → Z</option>
+      <option value="dist-asc">Distanza ↑</option>
+      <option value="dist-desc">Distanza ↓</option>
+      <option value="rating">Rating ↓</option>
+      <option value="gain-desc">Dislivello ↓</option>
+    </select>
+  </div>
 </div>
 
 <div class="grid-wrap" id="grid"></div>
@@ -332,6 +385,27 @@ function locationLine(t) {
 
 function fmtDist(km) { return km ? km + ' km' : '—'; }
 function fmtGain(g) { return g ? '+' + g + ' m' : '—'; }
+
+
+function toggleFilterPanel() {
+  var panel = document.getElementById('filter-panel');
+  var btn = document.getElementById('filter-toggle-btn');
+  if (!panel) return;
+  panel.classList.toggle('open');
+  btn.classList.toggle('active', panel.classList.contains('open'));
+}
+
+function updateFilterBadge() {
+  var count = 0;
+  if (filters.diff.length) count += filters.diff.length;
+  if (filters.dist !== 'all') count++;
+  if (filters.dplus !== 'all') count++;
+  if (filters.activity !== 'all') count++;
+  if (filters.season !== 'all') count++;
+  if (filters.rating > 0) count++;
+  var badge = document.getElementById('filter-count-badge');
+  if (badge) badge.textContent = count > 0 ? count : '';
+}
 
 function onSearch(v) {
   filters.q = v.trim();
