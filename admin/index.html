@@ -434,6 +434,11 @@ input,textarea,select{font-family:inherit;font-size:14px}
 .logbook-admin-entry-actions button:hover{background:var(--accent);color:#000;border-color:var(--accent)}
 #lb-stars span{color:var(--text-muted)}
 #lb-stars span.active{color:var(--accent)}
+
+/* === Difficulty tooltip === */
+[data-tooltip] { position:relative; cursor:help; }
+[data-tooltip]::after { content:attr(data-tooltip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:#222; color:#fff; font-size:11px; white-space:nowrap; padding:4px 8px; border-radius:6px; pointer-events:none; opacity:0; transition:opacity .2s; z-index:9999; }
+[data-tooltip]:hover::after { opacity:1; }
 </style>
 </head>
 <body>
@@ -499,12 +504,12 @@ input,textarea,select{font-family:inherit;font-size:14px}
               <label>Difficoltà</label>
               <select id="filter-difficulty" onchange="applyFilters()">
                 <option value="">Tutte</option>
-                <option value="T1">T1 — Turistico</option>
-                <option value="T2">T2 — Escursionistico</option>
-                <option value="T3">T3 — Avanzato</option>
-                <option value="T4">T4 — Alpinistico</option>
-                <option value="T5">T5 — Alpinistico avanzato</option>
-                <option value="T6">T6 — Estremo</option>
+                <option value="1">1 — Facile</option>
+                <option value="2">2 — Facile/Medio</option>
+                <option value="3">3 — Medio</option>
+                <option value="4">4 — Medio/Difficile</option>
+                <option value="5">5 — Difficile</option>
+                <option value="6">6 — Molto Difficile</option>
               </select>
             </div>
             <div class="adv-filter">
@@ -780,12 +785,12 @@ input,textarea,select{font-family:inherit;font-size:14px}
                   <label>Difficoltà</label>
                   <select id="f-difficulty">
                     <option value="">— seleziona —</option>
-                    <option value="T1">T1 — Turistico</option>
-                    <option value="T2">T2 — Escursionistico</option>
-                    <option value="T3">T3 — Avanzato</option>
-                    <option value="T4">T4 — Alpinistico</option>
-                    <option value="T5">T5 — Alpinistico avanzato</option>
-                    <option value="T6">T6 — Estremo</option>
+                    <option value="1">1 — Facile</option>
+                    <option value="2">2 — Facile/Medio</option>
+                    <option value="3">3 — Medio</option>
+                    <option value="4">4 — Medio/Difficile</option>
+                    <option value="5">5 — Difficile</option>
+                    <option value="6">6 — Molto Difficile</option>
                   </select>
                 </div>
                 <div class="field full">
@@ -1185,6 +1190,7 @@ function renderList(trailsOverride) {
         <span class="badge badge-${t.status||'todo'}">${t.status==='done'?'✅ Done':'📌 Todo'}</span>
         ${stars ? `<span class="stars-small">${stars}</span>` : ''}
         ${t.location?.region ? `<span style="font-size:11px;color:var(--text-dim)">${escHtml(t.location.region)}</span>` : ''}
+        ${(t.classification && t.classification.difficulty) ? `<span data-tooltip="&#x26A0;&#xFE0F; La difficolt&agrave; &egrave; soggettiva!" style="font-size:11px;font-weight:600;color:var(--accent)">${escHtml(String(t.classification.difficulty))}</span>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -1744,7 +1750,7 @@ function populateForm(t) {
   setChecked('cb-surface', tr.surface || []);
   // classification
   const cl = t.classification || {};
-  document.getElementById('f-difficulty').value = cl.difficulty || '';
+  document.getElementById('f-difficulty').value = (cl.difficulty !== null && cl.difficulty !== undefined) ? String(cl.difficulty) : '';
   setChecked('cb-activity', cl.activity_types || []);
   setChecked('cb-season', cl.seasons || []);
   tags = (t.tags || []).slice(); renderTags();
@@ -1837,7 +1843,7 @@ function collectForm() {
       surface: getChecked('cb-surface')
     },
     classification: {
-      difficulty: document.getElementById('f-difficulty').value || null,
+      difficulty: document.getElementById('f-difficulty').value ? parseInt(document.getElementById('f-difficulty').value, 10) : null,
       activity_types: getChecked('cb-activity'),
       seasons: getChecked('cb-season')
     },
@@ -2151,7 +2157,7 @@ function applyFilters() {
     if (activeStatusFilter !== 'all' && t.status !== activeStatusFilter) return false;
     if (text && !(t.title||'').toLowerCase().includes(text) && !(t.description||'').toLowerCase().includes(text)) return false;
     if (region && (t.location?.region || t.geo?.region) !== region) return false;
-    if (difficulty && t.classification?.difficulty !== difficulty) return false;
+    if (difficulty && String(t.classification && t.classification.difficulty) !== String(difficulty)) return false;
     if (activity && !(t.classification?.activity_types || t.classification?.activity_type || []).includes(activity)) return false;
     if (season && !(t.classification?.seasons || []).includes(season)) return false;
     if (rating && (!t.rating || t.rating < rating)) return false;
