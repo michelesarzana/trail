@@ -778,6 +778,15 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     </div>
   </nav>
 
+  <!-- CONTENT FILTER (visibile in tab Percorsi e Cime) -->
+  <div id="content-filter" style="display:none;padding:8px 48px;background:#fff;border-bottom:1px solid rgba(46,43,56,0.08);">
+    <div style="display:flex;gap:4px;background:rgba(46,43,56,0.06);border-radius:10px;padding:3px;display:inline-flex;">
+      <button class="filter-btn active" id="filter-all" onclick="setContentFilter('all')">🥾🏔️ Tutti</button>
+      <button class="filter-btn" id="filter-trails" onclick="setContentFilter('trails')">🥾 Percorsi</button>
+      <button class="filter-btn" id="filter-peaks" onclick="setContentFilter('peaks')">🏔️ Cime</button>
+    </div>
+  </div>
+
   <!-- SEARCH HERO with full filters -->
   <div class="search-hero">
     <!-- SEARCH BOX -->
@@ -903,12 +912,6 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     </div>
   </div>
 
-  <!-- CONTENT FILTER -->
-  <div id="content-filter" style="display:none;gap:4px;background:rgba(255,255,255,0.06);border-radius:10px;padding:3px;margin:0 0 0 0">
-    <button class="filter-btn active" id="filter-all" onclick="setContentFilter('all')">🥾🏔️ Tutti</button>
-    <button class="filter-btn" id="filter-trails" onclick="setContentFilter('trails')">🥾 Percorsi</button>
-    <button class="filter-btn" id="filter-peaks" onclick="setContentFilter('peaks')">🏔️ Cime</button>
-  </div>
 
   <!-- SECTION: PERCORSI -->
   <div id="section-percorsi" class="section-page" style="display:none">
@@ -957,7 +960,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
       </div>
       <div class="section-count" id="cime-count">0 cime</div>
     </div>
-    <div id="peaks-osm-map"></div>
+    <div id="peaks-osm-map" style="height:300px;border-radius:12px;overflow:hidden;margin-bottom:16px"></div>
     <div class="grid-wrap" id="cime-grid">
       <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
     </div>
@@ -1527,9 +1530,6 @@ async function init() {
 
   // Render peak markers on map
   renderPeakMarkers(allPeaks);
-  // Init peaks OSM map (cime tab)
-  initPeaksMap(allPeaks);
-
   // After render, let Leaflet recalculate map size
   setTimeout(function() {
     if (leafletMap) leafletMap.invalidateSize();
@@ -1628,22 +1628,32 @@ function switchTab(tab, el) {
     if (mappa) mappa.style.display = '';
     if (hero) hero.style.display = '';
     if (filters) filters.style.display = '';
+    var cf = document.getElementById('content-filter');
+    if (cf) cf.style.display = 'none';
     setTimeout(function() { if (leafletMap) leafletMap.invalidateSize(); }, 200);
   } else if (tab === 'percorsi') {
     if (percorsi) percorsi.style.display = '';
-    if (hero) hero.style.display = 'none';
-    if (filters) filters.style.display = 'none';
-    var cf = document.getElementById('content-filter');
-    if (cf) cf.style.display = 'none';
-    renderPercorsiGrid(allTrails);
-  } else if (tab === 'cime') {
     if (cime) cime.style.display = '';
     if (hero) hero.style.display = 'none';
     if (filters) filters.style.display = 'none';
     var cf = document.getElementById('content-filter');
     if (cf) cf.style.display = 'flex';
+    currentContentFilter = 'all';
+    applyContentFilter();
+    renderPercorsiGrid(allTrails);
     renderCimeGrid(allPeaks);
-    setTimeout(function() { if (peaksOsmMap) peaksOsmMap.invalidateSize(); }, 250);
+  } else if (tab === 'cime') {
+    if (cime) cime.style.display = '';
+    if (percorsi) percorsi.style.display = 'none';
+    if (hero) hero.style.display = 'none';
+    if (filters) filters.style.display = 'none';
+    var cf = document.getElementById('content-filter');
+    if (cf) cf.style.display = 'none';
+    renderCimeGrid(allPeaks);
+    setTimeout(function() {
+      initPeaksMap(allPeaks);
+      if (peaksOsmMap) peaksOsmMap.invalidateSize();
+    }, 250);
   }
 }
 
@@ -1846,6 +1856,7 @@ function initPeaksMap(peaks) {
   if (bounds.length > 0) {
     peaksOsmMap.fitBounds(bounds, { padding: [30, 30] });
   }
+  peaksOsmMap.invalidateSize();
 }
 
 function focusPeakOnMap(peakId) {
