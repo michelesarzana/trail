@@ -152,8 +152,21 @@
         }
       ],
       "media": {
-        "cover": null,
-        "photos": []
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg",
+        "photos": [
+          {
+            "filename": "j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/j6fUTd2v_eX8OORTURLOAXMSbLttkDxbewkPkCydTGw-1536x2048.jpg"
+          },
+          {
+            "filename": "BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/BLfl6rYPKe7n1y3-h6ZTI9gzSB0fO8tWq_DJ_m4ckdk-1536x2048.jpg"
+          },
+          {
+            "filename": "_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048 (1)_hero.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/lago-antermoia-dal-rifugio-micheluzzi/_jGTFMCcQmJ9JnqOOXmVHahSsp8FhlsTnkKu5NMAlPk-1537x2048 (1)_hero.jpg"
+          }
+        ]
       },
       "gpx_file": "https://raw.githubusercontent.com/michelesarzana/trail/main/gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
     },
@@ -773,13 +786,8 @@
       },
       "log": [],
       "media": {
-        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/IMG_8500_hero.JPEG",
-        "photos": [
-          {
-            "filename": "IMG_8500_hero.JPEG",
-            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona/IMG_8500_hero.JPEG"
-          }
-        ]
+        "cover": null,
+        "photos": []
       }
     },
     {
