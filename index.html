@@ -747,6 +747,11 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
   font-size: 12px; font-weight: 600; color: #2e2b38; cursor: pointer; outline: none;
 }
 
+
+/* === Difficulty tooltip === */
+[data-tooltip] { position:relative; cursor:help; }
+[data-tooltip]::after { content:attr(data-tooltip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:#222; color:#fff; font-size:11px; white-space:nowrap; padding:4px 8px; border-radius:6px; pointer-events:none; opacity:0; transition:opacity .2s; z-index:9999; }
+[data-tooltip]:hover::after { opacity:1; }
 </style>
 <meta property="og:image" content="https://michelesarzana.github.io/trail/media/favicon-512.png">
 </head>
@@ -803,12 +808,12 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
         <div class="filter-group">
           <span class="filter-group-label">Difficoltà</span>
           <div class="pill-group" id="filter-difficulty">
-            <span class="pill" data-val="T1" onclick="togglePillFilter('difficulty','T1',this)">T1</span>
-            <span class="pill" data-val="T2" onclick="togglePillFilter('difficulty','T2',this)">T2</span>
-            <span class="pill" data-val="T3" onclick="togglePillFilter('difficulty','T3',this)">T3</span>
-            <span class="pill" data-val="T4" onclick="togglePillFilter('difficulty','T4',this)">T4</span>
-            <span class="pill" data-val="T5" onclick="togglePillFilter('difficulty','T5',this)">T5</span>
-            <span class="pill" data-val="T6" onclick="togglePillFilter('difficulty','T6',this)">T6</span>
+            <span class="pill" data-val="1" onclick="togglePillFilter('difficulty',1,this)">1</span>
+            <span class="pill" data-val="2" onclick="togglePillFilter('difficulty',2,this)">2</span>
+            <span class="pill" data-val="3" onclick="togglePillFilter('difficulty',3,this)">3</span>
+            <span class="pill" data-val="4" onclick="togglePillFilter('difficulty',4,this)">4</span>
+            <span class="pill" data-val="5" onclick="togglePillFilter('difficulty',5,this)">5</span>
+            <span class="pill" data-val="6" onclick="togglePillFilter('difficulty',6,this)">6</span>
           </div>
         </div>
       </div>
@@ -1175,7 +1180,7 @@ function showAutocomplete(q) {
     return '<div class="autocomplete-item" data-idx="' + i + '" onmousedown="selectAutocomplete(\'' + titleEsc.replace(/'/g,"\\'") + '\')">' +
       '<span class="autocomplete-emoji">' + (t.status === 'done' ? '\u2705' : '\uD83E\uDD5E') + '</span>' +
       '<div><div class="autocomplete-title">' + escHtml(t.title||'') + '</div>' +
-      '<div class="autocomplete-meta">' + escHtml(region) + (diff ? ' · ' + escHtml(diff) : '') + '</div></div></div>';
+      '<div class="autocomplete-meta">' + escHtml(region) + (diff ? ' · <span data-tooltip="\u26A0\uFE0F La difficolt\u00e0 \u00e8 soggettiva!" style="cursor:help">' + escHtml(diff) + '</span>' : '') + '</div></div></div>';
   }).join('');
   box.classList.add('open');
 }
@@ -1373,7 +1378,7 @@ function renderCard(t) {
         <div class="trail-card-stats-left">
           <span>${fmtDist(track.distance_km)}</span>
           <span class="stat-accent">${fmtGain(track.elevation_gain)}</span>
-          ${diff ? `<span>${escHtml(diff)}</span>` : ''}
+          ${diff ? `<span data-tooltip="&#x26A0;&#xFE0F; La difficolt\u00e0 \u00e8 soggettiva!" style="cursor:help">${escHtml(diff)}</span>` : ''}
           ${track.duration_min ? `<span>${fmtDur(track.duration_min)}</span>` : ''}
         </div>
         <span class="card-link">Dettagli →</span>
