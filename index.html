@@ -470,12 +470,23 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .peak-alt { font-size: 13px; font-weight: 800; color: #2e2b38; }
 
 /* Peak marker popup */
-.peak-popup { width: 200px; font-family: 'Manrope', sans-serif; }
+.peak-popup { width: 200px; font-family: 'Manrope', sans-serif; padding: 4px 4px 12px; box-sizing:border-box; }
 .peak-popup-title { font-size: 14px; font-weight: 800; color: #2e2b38; margin: 0 0 4px; }
 .peak-popup-alt { font-size: 12px; color: #726e7a; margin: 0 0 6px; }
 .peak-popup-stars { font-size: 13px; color: #fdc400; margin-bottom: 6px; }
 .peak-popup-trail-link { font-size: 12px; font-weight: 700; color: #c17b8c; }
+.peak-popup-coords { font-size: 11px; color: #726e7a; margin: 0 0 4px; }
+.peak-popup-maps { font-size: 12px; font-weight: 600; color: #4a90e2; display:block; margin-bottom: 6px; text-decoration:none; }
+.peak-popup-maps:hover { text-decoration: underline; }
 .peak-popup img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
+
+/* Content filter toggle */
+.filter-btn { background:transparent; border:none; border-radius:7px; padding:6px 14px; font-size:13px; cursor:pointer; color:var(--text-dim,#aaa); transition:all .2s; }
+.filter-btn.active { background:var(--accent,#e8ff4d); color:#000; font-weight:600; }
+
+/* Peaks OSM map */
+#peaks-osm-map { height:300px; border-radius:12px; overflow:hidden; margin-bottom:16px; }
+
 
 @media (max-width: 600px) {
   .section-page { padding: 16px 16px 32px; }
@@ -887,6 +898,13 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
     </div>
   </div>
 
+  <!-- CONTENT FILTER -->
+  <div id="content-filter" style="display:none;gap:4px;background:rgba(255,255,255,0.06);border-radius:10px;padding:3px;margin:0 0 0 0">
+    <button class="filter-btn active" id="filter-all" onclick="setContentFilter('all')">🥾🏔️ Tutti</button>
+    <button class="filter-btn" id="filter-trails" onclick="setContentFilter('trails')">🥾 Percorsi</button>
+    <button class="filter-btn" id="filter-peaks" onclick="setContentFilter('peaks')">🏔️ Cime</button>
+  </div>
+
   <!-- SECTION: PERCORSI -->
   <div id="section-percorsi" class="section-page" style="display:none">
     <div class="section-header">
@@ -934,6 +952,7 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
       </div>
       <div class="section-count" id="cime-count">0 cime</div>
     </div>
+    <div id="peaks-osm-map"></div>
     <div class="grid-wrap" id="cime-grid">
       <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
     </div>
@@ -1503,6 +1522,8 @@ async function init() {
 
   // Render peak markers on map
   renderPeakMarkers(allPeaks);
+  // Init peaks OSM map (cime tab)
+  initPeaksMap(allPeaks);
 
   // After render, let Leaflet recalculate map size
   setTimeout(function() {
@@ -1552,6 +1573,7 @@ function renderPeakPopup(p) {
     + img
     + '<p class="peak-popup-title">' + escHtml(p.name) + '</p>'
     + '<p class="peak-popup-alt">⛰️ ' + p.altitude + ' m s.l.m.</p>'
+    + (p.lat && p.lon ? '<p class="peak-popup-coords">📍 ' + p.lat.toFixed(6) + ', ' + p.lon.toFixed(6) + '</p><a class="peak-popup-maps" href="https://www.google.com/maps?q=' + p.lat + ',' + p.lon + '" target="_blank" rel="noopener">🔗 Apri in Maps</a>' : '')
     + (stars ? '<div class="peak-popup-stars">' + stars + '</div>' : '')
     + trailLink
     + '</div>';
@@ -1606,12 +1628,17 @@ function switchTab(tab, el) {
     if (percorsi) percorsi.style.display = '';
     if (hero) hero.style.display = 'none';
     if (filters) filters.style.display = 'none';
+    var cf = document.getElementById('content-filter');
+    if (cf) cf.style.display = 'none';
     renderPercorsiGrid(allTrails);
   } else if (tab === 'cime') {
     if (cime) cime.style.display = '';
     if (hero) hero.style.display = 'none';
     if (filters) filters.style.display = 'none';
+    var cf = document.getElementById('content-filter');
+    if (cf) cf.style.display = 'flex';
     renderCimeGrid(allPeaks);
+    setTimeout(function() { if (peaksOsmMap) peaksOsmMap.invalidateSize(); }, 250);
   }
 }
 
@@ -1736,7 +1763,7 @@ function renderCimeGrid(peaks) {
     const coverHtml = p.photo
       ? '<img src="' + escHtml(p.photo) + '" alt="' + escHtml(p.name) + '" loading="lazy">'
       : '<div class="grid-card-cover-placeholder">🏔️</div>';
-    return '<div class="grid-card">'
+    return '<div class="grid-card" onclick="focusPeakOnMap(\'' + escHtml(p.id) + '\')" style="cursor:pointer">'
       + '<div class="grid-card-cover">' + coverHtml + '</div>'
       + '<div class="grid-card-body">'
       + '<div class="grid-card-title">' + escHtml(p.name) + '</div>'
@@ -1766,6 +1793,63 @@ function setCimeAltitude(val) {
 /* ===== OVERRIDE INIT to also load peaks ===== */
 
 
+
+
+/* ===== CONTENT FILTER ===== */
+var currentContentFilter = 'all';
+
+function setContentFilter(f) {
+  currentContentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  var btn = document.getElementById('filter-' + f);
+  if (btn) btn.classList.add('active');
+  applyContentFilter();
+}
+
+function applyContentFilter() {
+  var showTrails = currentContentFilter === 'all' || currentContentFilter === 'trails';
+  var showPeaks  = currentContentFilter === 'all' || currentContentFilter === 'peaks';
+  var percorsiSection = document.getElementById('section-percorsi');
+  var peaksSection = document.getElementById('section-cime');
+  if (percorsiSection) percorsiSection.style.display = showTrails ? '' : 'none';
+  if (peaksSection) peaksSection.style.display = showPeaks ? '' : 'none';
+}
+
+/* ===== PEAKS OSM MAP (cime tab) ===== */
+var peaksOsmMap = null;
+var peaksOsmMarkers = {};
+
+function initPeaksMap(peaks) {
+  if (!peaksOsmMap) {
+    peaksOsmMap = L.map('peaks-osm-map').setView([46.0, 11.5], 7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(peaksOsmMap);
+  }
+  Object.values(peaksOsmMarkers).forEach(function(m) { peaksOsmMap.removeLayer(m); });
+  peaksOsmMarkers = {};
+  var bounds = [];
+  (peaks || []).forEach(function(p) {
+    if (!p.lat || !p.lon) return;
+    var marker = L.marker([p.lat, p.lon]);
+    var popupHtml = '<strong>' + escHtml(p.name || '') + '</strong><br>' + (p.altitude ? p.altitude + ' m s.l.m.' : '');
+    marker.bindPopup(popupHtml);
+    marker.addTo(peaksOsmMap);
+    peaksOsmMarkers[p.id] = marker;
+    bounds.push([p.lat, p.lon]);
+  });
+  if (bounds.length > 0) {
+    peaksOsmMap.fitBounds(bounds, { padding: [30, 30] });
+  }
+}
+
+function focusPeakOnMap(peakId) {
+  var marker = peaksOsmMarkers[peakId];
+  if (marker) {
+    peaksOsmMap.flyTo(marker.getLatLng(), 13, { duration: 1 });
+    marker.openPopup();
+  }
+}
 
 </script>
 </body>
