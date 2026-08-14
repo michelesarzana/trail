@@ -893,10 +893,16 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
           <option value="rating">Rating ↓</option>
         </select>
       </div>
+      <div id="home-content-filter" style="display:flex;gap:4px;background:rgba(0,0,0,0.05);border-radius:10px;padding:3px;margin:0 12px 10px;width:fit-content">
+        <button class="filter-btn active" id="hfilter-all" onclick="setHomeFilter('all')">&#x1F97E;&#x1F3D4;&#xFE0F; Tutti</button>
+        <button class="filter-btn" id="hfilter-trails" onclick="setHomeFilter('trails')">&#x1F97E; Percorsi</button>
+        <button class="filter-btn" id="hfilter-peaks" onclick="setHomeFilter('peaks')">&#x1F3D4;&#xFE0F; Cime</button>
+      </div>
       <div class="trail-list" id="trail-list">
         <div class="no-results"><div class="no-results-icon">⏳</div>Caricamento…</div>
       </div>
       <div id="load-sentinel" style="display:none"><div class="loader-dots"><span></span><span></span><span></span></div></div>
+      <div id="peaks-home-list" style="display:none;overflow-y:auto;padding:0 12px 12px"></div>
     </div>
     <div class="map-area">
       <div id="map"></div>
@@ -1514,7 +1520,7 @@ async function loadTrails() {
 async function init() {
   initMap();
 
-  allTrails = await loadTrails();
+  [allTrails, allPeaks] = await Promise.all([loadTrails(), loadPeaks()]);
 
   // Update nav counter
   const done = allTrails.filter(t => t.status === 'done').length;
@@ -1525,20 +1531,15 @@ async function init() {
   setupSearchListeners();
   applyFilters();
 
+  // Render peak markers on map
+  renderPeakMarkers(allPeaks);
+  // Init peaks OSM map (cime tab)
+  initPeaksMap(allPeaks);
+
   // After render, let Leaflet recalculate map size
   setTimeout(function() {
     if (leafletMap) leafletMap.invalidateSize();
   }, 200);
-}
-
-/* Lazy load peaks — chiamato solo quando si visita la tab Cime per la prima volta */
-var _peaksLoaded = false;
-async function ensurePeaksLoaded() {
-  if (_peaksLoaded) return;
-  _peaksLoaded = true;
-  allPeaks = await loadPeaks();
-  renderPeakMarkers(allPeaks);
-  initPeaksMap(allPeaks);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -1633,6 +1634,8 @@ function switchTab(tab, el) {
     if (mappa) mappa.style.display = '';
     if (hero) hero.style.display = '';
     if (filters) filters.style.display = '';
+    var hcf = document.getElementById('home-content-filter');
+    if (hcf) hcf.style.display = 'flex';
     setTimeout(function() { if (leafletMap) leafletMap.invalidateSize(); }, 200);
   } else if (tab === 'percorsi') {
     if (percorsi) percorsi.style.display = '';
@@ -1640,18 +1643,19 @@ function switchTab(tab, el) {
     if (filters) filters.style.display = 'none';
     var cf = document.getElementById('content-filter');
     if (cf) cf.style.display = 'none';
-    // allTrails già caricati all'init — renderizza subito
+    var hcf2 = document.getElementById('home-content-filter');
+    if (hcf2) hcf2.style.display = 'none';
     renderPercorsiGrid(allTrails);
   } else if (tab === 'cime') {
     if (cime) cime.style.display = '';
     if (hero) hero.style.display = 'none';
     if (filters) filters.style.display = 'none';
     var cf = document.getElementById('content-filter');
-    if (cf) cf.style.display = 'flex';
-    ensurePeaksLoaded().then(function() {
-      renderCimeGrid(allPeaks);
-      setTimeout(function() { if (peaksOsmMap) peaksOsmMap.invalidateSize(); }, 300);
-    });
+    if (cf) cf.style.display = 'none';
+    var hcf3 = document.getElementById('home-content-filter');
+    if (hcf3) hcf3.style.display = 'none';
+    renderCimeGrid(allPeaks);
+    setTimeout(function() { if (peaksOsmMap) peaksOsmMap.invalidateSize(); }, 250);
   }
 }
 
@@ -1845,17 +1849,8 @@ function initPeaksMap(peaks) {
   (peaks || []).forEach(function(p) {
     if (!p.lat || !p.lon) return;
     var marker = L.marker([p.lat, p.lon]);
-    var stars = p.rating ? '⭐'.repeat(p.rating) : '';
-    var mapsLink = (p.lat && p.lon) ? '<a href="https://www.google.com/maps?q=' + p.lat + ',' + p.lon + '" target="_blank" rel="noopener" style="font-size:12px;color:#4a90e2;text-decoration:none;display:block;margin-top:4px">🔗 Apri in Maps</a>' : '';
-    var imgHtml = p.photo ? '<img src="' + escHtml(p.photo) + '" style="width:100%;height:100px;object-fit:cover;border-radius:8px;margin-bottom:8px" loading="lazy">' : '';
-    var popupHtml = '<div style="min-width:190px;max-width:230px;padding:12px;font-family:\'Manrope\',sans-serif;box-sizing:border-box">'
-      + imgHtml
-      + '<strong style="font-size:14px;font-weight:800;color:#2e2b38;display:block;margin-bottom:4px">' + escHtml(p.name || '') + '</strong>'
-      + (p.altitude ? '<span style="font-size:13px;color:#726e7a;display:block;margin-bottom:4px">⛰️ ' + p.altitude + ' m s.l.m.</span>' : '')
-      + (stars ? '<span style="font-size:14px;display:block;margin-bottom:4px">' + stars + '</span>' : '')
-      + mapsLink
-      + '</div>';
-    marker.bindPopup(popupHtml, { maxWidth: 250 });
+    var popupHtml = '<strong>' + escHtml(p.name || '') + '</strong><br>' + (p.altitude ? p.altitude + ' m s.l.m.' : '');
+    marker.bindPopup(popupHtml);
     marker.addTo(peaksOsmMap);
     peaksOsmMarkers[p.id] = marker;
     bounds.push([p.lat, p.lon]);
@@ -1871,6 +1866,58 @@ function focusPeakOnMap(peakId) {
     peaksOsmMap.flyTo(marker.getLatLng(), 13, { duration: 1 });
     marker.openPopup();
   }
+}
+
+
+/* ===== HOME CONTENT FILTER (mappa tab sidebar) ===== */
+var currentHomeFilter = 'all';
+
+function setHomeFilter(f) {
+  currentHomeFilter = f;
+  document.querySelectorAll('#home-content-filter .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  var btn = document.getElementById('hfilter-' + f);
+  if (btn) btn.classList.add('active');
+  applyHomeFilter();
+}
+
+function applyHomeFilter() {
+  var showTrails = currentHomeFilter === 'all' || currentHomeFilter === 'trails';
+  var showPeaks  = currentHomeFilter === 'all' || currentHomeFilter === 'peaks';
+
+  var trailList = document.getElementById('trail-list');
+  var sentinel = document.getElementById('load-sentinel');
+  var peaksList = document.getElementById('peaks-home-list');
+
+  if (trailList) trailList.style.display = showTrails ? '' : 'none';
+  if (sentinel) sentinel.style.display = showTrails ? '' : 'none';
+  if (peaksList) {
+    peaksList.style.display = showPeaks ? '' : 'none';
+    if (showPeaks) renderPeaksHomeList();
+  }
+}
+
+function renderPeaksHomeList() {
+  var el = document.getElementById('peaks-home-list');
+  if (!el) return;
+  var peaks = allPeaks || [];
+  if (!peaks.length) {
+    el.innerHTML = '<p style="color:#888;padding:12px;font-size:13px">Nessuna cima registrata.</p>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < peaks.length; i++) {
+    var p = peaks[i];
+    var stars = p.rating ? '&#9733;'.repeat(p.rating) : '';
+    var mapsUrl = (p.lat && p.lon) ? 'https://www.google.com/maps?q=' + p.lat + ',' + p.lon : '';
+    html += '<div style="background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer" onclick="focusPeakOnMap('' + p.id + '')">';
+    if (p.photo) html += '<img src="' + p.photo + '" style="width:100%;height:100px;object-fit:cover;border-radius:8px;margin-bottom:6px">';
+    html += '<strong style="font-size:14px">' + escHtml(p.name || '') + '</strong><br>';
+    if (p.altitude) html += '<span style="color:#888;font-size:12px">&#9968; ' + p.altitude + ' m s.l.m.</span><br>';
+    if (stars) html += '<span style="color:#f5a623;font-size:13px">' + stars + '</span><br>';
+    if (mapsUrl) html += '<a href="' + mapsUrl + '" target="_blank" style="font-size:12px;color:#007aff">&#128279; Apri in Maps</a>';
+    html += '</div>';
+  }
+  el.innerHTML = html;
 }
 
 </script>
