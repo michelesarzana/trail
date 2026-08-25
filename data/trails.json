@@ -1185,6 +1185,100 @@
         ]
       },
       "gpx_file": "gpx/carona-laghi-gemelli-loop.gpx"
+    },
+    {
+      "id": "mont-chaberton",
+      "title": "Mont Chaberton",
+      "status": "todo",
+      "description": null,
+      "rating": null,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/mont-chaberton/8998701F-4FBF-4536-9313-1154ECDF6819_hero.jpg",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Provenza-Alpi-Costa Azzurra",
+        "province": "Hautes-Alpes",
+        "municipality": "Monginevro",
+        "area": "Alpi Cozie Centrali",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 44.93553,
+            "lng": 6.72902
+          },
+          "end": {
+            "lat": 44.93553,
+            "lng": 6.72902
+          }
+        }
+      },
+      "track": {
+        "distance_km": 16.6,
+        "elevation_gain": 1267,
+        "elevation_loss": 1274,
+        "elevation_max": 3101,
+        "elevation_min": 1865,
+        "duration_min": 453,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato",
+          "roccia"
+        ],
+        "gpx_file": "gpx/mont-chaberton.gpx"
+      },
+      "classification": {
+        "difficulty": 4,
+        "activity_types": [
+          "trail-running",
+          "trekking",
+          "escursionismo"
+        ],
+        "seasons": [
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "Alpi Cozie",
+        "Monginevro"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": true,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "photo_credit": null,
+      "links": {
+        "strava": null,
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/mont-chaberton/8998701F-4FBF-4536-9313-1154ECDF6819_hero.jpg",
+        "photos": [
+          {
+            "filename": "8998701F-4FBF-4536-9313-1154ECDF6819_hero.jpg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/mont-chaberton/8998701F-4FBF-4536-9313-1154ECDF6819_hero.jpg"
+          },
+          {
+            "filename": "IMG_1202.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/mont-chaberton/IMG_1202.jpeg"
+          },
+          {
+            "filename": "IMG_1210.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/mont-chaberton/IMG_1210.jpeg"
+          },
+          {
+            "filename": "IMG_1207.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/mont-chaberton/IMG_1207.jpeg"
+          }
+        ]
+      }
     }
   ]
 }
