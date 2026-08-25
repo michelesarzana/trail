@@ -470,13 +470,15 @@ button { font-family: 'Manrope', sans-serif; cursor: pointer; border: none; }
 .peak-alt { font-size: 13px; font-weight: 800; color: #2e2b38; }
 
 /* Peak marker popup */
-.peak-popup { width: 200px; font-family: 'Manrope', sans-serif; padding: 4px 4px 12px; box-sizing:border-box; }
-.peak-popup-title { font-size: 14px; font-weight: 800; color: #2e2b38; margin: 0 0 4px; }
-.peak-popup-alt { font-size: 12px; color: #726e7a; margin: 0 0 6px; }
-.peak-popup-stars { font-size: 13px; color: #fdc400; margin-bottom: 6px; }
-.peak-popup-trail-link { font-size: 12px; font-weight: 700; color: #c17b8c; }
-.peak-popup-coords { font-size: 11px; color: #726e7a; margin: 0 0 4px; }
-.peak-popup-maps { font-size: 12px; font-weight: 600; color: #4a90e2; display:block; margin-bottom: 6px; text-decoration:none; }
+.peak-popup { width: 220px; font-family: 'Manrope', sans-serif; padding: 0; box-sizing:border-box; border-radius: 12px; overflow: hidden; }
+.peak-popup-img { width: 100%; height: 110px; object-fit: cover; display: block; }
+.peak-popup-body { padding: 10px 12px 12px; }
+.peak-popup-title { font-size: 14px; font-weight: 800; color: #2e2b38; margin: 0 0 3px; }
+.peak-popup-alt { font-size: 12px; color: #726e7a; margin: 0 0 5px; }
+.peak-popup-stars { font-size: 14px; color: #fdc400; margin-bottom: 8px; }
+.peak-popup-trail-link { display: block; text-align: center; background: #c17b8c; color: #fff; font-size: 12px; font-weight: 700; border-radius: 8px; padding: 6px 10px; text-decoration: none; margin-top: 4px; transition: background .15s; }
+.peak-popup-trail-link:hover { background: #a85e73; color: #fff; }
+.peak-popup-maps { font-size: 12px; font-weight: 600; color: #007aff; display: block; margin-bottom: 6px; text-decoration: none; }
 .peak-popup-maps:hover { text-decoration: underline; }
 .peak-popup img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
 
@@ -1554,20 +1556,23 @@ function makePeakMarker() {
 }
 
 function renderPeakPopup(p) {
-  const stars = p.rating ? '⭐'.repeat(p.rating) : '';
+  const starsHtml = p.rating ? '★'.repeat(p.rating) + '☆'.repeat(5 - p.rating) : '';
   const trailLink = p.trail_id
     ? '<a class="peak-popup-trail-link" href="/trails/' + p.trail_id + '/">→ Vedi il trail</a>'
     : '';
-  const img = p.photo
-    ? '<img src="' + escHtml(p.photo) + '" alt="' + escHtml(p.name) + '">'
+  const imgHtml = p.photo
+    ? '<img class="peak-popup-img" src="' + escHtml(p.photo) + '" alt="' + escHtml(p.name || '') + '">'
     : '';
+  const mapsUrl = p.lat && p.lon ? 'https://www.google.com/maps?q=' + p.lat + ',' + p.lon : '';
   return '<div class="peak-popup">'
-    + img
-    + '<p class="peak-popup-title">' + escHtml(p.name) + '</p>'
-    + '<p class="peak-popup-alt">⛰️ ' + p.altitude + ' m s.l.m.</p>'
-    + (p.lat && p.lon ? '<p class="peak-popup-coords">📍 ' + p.lat.toFixed(6) + ', ' + p.lon.toFixed(6) + '</p><a class="peak-popup-maps" href="https://www.google.com/maps?q=' + p.lat + ',' + p.lon + '" target="_blank" rel="noopener">🔗 Apri in Maps</a>' : '')
-    + (stars ? '<div class="peak-popup-stars">' + stars + '</div>' : '')
+    + imgHtml
+    + '<div class="peak-popup-body">'
+    + '<p class="peak-popup-title">' + escHtml(p.name || '') + '</p>'
+    + (p.altitude ? '<div class="peak-popup-alt">⛰ ' + p.altitude + ' m s.l.m.</div>' : '')
+    + (starsHtml ? '<div class="peak-popup-stars">' + starsHtml + '</div>' : '')
+    + (mapsUrl ? '<a class="peak-popup-maps" href="' + mapsUrl + '" target="_blank" rel="noopener">🔗 Apri in Maps</a>' : '')
     + trailLink
+    + '</div>'
     + '</div>';
 }
 
