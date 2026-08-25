@@ -112,7 +112,7 @@
         "gpx_file": "gpx/lago-antermoia-dal-rifugio-micheluzzi.gpx"
       },
       "classification": {
-        "difficulty": 4,
+        "difficulty": "4",
         "activity_types": [
           "trail-running",
           "trekking",
@@ -274,7 +274,7 @@
         "gpx_file": "gpx/coumarial-rifugio-barma.gpx"
       },
       "classification": {
-        "difficulty": 4,
+        "difficulty": "4",
         "activity_types": [
           "trail-running",
           "trekking",
@@ -371,7 +371,7 @@
         "gpx_file": "gpx/campestrin-cortina-d-ampezzo-fkt.gpx"
       },
       "classification": {
-        "difficulty": 5,
+        "difficulty": "5",
         "activity_types": [
           "trail-running"
         ],
@@ -478,7 +478,7 @@
         "gpx_file": "gpx/da-paneveggio-ai-laghi-di-colbricon.gpx"
       },
       "classification": {
-        "difficulty": 2,
+        "difficulty": "2",
         "activity_types": [
           "trekking",
           "escursionismo"
@@ -647,7 +647,7 @@
         "gpx_file": "gpx/rifugio-dondena-lago-del-miserin.gpx"
       },
       "classification": {
-        "difficulty": 2,
+        "difficulty": "2",
         "activity_types": [
           "trail-running",
           "trekking",
@@ -771,7 +771,7 @@
         "gpx_file": "gpx/rifugio-antermoia-tramite-sentiero-paola-e-val-di-dona.gpx"
       },
       "classification": {
-        "difficulty": 5,
+        "difficulty": "5",
         "activity_types": [
           "trail-running",
           "trekking",
@@ -892,7 +892,7 @@
         "gpx_file": "gpx/dorsale-del-triangolo-lariano.gpx"
       },
       "classification": {
-        "difficulty": 4,
+        "difficulty": "4",
         "activity_types": [
           "trail-running"
         ],
@@ -1009,7 +1009,7 @@
         "gpx_file": "gpx/trekking-del-cristo-pensante.gpx"
       },
       "classification": {
-        "difficulty": 2,
+        "difficulty": "2",
         "activity_types": [
           "trail-running",
           "trekking",
@@ -1107,7 +1107,7 @@
         ]
       },
       "classification": {
-        "difficulty": 5,
+        "difficulty": "5",
         "activity_types": [
           "trail-running"
         ],
@@ -1228,7 +1228,7 @@
         "gpx_file": "gpx/mont-chaberton.gpx"
       },
       "classification": {
-        "difficulty": 4,
+        "difficulty": "4",
         "activity_types": [
           "trail-running",
           "trekking",
