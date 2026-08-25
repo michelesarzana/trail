@@ -1010,7 +1010,7 @@ function renderPage(trail, allTrails) {
         ${actTypes.length > 0 || seasons.length > 0 || cls.difficulty ? `
           <div class="section-heading" style="margin-top:0">Classificazione</div>
           <div class="info-grid" style="margin-bottom:32px">
-            ${cls.difficulty ? `<div class="info-row"><span class="info-key">Difficoltà</span><span class="info-val">${escHtml(cls.difficulty)}</span></div>` : ''}
+            ${cls.difficulty ? `<div class="info-row"><span class="info-key">Difficoltà</span><span class="info-val">${escHtml(cls.difficulty != null ? String(cls.difficulty) : '')}</span></div>` : ''}
             ${actTypes.length > 0 ? `<div class="info-row"><span class="info-key">Attività</span><span class="info-val">${actTypes.map(escHtml).join(', ')}</span></div>` : ''}
             ${seasons.length > 0 ? `<div class="info-row"><span class="info-key">Stagioni</span><span class="info-val">${seasons.map(escHtml).join(', ')}</span></div>` : ''}
             ${track.route_type ? `<div class="info-row"><span class="info-key">Tipo percorso</span><span class="info-val">${escHtml(track.route_type)}</span></div>` : ''}
