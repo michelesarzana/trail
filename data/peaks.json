@@ -2,7 +2,7 @@
   "_meta": {
     "version": "1.0.0",
     "description": "Database cime personali di Michele Sarzana",
-    "last_updated": "2026-08-14"
+    "last_updated": "2026-08-25"
   },
   "peaks": [
     {
@@ -33,6 +33,16 @@
       "lon": 11.7081,
       "rating": 4,
       "photo": "https://raw.githubusercontent.com/michelesarzana/trail/main/assets/peaks/punta-vallaccia.jpeg",
+      "trail_id": null
+    },
+    {
+      "id": "piz-boe",
+      "name": "Piz Boè",
+      "altitude": 3152,
+      "lat": 46.50889,
+      "lon": 11.82806,
+      "rating": 5,
+      "photo": "https://raw.githubusercontent.com/michelesarzana/trail/main/assets/peaks/piz-boe.jpeg",
       "trail_id": null
     }
   ]
