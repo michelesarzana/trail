@@ -1104,8 +1104,7 @@
           "sterrato",
           "roccia",
           "misto"
-        ],
-        "gpx_file": "gpx/carona-laghi-gemelli-loop.gpx"
+        ]
       },
       "classification": {
         "difficulty": 5,
@@ -1184,7 +1183,8 @@
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5002_hero.jpeg"
           }
         ]
-      }
+      },
+      "gpx_file": "gpx/carona-laghi-gemelli-loop.gpx"
     }
   ]
 }
