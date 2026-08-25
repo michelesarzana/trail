@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Database trail personale di Michele Sarzana",
     "schema": "./schema/trail.schema.json",
-    "last_updated": "2026-08-14"
+    "last_updated": "2026-08-25"
   },
   "trails": [
     {
@@ -1061,6 +1061,127 @@
           {
             "filename": "DSC04728_hero.JPEG",
             "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/trekking-del-cristo-pensante/DSC04728_hero.JPEG"
+          }
+        ]
+      }
+    },
+    {
+      "id": "carona-laghi-gemelli-loop",
+      "title": "Carona < > Laghi Gemelli Loop",
+      "status": "done",
+      "description": "Orobie d'autunno: Carona Loop via Laghi Gemelli e Passo d'Aviasco\n\nC'è un tipo di giornate in montagna che non si programma davvero. Si guarda la heatmap di Strava, si controlla il meteo, e poi si parte. Questo giro sulle Orobie è nato così: empirico, un po' avventuroso, con la consapevolezza che a inizio novembre la neve potrebbe già avere qualcosa da dire.\n\nIl punto di partenza è Carona, piccolo paese in fondo all'Alta Val Brembana, silenzioso e autentico come sanno essere i borghi alpini fuori stagione. Da qui il sentiero 211 attacca subito senza troppi preamboli: 800 metri di dislivello che salgono decisi attraverso una sequenza di bacini artificiali, Lago Becco, Lago Marcio, Lago Case, che raccontano un'altra storia oltre a quella del trail. Un sistema idroelettrico imponente, costruito con una logistica che ancora oggi toglie il fiato quasi quanto la salita stessa. Vale la pena fermarsi a guardarlo con occhi diversi.\n\nIn cima alla salita, il Rifugio Laghi Gemelli, aperto contro ogni aspettativa di novembre. Un regalo. Prima di ripartire, fai il giro completo dei laghi: è uno di quei momenti che non ti aspetti e che poi ricordi a lungo.\n\nDa lì il sentiero 214 porta al Passo d'Aviasco. Il percorso scorre bene fino al Lago Colombo, poi l'ultimo chilometro e mezzo alza l'asticella. Niente di tecnico, ma le gambe lo sentono. In cima, qualche spruzzo di neve a ricordarti dove sei e in che periodo ci sei. Controlla sempre le condizioni prima di partire: questo passo in autunno avanzato può riservare sorprese.\n\nSuperato il valico si apre la Valle dei Frati: discesa su pietraia, tecnica quanto basta per tenere alta la concentrazione fino al Lago dei Frati. Poi il paesaggio cambia registro, i sentieri si distendono e le gambe tornano a girare.\n\nQui hai una scelta:\n- Sentiero 213 → traverso lungo verso il Lago Becco, poi discesa finale. Pulito, efficiente.\n- Sentiero 247 → diritto verso Pagliari, a due chilometri da Carona. È questa la strada che abbiamo preso noi.\n\nSe sei fortunato trovi un bar aperto. Un bicchiere di vino prima dell'ultimo strappo verso Carona. Non un lusso: una necessità morale.\n\nNote pratiche:\n- 🗓 Periodo consigliato: settembre-ottobre. Novembre è bello ma verifica la neve sul Passo d'Aviasco\n- 📍 Partenza/arrivo: Carona, Alta Val Brembana\n- 📈 Dislivello positivo: ~800m (salita principale) + quota Passo d'Aviasco\n- 🗺 Sentieri: 211 / 214 / 247 (o 213 per il ritorno alternativo)\n- ☕ Rifugio Laghi Gemelli: aperto a stagione estesa, verifica prima\n- ⚠️ Passo d'Aviasco: verificare innevamento da ottobre in poi",
+      "rating": 5,
+      "cover_image": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5024.JPG",
+      "location": {
+        "country": "Italia",
+        "country_code": "IT",
+        "region": "Lombardia",
+        "province": "Bergamo",
+        "municipality": "Carona",
+        "area": "Orobie",
+        "start_address": null,
+        "coordinates": {
+          "start": {
+            "lat": 46.020308,
+            "lng": 9.781642
+          },
+          "end": {
+            "lat": 46.020175,
+            "lng": 9.7816
+          }
+        }
+      },
+      "track": {
+        "distance_km": 22.3,
+        "elevation_gain": 1707,
+        "elevation_loss": 1708,
+        "elevation_max": 2311,
+        "elevation_min": 1109,
+        "duration_min": 365,
+        "route_type": "loop",
+        "surface": [
+          "terra",
+          "sterrato",
+          "roccia",
+          "misto"
+        ],
+        "gpx_file": "gpx/carona-laghi-gemelli-loop.gpx"
+      },
+      "classification": {
+        "difficulty": 5,
+        "activity_types": [
+          "trail-running"
+        ],
+        "seasons": [
+          "estate",
+          "autunno"
+        ]
+      },
+      "tags": [
+        "Orobie",
+        "Carona",
+        "Trail running"
+      ],
+      "logistics": {
+        "dog_friendly": true,
+        "public_transport": false,
+        "water_available": false,
+        "parking_notes": null
+      },
+      "photo_credit": null,
+      "links": {
+        "strava": "https://www.strava.com/activities/16322213541",
+        "komoot": null,
+        "alltrails": null,
+        "wikiloc": null,
+        "other": null
+      },
+      "log": [
+        {
+          "date": "2025-11-01",
+          "duration_min": 365,
+          "rating": 5,
+          "notes": null
+        }
+      ],
+      "media": {
+        "cover": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5024.JPG",
+        "photos": [
+          {
+            "filename": "IMG_5024.JPG",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5024.JPG"
+          },
+          {
+            "filename": "IMG_5004.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5004.jpeg"
+          },
+          {
+            "filename": "IMG_5013.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5013.jpeg"
+          },
+          {
+            "filename": "IMG_4999.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_4999.jpeg"
+          },
+          {
+            "filename": "IMG_5011.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5011.jpeg"
+          },
+          {
+            "filename": "IMG_5017.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5017.jpeg"
+          },
+          {
+            "filename": "IMG_5006.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5006.jpeg"
+          },
+          {
+            "filename": "IMG_5003.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5003.jpeg"
+          },
+          {
+            "filename": "IMG_5002_hero.jpeg",
+            "url": "https://raw.githubusercontent.com/michelesarzana/trail/main/media/carona-laghi-gemelli-loop/IMG_5002_hero.jpeg"
           }
         ]
       }
